@@ -1,0 +1,376 @@
+<extend name="Public/base"/>
+
+<block name="title">打印机详情</block>
+
+<block name="levels"><li><a href="{:U("Manage/Index/index")}">后台首页</a></li><li>商家设置</li></block>
+
+<block name="body">
+			   <div class="row" id="wrapper-content-list">
+                    <div class="col-lg-12">
+                        <div class="ibox float-e-margins">
+						<div class="ibox-title">	
+						 <div class="alert alert-warning" style="font-size: 16px;">
+                                温馨提示：目前打印机仅支付飞蛾打印机和易联云打印机！
+                            </div>
+						</div>
+                    <div class="ibox-content">
+			<div class="group main_bd">
+				<form novalidate="novalidate" class="store_build" id="js_store_build"> 
+				<div class="frm_section"> 							
+				<div class="frm_control_group"> 
+				 <label for="" class="frm_label">打印机名</label> 
+				 <div class="frm_controls"> 
+                                     <span class="frm_input_box"> <input class="frm_input ckinput" id="printer_name" name="printer_name" type="text" value="<?php echo $printer['printer_name']; ?>" /><u>15</u></span> 
+				  <p class="frm_msg fail" style="display: none;"><span for="js_business_name" class="frm_msg_content" style="display: inline;">门店名不能为空且长度不超过15个汉字或30个英文字母</span></p>
+				  <p class="frm_tips">名称不超过15个汉字</p> 
+				 </div> 
+				</div> 
+				<div class="frm_control_group"> 
+				 <label for="" class="frm_label">打印机编号sn</label> 
+				 <div class="frm_controls"> 
+                                     <span class="frm_input_box"> <input id="printer_sn" class="frm_input ckinput" name="printer_sn" type="text" value="<?php echo $printer['printer_sn']; ?>"/> <u>10</u></span> 
+				  <p class="frm_msg fail" style="display: none;"><span for="js_business_name" class="frm_msg_content" style="display: inline;">打印机的唯一编码不能为空</span></p>
+				  <p class="frm_tips">打印机的唯一编码</p> 
+				 </div> 
+				</div> 
+                                <div class="frm_control_group"> 
+				 <label for="" class="frm_label">打印机密钥key</label> 
+				 <div class="frm_controls"> 
+                                     <span class="frm_input_box"> <input id="printer_key" class="frm_input ckinput" name="printer_key" type="text" value="<?php echo $printer['printer_key'];?>" /> <u>10</u></span> 
+				  <p class="frm_msg fail" style="display: none;"><span for="js_business_name" class="frm_msg_content" style="display: inline;">打印机的密钥不能为空</span></p>
+				  <p class="frm_tips">打印机密钥，由官方后台生成</p> 
+				 </div> 
+				</div> 
+				
+				</div> 
+				<div class="frm_section service_info"> 
+				
+				<div class="frm_control_group"> 
+				 <label for="" class="frm_label">小票底部提示信息</label> 
+				 <div class="frm_controls"> 
+                                     <span class="frm_input_box"> <input id="printer_tip" class="frm_input ckinput" name="printer_tip" type="text" value="<?php echo $printer['printer_tip'];?>" /> <u>10</u></span> 
+				  <!--<p class="frm_msg fail" style="display: none;"><span for="js_business_name" class="frm_msg_content" style="display: inline;">打印机的密钥不能为空</span></p>-->
+				  <p class="frm_tips">出现在打印小票的底部，如：xxx公司提供技术支持 字样</p> 
+				 </div> 
+				</div> 
+                                    
+				<div class="frm_control_group"> 
+				 <label for="" class="frm_label">电话</label> 
+				 <div class="frm_controls"> 
+                                     <span class="frm_input_box"> <input class="frm_input" name="printer_telephone" id="printer_telephone" type="text" onkeyup="value=value.replace(/[^1234567890\-]+/g,'')" maxlength="25" value="<?php echo $printer['printer_telephone'];?>"/> </span> 
+				  <p class="frm_tips">出现在打印小票底部的联系电话字段</p> 
+				 </div> 
+				</div> 
+				
+                                <div class="frm_control_group"> 
+				 <label for="" class="frm_label">二维码信息</label> 
+				 <div class="frm_controls"> 
+                                     <span class="frm_input_box"> <input id="printer_qrcode" class="frm_input ckinput" name="printer_qrcode" type="text" value="<?php echo $printer['printer_qrcode']; ?>" /> <u>10</u></span> 
+				  <!--<p class="frm_msg fail" style="display: none;"><span for="js_business_name" class="frm_msg_content" style="display: inline;">打印机的密钥不能为空</span></p>-->
+				  <p class="frm_tips">打印机二维码内容,您可以使用扫码工具扫描您需要上传的二维码，复制扫描结果到这里，不打印请留空</p> 
+				 </div> 
+				</div> 
+                                    
+                                <div class="frm_control_group"> 
+				 <label for="" class="frm_label">打印小票数</label> 
+				 <div class="frm_controls"> 
+                                     <span class="frm_input_box"> <input id="printer_ticketnum" class="frm_input ckinput" name="printer_ticketnum" type="text" value="<?php echo $printer['printer_ticketnum']; ?>" /> <u>10</u></span> 				  
+				  <p class="frm_tips">此参数设置一次打印的小票联数</p> 
+				 </div> 
+				</div> 
+                                    
+                                <div class="frm_control_group"> 
+				 <label for="" class="frm_label">打印机型号</label> 
+				 <div class="frm_controls"> 
+                                     <span class="frm_input_box"> <input id="printer_version" class="frm_input ckinput" name="printer_version" type="text" value="<?php echo $printer['printer_version']; ?>" /> <u>10</u></span> 				  
+				  <p class="frm_tips">0-2：飞蛾打印机，0为飞蛾新版本，1、2为飞蛾旧版本，3：易联云打印机</p> 
+				 </div> 
+				</div> 
+				
+                                    <input name='printer_id' id="printer_id" type="hidden" value="<?php echo $printer['printer_id']; ?>" />
+				
+<!--				<div class="frm_control_group"> 
+				 <label for="" class="frm_label">简介<br /><span class="frm_label_dec">(选填)</span></label> 
+				 <div class="frm_controls"> 
+				  <div class="frm_textarea_box"> 
+				   <textarea class="frm_textarea ckinput" name="desc" id="js_desc"></textarea><u>100</u>
+				  </div>
+				  <p class="frm_msg fail" style="display: none;"><span for="js_business_name" class="frm_msg_content" style="display: inline;">简介长度不超过100个汉字或200个英文字母</span></p>
+				  <p class="frm_tips">对品牌或门店的简要介绍，不超过100个字</p> 
+				 </div> 
+				</div> -->
+				</div> 
+				</form> 
+	
+		</div> 
+          <div class="tool_bar border tc">
+			<button id="save_printer" class="btn btn-primary" style="height: 36px;"> 提交 </button>
+			 <!--<span  class="btn btn_input btn_default" id="js_preview"><button>预览</button></span>-->
+			</div>
+		</div>
+                        </div>
+                    </div>
+                </div>
+
+
+        	</div>
+</block>
+
+<block name="top">
+
+	<link href="__CSS__/merchant/store_mangecss.css" rel="stylesheet">
+	<link href="__CSS__/merchant/baseshop.css" rel="stylesheet">
+	<link href="__CSS__/merchant/widget_add_img.css" rel="stylesheet">
+	
+	<link href="__CSS__/plugins/basic.css" rel="stylesheet">
+    <link href="__CSS__/plugins/dropzone.css" rel="stylesheet">
+	<link href="__CSS__/dataTables/datepicker3.css" rel="stylesheet">
+	<style type="text/css">
+	  #dataselect .input-group-btn,#ym-select .input-group-btn{width: 12%;}
+	  #dataselect .input-sm ,#ym-select .input-sm{ border-radius: 7px; height:40px;}
+	  #dataselect .btn-primary ,#ym-select .btn-primary{ margin-left: 20px; border-radius:4px;margin-bottom: 0px;}
+	  #dataselect .input-group-addon,#ym-select .input-group-addon{border-radius: 7px;}
+	  .ibox-content{ min-height:800px;}
+	  #js_pic_url .dz-image-preview{display:none;}
+	  .img_upload_preview_box p{margin:0px;}
+	  .js_category_container select{width:200px;float: left;}
+	 #provinceS,#cityS,#districtS,#circleS{display:inline-block;width: auto;float:left;}
+	 #js_latitude,#js_longitude{width:250px;display: inline;}
+	 #js_store_build u{display:none;}
+	 #bside_left {
+		width: 260px;
+		height: 500px;
+		padding: 10px 10px 10px 10px;
+		float: left;
+		overflow: auto;
+	}
+	#mapfrm_controls::after{
+	   content:" . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . "
+	}
+	#mapcontainer{width: 620px;}
+.search_c {
+    float: left;
+	margin-left: 20px;
+	width: 350px;
+}
+.search_c .form-control{width:70%;display:inline-block;}
+#no_value{
+    color:red;
+    position: relative;
+    width:200px;
+}
+.info_list {
+    cursor: pointer;
+    margin-bottom: 5px;
+}
+	</style>
+	<!-- Data picker -->
+    <script src="__JS__/plugins/bootstrap-datepicker.js"></script>
+	<link href="__CSS__/plugins/custom.css" rel="stylesheet">
+	<script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp&key=S6PBZ-D7BRQ-BNB5S-G2LBZ-PYAIO-DJF4K&libraries=drawing,geometry,autocomplete,convertor"></script>
+</block>
+
+<block name="bottom">
+	<script src="__JS__/plugins/dropzone.js"></script>
+	<script src="__JS__/plugins/icheck.min.js"></script>
+    <script type="text/javascript">
+     var picnum = 0;
+     var  wxCouponType='<?php echo $typeid;?>';
+	 /***计算字符串长度(英文占1个字符，中文汉字占2个字符)*****/
+		String.prototype.gbLen = function() {    
+			var len = 0;    
+			for (var i=0; i<this.length; i++) {    
+				if (this.charCodeAt(i)>127 || this.charCodeAt(i)==94) {    
+					 len += 2;    
+				 } else {    
+					 len ++;    
+				 }    
+			 }    
+			return len;    
+		}
+	      wxCouponType=parseInt(wxCouponType);
+        $(document).ready(function() { 
+			/*$('#ymdatepicker input').datepicker({
+                keyboardNavigation: false,
+                forceParse: false,
+				format: "yyyy-mm-dd",
+                autoclose: true
+            });*/
+
+		    	$("#js_pic_url,#js_pic_url .icon20_common").dropzone({
+				url: "{:U('Manage/Stores/uploadStoreImg')}",
+				addRemoveLinks: false,
+				maxFilesize: 1,
+				acceptedFiles: ".jpg,.png,.gif,.jpeg",
+				uploadMultiple: false,
+				init: function() {
+					this.on("success", function(file,responseText) {
+						/***这里的this.element 是 $("#js_pic_url")****/
+					if(responseText.status == 1){
+						var  imgHtml='<div class="img_upload_box img_upload_preview_box js_edit_pic_wrp"><img  src="__ROOT__/'+responseText.savepath+'"><input name="photo_list[]" class="imginput" type="hidden" value="'+responseText.savepath+'"><input name="photo_img[]" type="hidden" value="'+responseText.savepath+'"><p class="img_upload_edit_area js_edit_area"><a class="icon18_common del_gray js_delete" href="javascript:;" onclick="DelthisImg($(this));" ></a></p></div>';
+					 	$('#js_upload_wrp .img_upload_wrp .js_pager').before(imgHtml);
+					 	$(this.element).find('div').remove();
+					 	picnum++;
+					 	if(picnum == 4){
+					 		$("#js_pic_url_div").hide();
+					 	}
+					}else{
+						swal({
+						  title: "上传失败",
+						  text: responseText.error,
+						  type: "error"
+						}, function () {
+						//window.location.reload();
+						   });
+						}
+					});
+				}
+			});
+
+	  $(document).on('mouseover mouseout','.img_upload_preview_box',function(event){
+	   if(event.type == "mouseover"){
+	     $(this).find('p').show();
+	   }else if(event.type == "mouseout"){
+		$(this).find('p').hide();
+		}
+	  });
+
+$('#save_printer').click(function(){
+		var thisObj=$(this);
+	    if(checkInPut()){
+		thisObj.prop('disabled',true);
+		$.ajax({
+			url:'{:U("Manage/Printer/savePrinter")}',
+			type:"post",
+			data:$('form').serialize(),
+			dataType:"JSON",
+			success:function(ret){
+				if(!ret.error){
+					swal({
+					  title: "保存成功！",
+					  text: ret.msg,
+					  type: "success"
+					 }, function () {
+					   window.location.href="{:U('Manage/Users/printerManage')}";
+					});
+				}else{
+					swal({
+					  title: "保存失败！",
+					  text: ret.msg,
+					  type: "error"
+					 }, function () {
+					//window.location.reload();
+					});
+			   }
+			   thisObj.prop('disabled',false);
+			}
+		});
+	  }
+	  return false;
+       //document.js_editform.submit();
+	});
+
+  $('#js_store_build .ckinput').each(function(){
+    $(this).keyup(function(){
+	  var inputstr=$(this).val();
+	  var strleng=inputstr.gbLen();
+	  var limitnum=$(this).siblings('u').text();
+	  limitnum=parseInt(limitnum);
+	  var tmplen=0;
+	  var tipsObj=$(this).parent().siblings('.frm_msg');
+	  if(limitnum>0){
+		  limitnum=limitnum*2;
+		  if(strleng > limitnum){
+			  tipsObj.show();
+		  }else{
+			  tipsObj.hide();
+		  }
+	  }
+  });
+
+  });
+
+});
+
+function checkInPut(){
+		
+	var printername=$.trim($('#printer_name').val());
+	if(!printername || (printername.gbLen() >30)){
+		swal({
+		title: "温馨提示！",
+		text: '打印机名必须填写且不得超过15个汉字',
+		type: "error"
+		});
+		return false;
+	}
+	var printersn=$.trim($('#printer_sn').val());
+	if(!printersn || (printersn.gbLen() >20)){
+		swal({
+		title: "温馨提示！",
+		text: '打印机编号sn必须填写且不得超过20个字节',
+		type: "error"
+		});
+		return false;
+	}
+	
+	var telephone=$.trim($('#printer_telephone').val());
+	if(!telephone){
+	  	swal({
+		title: "温馨提示！",
+		text: '电话号码没填写！',
+		type: "error"
+		});
+		return false;
+	}
+	var printerkey=$.trim($('#printer_key').val());
+	if(!printerkey){
+	  	swal({
+		title: "温馨提示！",
+		text: '打印机密钥必填！',
+		type: "error"
+		});
+		return false;
+	}
+	var printertip=$.trim($('#printer_tip').val());
+	if(!printertip){
+	  	swal({
+		title: "温馨提示！",
+		text: '小票底部提示信息没填写！',
+		type: "error"
+		});
+		return false;
+	}
+	var printerqrcode=$.trim($('#printer_qrcode').val());
+	if(!printerqrcode){
+	  	swal({
+		title: "温馨提示！",
+		text: '二维码信息没填写！',
+		type: "error"
+		});
+		return false;
+	}
+        var printer_ticketnum = $.trim($('#printer_ticketnum').val());
+        if(printer_ticketnum > 3){
+            swal({
+		title: "温馨提示！",
+		text: '打印联数不能超过3联！',
+		type: "error"
+		});
+		return false;
+        }
+        var printer_version = $.trim($('#printer_version').val());
+        if(!printer_version){
+            swal({
+		title: "温馨提示！",
+		text: '请填写打印机型号！',
+		type: "error"
+		});
+		return false;
+        }
+    return true;
+}
+
+
+
+  </script>
+</block>

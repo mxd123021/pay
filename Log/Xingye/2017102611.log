@@ -1,0 +1,182 @@
+================接口请求参数===================
+key: body value: 哈哈哈哈
+key: mch_create_ip value: 127.0.0.1
+key: mch_id value: 101590077738
+key: nonce_str value: 1508998012
+key: notify_url value: http://www.test.com/Manage/Xingye/callback.html
+key: out_trade_no value: 10159007773820171026114407
+key: service value: pay.weixin.native
+key: total_fee value: 500
+key: version value: 1.0
+key: sign value: 26B3DBD955D61A85D61338895AF70730
+
+================请求参数===================
+<xml><body><![CDATA[哈哈哈哈]]></body><mch_create_ip><![CDATA[127.0.0.1]]></mch_create_ip><mch_id><![CDATA[101590077738]]></mch_id><nonce_str><![CDATA[1508998012]]></nonce_str><notify_url><![CDATA[http://www.test.com/Manage/Xingye/callback.html]]></notify_url><out_trade_no><![CDATA[10159007773820171026114407]]></out_trade_no><service><![CDATA[pay.weixin.native]]></service><total_fee><![CDATA[500]]></total_fee><version><![CDATA[1.0]]></version><sign><![CDATA[26B3DBD955D61A85D61338895AF70730]]></sign></xml>
+
+================请求结果===================
+<xml><appid><![CDATA[wx0781c1dea664cd9a]]></appid>
+<charset><![CDATA[UTF-8]]></charset>
+<code_img_url><![CDATA[https://pay.swiftpass.cn/pay/qrcode?uuid=weixin%3A%2F%2Fwxpay%2Fbizpayurl%3Fpr%3DgCybihR]]></code_img_url>
+<code_url><![CDATA[weixin://wxpay/bizpayurl?pr=gCybihR]]></code_url>
+<mch_id><![CDATA[101590077738]]></mch_id>
+<nonce_str><![CDATA[1508998012]]></nonce_str>
+<result_code><![CDATA[0]]></result_code>
+<sign><![CDATA[DD591D485178E7342FEFC3061F07F399]]></sign>
+<sign_type><![CDATA[MD5]]></sign_type>
+<status><![CDATA[0]]></status>
+<uuid><![CDATA[2a2274e85d115d370c137dec6d9af45ab]]></uuid>
+<version><![CDATA[2.0]]></version>
+</xml>
+
+================接口请求参数===================
+key: body value: 哈哈哈哈
+key: mch_create_ip value: 127.0.0.1
+key: mch_id value: 101590077738
+key: nonce_str value: 1508989546
+key: notify_url value: http://www.test.com/Manage/Xingye/callback.html
+key: out_trade_no value: 10159007773820171026114451
+key: service value: pay.alipay.nativev2
+key: total_fee value: 500
+key: version value: 1.0
+key: sign value: A8D7A4A28243435D066E122D909BC320
+
+================请求参数===================
+<xml><body><![CDATA[哈哈哈哈]]></body><mch_create_ip><![CDATA[127.0.0.1]]></mch_create_ip><mch_id><![CDATA[101590077738]]></mch_id><nonce_str><![CDATA[1508989546]]></nonce_str><notify_url><![CDATA[http://www.test.com/Manage/Xingye/callback.html]]></notify_url><out_trade_no><![CDATA[10159007773820171026114451]]></out_trade_no><service><![CDATA[pay.alipay.nativev2]]></service><total_fee><![CDATA[500]]></total_fee><version><![CDATA[1.0]]></version><sign><![CDATA[A8D7A4A28243435D066E122D909BC320]]></sign></xml>
+
+================请求结果===================
+<xml><appid><![CDATA[2016081701760348]]></appid>
+<charset><![CDATA[UTF-8]]></charset>
+<code_img_url><![CDATA[https://pay.swiftpass.cn/pay/qrcode?uuid=https%3A%2F%2Fqr.alipay.com%2Fbax06260sfjsrda8ha7j8056]]></code_img_url>
+<code_url><![CDATA[https://qr.alipay.com/bax06260sfjsrda8ha7j8056]]></code_url>
+<mch_id><![CDATA[101590077738]]></mch_id>
+<nonce_str><![CDATA[1508989546]]></nonce_str>
+<result_code><![CDATA[0]]></result_code>
+<sign><![CDATA[4F0ABF22A797398DB384BF21FC746F27]]></sign>
+<sign_type><![CDATA[MD5]]></sign_type>
+<status><![CDATA[0]]></status>
+<version><![CDATA[2.0]]></version>
+</xml>
+
+================接口请求参数===================
+key: body value: 哈哈哈哈
+key: mch_create_ip value: 127.0.0.1
+key: mch_id value: 101590077738
+key: nonce_str value: 1508990817
+key: notify_url value: http://www.test.com/Manage/Xingye/callback.html
+key: out_trade_no value: 10159007773820171026114522
+key: service value: pay.alipay.nativev2
+key: total_fee value: 1
+key: version value: 1.0
+key: sign value: A71D09B74D222037D14C4FA745260642
+
+================请求参数===================
+<xml><body><![CDATA[哈哈哈哈]]></body><mch_create_ip><![CDATA[127.0.0.1]]></mch_create_ip><mch_id><![CDATA[101590077738]]></mch_id><nonce_str><![CDATA[1508990817]]></nonce_str><notify_url><![CDATA[http://www.test.com/Manage/Xingye/callback.html]]></notify_url><out_trade_no><![CDATA[10159007773820171026114522]]></out_trade_no><service><![CDATA[pay.alipay.nativev2]]></service><total_fee><![CDATA[1]]></total_fee><version><![CDATA[1.0]]></version><sign><![CDATA[A71D09B74D222037D14C4FA745260642]]></sign></xml>
+
+================请求结果===================
+<xml><appid><![CDATA[2016081701760348]]></appid>
+<charset><![CDATA[UTF-8]]></charset>
+<code_img_url><![CDATA[https://pay.swiftpass.cn/pay/qrcode?uuid=https%3A%2F%2Fqr.alipay.com%2Fbax02533arqzh9cltjvp407f]]></code_img_url>
+<code_url><![CDATA[https://qr.alipay.com/bax02533arqzh9cltjvp407f]]></code_url>
+<mch_id><![CDATA[101590077738]]></mch_id>
+<nonce_str><![CDATA[1508990817]]></nonce_str>
+<result_code><![CDATA[0]]></result_code>
+<sign><![CDATA[26644E42665E7574690B6847C646E4E4]]></sign>
+<sign_type><![CDATA[MD5]]></sign_type>
+<status><![CDATA[0]]></status>
+<version><![CDATA[2.0]]></version>
+</xml>
+
+================请求参数===================
+<xml><auth_code><![CDATA[23232]]></auth_code><body><![CDATA[扫码枪刷卡支付]]></body><mch_create_ip><![CDATA[127.0.0.1]]></mch_create_ip><mch_id><![CDATA[101590077738]]></mch_id><nonce_str><![CDATA[1508991377]]></nonce_str><out_trade_no><![CDATA[10159007773820171026114653]]></out_trade_no><service><![CDATA[unified.trade.micropay]]></service><total_fee><![CDATA[10]]></total_fee><version><![CDATA[1.0]]></version><sign><![CDATA[7F2A955E50618D1D22E0859C46A371D4]]></sign></xml>
+
+================请求结果===================
+<xml><charset><![CDATA[UTF-8]]></charset>
+<err_code><![CDATA[Auth code invalid]]></err_code>
+<err_msg><![CDATA[付款码无效:23232]]></err_msg>
+<mch_id><![CDATA[101590077738]]></mch_id>
+<need_query><![CDATA[N]]></need_query>
+<nonce_str><![CDATA[1508991377]]></nonce_str>
+<result_code><![CDATA[1]]></result_code>
+<sign><![CDATA[8268BEE9EE3AA93EFFEC4E180D2A2A71]]></sign>
+<sign_type><![CDATA[MD5]]></sign_type>
+<status><![CDATA[0]]></status>
+<version><![CDATA[2.0]]></version>
+</xml>
+
+================小额支付结果2===================
+key: status value: 0
+key: result_code value: 1
+key: need_query value: N
+        key: charset value: UTF-8
+        key: err_code value: Auth code invalid
+        key: err_msg value: 付款码无效:23232
+        key: mch_id value: 101590077738
+        key: need_query value: N
+        key: nonce_str value: 1508991377
+        key: result_code value: 1
+        key: sign value: 8268BEE9EE3AA93EFFEC4E180D2A2A71
+        key: sign_type value: MD5
+        key: status value: 0
+        key: version value: 2.0
+
+================in micropay res = ===================
+key: status value: 0
+key: result_code value: 1
+key: need_query value: N
+        key: charset value: UTF-8
+        key: err_code value: Auth code invalid
+        key: err_msg value: 付款码无效:23232
+        key: mch_id value: 101590077738
+        key: need_query value: N
+        key: nonce_str value: 1508991377
+        key: result_code value: 1
+        key: sign value: 8268BEE9EE3AA93EFFEC4E180D2A2A71
+        key: sign_type value: MD5
+        key: status value: 0
+        key: version value: 2.0
+
+================请求参数===================
+<xml><mch_id><![CDATA[101590077738]]></mch_id><nonce_str><![CDATA[1508995924]]></nonce_str><service><![CDATA[unified.trade.refundquery]]></service><transaction_id><![CDATA[]]></transaction_id><version><![CDATA[1.0]]></version><sign><![CDATA[0313CB3C8B7799E4E84CDE593A57F968]]></sign></xml>
+
+================请求结果===================
+<xml><charset><![CDATA[UTF-8]]></charset>
+<err_code><![CDATA[transaction_id|out_trade_no|out_refund_no|refund_id is required]]></err_code>
+<err_msg><![CDATA[缺少参数]]></err_msg>
+<mch_id><![CDATA[101590077738]]></mch_id>
+<nonce_str><![CDATA[1508995924]]></nonce_str>
+<result_code><![CDATA[1]]></result_code>
+<sign><![CDATA[DB9095C496B346F30DDA9F8B20C244B2]]></sign>
+<sign_type><![CDATA[MD5]]></sign_type>
+<status><![CDATA[0]]></status>
+<version><![CDATA[2.0]]></version>
+</xml>
+
+================接口请求参数===================
+key: body value: 232
+key: mch_create_ip value: 127.0.0.1
+key: mch_id value: 101590077738
+key: nonce_str value: 1509003134
+key: notify_url value: http://www.test.com/Manage/Xingye/callback.html
+key: out_trade_no value: 10159007773820171026115028
+key: service value: pay.alipay.nativev2
+key: total_fee value: 1
+key: version value: 1.0
+key: sign value: 08583FBBB4F14C76A2D7C5D5DE092426
+
+================请求参数===================
+<xml><body><![CDATA[232]]></body><mch_create_ip><![CDATA[127.0.0.1]]></mch_create_ip><mch_id><![CDATA[101590077738]]></mch_id><nonce_str><![CDATA[1509003134]]></nonce_str><notify_url><![CDATA[http://www.test.com/Manage/Xingye/callback.html]]></notify_url><out_trade_no><![CDATA[10159007773820171026115028]]></out_trade_no><service><![CDATA[pay.alipay.nativev2]]></service><total_fee><![CDATA[1]]></total_fee><version><![CDATA[1.0]]></version><sign><![CDATA[08583FBBB4F14C76A2D7C5D5DE092426]]></sign></xml>
+
+================请求结果===================
+<xml><appid><![CDATA[2016081701760348]]></appid>
+<charset><![CDATA[UTF-8]]></charset>
+<code_img_url><![CDATA[https://pay.swiftpass.cn/pay/qrcode?uuid=https%3A%2F%2Fqr.alipay.com%2Fbax09531mmyy0arviq7t40fa]]></code_img_url>
+<code_url><![CDATA[https://qr.alipay.com/bax09531mmyy0arviq7t40fa]]></code_url>
+<mch_id><![CDATA[101590077738]]></mch_id>
+<nonce_str><![CDATA[1509003134]]></nonce_str>
+<result_code><![CDATA[0]]></result_code>
+<sign><![CDATA[531B78A8CADD651A837FC08CA58E20A4]]></sign>
+<sign_type><![CDATA[MD5]]></sign_type>
+<status><![CDATA[0]]></status>
+<version><![CDATA[2.0]]></version>
+</xml>
+

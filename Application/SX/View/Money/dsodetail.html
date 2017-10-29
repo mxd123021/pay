@@ -1,0 +1,220 @@
+<link href="__CSS__/plugins/ui.jqgrid.css" rel="stylesheet">
+<link href="__CSS__/dataTables/datepicker3.css" rel="stylesheet">
+<style>.modal-body{padding: 10px; } #ibox-content-me{padding: 0px; height: 380px;} #ibox-content-me .info-table th{text-align:left;} .ui-table th, .ui-table td{border:1px solid #e5e5e5;} .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus{border-bottom:1px solid #ffffff;}.pull-right li{float:left;}.ui-jqgrid .ui-jqgrid-title{margin:5px; font-weight: 700;}
+		.ui-jqgrid tr.jqgfirstrow{height:0px;}.ui-jqgrid .ui-jqgrid-pager, .ui-jqgrid .ui-jqgrid-toppager{border-top:none;}#gbox_table_list_1{width:516px;}.datepicker { z-index:9999 !important}</style>
+<div class="ibox-content" id="ibox-content-me">
+    <div class="col-sm-12">
+        <div class="panel blank-panel">
+            <div class="panel-heading">
+                <div class="panel-options">
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a data-toggle="tab" href="tabs_panels.html#tab-1" aria-expanded="true">
+                                <i class="fa fa-newspaper-o"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a data-toggle="tab" href="tabs_panels.html#tab-2" aria-expanded="false">
+                                <i class="fa fa-bar-chart-o"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="tab-content">
+                    <div id="tab-1" class="tab-pane active">
+                        <div class="page-trade-order-detail">
+                            <?php if(!empty($data)){ ?>
+                                <div class="content-region clearfix">
+                                    <div class="info-region" style="width: 100%; padding-bottom: 10px;">
+                                        <h3>
+                                            <span>单号信息</span></h3>
+                                        <table class="info-table">
+                                            <tbody>
+                                                <tr>
+                                                    <th>名称：</th>
+                                                    <td>&nbsp;&nbsp;
+                                                        <span>
+                                                            <?php echo $data[ 'userInfo'][ 'userName'];?></span></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>电话：</th>
+                                                    <td>&nbsp;&nbsp;
+                                                        <span>
+                                                            <?php echo $data[ 'userInfo'][ 'userPhone'];?></span></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>邮箱：</th>
+                                                    <td>&nbsp;&nbsp;
+                                                        <span>
+                                                            <?php echo $data[ 'userInfo'][ 'userEmail'];?></span></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>微信：</th>
+                                                    <td>&nbsp;&nbsp;
+                                                        <span>
+                                                            <?php if(empty($data['bind'])){echo "<font color='red'>没有绑定微信</font>";}else{ ?>
+                                                            <img src='{$data.bind.headimgurl}' width='30' height='30'>
+                                                            <?php } ?>
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <div class="dashed-line"></div>
+                                    </div>
+                                </div>
+                                <table class="ui-table ui-table-simple goods-table">
+                                    <thead>
+                                        <tr>
+                                            <th>提现金额(元)</th>
+                                            <th data-hide="phone">代扣税金额(元)</th>
+                                            <th data-hide="phone">申请时间</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="test-item">
+                                            <td>
+                                                <?php echo $data[ 'withdraw'][ 'price'];?></td>
+                                            <td>
+                                                <?php echo $data[ 'withdraw'][ 'dprice'];?></td>
+                                            <td>
+                                                <?php echo date( 'Y-m-d H:i:s',$data[ 'withdraw'][ 'applytime']);?></td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="8" class="text-right">
+                                                <span class="c-gray">应打款金额：</span>
+                                                <span class="real-pay ui-money-income">
+                                                    <span>&yen;</span>
+                                                    <span id="money" style="color:green">
+                                                        <?php echo $data[ 'withdraw'][ 'price'];?></span>
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                                <input id="bind" type="hidden" value="<?php if(empty($data[ 'bind'])){echo 0;}else{echo 1;}?>">
+                                <input id="oid" type="hidden" value="{$data.withdraw.orderid}">
+                                <?php }else{?>
+                                    <div class="step-region" style="border: medium none; font-size: 20px; margin-top: 15px;text-align: center;">
+                                        <div>提现单号不存在！</div></div>
+                                    <?php }?></div>
+                    </div>
+                    <div id="tab-2" class="tab-pane">
+						<div>
+					      <!-- 实时交易信息展示区域 -->
+					      <div class="cashier-realtime"> 
+					       <div class="realtime-title-block clearfix"> 
+						        <ul class="pull-right" style="height: 30px; width: 490px;">
+		                            <li style="width: 400px">
+		                            	<div class="input-daterange input-group" id="datepicker">
+			                            	<div class="input-group date">
+				                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+				                                <input id="stime" type="text" class="input-sm form-control" name="start" value="{$starttime}" style="border-radius:0px;">
+				                            </div>
+			                                <span class="input-group-addon" style="background-color: #FBFBFB"> 至 </span>
+											<div class="input-group date">
+				                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+				                                <input id="etime" type="text" class="input-sm form-control" name="end" value="{$endtime}" style="border-radius:0px;">
+				                            </div>
+	                            		</div>
+		                            </li>
+		                            <li style="width: 50px">
+		                            	<button onclick="getorders('{$data.withdraw.userId}')" type="button" class="btn btn-primary btn-sm" style="margin-bottom: 15px;">查询</button>
+		                            </li>
+						        </ul>
+					       </div> 
+					      </div> 
+						<div class="js-real-time-region realtime-list-box loading">
+					     	<div class="widget-list">
+						        <div class="js-list-filter-region clearfix ui-box" style="position: relative;">
+						        	<div class="widget-list-filter"></div>
+						        </div> 
+						        <div class="ui-box">
+									<div class="jqGrid_wrapper">
+			                            <table id="table_list_1"></table>
+			                            <div id="pager_list_1"></div>
+			                        </div>
+
+						        	<div class="js-list-empty-region"></div> 
+						        </div> 
+					        	<div class="js-list-footer-region ui-box">
+							         <div class="widget-list-footer"></div>
+							        </div> 
+								</div>
+							</div> 
+				 		</div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="__JS__/plugins/bootstrap-datepicker.js"></script>
+<script src="__JS__/plugins/grid.locale-cn.js"></script>
+<script src="__JS__/plugins/jquery.jqGrid.min.js"></script>
+<script>
+$("#datepicker.input-daterange").datepicker({
+	keyboardNavigation: false,
+	forceParse: false,
+	format: "yyyy-mm-dd",
+	autoclose: true
+});
+function getorders(usId){
+	var stime = $("#stime").val();
+	var etime = $("#etime").val();
+	$("#table_list_1").jqGrid('setGridParam',{
+		url:'{:U("SX/Order/getajaxOrder")}',
+		mtype: 'POST',
+        datatype:'json',  
+        postData:{'usId':usId,'stime':stime,'etime':etime}, //发送数据
+        page:1,
+        loadonce:true
+    }).trigger("reloadGrid"); //重新载入
+}
+
+$(document).ready(function(){
+    $.jgrid.defaults.styleUI = "Bootstrap";
+	$("#table_list_1").jqGrid({
+        height: "100%",
+        autowidth: true,
+        shrinkToFit: true,
+        rowNum: 4,
+        rowList: [10,20,30],
+        colNames: ["订单号", "付款时间", "付款金额", "退款情况"],
+        colModel: [{
+            name: "order_id",
+            index: "order_id",
+            width: 120,
+            sorttype: "int",
+        }, {
+            name: "paytime",
+            index: "paytime",
+            formatter:'date',
+            formatoptions: {srcformat: 'U', newformat:'Y-m-d H:i:s'},
+            width: 110
+        }, {
+            name: "goods_price",
+            index: "goods_price",
+            width: 50,
+            align: "right",
+            sorttype: "float"
+        }, {
+            name: "refund",
+            index: "refund",
+            edittype:'select',
+            formatter:'select',
+            editoptions:{value:"1:退款中;2:<font color=\"#2e6da4\">已退款</font>;3:<font color=\"#ed5565\">退款失败</font>;0:<font color=\"#44b549\">已支付</font>"},
+            width: 45,
+            align:"center"
+        }],
+        pager: "#pager_list_1",
+        viewrecords: true,
+        caption: "收款情况",
+        hidegrid: false
+    });
+});
+</script>

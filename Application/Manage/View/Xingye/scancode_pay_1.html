@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+<meta content="yes" name="apple-mobile-web-app-capable">
+<meta content="black" name="apple-mobile-web-app-status-bar-style">
+<meta content="telephone=no" name="format-detection">
+<meta content="email=no" name="format-detection">
+<link rel="stylesheet" href="__CSS__/scancode_css/wepayui.min.css">
+<link rel="stylesheet" href="__CSS__/scancode_css/index.css">
+<!--<script src="__JS__/jquery-2.1.1.js"/></script>-->
+
+  <link href="__CSS__/foreverpay.css?v=1" rel="stylesheet"/>
+  <script src="__JS__/jquery-2.1.1.js"/></script>
+
+    <link rel="stylesheet" type="text/css" href="__STATIC__/weui/lib/weui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/weui/css/jquery-weui.min.css"/>
+    <script type="text/javascript" src="__STATIC__/weui/js/jquery-weui.min.js"></script>
+
+<title><?php echo $branch_name?></title>
+</head>
+<!-- 
+	通用说明： 
+	1.模块的隐藏添加class:hide;
+	2.body标签默认绑定ontouchstart事件，激活所有按钮的:active效果
+-->
+<body ontouchstart>
+<div class="weui-wepay-pay">
+    <form method="post" name="myform" id="subform">
+    <input type="hidden" name="buyer_id" value="{$buyer_id}">
+    
+    <div class="weui-wepay-pay__bd">
+        <div class="weui-wepay-pay__inner">
+            <h1 class="weui-wepay-pay__title">付款金额(元)</h1>
+            <div class="weui-wepay-pay__inputs"> <strong class="weui-wepay-pay__strong">￥</strong>
+                <!--<input type="number" class="weui-wepay-pay__input" placeholder="请输入金额" name="tprice" id="tprice" onkeyup="value=value.replace(/[^\d.]/g,'')"/></div>-->
+                <!--<input type="text" pattern="[0-9]*" class="weui-wepay-pay__input" name="tprice" id="tprice" /></div>-->
+                <!--<input type="number" class="weui-wepay-pay__input" name="tprice" id="tprice" onkeyup="if(isNaN(value))execCommand('请输入数字')" onafterpaste="if(isNaN(value))execCommand('请输入数字')"></div>-->
+                <input type="number" class="weui-wepay-pay__input" name="tprice" id="tprice" onKeyPress="if(event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"></div>
+            <div class="weui-wepay-pay__intro">请跟收银员确认支付金额</div>
+        </div> 
+    </div>
+    <div style="display:none;">
+    <input type="text" class="item-input" id="js-payer-name" name="tname" value="自助扫码支付" placeholder="输入收款理由"/> 
+    <input type="text" class="item-input" id="js-payer-tname"  name="" value="{$pay_type}" readonly /> 
+    </div>
+    <input type="hidden" value="{$data.userId}"  name="userId">
+  <input type="hidden" value="{$data.usId}"  name="usId">
+  <input type="hidden" value="{$data.storeId}"  name="storeId">
+  <input type="hidden" value="{$data.parentId}"  name="parentId">
+  <input type="hidden" value="{$data.openid}"  name="openid">
+  <input type="hidden" value="autopay"  name="type">
+    <input type="hidden" value="{$data.paytype}" id="paytype" name="paytype">
+    </form>
+    
+    <div class="weui-wepay-pay__ft">
+        <p class="weui-wepay-pay__info">支付金额给商户</p>
+        <div class="weui-wepay-pay__btn">
+            <button class="weui-btn weui-btn_primary subform">立即支付</button>
+        </div>
+    </div>
+    
+    
+</div>
+    <?php if('微信支付' == $pay_type){?>
+<div class="weui-wepay-logos weui-wepay-logos_ft">
+    <i class="weui-wepay-logo-default weui-wepay-logo_gray"><span class="path1"></span><span class="path2"></span></i>
+</div>
+    <?php }else{?>
+    <div class="weui-wepay-logos weui-wepay-logos_ft">
+        <img src="__IMG__/pay_icon/alipay.png" height="20">
+    </div>
+    <?php }?>
+    
+    <script type="text/javascript">
+        
+        function clientType(){
+                if(stristr($_SERVER['HTTP_USER_AGENT'],'Android')) {
+                    return 'android';
+                }else if(stristr($_SERVER['HTTP_USER_AGENT'],'iPhone')){
+                    return 'ios';
+                }else{
+                    return 'other';
+                }
+            }
+
+    var formPostUrl="{:U('Manage/Xingye/scancode_pay@'.C('SITE_URL'))}";     
+
+
+        $('.subform').on('click', function(){                        
+            $('#subform').submit();
+        });
+        $('#subform').on('submit', function(){
+//            $.toast($("#tprice").val(), 'forbidden');
+            var self = $(this);
+            
+            $.ajax({
+                type:       "POST",
+                url:        formPostUrl,
+                data:       self.serialize(),
+                dataType:   "json",
+                beforeSend: beforeSend,
+                dataFilter: dataFilter,
+                complete:   complete,
+                success:    success,
+            });
+            return false;
+
+            function beforeSend()
+            {
+                $.showLoading();                
+            }
+            function dataFilter(data)
+            {
+                $.hideLoading();
+                return data;
+            }
+            function success(data)
+            {
+               
+                if(data.status == 0)
+                {
+                    //$.toast(data.msg, function(){
+                        window.location.href = data.pay_url;
+                    //});
+                }
+                else
+                {
+                    $.toast(data.msg, 'forbidden');
+                }
+            }
+            function complete(){}
+        });
+  </script>
+  
+</body>
+</html>
+

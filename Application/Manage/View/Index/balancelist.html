@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>会员中心</title>
+    <link rel="stylesheet" href="__CSS__/weui/weui.css"/>
+    <link rel="stylesheet" href="__CSS__/weui/example.css"/>
+    
+    <link href="__CSS__/bootstrap.min.css" rel="stylesheet">
+    <link href="__CSS__/font-awesome.min.css" rel="stylesheet">
+    <link href="__CSS__/sweetalert.css" rel="stylesheet">
+    <link href="__CSS__/animate.css" rel="stylesheet">
+    <!--<link href="__CSS__/common.css" rel="stylesheet">-->
+    <script src="__JS__/sweetalert.min.js"></script>
+    <script src="__JS__/jquery.min.js"></script>
+    <script src="__JS__/cashier/lhsw.js"></script>
+    <style type="text/css">
+      .button_sp_area a{width:95%;}
+      
+    </style>
+</head>
+<body>
+<div class="hd">
+    <h1 class="page_title">{$user.userName}</h1>
+</div>
+
+
+
+<div class="button_sp_area" style="margin-top: 15px;">
+  <a data-id="{$info.id}" href="javascript:;" id="balance" class="weui_btn weui_btn_plain_primary">本班次结算</a>
+</div>
+    
+    
+    <div class="panel panel-info" style=" margin-top: 5px; border: none">        
+        <div class="panel-body table-responsive">
+            <span><h3>历史结算记录</h2></span>
+          <table class="table  table-striped">
+            <thead>
+              <tr>
+                <th style="width:150px;">总金额/笔数</th>
+                <th>结算时间</th>                              
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody>
+           
+            <?php foreach($balances as $v){?>
+            <tr>
+            <td>
+              ￥<?php echo $v['totalMoney']?>/<?php echo $v['totalNum']?>            
+            </td>
+              <td>
+                  <?php echo date('Y-m-d H:i:s',$v['ebalanceTime']);?>
+                  
+              </td>
+             
+              <td>
+                   <button data-id="{$v.id}" class="btn btn-sm btn-info" onclick="toPrintBalance({$v.id})"><strong>打印</strong></button>
+              </td>
+             
+            </tr>
+                <?php }?>
+            
+              </tbody>
+          </table>
+          <div class="text-center">
+          <!--{$pager}-->
+          </div>
+        </div>
+      </div>
+    
+
+    
+    
+<div id="toast" style="display: none;">
+    <div class="weui_mask_transparent"></div>
+    <div class="weui_toast">
+        <i class="weui_icon_toast"></i>
+        <p class="weui_toast_content">已完成</p>
+    </div>
+</div>
+<div id="loadingToast" class="weui_loading_toast" style="display: none;">
+    <div class="weui_mask_transparent"></div>
+    <div class="weui_toast">
+        <div class="weui_loading">
+            <div class="weui_loading_leaf weui_loading_leaf_0"></div>
+            <div class="weui_loading_leaf weui_loading_leaf_1"></div>
+            <div class="weui_loading_leaf weui_loading_leaf_2"></div>
+            <div class="weui_loading_leaf weui_loading_leaf_3"></div>
+            <div class="weui_loading_leaf weui_loading_leaf_4"></div>
+            <div class="weui_loading_leaf weui_loading_leaf_5"></div>
+            <div class="weui_loading_leaf weui_loading_leaf_6"></div>
+            <div class="weui_loading_leaf weui_loading_leaf_7"></div>
+            <div class="weui_loading_leaf weui_loading_leaf_8"></div>
+            <div class="weui_loading_leaf weui_loading_leaf_9"></div>
+            <div class="weui_loading_leaf weui_loading_leaf_10"></div>
+            <div class="weui_loading_leaf weui_loading_leaf_11"></div>
+        </div>
+        <p class="weui_toast_content" id="toast_content">正在解除绑定</p>
+    </div>
+</div>
+   
+
+  
+
+<div class="weui_dialog_alert" id="ewm" style="display: none;">
+    <div class="weui_mask"></div>
+    <div class="weui_dialog">
+        <div class="weui_dialog_hd"><strong class="weui_dialog_title">收款二维码</strong></div>
+        <div class="weui_dialog_bd"></div>
+        <div class="weui_dialog_ft">
+            <a href="javascript:;" class="weui_btn_dialog primary">确定</a>
+        </div>
+    </div>
+</div>
+<script src="__JS__/jquery.qrcode.min.js"></script>
+<script>
+$(document).ready(function(){
+
+   
+});
+
+function toPrintBalance(id){
+//    var id = $(this).attr('data-id');
+//    swal('hello: '+id);
+    
+            swal({  
+            title: "打印此结算订单？",  
+            text: "",  
+            type: "warning",  
+            showCancelButton: true,  
+            confirmButtonColor: "#DD6B55",  
+            confirmButtonText: "打印",  
+            cancelButtonText: "取消",  
+        closeOnConfirm: false,  
+        closeOnCancel: true },  
+        function (isConfirm) {  
+            $('#toast_content').html('请耐心等待...');
+      if (isConfirm) {
+            $.ajax({
+                type: "POST",
+                url: "{:U('Manage/Index/rePrintBalance')}",
+                data: {'bId':id},
+                dataType: "json",
+                beforeSend: function(){
+                    $('#loadingToast').show();
+                },
+                success: function(data){
+                    $('#loadingToast').hide();
+                    swal(data.msg); 
+                },
+                error:function(XMLHttpRequest, textStatus, errorThrown){
+                    $('#loadingToast').hide();
+                    swal('请求失败， textStatus:'+textStatus, 'error');
+                }
+            });
+        }
+    });
+}
+
+$('#balance').click(function(){
+    var i = $(this).attr('data-id');
+    $('#toast_content').html('结算中...'+i)
+    $('#loadingToast').show();
+    var URL = '{:U("Manage/Index/balance")}';
+//    if(744 == i){
+        URL = '{:U("Manage/Index/toBalance")}';
+//    }
+    $.post(URL,{id:i,type:2},function(re){
+    if(re.status == -1){
+      $('#loadingToast').hide();
+      swal('非法用户或未绑定打印机，无法进行交接班数据打印');
+    }else if(re.status == 2){
+      $('#loadingToast').hide();
+      swal({
+          title: "提示",
+          text: re.msg,
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#DD6B55",
+          confirmButtonText: "打印",
+          cancelButtonText: "取消", 
+          closeOnConfirm: false 
+      }, function(){
+          $.ajax({
+                    type: "POST",
+                    url: "{:U('Manage/Index/rePrintBalance')}",
+                    data: {'bId': re.bId},
+                    dataType: "json",
+                    beforeSend: function(){
+                        $('#loadingToast').show();
+                    },
+                    success: function(data){
+                            $('#loadingToast').hide();
+                            swal(data.msg);                        
+                              },
+                    error:function(XMLHttpRequest, textStatus, errorThrown){
+                        $('#loadingToast').hide();
+                        swal('请求失败， textStatus:'+textStatus, 'error');
+                    }
+                });   
+      });
+//      alert(re.msg);
+    }else if(re.status == -2){
+      $('#loadingToast').hide();
+      swal(re.msg);
+    }else{        
+        $('#loadingToast').hide();
+        swal('成功！');
+    }
+  },'json');
+  
+});
+
+
+    function toPrintOrder(id){           
+        swal({  
+            title: "打印订单",  
+            text: "确定打印吗？如订单已打印请不要重复打印哦~!",  
+            type: "warning",  
+            showCancelButton: true,  
+            confirmButtonColor: "#DD6B55",  
+            confirmButtonText: "打印",  
+            cancelButtonText: "取消",  
+        closeOnConfirm: false,  
+        closeOnCancel: true },  
+        function (isConfirm) {  
+      if (isConfirm) {  
+               $('#toast_content').html('请耐心等待...');
+                $.ajax({
+                    type: "POST",
+                    url: "{:U('Manage/Xingye/toPrintOrder')}",
+                    data: {'id': id},
+                    dataType: "json",
+                    beforeSend: function(){
+                        $('#loadingToast').show();
+                    },
+                    success: function(data){
+                            $('#loadingToast').hide();
+                            swal(data.msg, 'success');                        
+                              },
+                    error:function(XMLHttpRequest, textStatus, errorThrown){
+                        $('#loadingToast').hide();
+//                        $('#popPay').hide();
+                        swal('请求失败， textStatus:'+textStatus, 'error');
+                    }
+                });  
+       } else {  
+                   
+             }  
+        });  
+
+        
+    }
+    
+    
+    function queryRefund(id){
+        $('#toast_content').html('请耐心等待...');
+             $.ajax({
+            type: "POST",
+            url: "{:U('Manage/Xingye/queryRefund')}",
+            data: {'id': id},
+            dataType: "json",
+            beforeSend: function(){
+                $('#loadingToast').show();
+            },
+            success: function(data){
+                    $('#loadingToast').hide();
+                    if(1 == data.status){
+                        swal('订单正在退款中...');
+                    }else if(2 == data.status){
+                        swal('订单已退款成功！', 'success');
+                    }else if(3 == data.status){
+                        swal('退款失败！', 'success');
+                    }else{
+                        swal(data.msg, 'success');
+                    }                    
+                        
+                      },
+            error:function(XMLHttpRequest, textStatus, errorThrown){
+                $('#loadingToast').hide();
+                swal('请求失败， textStatus:'+textStatus, 'error');
+            }
+        });
+    
+    
+    }
+    
+    function printBalance(bId){
+        alert('hello');
+//        swal({  
+//            title: "打印订单",  
+//            text: "确定打印吗？",  
+//            type: "warning",  
+//            showCancelButton: true,  
+//            confirmButtonColor: "#DD6B55",  
+//            confirmButtonText: "打印",  
+//            cancelButtonText: "取消",  
+//        closeOnConfirm: false,  
+//        closeOnCancel: true },  
+//        function (isConfirm) {  
+//            $('#toast_content').html('请耐心等待...');
+//      if (isConfirm) {
+//            $.ajax({
+//                type: "POST",
+//                url: "{:U('Manage/Index/rePrintBalance')}",
+//                data: {'usId': usId, 'bId':bId},
+//                dataType: "json",
+//                beforeSend: function(){
+//                    $('#loadingToast').show();
+//                },
+//                success: function(data){
+//                    $('#loadingToast').hide();
+//                    swal(data.msg); 
+//                },
+//                error:function(XMLHttpRequest, textStatus, errorThrown){
+//                    $('#loadingToast').hide();
+//                    swal('请求失败， textStatus:'+textStatus, 'error');
+//                }
+//            });
+//        }
+//    });
+}
+//    $("#print").on('click', function(){
+//       swal('hello'); 
+//    });
+//    
+</script>
+
+</body>
+</html>

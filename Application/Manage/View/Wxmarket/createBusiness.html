@@ -1,0 +1,373 @@
+<extend name="Public/base" />
+<block name="title">创建微信社区</block>
+<block name="levels">
+    <li>
+        <a href="{:U(" Manage/Index/index ")}">后台首页</a></li>
+    <li>微信营销</li></block>
+<block name="body">
+    <div class="row" id="wrapper-content-list">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <div class="alert alert-warning" style="font-size: 16px;">温馨提示：添加新社区的费用为500元，后期修改免费</div></div>
+                <div class="ibox-content">
+                    <div class="group main_bd">
+                        <form novalidate="novalidate" class="store_build" id="js_store_build">
+
+							<div class="form-group">
+								<label for="" class="frm_label">选择门店</label>
+								<div class="frm_controls">
+									<?php if(empty($stores)){?>
+									 <div style="padding-top:5px">您还没有门店，请去门店管理里去创建吧。</div>
+									<?php }else{?>
+									 <select id="storeid" name="storeid" class="form-control" aria-required="true" min="1" style="z-index:999; width: 278px">
+									  <option value="0">请选择门店</option>
+									  <?php foreach($stores as $svv){?>
+									   <option  value="<?php echo $svv['storeId'];?>" ><?php echo $svv['business_name'].$svv['branch_name']?>
+									   </option>
+									  <?php }?>
+									 </select>
+									<?php }?>
+                                    <div id="areashow" style="padding-top:5px;min-width:278px; display: none;"></div>
+                                    <input id="js_longitude" name="longitude" type="hidden" />
+                                    <input id="js_latitude" name="latitude" type="hidden" />
+                                    <input id="js_province" name="province" type="hidden" />
+                                    <input id="js_city" name="city" type="hidden" />
+                                    <input id="js_district" name="district" type="hidden" />
+                                    <input id="js_categories" name="categories" type="hidden" />
+                                    <input id="js_categories2" name="categories2" type="hidden" />
+								</div>
+							</div>
+
+                            <div class="frm_section">
+                                <h3 class="frm_title">广告信息</h3>
+                                <div class="frm_control_group">
+                                    <label for="" class="frm_label">广告标题</label>
+                                    <div class="frm_controls">
+                                        <span class="frm_input_box">
+                                            <input class="frm_input ckinput" id="js_business_name" name="business_name" type="text" />
+                                            <u>15</u>
+                                        </span>
+                                        <p class="frm_msg fail" style="display: none;">
+                                            <span for="js_business_name" class="frm_msg_content" style="display: inline;">广告标题不能为空且长度不超过10个汉字或20个英文字母</span></p>
+                                        <p class="frm_tips">如：某某发型工作室，不超过10个汉字</p></div>
+                                </div>
+                                <div class="frm_control_group">
+                                    <label for="" class="frm_label">广告描述</label>
+                                    <div class="frm_controls">
+                                        <span class="frm_input_box">
+                                            <input id="js_branch_name" class="frm_input ckinput" name="branch_name" type="text" />
+                                            <u>10</u>
+                                        </span>
+                                        <p class="frm_msg fail" style="display: none;">
+                                            <span for="js_business_name" class="frm_msg_content" style="display: inline;">门店名不能为空且长度不超过20个汉字或40个英文字母</span></p>
+                                        <p class="frm_tips">如：单人设计师洗剪吹+免费水疗护理 提供Wifi，不超过20个汉字</p></div>
+                                </div>
+                                <div class="frm_control_group">
+                                    <label for="" class="frm_label">广告图片</label>
+                                    <div class="frm_controls">
+                                        <p class="frm_tips">像素要求必须为90*90像素，支持.jpg .jpeg .gif .png格式，大小不超过1M</p>
+                                        <div id="js_upload_wrp">
+                                            <div class="img_upload_wrp group">
+                                                <div id="js_pic_url_div" class="img_upload_box">
+                                                    <a class="img_upload_box_oper js_upload" id="js_pic_url" href="javascript:">
+                                                        <i class="icon20_common add_gray">上传</i></a>
+                                                </div>
+                                                <div class="js_pager"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="frm_section service_info">
+                                <h3 class="frm_title">其它信息</h3>
+                                <div class="frm_control_group">
+                                    <label for="" class="frm_label">当前价格</label>
+                                    <div class="frm_controls with_hint"> 
+									  <span class="frm_input_box"> <input id="js_avg_price" class="frm_input" name="avg_price" type="text" onkeyup="value=value.replace(/[^1234567890.]+/g,'')" maxlength="8"> </span> 
+									  <span class="frm_hint">元</span> 
+									  <p class="frm_tips">大于零的整数，须如实填写，默认单位为人民币</p>
+									 </div>
+                                </div>
+                                <div class="frm_control_group">
+                                    <label for="" class="frm_label">门市价格</label>
+                                    <div class="frm_controls with_hint"> 
+									  <span class="frm_input_box"> <input id="js_avg_price2" class="frm_input" name="avg_price2" type="text" onkeyup="value=value.replace(/[^1234567890.]+/g,'')" maxlength="8"> </span> 
+									  <span class="frm_hint">元</span> 
+									  <p class="frm_tips">大于零的整数，须如实填写，默认单位为人民币</p>
+									 </div>
+                                </div>
+                                <div class="frm_control_group">
+                                    <label for="" class="frm_label">示例</label>
+                                    <div class="frm_controls">
+                                    	<img src="__IMG__/market/business.png">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="tool_bar border tc">
+                        <button id="sub_add_shop" class="btn btn-primary" style="height: 36px;">确认开通</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</block>
+<block name="top">
+    <link href="__CSS__/merchant/store_mangecss.css" rel="stylesheet">
+    <link href="__CSS__/merchant/baseshop.css" rel="stylesheet">
+    <link href="__CSS__/merchant/widget_add_img.css" rel="stylesheet">
+    <link href="__CSS__/plugins/basic.css" rel="stylesheet">
+
+    <link href="__CSS__/dataTables/datepicker3.css" rel="stylesheet">
+    <style type="text/css">#dataselect .input-group-btn,#ym-select .input-group-btn{width: 12%;} #dataselect .input-sm ,#ym-select .input-sm{ border-radius: 7px; height:40px;} #dataselect .btn-primary ,#ym-select .btn-primary{ margin-left: 20px; border-radius:4px;margin-bottom: 0px;} #dataselect .input-group-addon,#ym-select .input-group-addon{border-radius: 7px;} .ibox-content{ min-height:800px;} #js_pic_url .dz-image-preview{display:none;} .img_upload_preview_box p{margin:0px;} .js_category_container select{width:200px;float: left;} #provinceS,#cityS,#districtS,#circleS{display:inline-block;width: auto;float:left;} #js_latitude,#js_longitude{width:250px;display: inline;} #js_store_build u{display:none;} #bside_left { width: 260px; height: 500px; padding: 10px 10px 10px 10px; float: left; overflow: auto; } #mapfrm_controls::after{ content:" . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . " } #mapcontainer{width: 620px;} .search_c { float: left; margin-left: 20px; width: 350px; } .search_c .form-control{width:70%;display:inline-block;} #no_value{ color:red; position: relative; width:200px; } .info_list { cursor: pointer; margin-bottom: 5px; }.frm_controls.with_hint .frm_input_box{width:278px;}</style>
+    <!-- Data picker -->
+    <script src="__JS__/plugins/bootstrap-datepicker.js"></script>
+    <link href="__CSS__/plugins/custom.css" rel="stylesheet">
+</block>
+<block name="bottom">
+    <script src="__JS__/plugins/dropzone.js"></script>
+    <script src="__JS__/plugins/icheck.min.js"></script>
+    <script type="text/javascript">
+        /***计算字符串长度(英文占1个字符，中文汉字占2个字符)*****/
+        String.prototype.gbLen = function() {
+            var len = 0;
+            for (var i = 0; i < this.length; i++) {
+                if (this.charCodeAt(i) > 127 || this.charCodeAt(i) == 94) {
+                    len += 2;
+                } else {
+                    len++;
+                }
+            }
+            return len;
+        }
+        $(document).ready(function() {
+            $("#js_pic_url,#js_pic_url .icon20_common").dropzone({
+                url: "{:U('Manage/Wxmarket/uploadStoreImg')}",
+                maxFilesize: 1,
+                addRemoveLinks: false,
+                acceptedFiles: ".jpg,.png,.gif,.jpeg",
+                uploadMultiple: false,
+                init: function() {
+                    this.on("success",
+                    function(file, responseText) {
+                        /***这里的this.element 是 $("#js_pic_url")****/
+                        if (responseText.status == 1) {
+                            var imgHtml = '<div class="img_upload_box img_upload_preview_box js_edit_pic_wrp"><img  src="__ROOT__/' + responseText.savepath + '" data-dz-remove><input name="photo_list[]" class="imginput" type="hidden" value="' + responseText.savepath + '"><input name="photo_img[]" type="hidden" value="' + responseText.savepath + '"><p class="img_upload_edit_area js_edit_area"><a class="icon18_common del_gray js_delete" href="javascript:;" onclick="DelthisImg($(this));" ></a></p></div>';
+                            $('#js_upload_wrp .img_upload_wrp .js_pager').before(imgHtml);
+                            $(this.element).find('div').remove();
+                            $("#js_pic_url_div").hide();
+                        } else {
+                            swal({
+                                title: "上传失败",
+                                text: responseText.error,
+                                type: "error"
+                            },
+                            function() {
+                                //window.location.reload();
+                            });
+                        }
+                    });
+                    this.on("maxfilesreached", function(file) {
+		            });
+                }
+            });
+
+            $(document).on('mouseover mouseout', '.img_upload_preview_box',
+            function(event) {
+                if (event.type == "mouseover") {
+                    $(this).find('p').show();
+                } else if (event.type == "mouseout") {
+                    $(this).find('p').hide();
+                }
+            });
+
+            $("#storeid").change(function(){
+                var storeid = $(this).val();
+                if(storeid != 0){
+                    $.ajax({
+                        url: "{:U('Manage/Stores/getStore')}",
+                        type: "POST",
+                        dataType: "json",
+                        data:{id:storeid},
+                        success: function(res){
+                            if(res.status != -1){
+                                var province = res.stores.province;
+                                var city = res.stores.city;
+                                if(res.stores.district != null){
+                                    var district = res.stores.district;
+                                }else{
+                                    var district = "";
+                                }
+                               
+                                $('#js_longitude').val(res.stores.longitude);
+                                $('#js_latitude').val(res.stores.latitude);
+                                $('#js_province').val(res.stores.province);
+                                $('#js_city').val(res.stores.city);
+                                $('#js_district').val(res.stores.district);
+                                $('#js_categories').val(res.stores.categories);
+                                $('#js_categories2').val(res.stores.categories2);
+                                
+                                $('#areashow').html('<small class="label label-primary"><i class="fa fa-map-marker"></i> '+province+' '+city+' '+district+'</small>');
+                                $('#areashow').show();
+                            }else{
+                                swal({
+                                    title: "门店信息读取失败！",
+                                    type: "error"
+                                },
+                                function() {
+                                    window.location.reload();
+                                });
+                            }
+                        }
+                    });
+                }else{
+                    $('#areashow').hide();
+                }
+            });
+
+            $('#sub_add_shop').click(function() {
+                sweetAlert({
+                          title: "开通微信社区将扣除500元费用",
+                          type: "warning",
+                          closeOnConfirm: false,
+                          showCancelButton: true,
+                          confirmButtonText: "确认开通",
+                          confirmButtonColor: "#44b549" 
+                        }, function(){
+                            var thisObj = $(this);
+                            if (checkInPut()) {
+                                thisObj.prop('disabled', true);
+                                $.post('{:U("Manage/wxmarket/openbusiness")}',$('form').serialize(),function(ret){
+                                    if(ret.status == -1){
+                                        swal({title: "温馨提示",text:'开通失败',type: "error"});
+                                        thisObj.prop('disabled', false);
+                                    }else if(ret.status == -2){
+                                        sweetAlert({
+                                          title: ret.msg,
+                                          type: "error",
+                                          closeOnConfirm: false,
+                                          showCancelButton: true,
+                                          confirmButtonText: "前往充值",
+                                          confirmButtonColor: "#44b549" 
+                                        }, function(){
+                                          window.location.href=ret.tourl;
+                                        })
+                                    }else if(ret.status == -3){
+                                        sweetAlert({
+                                          title: ret.msg,
+                                          type: "error",
+                                          closeOnConfirm: false,
+                                          showCancelButton: true,
+                                          confirmButtonText: "前往审核",
+                                          confirmButtonColor: "#44b549" 
+                                        }, function(){
+                                          window.location.href=ret.tourl;
+                                        })
+                                    }else if(ret.status == -4){
+                                        swal({title: "温馨提示",text:ret.msg,type: "error"});
+                                        thisObj.prop('disabled', false);
+                                    }else{
+                                        sweetAlert({
+                                          title: "恭喜您，微信社区开通成功!",
+                                          text: "",
+                                          type: "success",
+                                          closeOnConfirm: false
+                                        }, function(){
+                                          window.location.href="{:U('Manage/wxmarket/business')}";
+                                        })
+                                    }
+                                });
+                            }
+                })
+            });
+
+            $('#js_store_build .ckinput').each(function() {
+                $(this).keyup(function() {
+                    var inputstr = $(this).val();
+                    var strleng = inputstr.gbLen();
+                    var limitnum = $(this).siblings('u').text();
+                    limitnum = parseInt(limitnum);
+                    var tmplen = 0;
+                    var tipsObj = $(this).parent().siblings('.frm_msg');
+                    if (limitnum > 0) {
+                        limitnum = limitnum * 2;
+                        if (strleng > limitnum) {
+                            tipsObj.show();
+                        } else {
+                            tipsObj.hide();
+                        }
+                    }
+                });
+
+            });
+
+        });
+
+        function checkInPut() {
+        	var storeid = $.trim($('#storeid').val());
+            if (!storeid || (storeid == 0)) {
+                swal({
+                    title: "温馨提示！",
+                    text: '请选择社区所对应的门店',
+                    type: "error"
+                });
+                return false;
+            }
+
+            var businessname = $.trim($('#js_business_name').val());
+            if (!businessname || (businessname.gbLen() > 20)) {
+                swal({
+                    title: "温馨提示！",
+                    text: '广告标题必须填写且不得超过10个汉字',
+                    type: "error"
+                });
+                return false;
+            }
+            var branchname = $.trim($('#js_branch_name').val());
+            if (!branchname || (branchname.gbLen() > 40)) {
+                swal({
+                    title: "温馨提示！",
+                    text: '广告描述必须填写且不得超过20个汉字',
+                    type: "error"
+                });
+                return false;
+            }
+            if (! ($('#js_upload_wrp .imginput').size() > 0)) {
+                swal({
+                    title: "温馨提示！",
+                    text: '请上传一张广告图片！',
+                    type: "error"
+                });
+                return false;
+            }
+            var avgprice = $.trim($('#js_avg_price').val());
+            if (!avgprice) {
+                swal({
+                    title: "温馨提示！",
+                    text: '当前价格没填写！',
+                    type: "error"
+                });
+                return false;
+            }
+            var avgprice2 = $.trim($('#js_avg_price2').val());
+            if (!avgprice2) {
+                swal({
+                    title: "温馨提示！",
+                    text: '门市价格没填写！',
+                    type: "error"
+                });
+                return false;
+            }
+            return true;
+        }
+
+        function DelthisImg(obj) {
+            if (confirm('您确定删除图片！')) {
+                obj.parent('p').parent('.img_upload_preview_box').remove();
+                $("#js_pic_url_div").show();
+            }
+        }
+</script>
+</block>

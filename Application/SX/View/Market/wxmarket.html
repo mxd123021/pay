@@ -1,0 +1,227 @@
+<extend name="Public/base" />
+<block name="title">微信广告</block>
+<block name="levels">
+    <li>
+        <a href="{:U("SX/Index/index")}">后台首页</a></li>
+    <li>微信营销</li></block>
+<block name="body">
+    <div class="row">
+        <div class="col-lg-7">
+            <div class="tabs-container weixin">
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a data-toggle="tab" href="#tab-1" aria-expanded="true">弹框广告</a></li>
+<!--                    <li class="">
+                        <a data-toggle="tab" href="#tab-2" aria-expanded="false">贴片广告</a></li>-->
+                </ul>
+                <div class="tab-content">
+                    <div id="tab-1" class="tab-pane active">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-sm-12 micropay">
+                                    <h3 class="m-t-none m-b">
+                                        <span class="label label-primary">弹框信息</span></h3>
+                                    <form novalidate="novalidate" class="store_build" id="js_store_build">
+                                        <div class="frm_control_group">
+                                            <label for="" class="frm_label">广告图片</label>
+                                            <div class="frm_controls">
+                                                <p class="frm_tips">像素要求：宽300px，高<=300px 支持.jpg .jpeg .gif .png格式，大小不超过1M，注：右上角为关闭，广告图片请标明关闭按钮</p>
+                                                <div id="js_upload_wrp">
+                                                    <div class="img_upload_wrp group">
+                                                        <div id="js_pic_url_div" class="img_upload_box" style="<neq name='adv.photo_url' value=''>display: none;</neq>">
+                                                            <a class="img_upload_box_oper js_upload dz-clickable" id="js_pic_url" href="javascript:">
+                                                                <i class="icon20_common add_gray dz-clickable dz-started">上传</i></a>
+                                                        </div>
+                                                        <neq name='adv.photo_url' value=''>
+                                                            <div class="img_upload_box img_upload_preview_box js_edit_pic_wrp"><img src="__ROOT__/{$adv.photo_url}" data-dz-remove=""><input name="photo_list[]" class="imginput" type="hidden" value="{$adv.photo_url}"><input name="photo_img[]" type="hidden" value="{$adv.photo_url}"><p class="img_upload_edit_area js_edit_area" style="display: none;"><a class="icon18_common del_gray js_delete" href="javascript:;" onclick="DelthisImg($(this));"></a></p></div>
+                                                        </neq>
+                                                        <div class="js_pager"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="frm_control_group">
+                                            <label for="" class="frm_label">展示地域</label>
+                                            <div class="frm_controls">
+                                               <select id="area" class="form-control" name="area" onchange="setarea();">
+                                               <option value="0">不限</option>
+                                                <?php foreach($districts as $akk=>$avv){?>
+                                                  <option value="<?php echo msubstr($avv['fullname'],0,2);?>" data-id="<?php echo $avv['id']?>" <?php if(strpos($avv['fullname'],$adv['area'])===0){echo "selected";}?>><?php echo $avv['fullname'];?></option>
+                                                <?php }?>
+                                               </select>
+                                               <input id="areaid" type="hidden" value="{$adv.areaId}" name="areaid">
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="frm_control_group">
+                                            <label for="" class="frm_label">广告标题</label>
+                                            <div class="frm_controls">
+                                               <input type="text" placeholder="广告标题" name="title" class="form-control" value="{$adv.title}">
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="frm_control_group">
+                                            <label for="" class="frm_label">广告描述</label>
+                                            <div class="frm_controls">
+                                               <input type="text" placeholder="广告描述" name="content" class="form-control" value="{$adv.content}">
+                                            </div>
+                                        </div>
+
+                                        <div class="frm_control_group">
+                                            <label for="" class="frm_label">广告链接</label>
+                                            <div class="frm_controls">
+                                               <input type="text" placeholder="点击图片打开的网址，请加http://" name="url" class="form-control" value="{$adv.url}">
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="frm_control_group">
+                                            <label for="" class="frm_label">广告类型</label>
+                                            <div class="frm_controls">
+                                               <select id="adtype" class="form-control" name="adtype">
+                                               <option value="1" <?php if($adv['adtype'] == 1){echo "selected";}?>>弹窗广告</option>
+                                               <option value="2" <?php if($adv['adtype'] == 2){echo "selected";}?>>图文广告</option>
+                                               <option value="3" <?php if($adv['adtype'] == 3){echo "selected";}?>>贴片广告</option>
+                                               </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="frm_control_group">
+                                            <label for="" class="frm_label">广告状态</label>
+                                            <div class="frm_controls">
+                                               <select id="status" class="form-control" name="status">
+                                               <option value="0" <?php if($adv['status'] == 0){echo "selected";}?>>关闭</option>
+                                               <option value="1" <?php if($adv['status'] == 1){echo "selected";}?>>开启</option>
+                                               </select>
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                    <div>
+                                        <button id="sub_add_wxtk" class="btn btn-primary pull-right" type="button">
+                                            <i class="fa fa-check"></i>&nbsp;保存</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="tab-2" class="tab-pane">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-sm-12 micropay">
+                                    <div class="form-group">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+<block name="top">
+    <link href="__CSS__/merchant/baseshop.css" rel="stylesheet">
+    <link href="__CSS__/merchant/widget_add_img.css" rel="stylesheet">
+    <style>
+        .frm_controls {
+            display: table-cell;
+            vertical-align: top;
+            float: left;
+            width: 400px;
+        }
+        .frm_tips, .frm_msg {
+            padding-top: 4px;
+            width: 400px;
+        }
+        #area,#status{display:inline-block;width: auto;float:left;}
+        .img_upload_preview_box p{margin:0px;}
+    </style>
+</block>
+<block name="bottom">
+    <script src="__JS__/plugins/dropzone.js"></script>
+<script type="text/javascript">
+$('#sub_add_wxtk').click(function(){
+    $.ajax({
+      url:'{:U("SX/Market/advertising")}',
+      type:"post",
+      data:$('form').serialize(),
+      dataType:"JSON",
+      success:function(ret){
+        if(ret.status != -1){
+          swal({
+            title: "保存成功！",
+            text: ret.msg,
+            type: "success"
+           }, function () {
+             window.location.reload();
+          });
+        }else{
+          swal({
+            title: "保存失败！",
+            text: ret.msg,
+            type: "error"
+           }, function () {
+          //window.location.reload();
+          });
+         }
+      }
+    });
+  });
+
+            $(document).on('mouseover mouseout', '.img_upload_preview_box',
+            function(event) {
+                if (event.type == "mouseover") {
+                    $(this).find('p').show();
+                } else if (event.type == "mouseout") {
+                    $(this).find('p').hide();
+                }
+            });
+
+     function setarea(){
+   var obj= $('#area');
+     var areaid=obj.find("option:selected").attr("data-id");
+     $('#areaid').val(areaid);
+  }
+
+            $("#js_pic_url,#js_pic_url .icon20_common").dropzone({
+                url: "{:U('SX/Market/img_Upload')}",
+                maxFilesize: 1,
+                addRemoveLinks: false,
+                acceptedFiles: ".jpg,.png,.gif,.jpeg",
+                uploadMultiple: false,
+                init: function() {
+                    this.on("success",
+                    function(file, responseText) {
+                        /***这里的this.element 是 $("#js_pic_url")****/
+                        if (responseText.status == 1) {
+                            var imgHtml = '<div class="img_upload_box img_upload_preview_box js_edit_pic_wrp"><img  src="__ROOT__/' + responseText.savepath + '" data-dz-remove><input name="photo_list[]" class="imginput" type="hidden" value="' + responseText.savepath + '"><input name="photo_img[]" type="hidden" value="' + responseText.savepath + '"><p class="img_upload_edit_area js_edit_area"><a class="icon18_common del_gray js_delete" href="javascript:;" onclick="DelthisImg($(this));" ></a></p></div>';
+                            $('#js_upload_wrp .img_upload_wrp .js_pager').before(imgHtml);
+                            $(this.element).find('div').remove();
+                            $("#js_pic_url_div").hide();
+                        } else {
+                            swal({
+                                title: "上传失败",
+                                text: responseText.error,
+                                type: "error"
+                            },
+                            function() {
+                                //window.location.reload();
+                            });
+                        }
+                    });
+                    this.on("maxfilesreached", function(file) {
+                });
+                }
+            });
+
+        function DelthisImg(obj) {
+            if (confirm('您确定删除图片！')) {
+                obj.parent('p').parent('.img_upload_preview_box').remove();
+                $("#js_pic_url_div").show();
+            }
+        }
+</script>
+</block>

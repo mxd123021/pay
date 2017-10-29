@@ -1,0 +1,2009 @@
+[ 2017-10-26T09:06:07+08:00 ] 127.0.0.1 /Manage/Users/storefront.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000386s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000450s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000488s ]
+
+[ 2017-10-26T09:06:07+08:00 ] 127.0.0.1 /Manage/Index/toLogin.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000011s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000295s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000402s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000438s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000115s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000163s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.014642s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.014708s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000408s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000441s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000444s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000476s ]
+
+[ 2017-10-26T09:06:09+08:00 ] 127.0.0.1 /Manage/Index/login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000342s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000487s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000533s ]
+SQL: SHOW COLUMNS FROM `de_users` [ RunTime:0.0052s ]
+SQL: SHOW COLUMNS FROM `de_users` [ RunTime:0.0047s ]
+SQL: SELECT * FROM `de_users` WHERE ( loginName="ceshi@qq.com" and userStatus=1 or userId =306 ) LIMIT 1   [ RunTime:0.0009s ]
+NOTIC: [8] Undefined index: grant C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Model\UsersModel.class.php 第 34 行.
+SQL: UPDATE `de_users` SET `userId`='306',`parentId`='182',`tgId`='0',`tgemId`='0',`loginName`='兴宁深宝',`loginSecret`='4075',`loginPwd`='3e7f5c41c14d9607fd719b8f911fa6f1',`userType`='0',`userName`='兴宁市深宝键身休闲有限公司',`userQQ`=NULL,`userPhone`='13903000139',`userEmail`='9685199711@qq.com',`userScore`='0',`userPhoto`=NULL,`userTotalScore`='0',`userStatus`='1',`userFlag`='1',`userAudit`='1',`userStep`='1',`wx_appId`='wx279a7af089a58da1',`wx_appSecret`='7da603f1e9fd99bab762da217a825544',`wx_mchId`=NULL,`wx_apiSecret`=NULL,`wx_apiclientCert`=NULL,`wx_apiclientKey`=NULL,`wx_apiclientCa`=NULL,`wx_token`=NULL,`wx_update`=NULL,`wx_issp`='3',`zz_name`=NULL,`zz_payAtuh`='1',`zz_sfz`=NULL,`zz_shname`=NULL,`zz_license`=NULL,`zz_banktype`=NULL,`zz_bank`=NULL,`zz_accountname`='',`zz_bankinfo`=NULL,`bankPhone`='',`zz_sftype`=NULL,`zz_yxq`=NULL,`zz_jc`=NULL,`zz_jyxz`=NULL,`incode`='0',`sid`='',`fid`='',`backcode`='0',`zz_zcdz`=NULL,`zz_bankqc`=NULL,`tszz`=NULL,`yyzz`=NULL,`zzjg`=NULL,`sfzz`=NULL,`sfzf`=NULL,`gd_mchId`='101590077738',`xy_key`='b8bafbe19097167504bbcb34e602da58',`gd_rate`='',`reson`=NULL,`createTime`='2017-07-15 11:41:09',`lastIP`='127.0.0.1',`lastTime`='2017-10-26 09:06:09' WHERE ( userId=306 ) [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `de_log_user_logins` [ RunTime:0.0039s ]
+SQL: INSERT INTO `de_log_user_logins` (`userId`,`loginTime`,`loginIp`) VALUES ('306','2017-10-26 09:06:09','127.0.0.1') [ RunTime:0.0004s ]
+
+[ 2017-10-26T09:06:09+08:00 ] 127.0.0.1 /Manage/Index/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000011s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000306s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000385s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000422s ]
+SQL: SHOW COLUMNS FROM `de_users` [ RunTime:0.0056s ]
+SQL: SELECT * FROM `de_users` WHERE ( userId=306 ) LIMIT 1   [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `de_configs` [ RunTime:0.0044s ]
+SQL: SELECT * FROM `de_configs` WHERE ( configId=1 ) LIMIT 1   [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `de_order` [ RunTime:0.0050s ]
+SQL: SHOW COLUMNS FROM `de_bindweixin` [ RunTime:0.0037s ]
+SQL: SHOW COLUMNS FROM `de_financial` [ RunTime:0.0043s ]
+SQL: SELECT * FROM `de_financial` WHERE ( userId=306 ) LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `de_stores` [ RunTime:0.0051s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_bindweixin` WHERE ( userId = 306 and usId = 0 and storeId = 0 ) LIMIT 1   [ RunTime:0.0004s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and year(FROM_UNIXTIME(paytime))=2017 and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and year(FROM_UNIXTIME(paytime))=2016 and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+NOTIC: [2] Division by zero C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\IndexController.class.php 第 66 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-10' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-09' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m-%d')='2017-10-26' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m-%d')='2017-10-25' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+NOTIC: [2] Division by zero C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\IndexController.class.php 第 79 行.
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-04' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-04' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-05' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-05' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-06' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-06' and 1 ) LIMIT 1   [ RunTime:0.0001s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-07' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-07' and 1 ) LIMIT 1   [ RunTime:0.0004s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-08' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-08' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-09' and 1 ) LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-09' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-10' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-10' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_stores` WHERE ( userId=306 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `de_ustaffs` [ RunTime:0.0036s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_ustaffs` WHERE ( userId=306 ) LIMIT 1   [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000395s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000441s ]
+NOTIC: [2] Division by zero C:\Users\Administrator\Desktop\payCode\code\Application\Runtime\Cache\Manage\737aa8fc5877d411a50443dade831133.php 第 344 行.
+NOTIC: [2] Division by zero C:\Users\Administrator\Desktop\payCode\code\Application\Runtime\Cache\Manage\737aa8fc5877d411a50443dade831133.php 第 351 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.033720s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.033761s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000213s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000245s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000446s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000481s ]
+
+[ 2017-10-26T11:42:05+08:00 ] 127.0.0.1 /
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000010s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000342s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000417s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000456s ]
+
+[ 2017-10-26T11:42:05+08:00 ] 127.0.0.1 /Manage/Index/toLogin.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000377s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000398s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000435s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000121s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000175s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.014030s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.014080s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000333s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000363s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000437s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000469s ]
+
+[ 2017-10-26T11:42:07+08:00 ] 127.0.0.1 /Manage/Index/login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000020s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000540s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001492s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001594s ]
+SQL: SHOW COLUMNS FROM `de_users` [ RunTime:0.0083s ]
+SQL: SHOW COLUMNS FROM `de_users` [ RunTime:0.0057s ]
+SQL: SELECT * FROM `de_users` WHERE ( loginName="ceshi@qq.com" and userStatus=1 or userId =306 ) LIMIT 1   [ RunTime:0.0010s ]
+NOTIC: [8] Undefined index: grant C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Model\UsersModel.class.php 第 34 行.
+SQL: UPDATE `de_users` SET `userId`='306',`parentId`='182',`tgId`='0',`tgemId`='0',`loginName`='兴宁深宝',`loginSecret`='4075',`loginPwd`='3e7f5c41c14d9607fd719b8f911fa6f1',`userType`='0',`userName`='兴宁市深宝键身休闲有限公司',`userQQ`=NULL,`userPhone`='13903000139',`userEmail`='9685199711@qq.com',`userScore`='0',`userPhoto`=NULL,`userTotalScore`='0',`userStatus`='1',`userFlag`='1',`userAudit`='1',`userStep`='1',`wx_appId`='wx279a7af089a58da1',`wx_appSecret`='7da603f1e9fd99bab762da217a825544',`wx_mchId`=NULL,`wx_apiSecret`=NULL,`wx_apiclientCert`=NULL,`wx_apiclientKey`=NULL,`wx_apiclientCa`=NULL,`wx_token`=NULL,`wx_update`=NULL,`wx_issp`='3',`zz_name`=NULL,`zz_payAtuh`='1',`zz_sfz`=NULL,`zz_shname`=NULL,`zz_license`=NULL,`zz_banktype`=NULL,`zz_bank`=NULL,`zz_accountname`='',`zz_bankinfo`=NULL,`bankPhone`='',`zz_sftype`=NULL,`zz_yxq`=NULL,`zz_jc`=NULL,`zz_jyxz`=NULL,`incode`='0',`sid`='',`fid`='',`backcode`='0',`zz_zcdz`=NULL,`zz_bankqc`=NULL,`tszz`=NULL,`yyzz`=NULL,`zzjg`=NULL,`sfzz`=NULL,`sfzf`=NULL,`gd_mchId`='101590077738',`xy_key`='b8bafbe19097167504bbcb34e602da58',`gd_rate`='',`reson`=NULL,`createTime`='2017-07-15 11:41:09',`lastIP`='127.0.0.1',`lastTime`='2017-10-26 11:42:07' WHERE ( userId=306 ) [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `de_log_user_logins` [ RunTime:0.0048s ]
+SQL: INSERT INTO `de_log_user_logins` (`userId`,`loginTime`,`loginIp`) VALUES ('306','2017-10-26 11:42:07','127.0.0.1') [ RunTime:0.0004s ]
+
+[ 2017-10-26T11:42:07+08:00 ] 127.0.0.1 /Manage/Index/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000406s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000427s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000492s ]
+SQL: SHOW COLUMNS FROM `de_users` [ RunTime:0.0050s ]
+SQL: SELECT * FROM `de_users` WHERE ( userId=306 ) LIMIT 1   [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `de_configs` [ RunTime:0.0049s ]
+SQL: SELECT * FROM `de_configs` WHERE ( configId=1 ) LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `de_order` [ RunTime:0.0042s ]
+SQL: SHOW COLUMNS FROM `de_bindweixin` [ RunTime:0.0042s ]
+SQL: SHOW COLUMNS FROM `de_financial` [ RunTime:0.0040s ]
+SQL: SELECT * FROM `de_financial` WHERE ( userId=306 ) LIMIT 1   [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `de_stores` [ RunTime:0.0042s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_bindweixin` WHERE ( userId = 306 and usId = 0 and storeId = 0 ) LIMIT 1   [ RunTime:0.0004s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and year(FROM_UNIXTIME(paytime))=2017 and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and year(FROM_UNIXTIME(paytime))=2016 and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+NOTIC: [2] Division by zero C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\IndexController.class.php 第 66 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-10' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-09' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m-%d')='2017-10-26' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m-%d')='2017-10-25' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+NOTIC: [2] Division by zero C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\IndexController.class.php 第 79 行.
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-04' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-04' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-05' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-05' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-06' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-06' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-07' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-07' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-08' and 1 ) LIMIT 1   [ RunTime:0.0004s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-08' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-09' and 1 ) LIMIT 1   [ RunTime:0.0004s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-09' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-10' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-10' and 1 ) LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_stores` WHERE ( userId=306 ) LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `de_ustaffs` [ RunTime:0.0043s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_ustaffs` WHERE ( userId=306 ) LIMIT 1   [ RunTime:0.0004s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000391s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000446s ]
+NOTIC: [2] Division by zero C:\Users\Administrator\Desktop\payCode\code\Application\Runtime\Cache\Manage\737aa8fc5877d411a50443dade831133.php 第 344 行.
+NOTIC: [2] Division by zero C:\Users\Administrator\Desktop\payCode\code\Application\Runtime\Cache\Manage\737aa8fc5877d411a50443dade831133.php 第 351 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.035940s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.035982s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000235s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000311s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000717s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000791s ]
+
+[ 2017-10-26T11:42:17+08:00 ] 127.0.0.1 /Manage/Users/storefront.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000016s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000336s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000453s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000491s ]
+SQL: SHOW COLUMNS FROM `de_users` [ RunTime:0.0045s ]
+SQL: SHOW COLUMNS FROM `de_stores` [ RunTime:0.0039s ]
+SQL: select count(*) counts from (select * from de_stores where userId=306 order by storeId desc ) as a [ RunTime:0.0005s ]
+SQL: select * from de_stores where userId=306 order by storeId desc  limit 0,20 [ RunTime:0.0003s ]
+SQL: SELECT * FROM `de_users` WHERE ( userId=306 ) LIMIT 1   [ RunTime:0.0008s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000344s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000389s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.030773s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.030825s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000242s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000274s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000394s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000426s ]
+
+[ 2017-10-26T11:42:37+08:00 ] 127.0.0.1 /Manage/Index/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000320s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000382s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000420s ]
+SQL: SHOW COLUMNS FROM `de_users` [ RunTime:0.0054s ]
+SQL: SELECT * FROM `de_users` WHERE ( userId=306 ) LIMIT 1   [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `de_configs` [ RunTime:0.0040s ]
+SQL: SELECT * FROM `de_configs` WHERE ( configId=1 ) LIMIT 1   [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `de_order` [ RunTime:0.0040s ]
+SQL: SHOW COLUMNS FROM `de_bindweixin` [ RunTime:0.0042s ]
+SQL: SHOW COLUMNS FROM `de_financial` [ RunTime:0.0036s ]
+SQL: SELECT * FROM `de_financial` WHERE ( userId=306 ) LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `de_stores` [ RunTime:0.0049s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_bindweixin` WHERE ( userId = 306 and usId = 0 and storeId = 0 ) LIMIT 1   [ RunTime:0.0004s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and year(FROM_UNIXTIME(paytime))=2017 and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and year(FROM_UNIXTIME(paytime))=2016 and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+NOTIC: [2] Division by zero C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\IndexController.class.php 第 66 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-10' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-09' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m-%d')='2017-10-26' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m-%d')='2017-10-25' and 1 ) LIMIT 1   [ RunTime:0.0005s ]
+NOTIC: [2] Division by zero C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\IndexController.class.php 第 79 行.
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-04' and 1 ) LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-04' and 1 ) LIMIT 1   [ RunTime:0.0004s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-05' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-05' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-06' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-06' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-07' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-07' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-08' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-08' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-09' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-09' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-10' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-10' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_stores` WHERE ( userId=306 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `de_ustaffs` [ RunTime:0.0035s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_ustaffs` WHERE ( userId=306 ) LIMIT 1   [ RunTime:0.0003s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000385s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000433s ]
+NOTIC: [2] Division by zero C:\Users\Administrator\Desktop\payCode\code\Application\Runtime\Cache\Manage\737aa8fc5877d411a50443dade831133.php 第 344 行.
+NOTIC: [2] Division by zero C:\Users\Administrator\Desktop\payCode\code\Application\Runtime\Cache\Manage\737aa8fc5877d411a50443dade831133.php 第 351 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.032917s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.032977s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000248s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000281s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000468s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000507s ]
+
+[ 2017-10-26T11:42:46+08:00 ] 127.0.0.1 /Manage/Users/payConfig.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000277s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000372s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000407s ]
+SQL: SHOW COLUMNS FROM `de_users` [ RunTime:0.0051s ]
+SQL: SELECT * FROM `de_users` WHERE ( userId=306 ) LIMIT 1   [ RunTime:0.0008s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000403s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000452s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.031624s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.031672s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000210s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000241s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000409s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000444s ]
+
+[ 2017-10-26T11:42:49+08:00 ] 127.0.0.1 /Manage/Xingye/payment/type/1.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000417s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000586s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000656s ]
+NOTIC: [2048] Declaration of Manage\Controller\XingyeController::uploadPic() should be compatible with Manage\Controller\BaseController::uploadPic($maxSize = 0, $savePath = 'uploads') C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\XingyeController.class.php 第 6 行.
+SQL: SHOW COLUMNS FROM `de_order` [ RunTime:0.0042s ]
+NOTIC: [2] Missing argument 4 for Manage\Model\OrderModel::getAll(), called in C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\XingyeController.class.php on line 478 and defined C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Model\OrderModel.class.php 第 16 行.
+NOTIC: [8] Undefined variable: sql C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Model\OrderModel.class.php 第 18 行.
+SQL: SELECT * FROM `de_order` WHERE ( uid=306 ) ORDER BY paytime desc LIMIT 20   [ RunTime:0.0008s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000500s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000546s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.035025s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.035079s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000217s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000246s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000719s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000807s ]
+
+[ 2017-10-26T11:43:16+08:00 ] 127.0.0.1 /Manage/Statistics/orderLists.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000018s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000354s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000407s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000443s ]
+SQL: SHOW COLUMNS FROM `de_order` [ RunTime:0.0040s ]
+SQL: SELECT * FROM `de_order` WHERE ( uid=306 and paytime >= 1508947200 and paytime <= 1509033600 ) ORDER BY paytime desc  [ RunTime:0.0005s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and paytime >= 1508947200 and paytime <= 1509033600 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `de_stores` [ RunTime:0.0039s ]
+SQL: SELECT * FROM `de_stores` WHERE ( userId=306 )  [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `de_ustaffs` [ RunTime:0.0040s ]
+SQL: SELECT * FROM `de_ustaffs` WHERE ( userId=306 )  [ RunTime:0.0004s ]
+NOTIC: [8] Undefined variable: store C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\StatisticsController.class.php 第 140 行.
+NOTIC: [8] Undefined variable: ustaff C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\StatisticsController.class.php 第 141 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000410s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000467s ]
+NOTIC: [8] Undefined variable: type C:\Users\Administrator\Desktop\payCode\code\Application\Runtime\Cache\Manage\b4721fda0a0cc3b899c49428b02ed1ba.php 第 162 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.034603s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.034652s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000378s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000418s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000690s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000764s ]
+
+[ 2017-10-26T11:43:25+08:00 ] 127.0.0.1 /Manage/Index/logout.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000010s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000276s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000392s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000427s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000057s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000095s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.004696s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.004742s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000232s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000261s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000374s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000404s ]
+
+[ 2017-10-26T11:43:40+08:00 ] 127.0.0.1 /Manage/Xingye/ewmpay.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000018s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000474s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000487s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000542s ]
+NOTIC: [2048] Declaration of Manage\Controller\XingyeController::uploadPic() should be compatible with Manage\Controller\BaseController::uploadPic($maxSize = 0, $savePath = 'uploads') C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\XingyeController.class.php 第 6 行.
+
+[ 2017-10-26T11:43:40+08:00 ] 127.0.0.1 /Manage/Index/toLogin.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000011s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000284s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000367s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000401s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000103s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000160s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.006047s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.006102s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000265s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000297s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000477s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000512s ]
+
+[ 2017-10-26T11:43:42+08:00 ] 127.0.0.1 /Manage/Index/login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000018s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000578s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000756s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000827s ]
+SQL: SHOW COLUMNS FROM `de_users` [ RunTime:0.0044s ]
+SQL: SHOW COLUMNS FROM `de_users` [ RunTime:0.0045s ]
+SQL: SELECT * FROM `de_users` WHERE ( loginName="ceshi@qq.com" and userStatus=1 or userId =306 ) LIMIT 1   [ RunTime:0.0009s ]
+NOTIC: [8] Undefined index: grant C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Model\UsersModel.class.php 第 34 行.
+SQL: UPDATE `de_users` SET `userId`='306',`parentId`='182',`tgId`='0',`tgemId`='0',`loginName`='兴宁深宝',`loginSecret`='4075',`loginPwd`='3e7f5c41c14d9607fd719b8f911fa6f1',`userType`='0',`userName`='兴宁市深宝键身休闲有限公司',`userQQ`=NULL,`userPhone`='13903000139',`userEmail`='9685199711@qq.com',`userScore`='0',`userPhoto`=NULL,`userTotalScore`='0',`userStatus`='1',`userFlag`='1',`userAudit`='1',`userStep`='1',`wx_appId`='wx279a7af089a58da1',`wx_appSecret`='7da603f1e9fd99bab762da217a825544',`wx_mchId`=NULL,`wx_apiSecret`=NULL,`wx_apiclientCert`=NULL,`wx_apiclientKey`=NULL,`wx_apiclientCa`=NULL,`wx_token`=NULL,`wx_update`=NULL,`wx_issp`='3',`zz_name`=NULL,`zz_payAtuh`='1',`zz_sfz`=NULL,`zz_shname`=NULL,`zz_license`=NULL,`zz_banktype`=NULL,`zz_bank`=NULL,`zz_accountname`='',`zz_bankinfo`=NULL,`bankPhone`='',`zz_sftype`=NULL,`zz_yxq`=NULL,`zz_jc`=NULL,`zz_jyxz`=NULL,`incode`='0',`sid`='',`fid`='',`backcode`='0',`zz_zcdz`=NULL,`zz_bankqc`=NULL,`tszz`=NULL,`yyzz`=NULL,`zzjg`=NULL,`sfzz`=NULL,`sfzf`=NULL,`gd_mchId`='101590077738',`xy_key`='b8bafbe19097167504bbcb34e602da58',`gd_rate`='',`reson`=NULL,`createTime`='2017-07-15 11:41:09',`lastIP`='127.0.0.1',`lastTime`='2017-10-26 11:43:42' WHERE ( userId=306 ) [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `de_log_user_logins` [ RunTime:0.0035s ]
+SQL: INSERT INTO `de_log_user_logins` (`userId`,`loginTime`,`loginIp`) VALUES ('306','2017-10-26 11:43:42','127.0.0.1') [ RunTime:0.0003s ]
+
+[ 2017-10-26T11:43:42+08:00 ] 127.0.0.1 /Manage/Index/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000332s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000435s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000487s ]
+SQL: SHOW COLUMNS FROM `de_users` [ RunTime:0.0058s ]
+SQL: SELECT * FROM `de_users` WHERE ( userId=306 ) LIMIT 1   [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `de_configs` [ RunTime:0.0044s ]
+SQL: SELECT * FROM `de_configs` WHERE ( configId=1 ) LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `de_order` [ RunTime:0.0041s ]
+SQL: SHOW COLUMNS FROM `de_bindweixin` [ RunTime:0.0044s ]
+SQL: SHOW COLUMNS FROM `de_financial` [ RunTime:0.0042s ]
+SQL: SELECT * FROM `de_financial` WHERE ( userId=306 ) LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `de_stores` [ RunTime:0.0038s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_bindweixin` WHERE ( userId = 306 and usId = 0 and storeId = 0 ) LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and year(FROM_UNIXTIME(paytime))=2017 and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and year(FROM_UNIXTIME(paytime))=2016 and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+NOTIC: [2] Division by zero C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\IndexController.class.php 第 66 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-10' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-09' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m-%d')='2017-10-26' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m-%d')='2017-10-25' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+NOTIC: [2] Division by zero C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\IndexController.class.php 第 79 行.
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-04' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-04' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-05' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-05' and 1 ) LIMIT 1   [ RunTime:0.0004s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-06' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-06' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-07' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-07' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-08' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-08' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-09' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-09' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-10' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-10' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_stores` WHERE ( userId=306 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `de_ustaffs` [ RunTime:0.0041s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_ustaffs` WHERE ( userId=306 ) LIMIT 1   [ RunTime:0.0003s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000448s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000497s ]
+NOTIC: [2] Division by zero C:\Users\Administrator\Desktop\payCode\code\Application\Runtime\Cache\Manage\737aa8fc5877d411a50443dade831133.php 第 344 行.
+NOTIC: [2] Division by zero C:\Users\Administrator\Desktop\payCode\code\Application\Runtime\Cache\Manage\737aa8fc5877d411a50443dade831133.php 第 351 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.036282s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.036324s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000260s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000289s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000411s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000444s ]
+
+[ 2017-10-26T11:43:44+08:00 ] 127.0.0.1 /Manage/Xingye/ewmpay.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000011s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000295s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000407s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000445s ]
+NOTIC: [2048] Declaration of Manage\Controller\XingyeController::uploadPic() should be compatible with Manage\Controller\BaseController::uploadPic($maxSize = 0, $savePath = 'uploads') C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\XingyeController.class.php 第 6 行.
+SQL: SHOW COLUMNS FROM `de_order` [ RunTime:0.0046s ]
+NOTIC: [2] Missing argument 4 for Manage\Model\OrderModel::getAll(), called in C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\XingyeController.class.php on line 216 and defined C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Model\OrderModel.class.php 第 16 行.
+NOTIC: [8] Undefined variable: sql C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Model\OrderModel.class.php 第 18 行.
+SQL: SELECT * FROM `de_order` WHERE ( uid=306 ) ORDER BY paytime desc LIMIT 20   [ RunTime:0.0007s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000479s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000532s ]
+NOTIC: [8] Undefined property: Think\Storage\Driver\File::$SiteUrl C:\Users\Administrator\Desktop\payCode\code\Application\Runtime\Cache\Manage\0ee3e5250df48a7bd743df24111c3c7c.php 第 288 行.
+NOTIC: [8] Undefined property: Think\Storage\Driver\File::$SiteUrl C:\Users\Administrator\Desktop\payCode\code\Application\Runtime\Cache\Manage\0ee3e5250df48a7bd743df24111c3c7c.php 第 289 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.031534s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.031581s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000257s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000286s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000396s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000428s ]
+
+[ 2017-10-26T11:44:11+08:00 ] 127.0.0.1 /Manage/Xingye/ewmpay.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000011s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000361s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000446s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000487s ]
+NOTIC: [2048] Declaration of Manage\Controller\XingyeController::uploadPic() should be compatible with Manage\Controller\BaseController::uploadPic($maxSize = 0, $savePath = 'uploads') C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\XingyeController.class.php 第 6 行.
+SQL: SHOW COLUMNS FROM `de_users` [ RunTime:0.0045s ]
+SQL: SELECT * FROM `de_users` WHERE ( userId=306 ) LIMIT 1   [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `de_configs` [ RunTime:0.0039s ]
+SQL: SELECT * FROM `de_configs` WHERE ( configId=1 ) LIMIT 1   [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `de_order` [ RunTime:0.0045s ]
+NOTIC: [8] Undefined index: sub_mch_id C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Model\XyOrderModel.class.php 第 63 行.
+NOTIC: [8] Undefined index: time_end C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Model\XyOrderModel.class.php 第 71 行.
+SQL: SHOW COLUMNS FROM `de_order` [ RunTime:0.0043s ]
+SQL: INSERT INTO `de_order` (`order_id`,`uid`,`eid`,`storeid`,`pay_way`,`truename`,`pay_type`,`goods_type`,`mch_id`,`goods_name`,`goods_describe`,`goods_price`,`add_time`,`paytime`,`state`,`ispay`,`openid`,`transaction_id`,`refund`,`refundtext`,`comefrom`,`mchtype`,`pmid`,`p_openid`) VALUES ('10159007773820171026114407','306','0','0','weixin','','NATIVE','ordinary','0','哈哈哈哈','扫码支付','5','1508989447','0','0','0','','','0','','0','3','182','') [ RunTime:0.0008s ]
+SQL: SELECT * FROM `de_users` WHERE ( userId=306 ) LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT * FROM `de_configs` WHERE ( configId=1 ) LIMIT 1   [ RunTime:0.0003s ]
+
+[ 2017-10-26T11:44:51+08:00 ] 127.0.0.1 /Manage/Xingye/ewmpay.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000011s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000344s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000467s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000519s ]
+NOTIC: [2048] Declaration of Manage\Controller\XingyeController::uploadPic() should be compatible with Manage\Controller\BaseController::uploadPic($maxSize = 0, $savePath = 'uploads') C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\XingyeController.class.php 第 6 行.
+SQL: SHOW COLUMNS FROM `de_users` [ RunTime:0.0045s ]
+SQL: SELECT * FROM `de_users` WHERE ( userId=306 ) LIMIT 1   [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `de_configs` [ RunTime:0.0039s ]
+SQL: SELECT * FROM `de_configs` WHERE ( configId=1 ) LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `de_order` [ RunTime:0.0036s ]
+NOTIC: [8] Undefined index: sub_mch_id C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Model\XyOrderModel.class.php 第 63 行.
+NOTIC: [8] Undefined index: time_end C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Model\XyOrderModel.class.php 第 71 行.
+SQL: SHOW COLUMNS FROM `de_order` [ RunTime:0.0036s ]
+SQL: INSERT INTO `de_order` (`order_id`,`uid`,`eid`,`storeid`,`pay_way`,`truename`,`pay_type`,`goods_type`,`mch_id`,`goods_name`,`goods_describe`,`goods_price`,`add_time`,`paytime`,`state`,`ispay`,`openid`,`transaction_id`,`refund`,`refundtext`,`comefrom`,`mchtype`,`pmid`,`p_openid`) VALUES ('10159007773820171026114451','306','0','0','alipay','','NATIVE','ordinary','0','哈哈哈哈','扫码支付','5','1508989491','0','0','0','','','0','','0','3','182','') [ RunTime:0.0004s ]
+SQL: SELECT * FROM `de_users` WHERE ( userId=306 ) LIMIT 1   [ RunTime:0.0005s ]
+SQL: SELECT * FROM `de_configs` WHERE ( configId=1 ) LIMIT 1   [ RunTime:0.0002s ]
+
+[ 2017-10-26T11:45:23+08:00 ] 127.0.0.1 /Manage/Xingye/ewmpay.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000017s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000616s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000503s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000559s ]
+NOTIC: [2048] Declaration of Manage\Controller\XingyeController::uploadPic() should be compatible with Manage\Controller\BaseController::uploadPic($maxSize = 0, $savePath = 'uploads') C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\XingyeController.class.php 第 6 行.
+SQL: SHOW COLUMNS FROM `de_users` [ RunTime:0.0046s ]
+SQL: SELECT * FROM `de_users` WHERE ( userId=306 ) LIMIT 1   [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `de_configs` [ RunTime:0.0042s ]
+SQL: SELECT * FROM `de_configs` WHERE ( configId=1 ) LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `de_order` [ RunTime:0.0038s ]
+NOTIC: [8] Undefined index: sub_mch_id C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Model\XyOrderModel.class.php 第 63 行.
+NOTIC: [8] Undefined index: time_end C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Model\XyOrderModel.class.php 第 71 行.
+SQL: SHOW COLUMNS FROM `de_order` [ RunTime:0.0039s ]
+SQL: INSERT INTO `de_order` (`order_id`,`uid`,`eid`,`storeid`,`pay_way`,`truename`,`pay_type`,`goods_type`,`mch_id`,`goods_name`,`goods_describe`,`goods_price`,`add_time`,`paytime`,`state`,`ispay`,`openid`,`transaction_id`,`refund`,`refundtext`,`comefrom`,`mchtype`,`pmid`,`p_openid`) VALUES ('10159007773820171026114522','306','0','0','alipay','','NATIVE','ordinary','0','哈哈哈哈','扫码支付','0.01','1508989522','0','0','0','','','0','','0','3','182','') [ RunTime:0.0005s ]
+SQL: SELECT * FROM `de_users` WHERE ( userId=306 ) LIMIT 1   [ RunTime:0.0005s ]
+SQL: SELECT * FROM `de_configs` WHERE ( configId=1 ) LIMIT 1   [ RunTime:0.0003s ]
+
+[ 2017-10-26T11:45:48+08:00 ] 127.0.0.1 /Manage/Order/getajaxOrder.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000077s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000532s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000604s ]
+NOTIC: [2] session_start(): Cannot send session cache limiter - headers already sent C:\Users\Administrator\Desktop\payCode\code\ThinkPHP\Common\functions.php 第 1263 行.
+SQL: SHOW COLUMNS FROM `de_order` [ RunTime:0.0043s ]
+NOTIC: [2] Missing argument 4 for Manage\Model\OrderModel::getAll(), called in C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\OrderController.class.php on line 73 and defined C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Model\OrderModel.class.php 第 16 行.
+NOTIC: [8] Undefined variable: sql C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Model\OrderModel.class.php 第 18 行.
+SQL: SELECT * FROM `de_order` WHERE ( uid=306 ) ORDER BY paytime desc LIMIT 20   [ RunTime:0.0008s ]
+NOTIC: [2] Cannot modify header information - headers already sent C:\Users\Administrator\Desktop\payCode\code\ThinkPHP\Library\Think\Controller.class.php 第 215 行.
+
+[ 2017-10-26T11:45:49+08:00 ] 127.0.0.1 /Manage/Order/getajaxOrder.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000010s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000059s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000345s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000373s ]
+NOTIC: [2] session_start(): Cannot send session cache limiter - headers already sent C:\Users\Administrator\Desktop\payCode\code\ThinkPHP\Common\functions.php 第 1263 行.
+SQL: SHOW COLUMNS FROM `de_order` [ RunTime:0.0039s ]
+NOTIC: [2] Missing argument 4 for Manage\Model\OrderModel::getAll(), called in C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\OrderController.class.php on line 73 and defined C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Model\OrderModel.class.php 第 16 行.
+NOTIC: [8] Undefined variable: sql C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Model\OrderModel.class.php 第 18 行.
+SQL: SELECT * FROM `de_order` WHERE ( uid=306 ) ORDER BY paytime desc LIMIT 20   [ RunTime:0.0006s ]
+NOTIC: [2] Cannot modify header information - headers already sent C:\Users\Administrator\Desktop\payCode\code\ThinkPHP\Library\Think\Controller.class.php 第 215 行.
+
+[ 2017-10-26T11:45:50+08:00 ] 127.0.0.1 /Manage/Order/getajaxOrder.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000075s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000428s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000466s ]
+NOTIC: [2] session_start(): Cannot send session cache limiter - headers already sent C:\Users\Administrator\Desktop\payCode\code\ThinkPHP\Common\functions.php 第 1263 行.
+SQL: SHOW COLUMNS FROM `de_order` [ RunTime:0.0042s ]
+NOTIC: [2] Missing argument 4 for Manage\Model\OrderModel::getAll(), called in C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\OrderController.class.php on line 73 and defined C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Model\OrderModel.class.php 第 16 行.
+NOTIC: [8] Undefined variable: sql C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Model\OrderModel.class.php 第 18 行.
+SQL: SELECT * FROM `de_order` WHERE ( uid=306 ) ORDER BY paytime desc LIMIT 20   [ RunTime:0.0007s ]
+NOTIC: [2] Cannot modify header information - headers already sent C:\Users\Administrator\Desktop\payCode\code\ThinkPHP\Library\Think\Controller.class.php 第 215 行.
+
+[ 2017-10-26T11:45:51+08:00 ] 127.0.0.1 /Manage/Order/getajaxOrder.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000010s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000064s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000388s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000418s ]
+NOTIC: [2] session_start(): Cannot send session cache limiter - headers already sent C:\Users\Administrator\Desktop\payCode\code\ThinkPHP\Common\functions.php 第 1263 行.
+SQL: SHOW COLUMNS FROM `de_order` [ RunTime:0.0040s ]
+NOTIC: [2] Missing argument 4 for Manage\Model\OrderModel::getAll(), called in C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\OrderController.class.php on line 73 and defined C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Model\OrderModel.class.php 第 16 行.
+NOTIC: [8] Undefined variable: sql C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Model\OrderModel.class.php 第 18 行.
+SQL: SELECT * FROM `de_order` WHERE ( uid=306 ) ORDER BY paytime desc LIMIT 20   [ RunTime:0.0008s ]
+NOTIC: [2] Cannot modify header information - headers already sent C:\Users\Administrator\Desktop\payCode\code\ThinkPHP\Library\Think\Controller.class.php 第 215 行.
+
+[ 2017-10-26T11:45:51+08:00 ] 127.0.0.1 /Manage/Order/getajaxOrder.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000073s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000406s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000438s ]
+NOTIC: [2] session_start(): Cannot send session cache limiter - headers already sent C:\Users\Administrator\Desktop\payCode\code\ThinkPHP\Common\functions.php 第 1263 行.
+SQL: SHOW COLUMNS FROM `de_order` [ RunTime:0.0040s ]
+NOTIC: [2] Missing argument 4 for Manage\Model\OrderModel::getAll(), called in C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\OrderController.class.php on line 73 and defined C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Model\OrderModel.class.php 第 16 行.
+NOTIC: [8] Undefined variable: sql C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Model\OrderModel.class.php 第 18 行.
+SQL: SELECT * FROM `de_order` WHERE ( uid=306 ) ORDER BY paytime desc LIMIT 20   [ RunTime:0.0007s ]
+NOTIC: [2] Cannot modify header information - headers already sent C:\Users\Administrator\Desktop\payCode\code\ThinkPHP\Library\Think\Controller.class.php 第 215 行.
+
+[ 2017-10-26T11:45:51+08:00 ] 127.0.0.1 /Manage/Order/getajaxOrder.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000010s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000066s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000425s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000459s ]
+NOTIC: [2] session_start(): Cannot send session cache limiter - headers already sent C:\Users\Administrator\Desktop\payCode\code\ThinkPHP\Common\functions.php 第 1263 行.
+SQL: SHOW COLUMNS FROM `de_order` [ RunTime:0.0042s ]
+NOTIC: [2] Missing argument 4 for Manage\Model\OrderModel::getAll(), called in C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\OrderController.class.php on line 73 and defined C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Model\OrderModel.class.php 第 16 行.
+NOTIC: [8] Undefined variable: sql C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Model\OrderModel.class.php 第 18 行.
+SQL: SELECT * FROM `de_order` WHERE ( uid=306 ) ORDER BY paytime desc LIMIT 20   [ RunTime:0.0007s ]
+NOTIC: [2] Cannot modify header information - headers already sent C:\Users\Administrator\Desktop\payCode\code\ThinkPHP\Library\Think\Controller.class.php 第 215 行.
+
+[ 2017-10-26T11:45:52+08:00 ] 127.0.0.1 /Manage/Order/getajaxOrder.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000076s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000459s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000498s ]
+NOTIC: [2] session_start(): Cannot send session cache limiter - headers already sent C:\Users\Administrator\Desktop\payCode\code\ThinkPHP\Common\functions.php 第 1263 行.
+SQL: SHOW COLUMNS FROM `de_order` [ RunTime:0.0040s ]
+NOTIC: [2] Missing argument 4 for Manage\Model\OrderModel::getAll(), called in C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\OrderController.class.php on line 73 and defined C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Model\OrderModel.class.php 第 16 行.
+NOTIC: [8] Undefined variable: sql C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Model\OrderModel.class.php 第 18 行.
+SQL: SELECT * FROM `de_order` WHERE ( uid=306 ) ORDER BY paytime desc LIMIT 20   [ RunTime:0.0007s ]
+NOTIC: [2] Cannot modify header information - headers already sent C:\Users\Administrator\Desktop\payCode\code\ThinkPHP\Library\Think\Controller.class.php 第 215 行.
+
+[ 2017-10-26T11:46:07+08:00 ] 127.0.0.1 /Manage/Xingye/payment/type/1.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000368s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000399s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000439s ]
+NOTIC: [2048] Declaration of Manage\Controller\XingyeController::uploadPic() should be compatible with Manage\Controller\BaseController::uploadPic($maxSize = 0, $savePath = 'uploads') C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\XingyeController.class.php 第 6 行.
+SQL: SHOW COLUMNS FROM `de_order` [ RunTime:0.0041s ]
+NOTIC: [2] Missing argument 4 for Manage\Model\OrderModel::getAll(), called in C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\XingyeController.class.php on line 478 and defined C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Model\OrderModel.class.php 第 16 行.
+NOTIC: [8] Undefined variable: sql C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Model\OrderModel.class.php 第 18 行.
+SQL: SELECT * FROM `de_order` WHERE ( uid=306 ) ORDER BY paytime desc LIMIT 20   [ RunTime:0.0010s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000495s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000543s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.032170s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.032229s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000286s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000318s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000439s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000472s ]
+
+[ 2017-10-26T11:46:53+08:00 ] 127.0.0.1 /Manage/Xingye/payment.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000396s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000516s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000566s ]
+NOTIC: [2048] Declaration of Manage\Controller\XingyeController::uploadPic() should be compatible with Manage\Controller\BaseController::uploadPic($maxSize = 0, $savePath = 'uploads') C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\XingyeController.class.php 第 6 行.
+SQL: SHOW COLUMNS FROM `de_users` [ RunTime:0.0046s ]
+SQL: SELECT * FROM `de_users` WHERE ( userId=306 ) LIMIT 1   [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `de_configs` [ RunTime:0.0044s ]
+SQL: SELECT * FROM `de_configs` WHERE ( configId=1 ) LIMIT 1   [ RunTime:0.0004s ]
+SQL: SELECT * FROM `de_users` WHERE ( userId=306 ) LIMIT 1   [ RunTime:0.0005s ]
+SQL: SELECT * FROM `de_configs` WHERE ( configId=1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `de_order` [ RunTime:0.0046s ]
+SQL: SHOW COLUMNS FROM `de_order` [ RunTime:0.0047s ]
+SQL: INSERT INTO `de_order` (`order_id`,`uid`,`eid`,`storeid`,`pay_way`,`pay_type`,`goods_type`,`mch_id`,`goods_name`,`goods_describe`,`goods_price`,`add_time`,`paytime`,`state`,`ispay`,`openid`,`transaction_id`,`refund`,`refundtext`,`comefrom`,`mchtype`,`pmid`,`p_openid`) VALUES ('10159007773820171026114653','306','0','0','other','MICROPAY','ordinary','101590077738','扫码枪刷卡支付','扫码支付','0.1','1508989613','0','0','0','','','0','','0','3','182','') [ RunTime:0.0005s ]
+NOTIC: [8] Undefined index: buyer_logon_id C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\XingyeController.class.php 第 348 行.
+NOTIC: [8] Undefined index: time_end C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\XingyeController.class.php 第 349 行.
+NOTIC: [8] Undefined index: openid C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\XingyeController.class.php 第 350 行.
+NOTIC: [8] Undefined index: transaction_id C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\XingyeController.class.php 第 351 行.
+NOTIC: [8] Undefined index: time_end C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\XingyeController.class.php 第 353 行.
+NOTIC: [8] Undefined index: trade_type C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\XingyeController.class.php 第 355 行.
+NOTIC: [8] Undefined index: trade_type C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\XingyeController.class.php 第 360 行.
+SQL: UPDATE `de_order` SET `truename`=NULL,`paytime`='0',`openid`=NULL,`transaction_id`=NULL,`ispay`='0',`pay_way`='other' WHERE `order_id` = '10159007773820171026114653' [ RunTime:0.0004s ]
+
+[ 2017-10-26T11:46:54+08:00 ] 127.0.0.1 /Manage/Xingye/payment/type/1.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000017s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000657s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000541s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000606s ]
+NOTIC: [2048] Declaration of Manage\Controller\XingyeController::uploadPic() should be compatible with Manage\Controller\BaseController::uploadPic($maxSize = 0, $savePath = 'uploads') C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\XingyeController.class.php 第 6 行.
+SQL: SHOW COLUMNS FROM `de_order` [ RunTime:0.0080s ]
+NOTIC: [2] Missing argument 4 for Manage\Model\OrderModel::getAll(), called in C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\XingyeController.class.php on line 478 and defined C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Model\OrderModel.class.php 第 16 行.
+NOTIC: [8] Undefined variable: sql C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Model\OrderModel.class.php 第 18 行.
+SQL: SELECT * FROM `de_order` WHERE ( uid=306 ) ORDER BY paytime desc LIMIT 20   [ RunTime:0.0010s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000480s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000538s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.038115s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.038186s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000504s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000553s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000607s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000649s ]
+
+[ 2017-10-26T11:47:00+08:00 ] 127.0.0.1 /Manage/Statistics/odetail.html?id=303496
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000010s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000298s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000411s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000443s ]
+SQL: SHOW COLUMNS FROM `de_stores` [ RunTime:0.0050s ]
+SQL: SELECT * FROM `de_stores` WHERE ( userId=306 )  [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `de_ustaffs` [ RunTime:0.0040s ]
+SQL: SELECT * FROM `de_ustaffs` WHERE ( userId=306 )  [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `de_order` [ RunTime:0.0043s ]
+SQL: SELECT * FROM `de_order` WHERE ( id=303496 ) LIMIT 1   [ RunTime:0.0008s ]
+NOTIC: [8] Undefined variable: store C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\StatisticsController.class.php 第 200 行.
+NOTIC: [8] Undefined variable: ustaff C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\StatisticsController.class.php 第 201 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000097s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000139s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.009794s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009840s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000509s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000554s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000526s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000565s ]
+
+[ 2017-10-26T11:47:06+08:00 ] 127.0.0.1 /Manage/Xingye/queryRefund.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000016s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000388s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000527s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000599s ]
+NOTIC: [2048] Declaration of Manage\Controller\XingyeController::uploadPic() should be compatible with Manage\Controller\BaseController::uploadPic($maxSize = 0, $savePath = 'uploads') C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\XingyeController.class.php 第 6 行.
+SQL: SHOW COLUMNS FROM `de_order` [ RunTime:0.0052s ]
+SQL: SELECT * FROM `de_order` WHERE `id` = 303496 LIMIT 1   [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `de_users` [ RunTime:0.0054s ]
+SQL: SELECT * FROM `de_users` WHERE ( userId=306 ) LIMIT 1   [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `de_configs` [ RunTime:0.0053s ]
+SQL: SELECT * FROM `de_configs` WHERE ( configId=1 ) LIMIT 1   [ RunTime:0.0005s ]
+
+[ 2017-10-26T11:47:17+08:00 ] 127.0.0.1 /Manage/Xingye/payment/type/1.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000017s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000359s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000446s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000490s ]
+NOTIC: [2048] Declaration of Manage\Controller\XingyeController::uploadPic() should be compatible with Manage\Controller\BaseController::uploadPic($maxSize = 0, $savePath = 'uploads') C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\XingyeController.class.php 第 6 行.
+SQL: SHOW COLUMNS FROM `de_order` [ RunTime:0.0043s ]
+NOTIC: [2] Missing argument 4 for Manage\Model\OrderModel::getAll(), called in C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\XingyeController.class.php on line 478 and defined C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Model\OrderModel.class.php 第 16 行.
+NOTIC: [8] Undefined variable: sql C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Model\OrderModel.class.php 第 18 行.
+SQL: SELECT * FROM `de_order` WHERE ( uid=306 ) ORDER BY paytime desc LIMIT 20   [ RunTime:0.0007s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000473s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000519s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.031607s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.031652s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000215s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000245s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000388s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000422s ]
+
+[ 2017-10-26T11:47:19+08:00 ] 127.0.0.1 /Manage/Index/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000396s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000474s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000521s ]
+SQL: SHOW COLUMNS FROM `de_users` [ RunTime:0.0053s ]
+SQL: SELECT * FROM `de_users` WHERE ( userId=306 ) LIMIT 1   [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `de_configs` [ RunTime:0.0042s ]
+SQL: SELECT * FROM `de_configs` WHERE ( configId=1 ) LIMIT 1   [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `de_order` [ RunTime:0.0050s ]
+SQL: SHOW COLUMNS FROM `de_bindweixin` [ RunTime:0.0042s ]
+SQL: SHOW COLUMNS FROM `de_financial` [ RunTime:0.0040s ]
+SQL: SELECT * FROM `de_financial` WHERE ( userId=306 ) LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `de_stores` [ RunTime:0.0044s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_bindweixin` WHERE ( userId = 306 and usId = 0 and storeId = 0 ) LIMIT 1   [ RunTime:0.0004s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and year(FROM_UNIXTIME(paytime))=2017 and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and year(FROM_UNIXTIME(paytime))=2016 and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+NOTIC: [2] Division by zero C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\IndexController.class.php 第 66 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-10' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-09' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m-%d')='2017-10-26' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m-%d')='2017-10-25' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+NOTIC: [2] Division by zero C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\IndexController.class.php 第 79 行.
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-04' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-04' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-05' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-05' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-06' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-06' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-07' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-07' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-08' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-08' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-09' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-09' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-10' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-10' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_stores` WHERE ( userId=306 ) LIMIT 1   [ RunTime:0.0001s ]
+SQL: SHOW COLUMNS FROM `de_ustaffs` [ RunTime:0.0037s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_ustaffs` WHERE ( userId=306 ) LIMIT 1   [ RunTime:0.0003s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000376s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000424s ]
+NOTIC: [2] Division by zero C:\Users\Administrator\Desktop\payCode\code\Application\Runtime\Cache\Manage\737aa8fc5877d411a50443dade831133.php 第 344 行.
+NOTIC: [2] Division by zero C:\Users\Administrator\Desktop\payCode\code\Application\Runtime\Cache\Manage\737aa8fc5877d411a50443dade831133.php 第 351 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.032108s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.032149s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000304s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000334s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000407s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000441s ]
+
+[ 2017-10-26T11:47:48+08:00 ] 127.0.0.1 /Manage/Users/storefront.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000339s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000394s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000429s ]
+SQL: SHOW COLUMNS FROM `de_users` [ RunTime:0.0048s ]
+SQL: SHOW COLUMNS FROM `de_stores` [ RunTime:0.0050s ]
+SQL: select count(*) counts from (select * from de_stores where userId=306 order by storeId desc ) as a [ RunTime:0.0006s ]
+SQL: select * from de_stores where userId=306 order by storeId desc  limit 0,20 [ RunTime:0.0003s ]
+SQL: SELECT * FROM `de_users` WHERE ( userId=306 ) LIMIT 1   [ RunTime:0.0007s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000348s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000394s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.032059s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.032109s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000208s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000239s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000564s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000626s ]
+
+[ 2017-10-26T11:47:50+08:00 ] 127.0.0.1 /Manage/Users/employers.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000354s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000544s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000599s ]
+SQL: SHOW COLUMNS FROM `de_stores` [ RunTime:0.0040s ]
+SQL: SELECT * FROM `de_stores` WHERE ( userId=306 )  [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `de_ustaffs` [ RunTime:0.0049s ]
+SQL: SELECT * FROM `de_ustaffs` WHERE ( userId=306 )  [ RunTime:0.0006s ]
+NOTIC: [8] Undefined variable: store C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\UsersController.class.php 第 60 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000392s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000438s ]
+NOTIC: [8] Undefined index: printer_sn C:\Users\Administrator\Desktop\payCode\code\Application\Runtime\Cache\Manage\f61d047165c3d93d84e0184aaa367b91.php 第 423 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.033160s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.033218s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000378s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000437s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000496s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000535s ]
+
+[ 2017-10-26T11:47:52+08:00 ] 127.0.0.1 /Manage/Users/storefront.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000329s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000397s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000432s ]
+SQL: SHOW COLUMNS FROM `de_users` [ RunTime:0.0045s ]
+SQL: SHOW COLUMNS FROM `de_stores` [ RunTime:0.0042s ]
+SQL: select count(*) counts from (select * from de_stores where userId=306 order by storeId desc ) as a [ RunTime:0.0005s ]
+SQL: select * from de_stores where userId=306 order by storeId desc  limit 0,20 [ RunTime:0.0003s ]
+SQL: SELECT * FROM `de_users` WHERE ( userId=306 ) LIMIT 1   [ RunTime:0.0009s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000353s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000401s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.032817s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.032861s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000231s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000261s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000443s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000481s ]
+
+[ 2017-10-26T11:47:58+08:00 ] 127.0.0.1 /Manage/Users/printerManage.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000017s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000537s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000470s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000523s ]
+SQL: SHOW COLUMNS FROM `de_users` [ RunTime:0.0052s ]
+SQL: SHOW COLUMNS FROM `de_printer` [ RunTime:0.0039s ]
+SQL: select count(*) counts from (select * from de_printer where userId=306 order by printer_id desc ) as a [ RunTime:0.0005s ]
+SQL: select * from de_printer where userId=306 order by printer_id desc  limit 0,20 [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000343s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000390s ]
+NOTIC: [8] Undefined variable: stores C:\Users\Administrator\Desktop\payCode\code\Application\Runtime\Cache\Manage\c4db33b343b9154ea9538fcc6ae8476f.php 第 426 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.028437s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.028482s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000200s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000229s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000404s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000440s ]
+
+[ 2017-10-26T11:47:59+08:00 ] 127.0.0.1 /Manage/Users/modifypwd.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000404s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000520s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000567s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000348s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000419s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.027335s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.027392s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000235s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000267s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000612s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000671s ]
+
+[ 2017-10-26T11:48:03+08:00 ] 127.0.0.1 /Manage/Statistics/orderLists.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000350s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000546s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000599s ]
+SQL: SHOW COLUMNS FROM `de_order` [ RunTime:0.0044s ]
+SQL: SELECT * FROM `de_order` WHERE ( uid=306 and paytime >= 1508947200 and paytime <= 1509033600 ) ORDER BY paytime desc  [ RunTime:0.0008s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and paytime >= 1508947200 and paytime <= 1509033600 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `de_stores` [ RunTime:0.0042s ]
+SQL: SELECT * FROM `de_stores` WHERE ( userId=306 )  [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `de_ustaffs` [ RunTime:0.0040s ]
+SQL: SELECT * FROM `de_ustaffs` WHERE ( userId=306 )  [ RunTime:0.0005s ]
+NOTIC: [8] Undefined variable: store C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\StatisticsController.class.php 第 140 行.
+NOTIC: [8] Undefined variable: ustaff C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\StatisticsController.class.php 第 141 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000407s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000454s ]
+NOTIC: [8] Undefined variable: type C:\Users\Administrator\Desktop\payCode\code\Application\Runtime\Cache\Manage\b4721fda0a0cc3b899c49428b02ed1ba.php 第 162 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.037245s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.037290s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000225s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000254s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000407s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000442s ]
+
+[ 2017-10-26T11:48:05+08:00 ] 127.0.0.1 /Manage/Statistics/balance.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000011s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000312s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000434s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000468s ]
+SQL: SHOW COLUMNS FROM `de_order` [ RunTime:0.0042s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and ispay = 1 and paytime >= 1508860800 and paytime <= 1508947200 ) LIMIT 1   [ RunTime:0.0004s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and ispay = 1 and paytime >= 1508860800 and paytime <= 1508947200 ) LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT SUM(refund_fee) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund != 0 and paytime >= 1508860800 and paytime <= 1508947200 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and refund != 0 and paytime >= 1508860800 and paytime <= 1508947200 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `de_stores` [ RunTime:0.0043s ]
+SQL: SELECT * FROM `de_stores` WHERE ( userId=306 )  [ RunTime:0.0006s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000385s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000443s ]
+NOTIC: [8] Undefined variable: type C:\Users\Administrator\Desktop\payCode\code\Application\Runtime\Cache\Manage\ac4656ecd960edf36d23230dcd59965b.php 第 164 行.
+NOTIC: [8] Undefined variable: datetype C:\Users\Administrator\Desktop\payCode\code\Application\Runtime\Cache\Manage\ac4656ecd960edf36d23230dcd59965b.php 第 318 行.
+NOTIC: [8] Undefined variable: datetype C:\Users\Administrator\Desktop\payCode\code\Application\Runtime\Cache\Manage\ac4656ecd960edf36d23230dcd59965b.php 第 320 行.
+NOTIC: [8] Undefined variable: datetype C:\Users\Administrator\Desktop\payCode\code\Application\Runtime\Cache\Manage\ac4656ecd960edf36d23230dcd59965b.php 第 322 行.
+NOTIC: [8] Undefined variable: countIncome C:\Users\Administrator\Desktop\payCode\code\Application\Runtime\Cache\Manage\ac4656ecd960edf36d23230dcd59965b.php 第 567 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.029870s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.029917s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000432s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000466s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000416s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000451s ]
+
+[ 2017-10-26T11:48:31+08:00 ] 127.0.0.1 /Manage/Statistics/orderLists.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000454s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000539s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000598s ]
+SQL: SHOW COLUMNS FROM `de_order` [ RunTime:0.0047s ]
+SQL: SELECT * FROM `de_order` WHERE ( uid=306 and paytime >= 1508947200 and paytime <= 1509033600 ) ORDER BY paytime desc  [ RunTime:0.0007s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and paytime >= 1508947200 and paytime <= 1509033600 ) LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `de_stores` [ RunTime:0.0037s ]
+SQL: SELECT * FROM `de_stores` WHERE ( userId=306 )  [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `de_ustaffs` [ RunTime:0.0041s ]
+SQL: SELECT * FROM `de_ustaffs` WHERE ( userId=306 )  [ RunTime:0.0004s ]
+NOTIC: [8] Undefined variable: store C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\StatisticsController.class.php 第 140 行.
+NOTIC: [8] Undefined variable: ustaff C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\StatisticsController.class.php 第 141 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000396s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000444s ]
+NOTIC: [8] Undefined variable: type C:\Users\Administrator\Desktop\payCode\code\Application\Runtime\Cache\Manage\b4721fda0a0cc3b899c49428b02ed1ba.php 第 162 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.034417s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.034463s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000269s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000300s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000510s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000551s ]
+
+[ 2017-10-26T11:48:38+08:00 ] 127.0.0.1 /Manage/Xingye/ewmpay.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000017s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000417s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000445s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000494s ]
+NOTIC: [2048] Declaration of Manage\Controller\XingyeController::uploadPic() should be compatible with Manage\Controller\BaseController::uploadPic($maxSize = 0, $savePath = 'uploads') C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\XingyeController.class.php 第 6 行.
+SQL: SHOW COLUMNS FROM `de_order` [ RunTime:0.0042s ]
+NOTIC: [2] Missing argument 4 for Manage\Model\OrderModel::getAll(), called in C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\XingyeController.class.php on line 216 and defined C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Model\OrderModel.class.php 第 16 行.
+NOTIC: [8] Undefined variable: sql C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Model\OrderModel.class.php 第 18 行.
+SQL: SELECT * FROM `de_order` WHERE ( uid=306 ) ORDER BY paytime desc LIMIT 20   [ RunTime:0.0009s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000458s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000503s ]
+NOTIC: [8] Undefined property: Think\Storage\Driver\File::$SiteUrl C:\Users\Administrator\Desktop\payCode\code\Application\Runtime\Cache\Manage\0ee3e5250df48a7bd743df24111c3c7c.php 第 288 行.
+NOTIC: [8] Undefined property: Think\Storage\Driver\File::$SiteUrl C:\Users\Administrator\Desktop\payCode\code\Application\Runtime\Cache\Manage\0ee3e5250df48a7bd743df24111c3c7c.php 第 289 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.031886s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.031925s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000210s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000239s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000397s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000428s ]
+
+[ 2017-10-26T11:50:29+08:00 ] 127.0.0.1 /Manage/Xingye/ewmpay.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000463s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000595s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000653s ]
+NOTIC: [2048] Declaration of Manage\Controller\XingyeController::uploadPic() should be compatible with Manage\Controller\BaseController::uploadPic($maxSize = 0, $savePath = 'uploads') C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\XingyeController.class.php 第 6 行.
+SQL: SHOW COLUMNS FROM `de_users` [ RunTime:0.0045s ]
+SQL: SELECT * FROM `de_users` WHERE ( userId=306 ) LIMIT 1   [ RunTime:0.0009s ]
+SQL: SHOW COLUMNS FROM `de_configs` [ RunTime:0.0041s ]
+SQL: SELECT * FROM `de_configs` WHERE ( configId=1 ) LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `de_order` [ RunTime:0.0040s ]
+NOTIC: [8] Undefined index: sub_mch_id C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Model\XyOrderModel.class.php 第 63 行.
+NOTIC: [8] Undefined index: time_end C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Model\XyOrderModel.class.php 第 71 行.
+SQL: SHOW COLUMNS FROM `de_order` [ RunTime:0.0041s ]
+SQL: INSERT INTO `de_order` (`order_id`,`uid`,`eid`,`storeid`,`pay_way`,`truename`,`pay_type`,`goods_type`,`mch_id`,`goods_name`,`goods_describe`,`goods_price`,`add_time`,`paytime`,`state`,`ispay`,`openid`,`transaction_id`,`refund`,`refundtext`,`comefrom`,`mchtype`,`pmid`,`p_openid`) VALUES ('10159007773820171026115028','306','0','0','alipay','','NATIVE','ordinary','0','232','扫码支付','0.01','1508989828','0','0','0','','','0','','0','3','182','') [ RunTime:0.0006s ]
+SQL: SELECT * FROM `de_users` WHERE ( userId=306 ) LIMIT 1   [ RunTime:0.0005s ]
+SQL: SELECT * FROM `de_configs` WHERE ( configId=1 ) LIMIT 1   [ RunTime:0.0002s ]
+
+[ 2017-10-26T11:58:26+08:00 ] 127.0.0.1 /Manage/Order/getajaxOrder.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000011s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000084s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000421s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000471s ]
+NOTIC: [2] session_start(): Cannot send session cache limiter - headers already sent C:\Users\Administrator\Desktop\payCode\code\ThinkPHP\Common\functions.php 第 1263 行.
+SQL: SHOW COLUMNS FROM `de_order` [ RunTime:0.0042s ]
+NOTIC: [2] Missing argument 4 for Manage\Model\OrderModel::getAll(), called in C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\OrderController.class.php on line 73 and defined C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Model\OrderModel.class.php 第 16 行.
+NOTIC: [8] Undefined variable: sql C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Model\OrderModel.class.php 第 18 行.
+SQL: SELECT * FROM `de_order` WHERE ( uid=306 ) ORDER BY paytime desc LIMIT 20   [ RunTime:0.0006s ]
+NOTIC: [2] Cannot modify header information - headers already sent C:\Users\Administrator\Desktop\payCode\code\ThinkPHP\Library\Think\Controller.class.php 第 215 行.
+
+[ 2017-10-26T11:59:22+08:00 ] 127.0.0.1 /Manage/Statistics/orderLists.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000379s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000702s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000763s ]
+SQL: SHOW COLUMNS FROM `de_order` [ RunTime:0.0042s ]
+SQL: SELECT * FROM `de_order` WHERE ( uid=306 and paytime >= 1508947200 and paytime <= 1509033600 ) ORDER BY paytime desc  [ RunTime:0.0008s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and paytime >= 1508947200 and paytime <= 1509033600 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `de_stores` [ RunTime:0.0040s ]
+SQL: SELECT * FROM `de_stores` WHERE ( userId=306 )  [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `de_ustaffs` [ RunTime:0.0043s ]
+SQL: SELECT * FROM `de_ustaffs` WHERE ( userId=306 )  [ RunTime:0.0004s ]
+NOTIC: [8] Undefined variable: store C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\StatisticsController.class.php 第 140 行.
+NOTIC: [8] Undefined variable: ustaff C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\StatisticsController.class.php 第 141 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000386s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000456s ]
+NOTIC: [8] Undefined variable: type C:\Users\Administrator\Desktop\payCode\code\Application\Runtime\Cache\Manage\b4721fda0a0cc3b899c49428b02ed1ba.php 第 162 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.044598s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.044648s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000451s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000482s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000547s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000585s ]
+
+[ 2017-10-26T11:59:24+08:00 ] 127.0.0.1 /Manage/Statistics/balance.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000345s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000412s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000453s ]
+SQL: SHOW COLUMNS FROM `de_order` [ RunTime:0.0047s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and ispay = 1 and paytime >= 1508860800 and paytime <= 1508947200 ) LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and ispay = 1 and paytime >= 1508860800 and paytime <= 1508947200 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT SUM(refund_fee) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund != 0 and paytime >= 1508860800 and paytime <= 1508947200 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and refund != 0 and paytime >= 1508860800 and paytime <= 1508947200 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `de_stores` [ RunTime:0.0040s ]
+SQL: SELECT * FROM `de_stores` WHERE ( userId=306 )  [ RunTime:0.0005s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000370s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000420s ]
+NOTIC: [8] Undefined variable: type C:\Users\Administrator\Desktop\payCode\code\Application\Runtime\Cache\Manage\ac4656ecd960edf36d23230dcd59965b.php 第 164 行.
+NOTIC: [8] Undefined variable: datetype C:\Users\Administrator\Desktop\payCode\code\Application\Runtime\Cache\Manage\ac4656ecd960edf36d23230dcd59965b.php 第 318 行.
+NOTIC: [8] Undefined variable: datetype C:\Users\Administrator\Desktop\payCode\code\Application\Runtime\Cache\Manage\ac4656ecd960edf36d23230dcd59965b.php 第 320 行.
+NOTIC: [8] Undefined variable: datetype C:\Users\Administrator\Desktop\payCode\code\Application\Runtime\Cache\Manage\ac4656ecd960edf36d23230dcd59965b.php 第 322 行.
+NOTIC: [8] Undefined variable: countIncome C:\Users\Administrator\Desktop\payCode\code\Application\Runtime\Cache\Manage\ac4656ecd960edf36d23230dcd59965b.php 第 567 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.030037s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.030078s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000326s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000355s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000516s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000553s ]
+
+[ 2017-10-26T11:59:29+08:00 ] 127.0.0.1 /Manage/Statistics/balance.html?stime=2017-10-26&etime=2017-10-26&mendian=0&paytype=0
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000015s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000343s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000510s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000563s ]
+SQL: SHOW COLUMNS FROM `de_order` [ RunTime:0.0046s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and ispay = 1 and paytime >= 1508860800 and paytime <= 1508947200 ) LIMIT 1   [ RunTime:0.0005s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and ispay = 1 and paytime >= 1508860800 and paytime <= 1508947200 ) LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT SUM(refund_fee) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund != 0 and paytime >= 1508860800 and paytime <= 1508947200 ) LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and refund != 0 and paytime >= 1508860800 and paytime <= 1508947200 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `de_stores` [ RunTime:0.0037s ]
+SQL: SELECT * FROM `de_stores` WHERE ( userId=306 )  [ RunTime:0.0005s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000374s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000421s ]
+NOTIC: [8] Undefined variable: type C:\Users\Administrator\Desktop\payCode\code\Application\Runtime\Cache\Manage\ac4656ecd960edf36d23230dcd59965b.php 第 164 行.
+NOTIC: [8] Undefined variable: datetype C:\Users\Administrator\Desktop\payCode\code\Application\Runtime\Cache\Manage\ac4656ecd960edf36d23230dcd59965b.php 第 318 行.
+NOTIC: [8] Undefined variable: datetype C:\Users\Administrator\Desktop\payCode\code\Application\Runtime\Cache\Manage\ac4656ecd960edf36d23230dcd59965b.php 第 320 行.
+NOTIC: [8] Undefined variable: datetype C:\Users\Administrator\Desktop\payCode\code\Application\Runtime\Cache\Manage\ac4656ecd960edf36d23230dcd59965b.php 第 322 行.
+NOTIC: [8] Undefined variable: countIncome C:\Users\Administrator\Desktop\payCode\code\Application\Runtime\Cache\Manage\ac4656ecd960edf36d23230dcd59965b.php 第 567 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.028921s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.028960s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000348s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000381s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000525s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000559s ]
+
+[ 2017-10-26T13:40:04+08:00 ] 127.0.0.1 /Manage/Xingye/payment/type/1.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000039s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000522s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000562s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000613s ]
+NOTIC: [2048] Declaration of Manage\Controller\XingyeController::uploadPic() should be compatible with Manage\Controller\BaseController::uploadPic($maxSize = 0, $savePath = 'uploads') C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\XingyeController.class.php 第 6 行.
+
+[ 2017-10-26T13:40:04+08:00 ] 127.0.0.1 /Manage/Index/toLogin.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000369s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000510s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000562s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000118s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000168s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.015026s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.015077s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000302s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000333s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000508s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000549s ]
+
+[ 2017-10-26T13:40:06+08:00 ] 127.0.0.1 /Manage/Index/login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000330s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000456s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000496s ]
+SQL: SHOW COLUMNS FROM `de_users` [ RunTime:0.0057s ]
+SQL: SHOW COLUMNS FROM `de_users` [ RunTime:0.0051s ]
+SQL: SELECT * FROM `de_users` WHERE ( loginName="ceshi@qq.com" and userStatus=1 or userId =306 ) LIMIT 1   [ RunTime:0.0009s ]
+NOTIC: [8] Undefined index: grant C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Model\UsersModel.class.php 第 34 行.
+SQL: UPDATE `de_users` SET `userId`='306',`parentId`='182',`tgId`='0',`tgemId`='0',`loginName`='兴宁深宝',`loginSecret`='4075',`loginPwd`='3e7f5c41c14d9607fd719b8f911fa6f1',`userType`='0',`userName`='兴宁市深宝键身休闲有限公司',`userQQ`=NULL,`userPhone`='13903000139',`userEmail`='9685199711@qq.com',`userScore`='0',`userPhoto`=NULL,`userTotalScore`='0',`userStatus`='1',`userFlag`='1',`userAudit`='1',`userStep`='1',`wx_appId`='wx279a7af089a58da1',`wx_appSecret`='7da603f1e9fd99bab762da217a825544',`wx_mchId`=NULL,`wx_apiSecret`=NULL,`wx_apiclientCert`=NULL,`wx_apiclientKey`=NULL,`wx_apiclientCa`=NULL,`wx_token`=NULL,`wx_update`=NULL,`wx_issp`='3',`zz_name`=NULL,`zz_payAtuh`='1',`zz_sfz`=NULL,`zz_shname`=NULL,`zz_license`=NULL,`zz_banktype`=NULL,`zz_bank`=NULL,`zz_accountname`='',`zz_bankinfo`=NULL,`bankPhone`='',`zz_sftype`=NULL,`zz_yxq`=NULL,`zz_jc`=NULL,`zz_jyxz`=NULL,`incode`='0',`sid`='',`fid`='',`backcode`='0',`zz_zcdz`=NULL,`zz_bankqc`=NULL,`tszz`=NULL,`yyzz`=NULL,`zzjg`=NULL,`sfzz`=NULL,`sfzf`=NULL,`gd_mchId`='101590077738',`xy_key`='b8bafbe19097167504bbcb34e602da58',`gd_rate`='',`reson`=NULL,`createTime`='2017-07-15 11:41:09',`lastIP`='127.0.0.1',`lastTime`='2017-10-26 13:40:06' WHERE ( userId=306 ) [ RunTime:0.0009s ]
+SQL: SHOW COLUMNS FROM `de_log_user_logins` [ RunTime:0.0042s ]
+SQL: INSERT INTO `de_log_user_logins` (`userId`,`loginTime`,`loginIp`) VALUES ('306','2017-10-26 13:40:06','127.0.0.1') [ RunTime:0.0004s ]
+
+[ 2017-10-26T13:40:06+08:00 ] 127.0.0.1 /Manage/Index/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000018s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000418s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000387s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000423s ]
+SQL: SHOW COLUMNS FROM `de_users` [ RunTime:0.0051s ]
+SQL: SELECT * FROM `de_users` WHERE ( userId=306 ) LIMIT 1   [ RunTime:0.0009s ]
+SQL: SHOW COLUMNS FROM `de_configs` [ RunTime:0.0051s ]
+SQL: SELECT * FROM `de_configs` WHERE ( configId=1 ) LIMIT 1   [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `de_order` [ RunTime:0.0047s ]
+SQL: SHOW COLUMNS FROM `de_bindweixin` [ RunTime:0.0042s ]
+SQL: SHOW COLUMNS FROM `de_financial` [ RunTime:0.0039s ]
+SQL: SELECT * FROM `de_financial` WHERE ( userId=306 ) LIMIT 1   [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `de_stores` [ RunTime:0.0047s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_bindweixin` WHERE ( userId = 306 and usId = 0 and storeId = 0 ) LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and year(FROM_UNIXTIME(paytime))=2017 and 1 ) LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and year(FROM_UNIXTIME(paytime))=2016 and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+NOTIC: [2] Division by zero C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\IndexController.class.php 第 66 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-10' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-09' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m-%d')='2017-10-26' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m-%d')='2017-10-25' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+NOTIC: [2] Division by zero C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\IndexController.class.php 第 79 行.
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-04' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-04' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-05' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-05' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-06' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-06' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-07' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-07' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-08' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-08' and 1 ) LIMIT 1   [ RunTime:0.0004s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-09' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-09' and 1 ) LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-10' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-10' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_stores` WHERE ( userId=306 ) LIMIT 1   [ RunTime:0.0001s ]
+SQL: SHOW COLUMNS FROM `de_ustaffs` [ RunTime:0.0037s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_ustaffs` WHERE ( userId=306 ) LIMIT 1   [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000399s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000442s ]
+NOTIC: [2] Division by zero C:\Users\Administrator\Desktop\payCode\code\Application\Runtime\Cache\Manage\737aa8fc5877d411a50443dade831133.php 第 344 行.
+NOTIC: [2] Division by zero C:\Users\Administrator\Desktop\payCode\code\Application\Runtime\Cache\Manage\737aa8fc5877d411a50443dade831133.php 第 351 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.036630s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.036671s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000366s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000399s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000693s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000747s ]
+
+[ 2017-10-26T13:40:11+08:00 ] 127.0.0.1 /Manage/Xingye/payment/type/1.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000405s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000573s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000633s ]
+NOTIC: [2048] Declaration of Manage\Controller\XingyeController::uploadPic() should be compatible with Manage\Controller\BaseController::uploadPic($maxSize = 0, $savePath = 'uploads') C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\XingyeController.class.php 第 6 行.
+SQL: SHOW COLUMNS FROM `de_order` [ RunTime:0.0041s ]
+NOTIC: [2] Missing argument 4 for Manage\Model\OrderModel::getAll(), called in C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\XingyeController.class.php on line 478 and defined C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Model\OrderModel.class.php 第 16 行.
+NOTIC: [8] Undefined variable: sql C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Model\OrderModel.class.php 第 18 行.
+SQL: SELECT * FROM `de_order` WHERE ( uid=306 ) ORDER BY paytime desc LIMIT 20   [ RunTime:0.0007s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000503s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000551s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.037374s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.037420s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000254s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000285s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000396s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000427s ]
+
+[ 2017-10-26T13:40:28+08:00 ] 127.0.0.1 /Manage/Xingye/ewmpay.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000338s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000499s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000548s ]
+NOTIC: [2048] Declaration of Manage\Controller\XingyeController::uploadPic() should be compatible with Manage\Controller\BaseController::uploadPic($maxSize = 0, $savePath = 'uploads') C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\XingyeController.class.php 第 6 行.
+SQL: SHOW COLUMNS FROM `de_order` [ RunTime:0.0041s ]
+NOTIC: [2] Missing argument 4 for Manage\Model\OrderModel::getAll(), called in C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\XingyeController.class.php on line 216 and defined C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Model\OrderModel.class.php 第 16 行.
+NOTIC: [8] Undefined variable: sql C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Model\OrderModel.class.php 第 18 行.
+SQL: SELECT * FROM `de_order` WHERE ( uid=306 ) ORDER BY paytime desc LIMIT 20   [ RunTime:0.0007s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000459s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000522s ]
+NOTIC: [8] Undefined property: Think\Storage\Driver\File::$SiteUrl C:\Users\Administrator\Desktop\payCode\code\Application\Runtime\Cache\Manage\0ee3e5250df48a7bd743df24111c3c7c.php 第 288 行.
+NOTIC: [8] Undefined property: Think\Storage\Driver\File::$SiteUrl C:\Users\Administrator\Desktop\payCode\code\Application\Runtime\Cache\Manage\0ee3e5250df48a7bd743df24111c3c7c.php 第 289 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.035280s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.035326s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000229s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000259s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000436s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000475s ]
+
+[ 2017-10-26T13:40:39+08:00 ] 127.0.0.1 /Manage/Xingye/payment/type/1.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000319s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000402s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000443s ]
+NOTIC: [2048] Declaration of Manage\Controller\XingyeController::uploadPic() should be compatible with Manage\Controller\BaseController::uploadPic($maxSize = 0, $savePath = 'uploads') C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\XingyeController.class.php 第 6 行.
+SQL: SHOW COLUMNS FROM `de_order` [ RunTime:0.0041s ]
+NOTIC: [2] Missing argument 4 for Manage\Model\OrderModel::getAll(), called in C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\XingyeController.class.php on line 478 and defined C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Model\OrderModel.class.php 第 16 行.
+NOTIC: [8] Undefined variable: sql C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Model\OrderModel.class.php 第 18 行.
+SQL: SELECT * FROM `de_order` WHERE ( uid=306 ) ORDER BY paytime desc LIMIT 20   [ RunTime:0.0006s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000490s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000537s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.032673s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.032721s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000227s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000256s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000391s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000423s ]
+
+[ 2017-10-26T13:57:53+08:00 ] 127.0.0.1 /Manage/Statistics/orderLists.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000373s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000464s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000501s ]
+SQL: SHOW COLUMNS FROM `de_order` [ RunTime:0.0047s ]
+SQL: SELECT * FROM `de_order` WHERE ( uid=306 and paytime >= 1508947200 and paytime <= 1509033600 ) ORDER BY paytime desc  [ RunTime:0.0006s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and paytime >= 1508947200 and paytime <= 1509033600 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `de_stores` [ RunTime:0.0046s ]
+SQL: SELECT * FROM `de_stores` WHERE ( userId=306 )  [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `de_ustaffs` [ RunTime:0.0042s ]
+SQL: SELECT * FROM `de_ustaffs` WHERE ( userId=306 )  [ RunTime:0.0003s ]
+NOTIC: [8] Undefined variable: store C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\StatisticsController.class.php 第 140 行.
+NOTIC: [8] Undefined variable: ustaff C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\StatisticsController.class.php 第 141 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000531s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000623s ]
+NOTIC: [8] Undefined variable: type C:\Users\Administrator\Desktop\payCode\code\Application\Runtime\Cache\Manage\b4721fda0a0cc3b899c49428b02ed1ba.php 第 162 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.045373s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.045416s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000327s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000358s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000520s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000555s ]
+
+[ 2017-10-26T13:57:56+08:00 ] 127.0.0.1 /Manage/Users/storefront.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000029s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000394s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000472s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000523s ]
+SQL: SHOW COLUMNS FROM `de_users` [ RunTime:0.0051s ]
+SQL: SHOW COLUMNS FROM `de_stores` [ RunTime:0.0040s ]
+SQL: select count(*) counts from (select * from de_stores where userId=306 order by storeId desc ) as a [ RunTime:0.0006s ]
+SQL: select * from de_stores where userId=306 order by storeId desc  limit 0,20 [ RunTime:0.0005s ]
+SQL: SELECT * FROM `de_users` WHERE ( userId=306 ) LIMIT 1   [ RunTime:0.0008s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000350s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000400s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.036396s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.036469s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000708s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000769s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000840s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000918s ]
+
+[ 2017-10-26T13:57:58+08:00 ] 127.0.0.1 /Manage/Users/employers.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000358s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000456s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000504s ]
+SQL: SHOW COLUMNS FROM `de_stores` [ RunTime:0.0045s ]
+SQL: SELECT * FROM `de_stores` WHERE ( userId=306 )  [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `de_ustaffs` [ RunTime:0.0038s ]
+SQL: SELECT * FROM `de_ustaffs` WHERE ( userId=306 )  [ RunTime:0.0004s ]
+NOTIC: [8] Undefined variable: store C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\UsersController.class.php 第 60 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000701s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000771s ]
+NOTIC: [8] Undefined index: printer_sn C:\Users\Administrator\Desktop\payCode\code\Application\Runtime\Cache\Manage\f61d047165c3d93d84e0184aaa367b91.php 第 423 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.031816s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.031865s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000242s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000272s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000531s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000565s ]
+
+[ 2017-10-26T13:58:00+08:00 ] 127.0.0.1 /Manage/Users/payConfig.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000018s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000346s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000396s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000436s ]
+SQL: SHOW COLUMNS FROM `de_users` [ RunTime:0.0048s ]
+SQL: SELECT * FROM `de_users` WHERE ( userId=306 ) LIMIT 1   [ RunTime:0.0009s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000520s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000596s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.034568s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.034617s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000237s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000267s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000596s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000637s ]
+
+[ 2017-10-26T13:58:02+08:00 ] 127.0.0.1 /Manage/Users/SetFieldV.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000016s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000394s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000511s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000562s ]
+SQL: SHOW COLUMNS FROM `de_users` [ RunTime:0.0048s ]
+SQL: UPDATE `de_users` SET `wx_issp`='3' WHERE ( userId = 306 ) [ RunTime:0.0004s ]
+
+[ 2017-10-26T13:58:04+08:00 ] 127.0.0.1 /Manage/Users/payConfig.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000015s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000403s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000496s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000552s ]
+SQL: SHOW COLUMNS FROM `de_users` [ RunTime:0.0055s ]
+SQL: SELECT * FROM `de_users` WHERE ( userId=306 ) LIMIT 1   [ RunTime:0.0009s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000423s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000475s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.039093s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.039146s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000229s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000260s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000524s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000605s ]
+
+[ 2017-10-26T13:58:23+08:00 ] 127.0.0.1 /Manage/Users/userInfo.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000392s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000671s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000741s ]
+SQL: SHOW COLUMNS FROM `de_configs` [ RunTime:0.0055s ]
+SQL: SELECT * FROM `de_configs` WHERE ( configId=1 ) LIMIT 1   [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `de_users` [ RunTime:0.0052s ]
+SQL: SELECT * FROM `de_users` WHERE ( userId=306 ) LIMIT 1   [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `de_bindweixin` [ RunTime:0.0039s ]
+SQL: SELECT * FROM `de_bindweixin` WHERE ( userId=306 and type=1 ) LIMIT 1   [ RunTime:0.0006s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000303s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000355s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.029446s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.029546s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000889s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000939s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000950s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001207s ]
+
+[ 2017-10-26T13:58:26+08:00 ] 127.0.0.1 /Manage/Users/storefront.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000019s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000455s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000488s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000547s ]
+SQL: SHOW COLUMNS FROM `de_users` [ RunTime:0.0068s ]
+SQL: SHOW COLUMNS FROM `de_stores` [ RunTime:0.0043s ]
+SQL: select count(*) counts from (select * from de_stores where userId=306 order by storeId desc ) as a [ RunTime:0.0007s ]
+SQL: select * from de_stores where userId=306 order by storeId desc  limit 0,20 [ RunTime:0.0003s ]
+SQL: SELECT * FROM `de_users` WHERE ( userId=306 ) LIMIT 1   [ RunTime:0.0009s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000409s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000453s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.035695s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.035745s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000254s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000283s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000845s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000940s ]
+
+[ 2017-10-26T13:58:28+08:00 ] 127.0.0.1 /Manage/Xingye/realname.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000022s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000605s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000520s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000574s ]
+NOTIC: [2048] Declaration of Manage\Controller\XingyeController::uploadPic() should be compatible with Manage\Controller\BaseController::uploadPic($maxSize = 0, $savePath = 'uploads') C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\XingyeController.class.php 第 6 行.
+SQL: SHOW COLUMNS FROM `de_configs` [ RunTime:0.0045s ]
+SQL: SELECT * FROM `de_configs` WHERE ( configId=1 ) LIMIT 1   [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `de_users` [ RunTime:0.0044s ]
+SQL: SELECT * FROM `de_users` WHERE ( userId=306 ) LIMIT 1   [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `de_gd_district` [ RunTime:0.0037s ]
+SQL: SELECT * FROM `de_gd_district` WHERE ( level = 2 )  [ RunTime:0.0225s ]
+SQL: SHOW COLUMNS FROM `de_gd_bank` [ RunTime:0.0035s ]
+SQL: SELECT * FROM `de_gd_bank`  [ RunTime:0.0005s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000777s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000828s ]
+NOTIC: [8] Undefined variable: incategory C:\Users\Administrator\Desktop\payCode\code\Application\Runtime\Cache\Manage\998ab3c007bf420b3834a63492bb14df.php 第 356 行.
+NOTIC: [8] Undefined variable: incategory C:\Users\Administrator\Desktop\payCode\code\Application\Runtime\Cache\Manage\998ab3c007bf420b3834a63492bb14df.php 第 357 行.
+NOTIC: [8] Undefined variable: incategory C:\Users\Administrator\Desktop\payCode\code\Application\Runtime\Cache\Manage\998ab3c007bf420b3834a63492bb14df.php 第 358 行.
+NOTIC: [8] Undefined variable: incategory C:\Users\Administrator\Desktop\payCode\code\Application\Runtime\Cache\Manage\998ab3c007bf420b3834a63492bb14df.php 第 361 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.043202s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.043256s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000364s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000395s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000528s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000563s ]
+
+[ 2017-10-26T13:58:29+08:00 ] 127.0.0.1 /Manage/Xingye/ewmpay.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000020s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000502s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000491s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000541s ]
+NOTIC: [2048] Declaration of Manage\Controller\XingyeController::uploadPic() should be compatible with Manage\Controller\BaseController::uploadPic($maxSize = 0, $savePath = 'uploads') C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\XingyeController.class.php 第 6 行.
+SQL: SHOW COLUMNS FROM `de_order` [ RunTime:0.0041s ]
+NOTIC: [2] Missing argument 4 for Manage\Model\OrderModel::getAll(), called in C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\XingyeController.class.php on line 216 and defined C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Model\OrderModel.class.php 第 16 行.
+NOTIC: [8] Undefined variable: sql C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Model\OrderModel.class.php 第 18 行.
+SQL: SELECT * FROM `de_order` WHERE ( uid=306 ) ORDER BY paytime desc LIMIT 20   [ RunTime:0.0010s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000531s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000593s ]
+NOTIC: [8] Undefined property: Think\Storage\Driver\File::$SiteUrl C:\Users\Administrator\Desktop\payCode\code\Application\Runtime\Cache\Manage\0ee3e5250df48a7bd743df24111c3c7c.php 第 288 行.
+NOTIC: [8] Undefined property: Think\Storage\Driver\File::$SiteUrl C:\Users\Administrator\Desktop\payCode\code\Application\Runtime\Cache\Manage\0ee3e5250df48a7bd743df24111c3c7c.php 第 289 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.032659s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.032710s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000308s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000338s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000772s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000836s ]
+
+[ 2017-10-26T13:59:00+08:00 ] 127.0.0.1 /Manage/Index/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000331s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000462s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000514s ]
+SQL: SHOW COLUMNS FROM `de_users` [ RunTime:0.0063s ]
+SQL: SELECT * FROM `de_users` WHERE ( userId=306 ) LIMIT 1   [ RunTime:0.0011s ]
+SQL: SHOW COLUMNS FROM `de_configs` [ RunTime:0.0045s ]
+SQL: SELECT * FROM `de_configs` WHERE ( configId=1 ) LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `de_order` [ RunTime:0.0039s ]
+SQL: SHOW COLUMNS FROM `de_bindweixin` [ RunTime:0.0041s ]
+SQL: SHOW COLUMNS FROM `de_financial` [ RunTime:0.0038s ]
+SQL: SELECT * FROM `de_financial` WHERE ( userId=306 ) LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `de_stores` [ RunTime:0.0041s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_bindweixin` WHERE ( userId = 306 and usId = 0 and storeId = 0 ) LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and year(FROM_UNIXTIME(paytime))=2017 and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and year(FROM_UNIXTIME(paytime))=2016 and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+NOTIC: [2] Division by zero C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\IndexController.class.php 第 66 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-10' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-09' and 1 ) LIMIT 1   [ RunTime:0.0004s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m-%d')='2017-10-26' and 1 ) LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m-%d')='2017-10-25' and 1 ) LIMIT 1   [ RunTime:0.0003s ]
+NOTIC: [2] Division by zero C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\IndexController.class.php 第 79 行.
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-04' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-04' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-05' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-05' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-06' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-06' and 1 ) LIMIT 1   [ RunTime:0.0004s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-07' and 1 ) LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-07' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-08' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-08' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-09' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-09' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-10' and 1 ) LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-10' and 1 ) LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_stores` WHERE ( userId=306 ) LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `de_ustaffs` [ RunTime:0.0037s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_ustaffs` WHERE ( userId=306 ) LIMIT 1   [ RunTime:0.0003s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000518s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000614s ]
+NOTIC: [2] Division by zero C:\Users\Administrator\Desktop\payCode\code\Application\Runtime\Cache\Manage\737aa8fc5877d411a50443dade831133.php 第 344 行.
+NOTIC: [2] Division by zero C:\Users\Administrator\Desktop\payCode\code\Application\Runtime\Cache\Manage\737aa8fc5877d411a50443dade831133.php 第 351 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.034730s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.034773s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000247s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000278s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000564s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000603s ]
+
+[ 2017-10-26T13:59:15+08:00 ] 127.0.0.1 /Manage/Index/logout.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000015s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000384s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000435s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000480s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000074s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000138s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.006863s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.006929s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000218s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000250s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000582s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000616s ]
+
+[ 2017-10-26T13:59:16+08:00 ] 127.0.0.1 /Manage/Index/toLogin.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000295s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000376s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000413s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000143s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000189s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.007418s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.007467s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000204s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000235s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000531s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000566s ]
+
+[ 2017-10-26T13:59:18+08:00 ] 127.0.0.1 /Manage/Index/login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000299s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000404s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000443s ]
+SQL: SHOW COLUMNS FROM `de_users` [ RunTime:0.0049s ]
+SQL: SHOW COLUMNS FROM `de_users` [ RunTime:0.0050s ]
+SQL: SELECT * FROM `de_users` WHERE ( loginName="ceshi@qq.com" and userStatus=1 or userId =306 ) LIMIT 1   [ RunTime:0.0008s ]
+NOTIC: [8] Undefined index: grant C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Model\UsersModel.class.php 第 34 行.
+SQL: UPDATE `de_users` SET `userId`='306',`parentId`='182',`tgId`='0',`tgemId`='0',`loginName`='兴宁深宝',`loginSecret`='4075',`loginPwd`='3e7f5c41c14d9607fd719b8f911fa6f1',`userType`='0',`userName`='兴宁市深宝键身休闲有限公司',`userQQ`=NULL,`userPhone`='13903000139',`userEmail`='9685199711@qq.com',`userScore`='0',`userPhoto`=NULL,`userTotalScore`='0',`userStatus`='1',`userFlag`='1',`userAudit`='1',`userStep`='1',`wx_appId`='wx279a7af089a58da1',`wx_appSecret`='7da603f1e9fd99bab762da217a825544',`wx_mchId`=NULL,`wx_apiSecret`=NULL,`wx_apiclientCert`=NULL,`wx_apiclientKey`=NULL,`wx_apiclientCa`=NULL,`wx_token`=NULL,`wx_update`=NULL,`wx_issp`='3',`zz_name`=NULL,`zz_payAtuh`='1',`zz_sfz`=NULL,`zz_shname`=NULL,`zz_license`=NULL,`zz_banktype`=NULL,`zz_bank`=NULL,`zz_accountname`='',`zz_bankinfo`=NULL,`bankPhone`='',`zz_sftype`=NULL,`zz_yxq`=NULL,`zz_jc`=NULL,`zz_jyxz`=NULL,`incode`='0',`sid`='',`fid`='',`backcode`='0',`zz_zcdz`=NULL,`zz_bankqc`=NULL,`tszz`=NULL,`yyzz`=NULL,`zzjg`=NULL,`sfzz`=NULL,`sfzf`=NULL,`gd_mchId`='101590077738',`xy_key`='b8bafbe19097167504bbcb34e602da58',`gd_rate`='',`reson`=NULL,`createTime`='2017-07-15 11:41:09',`lastIP`='127.0.0.1',`lastTime`='2017-10-26 13:59:18' WHERE ( userId=306 ) [ RunTime:0.0009s ]
+SQL: SHOW COLUMNS FROM `de_log_user_logins` [ RunTime:0.0043s ]
+SQL: INSERT INTO `de_log_user_logins` (`userId`,`loginTime`,`loginIp`) VALUES ('306','2017-10-26 13:59:18','127.0.0.1') [ RunTime:0.0004s ]
+
+[ 2017-10-26T13:59:18+08:00 ] 127.0.0.1 /Manage/Index/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000016s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000500s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000601s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000657s ]
+SQL: SHOW COLUMNS FROM `de_users` [ RunTime:0.0064s ]
+SQL: SELECT * FROM `de_users` WHERE ( userId=306 ) LIMIT 1   [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `de_configs` [ RunTime:0.0046s ]
+SQL: SELECT * FROM `de_configs` WHERE ( configId=1 ) LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `de_order` [ RunTime:0.0043s ]
+SQL: SHOW COLUMNS FROM `de_bindweixin` [ RunTime:0.0039s ]
+SQL: SHOW COLUMNS FROM `de_financial` [ RunTime:0.0040s ]
+SQL: SELECT * FROM `de_financial` WHERE ( userId=306 ) LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `de_stores` [ RunTime:0.0040s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_bindweixin` WHERE ( userId = 306 and usId = 0 and storeId = 0 ) LIMIT 1   [ RunTime:0.0004s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and year(FROM_UNIXTIME(paytime))=2017 and 1 ) LIMIT 1   [ RunTime:0.0004s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and year(FROM_UNIXTIME(paytime))=2016 and 1 ) LIMIT 1   [ RunTime:0.0003s ]
+NOTIC: [2] Division by zero C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\IndexController.class.php 第 66 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-10' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-09' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m-%d')='2017-10-26' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m-%d')='2017-10-25' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+NOTIC: [2] Division by zero C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\IndexController.class.php 第 79 行.
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-04' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-04' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-05' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-05' and 1 ) LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-06' and 1 ) LIMIT 1   [ RunTime:0.0004s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-06' and 1 ) LIMIT 1   [ RunTime:0.0004s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-07' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-07' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-08' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-08' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-09' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-09' and 1 ) LIMIT 1   [ RunTime:0.0005s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-10' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-10' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_stores` WHERE ( userId=306 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `de_ustaffs` [ RunTime:0.0037s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_ustaffs` WHERE ( userId=306 ) LIMIT 1   [ RunTime:0.0003s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000434s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000489s ]
+NOTIC: [2] Division by zero C:\Users\Administrator\Desktop\payCode\code\Application\Runtime\Cache\Manage\737aa8fc5877d411a50443dade831133.php 第 344 行.
+NOTIC: [2] Division by zero C:\Users\Administrator\Desktop\payCode\code\Application\Runtime\Cache\Manage\737aa8fc5877d411a50443dade831133.php 第 351 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.034090s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.034132s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000255s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000286s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000567s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000607s ]
+
+[ 2017-10-26T13:59:22+08:00 ] 127.0.0.1 /Manage/Index/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000018s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000428s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000562s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000620s ]
+SQL: SHOW COLUMNS FROM `de_users` [ RunTime:0.0049s ]
+SQL: SELECT * FROM `de_users` WHERE ( userId=306 ) LIMIT 1   [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `de_configs` [ RunTime:0.0042s ]
+SQL: SELECT * FROM `de_configs` WHERE ( configId=1 ) LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `de_order` [ RunTime:0.0040s ]
+SQL: SHOW COLUMNS FROM `de_bindweixin` [ RunTime:0.0037s ]
+SQL: SHOW COLUMNS FROM `de_financial` [ RunTime:0.0040s ]
+SQL: SELECT * FROM `de_financial` WHERE ( userId=306 ) LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `de_stores` [ RunTime:0.0038s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_bindweixin` WHERE ( userId = 306 and usId = 0 and storeId = 0 ) LIMIT 1   [ RunTime:0.0004s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and year(FROM_UNIXTIME(paytime))=2017 and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and year(FROM_UNIXTIME(paytime))=2016 and 1 ) LIMIT 1   [ RunTime:0.0005s ]
+NOTIC: [2] Division by zero C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\IndexController.class.php 第 66 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-10' and 1 ) LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-09' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m-%d')='2017-10-26' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m-%d')='2017-10-25' and 1 ) LIMIT 1   [ RunTime:0.0005s ]
+NOTIC: [2] Division by zero C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\IndexController.class.php 第 79 行.
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-04' and 1 ) LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-04' and 1 ) LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-05' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-05' and 1 ) LIMIT 1   [ RunTime:0.0004s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-06' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-06' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-07' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-07' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-08' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-08' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-09' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-09' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-10' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-10' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_stores` WHERE ( userId=306 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `de_ustaffs` [ RunTime:0.0036s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_ustaffs` WHERE ( userId=306 ) LIMIT 1   [ RunTime:0.0003s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000435s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000481s ]
+NOTIC: [2] Division by zero C:\Users\Administrator\Desktop\payCode\code\Application\Runtime\Cache\Manage\737aa8fc5877d411a50443dade831133.php 第 344 行.
+NOTIC: [2] Division by zero C:\Users\Administrator\Desktop\payCode\code\Application\Runtime\Cache\Manage\737aa8fc5877d411a50443dade831133.php 第 351 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.033574s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.033623s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000271s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000303s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000525s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000561s ]
+
+[ 2017-10-26T21:45:33+08:00 ] 127.0.0.1 /
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000024s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002632s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001018s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001070s ]
+
+[ 2017-10-26T21:45:33+08:00 ] 127.0.0.1 /Manage/Index/toLogin.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000328s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000522s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000573s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000651s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000698s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.017651s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.017713s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000609s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000641s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000765s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000815s ]
+
+[ 2017-10-26T21:45:43+08:00 ] 127.0.0.1 /Manage/Index/login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000015s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000397s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000828s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000922s ]
+SQL: SHOW COLUMNS FROM `de_users` [ RunTime:0.0756s ]
+SQL: SHOW COLUMNS FROM `de_users` [ RunTime:0.0055s ]
+SQL: SELECT * FROM `de_users` WHERE ( loginName="ceshi@qq.com" and userStatus=1 or userId =306 ) LIMIT 1   [ RunTime:0.0013s ]
+NOTIC: [8] Undefined index: grant C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Model\UsersModel.class.php 第 34 行.
+SQL: UPDATE `de_users` SET `userId`='306',`parentId`='182',`tgId`='0',`tgemId`='0',`loginName`='兴宁深宝',`loginSecret`='4075',`loginPwd`='3e7f5c41c14d9607fd719b8f911fa6f1',`userType`='0',`userName`='兴宁市深宝键身休闲有限公司',`userQQ`=NULL,`userPhone`='13903000139',`userEmail`='9685199711@qq.com',`userScore`='0',`userPhoto`=NULL,`userTotalScore`='0',`userStatus`='1',`userFlag`='1',`userAudit`='1',`userStep`='1',`wx_appId`='wx279a7af089a58da1',`wx_appSecret`='7da603f1e9fd99bab762da217a825544',`wx_mchId`=NULL,`wx_apiSecret`=NULL,`wx_apiclientCert`=NULL,`wx_apiclientKey`=NULL,`wx_apiclientCa`=NULL,`wx_token`=NULL,`wx_update`=NULL,`wx_issp`='3',`zz_name`=NULL,`zz_payAtuh`='1',`zz_sfz`=NULL,`zz_shname`=NULL,`zz_license`=NULL,`zz_banktype`=NULL,`zz_bank`=NULL,`zz_accountname`='',`zz_bankinfo`=NULL,`bankPhone`='',`zz_sftype`=NULL,`zz_yxq`=NULL,`zz_jc`=NULL,`zz_jyxz`=NULL,`incode`='0',`sid`='',`fid`='',`backcode`='0',`zz_zcdz`=NULL,`zz_bankqc`=NULL,`tszz`=NULL,`yyzz`=NULL,`zzjg`=NULL,`sfzz`=NULL,`sfzf`=NULL,`gd_mchId`='101590077738',`xy_key`='b8bafbe19097167504bbcb34e602da58',`gd_rate`='',`reson`=NULL,`createTime`='2017-07-15 11:41:09',`lastIP`='127.0.0.1',`lastTime`='2017-10-26 21:45:43' WHERE ( userId=306 ) [ RunTime:0.0009s ]
+SQL: SHOW COLUMNS FROM `de_log_user_logins` [ RunTime:0.0220s ]
+SQL: INSERT INTO `de_log_user_logins` (`userId`,`loginTime`,`loginIp`) VALUES ('306','2017-10-26 21:45:43','127.0.0.1') [ RunTime:0.0464s ]
+
+[ 2017-10-26T21:45:43+08:00 ] 127.0.0.1 /Manage/Index/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000383s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001333s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001499s ]
+SQL: SHOW COLUMNS FROM `de_users` [ RunTime:0.0073s ]
+SQL: SELECT * FROM `de_users` WHERE ( userId=306 ) LIMIT 1   [ RunTime:0.0011s ]
+SQL: SHOW COLUMNS FROM `de_configs` [ RunTime:0.0980s ]
+SQL: SELECT * FROM `de_configs` WHERE ( configId=1 ) LIMIT 1   [ RunTime:0.0394s ]
+SQL: SHOW COLUMNS FROM `de_order` [ RunTime:0.0865s ]
+SQL: SHOW COLUMNS FROM `de_bindweixin` [ RunTime:0.0251s ]
+SQL: SHOW COLUMNS FROM `de_financial` [ RunTime:0.0396s ]
+SQL: SELECT * FROM `de_financial` WHERE ( userId=306 ) LIMIT 1   [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `de_stores` [ RunTime:0.0074s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_bindweixin` WHERE ( userId = 306 and usId = 0 and storeId = 0 ) LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and year(FROM_UNIXTIME(paytime))=2017 and 1 ) LIMIT 1   [ RunTime:0.0489s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and year(FROM_UNIXTIME(paytime))=2016 and 1 ) LIMIT 1   [ RunTime:0.0008s ]
+NOTIC: [2] Division by zero C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\IndexController.class.php 第 66 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-10' and 1 ) LIMIT 1   [ RunTime:0.0005s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-09' and 1 ) LIMIT 1   [ RunTime:0.0009s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m-%d')='2017-10-26' and 1 ) LIMIT 1   [ RunTime:0.0014s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m-%d')='2017-10-25' and 1 ) LIMIT 1   [ RunTime:0.0008s ]
+NOTIC: [2] Division by zero C:\Users\Administrator\Desktop\payCode\code\Application\Manage\Controller\IndexController.class.php 第 79 行.
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-04' and 1 ) LIMIT 1   [ RunTime:0.0005s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-04' and 1 ) LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-05' and 1 ) LIMIT 1   [ RunTime:0.0004s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-05' and 1 ) LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-06' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-06' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-07' and 1 ) LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-07' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-08' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-08' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-09' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-09' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT SUM(goods_price) AS tp_sum FROM `de_order` WHERE ( uid=306 and refund = 0 and ispay = 1 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-10' and 1 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_order` WHERE ( uid=306 and date_format(FROM_UNIXTIME(paytime),'%Y-%m')='2017-10' and 1 ) LIMIT 1   [ RunTime:0.0004s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_stores` WHERE ( userId=306 ) LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `de_ustaffs` [ RunTime:0.0045s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `de_ustaffs` WHERE ( userId=306 ) LIMIT 1   [ RunTime:0.0004s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000398s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000447s ]
+NOTIC: [2] Division by zero C:\Users\Administrator\Desktop\payCode\code\Application\Runtime\Cache\Manage\737aa8fc5877d411a50443dade831133.php 第 344 行.
+NOTIC: [2] Division by zero C:\Users\Administrator\Desktop\payCode\code\Application\Runtime\Cache\Manage\737aa8fc5877d411a50443dade831133.php 第 351 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.080419s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.080465s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000266s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000298s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000666s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000736s ]
+
+[ 2017-10-26T21:45:53+08:00 ] 127.0.0.1 /Manage/Users/storefront.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000278s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000340s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000374s ]
+SQL: SHOW COLUMNS FROM `de_users` [ RunTime:0.0058s ]
+SQL: SHOW COLUMNS FROM `de_stores` [ RunTime:0.0044s ]
+SQL: select count(*) counts from (select * from de_stores where userId=306 order by storeId desc ) as a [ RunTime:0.0007s ]
+SQL: select * from de_stores where userId=306 order by storeId desc  limit 0,20 [ RunTime:0.0004s ]
+SQL: SELECT * FROM `de_users` WHERE ( userId=306 ) LIMIT 1   [ RunTime:0.0011s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000492s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000559s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.036077s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.036134s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000330s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000361s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000419s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000451s ]
+

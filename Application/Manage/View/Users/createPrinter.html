@@ -1,0 +1,688 @@
+<extend name="Public/base"/>
+
+<block name="title">创建打印机</block>
+
+<block name="levels"><li><a href="{:U("Manage/Index/index")}">后台首页</a></li><li>商家设置</li></block>
+
+<block name="body">
+			   <div class="row" id="wrapper-content-list">
+                    <div class="col-lg-12">
+                        <div class="ibox float-e-margins">
+						<div class="ibox-title">	
+						 <div class="alert alert-warning" style="font-size: 16px;">
+                                温馨提示：目前打印机仅支付飞蛾打印机和易联云打印机！
+                            </div>
+						</div>
+                    <div class="ibox-content">
+			<div class="group main_bd">
+				<form novalidate="novalidate" class="store_build" id="js_store_build"> 
+				<div class="frm_section"> 							
+				<div class="frm_control_group"> 
+				 <label for="" class="frm_label">打印机名</label> 
+				 <div class="frm_controls"> 
+				  <span class="frm_input_box"> <input class="frm_input ckinput" id="printer_name" name="printer_name" type="text" /><u>15</u></span> 
+				  <p class="frm_msg fail" style="display: none;"><span for="js_business_name" class="frm_msg_content" style="display: inline;">门店名不能为空且长度不超过15个汉字或30个英文字母</span></p>
+				  <p class="frm_tips">名称不超过15个汉字</p> 
+				 </div> 
+				</div> 
+				<div class="frm_control_group"> 
+				 <label for="" class="frm_label">打印机编号sn</label> 
+				 <div class="frm_controls"> 
+				  <span class="frm_input_box"> <input id="printer_sn" class="frm_input ckinput" name="printer_sn" type="text" /> <u>10</u></span> 
+				  <p class="frm_msg fail" style="display: none;"><span for="js_business_name" class="frm_msg_content" style="display: inline;">打印机的唯一编码不能为空</span></p>
+				  <p class="frm_tips">打印机的唯一编码</p> 
+				 </div> 
+				</div> 
+                                <div class="frm_control_group"> 
+				 <label for="" class="frm_label">打印机密钥key</label> 
+				 <div class="frm_controls"> 
+				  <span class="frm_input_box"> <input id="printer_key" class="frm_input ckinput" name="printer_key" type="text" /> <u>10</u></span> 
+				  <p class="frm_msg fail" style="display: none;"><span for="js_business_name" class="frm_msg_content" style="display: inline;">打印机的密钥不能为空</span></p>
+				  <p class="frm_tips">打印机密钥，由官方后台生成</p> 
+				 </div> 
+				</div> 
+				
+				</div> 
+				<div class="frm_section service_info"> 
+				
+				<div class="frm_control_group"> 
+				 <label for="" class="frm_label">小票底部提示信息</label> 
+				 <div class="frm_controls"> 
+				  <span class="frm_input_box"> <input id="printer_tip" class="frm_input ckinput" name="printer_tip" type="text" /> <u>10</u></span> 
+				  <!--<p class="frm_msg fail" style="display: none;"><span for="js_business_name" class="frm_msg_content" style="display: inline;">打印机的密钥不能为空</span></p>-->
+				  <p class="frm_tips">出现在打印小票的底部，如：xxx公司提供技术支持 字样</p> 
+				 </div> 
+				</div> 
+                                    
+				<div class="frm_control_group"> 
+				 <label for="" class="frm_label">电话</label> 
+				 <div class="frm_controls"> 
+				  <span class="frm_input_box"> <input class="frm_input" name="printer_telephone" id="printer_telephone" type="text" onkeyup="value=value.replace(/[^1234567890\-]+/g,'')" maxlength="25"/> </span> 
+				  <p class="frm_tips">出现在打印小票底部的联系电话字段</p> 
+				 </div> 
+				</div> 
+				
+                                <div class="frm_control_group"> 
+				 <label for="" class="frm_label">二维码信息</label> 
+				 <div class="frm_controls"> 
+				  <span class="frm_input_box"> <input id="printer_qrcode" class="frm_input ckinput" name="printer_qrcode" type="text" /> <u>10</u></span> 
+				  <!--<p class="frm_msg fail" style="display: none;"><span for="js_business_name" class="frm_msg_content" style="display: inline;">打印机的密钥不能为空</span></p>-->
+				  <p class="frm_tips">打印机二维码内容,您可以使用扫码工具扫描您需要上传的二维码，复制扫描结果到这里，不打印请留空</p> 
+				 </div> 
+				</div> 
+                                
+                                <div class="frm_control_group"> 
+				 <label for="" class="frm_label">打印小票数</label> 
+				 <div class="frm_controls"> 
+                                     <span class="frm_input_box"> <input id="printer_ticketnum" class="frm_input ckinput" name="printer_ticketnum" type="text" value="<?php echo $printer['printer_ticketnum']; ?>" /> <u>10</u></span> 				  
+				  <p class="frm_tips">此参数设置一次打印的小票联数</p> 
+				 </div> 
+				</div> 
+                                    
+				<div class="frm_control_group"> 
+				 <label for="" class="frm_label">打印机型号</label> 
+				 <div class="frm_controls"> 
+                                     <span class="frm_input_box"> <input id="printer_version" class="frm_input ckinput" name="printer_version" type="text" value="<?php echo $printer['printer_version']; ?>" /> <u>10</u></span> 				  
+				  <p class="frm_tips">0-2：飞蛾打印机，0为飞蛾新版本，1、2为飞蛾旧版本，3：易联云打印机</p> 
+				 </div> 
+				</div> 
+				
+				
+<!--				<div class="frm_control_group"> 
+				 <label for="" class="frm_label">简介<br /><span class="frm_label_dec">(选填)</span></label> 
+				 <div class="frm_controls"> 
+				  <div class="frm_textarea_box"> 
+				   <textarea class="frm_textarea ckinput" name="desc" id="js_desc"></textarea><u>100</u>
+				  </div>
+				  <p class="frm_msg fail" style="display: none;"><span for="js_business_name" class="frm_msg_content" style="display: inline;">简介长度不超过100个汉字或200个英文字母</span></p>
+				  <p class="frm_tips">对品牌或门店的简要介绍，不超过100个字</p> 
+				 </div> 
+				</div> -->
+				</div> 
+				</form> 
+	
+		</div> 
+          <div class="tool_bar border tc">
+			<button id="sub_add_printer" class="btn btn-primary" style="height: 36px;"> 提交 </button>
+			 <!--<span  class="btn btn_input btn_default" id="js_preview"><button>预览</button></span>-->
+			</div>
+		</div>
+                        </div>
+                    </div>
+                </div>
+
+
+        	</div>
+</block>
+
+<block name="top">
+
+	<link href="__CSS__/merchant/store_mangecss.css" rel="stylesheet">
+	<link href="__CSS__/merchant/baseshop.css" rel="stylesheet">
+	<link href="__CSS__/merchant/widget_add_img.css" rel="stylesheet">
+	
+	<link href="__CSS__/plugins/basic.css" rel="stylesheet">
+    <link href="__CSS__/plugins/dropzone.css" rel="stylesheet">
+	<link href="__CSS__/dataTables/datepicker3.css" rel="stylesheet">
+	<style type="text/css">
+	  #dataselect .input-group-btn,#ym-select .input-group-btn{width: 12%;}
+	  #dataselect .input-sm ,#ym-select .input-sm{ border-radius: 7px; height:40px;}
+	  #dataselect .btn-primary ,#ym-select .btn-primary{ margin-left: 20px; border-radius:4px;margin-bottom: 0px;}
+	  #dataselect .input-group-addon,#ym-select .input-group-addon{border-radius: 7px;}
+	  .ibox-content{ min-height:800px;}
+	  #js_pic_url .dz-image-preview{display:none;}
+	  .img_upload_preview_box p{margin:0px;}
+	  .js_category_container select{width:200px;float: left;}
+	 #provinceS,#cityS,#districtS,#circleS{display:inline-block;width: auto;float:left;}
+	 #js_latitude,#js_longitude{width:250px;display: inline;}
+	 #js_store_build u{display:none;}
+	 #bside_left {
+		width: 260px;
+		height: 500px;
+		padding: 10px 10px 10px 10px;
+		float: left;
+		overflow: auto;
+	}
+	#mapfrm_controls::after{
+	   content:" . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . "
+	}
+	#mapcontainer{width: 620px;}
+.search_c {
+    float: left;
+	margin-left: 20px;
+	width: 350px;
+}
+.search_c .form-control{width:70%;display:inline-block;}
+#no_value{
+    color:red;
+    position: relative;
+    width:200px;
+}
+.info_list {
+    cursor: pointer;
+    margin-bottom: 5px;
+}
+	</style>
+	<!-- Data picker -->
+    <script src="__JS__/plugins/bootstrap-datepicker.js"></script>
+	<link href="__CSS__/plugins/custom.css" rel="stylesheet">
+	<script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp&key=S6PBZ-D7BRQ-BNB5S-G2LBZ-PYAIO-DJF4K&libraries=drawing,geometry,autocomplete,convertor"></script>
+</block>
+
+<block name="bottom">
+	<script src="__JS__/plugins/dropzone.js"></script>
+	<script src="__JS__/plugins/icheck.min.js"></script>
+    <script type="text/javascript">
+     var picnum = 0;
+     var  wxCouponType='<?php echo $typeid;?>';
+	 /***计算字符串长度(英文占1个字符，中文汉字占2个字符)*****/
+		String.prototype.gbLen = function() {    
+			var len = 0;    
+			for (var i=0; i<this.length; i++) {    
+				if (this.charCodeAt(i)>127 || this.charCodeAt(i)==94) {    
+					 len += 2;    
+				 } else {    
+					 len ++;    
+				 }    
+			 }    
+			return len;    
+		}
+	      wxCouponType=parseInt(wxCouponType);
+        $(document).ready(function() { 
+			/*$('#ymdatepicker input').datepicker({
+                keyboardNavigation: false,
+                forceParse: false,
+				format: "yyyy-mm-dd",
+                autoclose: true
+            });*/
+
+		    	$("#js_pic_url,#js_pic_url .icon20_common").dropzone({
+				url: "{:U('Manage/Stores/uploadStoreImg')}",
+				addRemoveLinks: false,
+				maxFilesize: 1,
+				acceptedFiles: ".jpg,.png,.gif,.jpeg",
+				uploadMultiple: false,
+				init: function() {
+					this.on("success", function(file,responseText) {
+						/***这里的this.element 是 $("#js_pic_url")****/
+					if(responseText.status == 1){
+						var  imgHtml='<div class="img_upload_box img_upload_preview_box js_edit_pic_wrp"><img  src="__ROOT__/'+responseText.savepath+'"><input name="photo_list[]" class="imginput" type="hidden" value="'+responseText.savepath+'"><input name="photo_img[]" type="hidden" value="'+responseText.savepath+'"><p class="img_upload_edit_area js_edit_area"><a class="icon18_common del_gray js_delete" href="javascript:;" onclick="DelthisImg($(this));" ></a></p></div>';
+					 	$('#js_upload_wrp .img_upload_wrp .js_pager').before(imgHtml);
+					 	$(this.element).find('div').remove();
+					 	picnum++;
+					 	if(picnum == 4){
+					 		$("#js_pic_url_div").hide();
+					 	}
+					}else{
+						swal({
+						  title: "上传失败",
+						  text: responseText.error,
+						  type: "error"
+						}, function () {
+						//window.location.reload();
+						   });
+						}
+					});
+				}
+			});
+
+	  $(document).on('mouseover mouseout','.img_upload_preview_box',function(event){
+	   if(event.type == "mouseover"){
+	     $(this).find('p').show();
+	   }else if(event.type == "mouseout"){
+		$(this).find('p').hide();
+		}
+	  });
+
+$('#sub_add_printer').click(function(){
+		var thisObj=$(this);
+	    if(checkInPut()){
+		thisObj.prop('disabled',true);
+		$.ajax({
+			url:'{:U("Manage/Printer/addPrinter")}',
+			type:"post",
+			data:$('form').serialize(),
+			dataType:"JSON",
+			success:function(ret){
+				if(!ret.error){
+					swal({
+					  title: "保存成功！",
+					  text: ret.msg,
+					  type: "success"
+					 }, function () {
+					   window.location.href="{:U('Manage/Users/printerManage')}";
+					});
+				}else{
+					swal({
+					  title: "保存失败！",
+					  text: ret.msg,
+					  type: "error"
+					 }, function () {
+					//window.location.reload();
+					});
+			   }
+			   thisObj.prop('disabled',false);
+			}
+		});
+	  }
+	  return false;
+       //document.js_editform.submit();
+	});
+
+  $('#js_store_build .ckinput').each(function(){
+    $(this).keyup(function(){
+	  var inputstr=$(this).val();
+	  var strleng=inputstr.gbLen();
+	  var limitnum=$(this).siblings('u').text();
+	  limitnum=parseInt(limitnum);
+	  var tmplen=0;
+	  var tipsObj=$(this).parent().siblings('.frm_msg');
+	  if(limitnum>0){
+		  limitnum=limitnum*2;
+		  if(strleng > limitnum){
+			  tipsObj.show();
+		  }else{
+			  tipsObj.hide();
+		  }
+	  }
+  });
+
+  });
+
+});
+
+function checkInPut(){
+		
+	var printername=$.trim($('#printer_name').val());
+	if(!printername || (printername.gbLen() >30)){
+		swal({
+		title: "温馨提示！",
+		text: '打印机名必须填写且不得超过15个汉字',
+		type: "error"
+		});
+		return false;
+	}
+	var printersn=$.trim($('#printer_sn').val());
+	if(!printersn || (printersn.gbLen() >20)){
+		swal({
+		title: "温馨提示！",
+		text: '打印机编号sn必须填写且不得超过20个字节',
+		type: "error"
+		});
+		return false;
+	}
+	
+	var telephone=$.trim($('#printer_telephone').val());
+	if(!telephone){
+	  	swal({
+		title: "温馨提示！",
+		text: '电话号码没填写！',
+		type: "error"
+		});
+		return false;
+	}
+	var printerkey=$.trim($('#printer_key').val());
+	if(!printerkey){
+	  	swal({
+		title: "温馨提示！",
+		text: '打印机密钥必填！',
+		type: "error"
+		});
+		return false;
+	}
+	var printertip=$.trim($('#printer_tip').val());
+	if(!printertip){
+	  	swal({
+		title: "温馨提示！",
+		text: '小票底部提示信息没填写！',
+		type: "error"
+		});
+		return false;
+	}
+	var printerqrcode=$.trim($('#printer_qrcode').val());
+	if(!printerqrcode){
+	  	swal({
+		title: "温馨提示！",
+		text: '二维码信息没填写！',
+		type: "error"
+		});
+		return false;
+	}
+        var printer_ticketnum = $.trim($('#printer_ticketnum').val());
+        if(printer_ticketnum > 3){
+            swal({
+		title: "温馨提示！",
+		text: '打印联数不能超过3联！',
+		type: "error"
+		});
+		return false;
+        }
+        var printer_version = $.trim($('#printer_version').val());
+        if(!printer_version){
+            swal({
+		title: "温馨提示！",
+		text: '请填写打印机型号！',
+		type: "error"
+		});
+		return false;
+        }
+    return true;
+}
+
+function DelthisImg(obj){
+  if(confirm('您确定删除图片！')){
+    obj.parent('p').parent('.img_upload_preview_box').remove();
+	picnum--;
+ 	$("#js_pic_url_div").show();
+  }
+}
+
+     //直接加载地图
+    //初始化地图函数  自定义函数名init
+	var map=null,label=null;
+    function init(lat,lng,tozoom) {
+        //定义map变量 调用 qq.maps.Map() 构造函数   获取地图显示容器
+          map = new qq.maps.Map(document.getElementById("mapcontainer"), {
+            center: new qq.maps.LatLng(lat,lng),      // 地图的中心地理坐标。
+            zoom:tozoom                               // 地图的中心地理坐标。
+        });
+    //给map绑定mousemove事件
+    label = new qq.maps.Label({
+		 map: map,
+         offset:new qq.maps.Size(15,-10),
+		 draggable: false,
+         clickable: false
+    });
+	map.setOptions({
+		draggableCursor: "crosshair"
+	});
+    //添加监听事件    监听鼠标移动 添加 当前鼠标的经纬度信息
+    qq.maps.event.addListener(map,"mousemove",function(e){
+		var latlng = e.latLng;
+        //label.setContent(e.latLng.toString());
+        label.setPosition(e.latLng);
+		label.setContent(latlng.getLat().toFixed(10) + "," + latlng.getLng().toFixed(10));
+    });
+    //添加监听事件  当鼠标移到图层上面显示图层
+    qq.maps.event.addListener(map,"mouseover",function(e){
+        label.setMap(map);
+    });
+    //添加监听事件  当鼠标离开的时候 设置图层为空
+    qq.maps.event.addListener(map,"mouseout",function(e){
+        label.setMap(null);
+    });
+	var url3;
+	qq.maps.event.addListener(map, "click", function (e) {
+		document.getElementById("js_latitude").value = e.latLng.getLat().toFixed(10);
+		document.getElementById("js_longitude").value = e.latLng.getLng().toFixed(10);
+		url3 = encodeURI("http://apis.map.qq.com/ws/geocoder/v1/?location=" + e.latLng.getLat() + "," + e.latLng.getLng() + "&key=S6PBZ-D7BRQ-BNB5S-G2LBZ-PYAIO-DJF4K&output=jsonp&&callback=?");
+		$.getJSON(url3, function (result) {
+			if(result.result!=undefined){
+				//document.getElementById("searchSubmit").value = result.result.address;
+				var addressComponent=result.result.address_component;
+				document.getElementById("searchSubmit").value = addressComponent.street+addressComponent.street_number;
+				$('#pos_id').val(result.result.ad_info.adcode);
+			}else{
+				document.getElementById("searchSubmit").value = "";
+			}
+
+		})
+	});
+	}
+   
+    //调用初始化函数地图
+    init(39.904690,116.407170,12); /***北京市*****/
+
+var listener_arr = [];
+var isNoValue = false;
+var btnSearch = document.getElementById("btn_search");
+var bside = document.getElementById("bside_left");
+var query_city='',havecity=0;
+var markerArray = [];
+function each(obj, fn) {
+    for (var n = 0, l = obj.length; n < l; n++) {
+        fn.call(obj[n], n, obj[n]);
+    }
+}
+qq.maps.event.addDomListener(btnSearch, 'click', function () {
+    var value = this.parentNode.getElementsByTagName("input")[0].value;
+    var latlngBounds = new qq.maps.LatLngBounds();
+    for(var i= 0,l=listener_arr.length;i<l;i++){
+        qq.maps.event.removeListener(listener_arr[i]);
+    }
+    listener_arr.length = 0;
+    havecity =$('#cityS').size();
+	if(havecity >0){
+	   havecity=$.trim($('#cityS').val());
+	   havecity=parseInt(havecity);
+	   if(havecity>0){
+	      query_city=$('#cityS').find("option:selected").data('fullname');
+	   }else{
+	      alert('请选择一个城市');
+		  return false;
+	   }
+	}else{
+		  alert('请选择省份和城市！');
+		  return false;
+	}
+    url = encodeURI("http://apis.map.qq.com/ws/place/v1/search?keyword=" + value + "&boundary=region(" + query_city + ",0)&page_size=9&page_index=1&key=S6PBZ-D7BRQ-BNB5S-G2LBZ-PYAIO-DJF4K&output=jsonp&&callback=?");
+    $.getJSON(url, function (result) {
+
+        if (result.count) {
+            isNoValue = false;
+            bside.innerHTML = "";
+            each(markerArray, function (n, ele) {
+                ele.setMap(null);
+            });
+            markerArray.length = 0;
+            each(result.data, function (n, ele) {
+                var latlng = new qq.maps.LatLng(ele.location.lat, ele.location.lng);
+                latlngBounds.extend(latlng);
+                var left = n * 27;
+                var marker = new qq.maps.Marker({
+                    map: map,
+                    position: latlng,
+					adcode:ele.ad_info.adcode,
+					district:ele.ad_info.district,
+					province:ele.ad_info.province,
+					city:ele.ad_info.city,
+					title:ele.title,
+					address:ele.address,
+                    zIndex: 10
+                });
+                marker.index = n;
+                marker.isClicked = false;
+                setAnchor(marker, true);
+                markerArray.push(marker);
+                var listener1 = qq.maps.event.addDomListener(marker, "mouseover", function () {
+                    var n = this.index;
+                    setCurrent(markerArray, n, false);
+                    setCurrent(markerArray, n, true);
+                    label.setContent(this.position.getLat().toFixed(10) + "," + this.position.getLng().toFixed(10));
+                    label.setPosition(this.position);
+                    label.setOptions({
+                        offset: new qq.maps.Size(15, -20)
+                    })
+
+                });
+                listener_arr.push(listener1);
+                var listener2 = qq.maps.event.addDomListener(marker, "mouseout", function () {
+                    var n = this.index;
+                    setCurrent(markerArray, n, false);
+                    setCurrent(markerArray, n, true);
+                    label.setOptions({
+                        offset: new qq.maps.Size(15, -12)
+                    })
+                });
+                listener_arr.push(listener2);
+                var listener3 = qq.maps.event.addDomListener(marker, "click", function () {
+                    var n = this.index;
+                    setFlagClicked(markerArray, n);
+                    setCurrent(markerArray, n, false);
+                    setCurrent(markerArray, n, true);
+                });
+                listener_arr.push(listener3);
+                map.fitBounds(latlngBounds);
+                var div = document.createElement("div");
+                div.className = "info_list";
+                var order = document.createElement("div");
+                var leftn = -54 - 17 * n;
+                order.style.cssText = "width:17px;height:17px;margin:3px 3px 0px 0px;float:left;background:url(__IMG__/merchant/marker_n.png) " + leftn + "px 0px";
+                div.appendChild(order);
+                var pannel = document.createElement("div");
+                pannel.style.cssText = "width:200px;float:left;";
+                div.appendChild(pannel);
+                var name = document.createElement("p");
+                name.style.cssText = "margin:0px;color:#0000CC";
+                name.innerHTML = ele.title;
+                pannel.appendChild(name);
+                var address = document.createElement("p");
+                address.style.cssText = "margin:0px;";
+                address.innerHTML = "地址：" + ele.address;
+                pannel.appendChild(address);
+                if (ele.tel != undefined) {
+                    var phone = document.createElement("p");
+                    phone.style.cssText = "margin:0px;";
+                    phone.innerHTML = "电话：" + ele.tel;
+                    pannel.appendChild(phone);
+                }
+                var position = document.createElement("p");
+                position.style.cssText = "margin:0px;";
+                position.innerHTML = "坐标：" + ele.location.lat.toFixed(6) + "，" + ele.location.lng.toFixed(6);
+                pannel.appendChild(position);
+                bside.appendChild(div);
+                div.style.height = pannel.offsetHeight + "px";
+                div.isClicked = false;
+                div.index = n;
+                marker.div = div;
+                div.marker = marker;
+            });
+            $("#bside_left").delegate(".info_list", "mouseover", function (e) {
+
+                var n = this.index;
+
+                setCurrent(markerArray, n, false);
+                setCurrent(markerArray, n, true);
+            });
+            $("#bside_left").delegate(".info_list", "mouseout", function () {
+                each(markerArray, function (n, ele) {
+                    if (!ele.isClicked) {
+                        setAnchor(ele, true);
+                        ele.div.style.background = "#fff";
+                    }
+                })
+            });
+            $("#bside_left").delegate(".info_list", "click", function (e) {
+                var n = this.index;
+                setFlagClicked(markerArray, n);
+                setCurrent(markerArray, n, false);
+                setCurrent(markerArray, n, true);
+                map.setCenter(markerArray[n].position);
+            });
+        } else {
+
+            bside.innerHTML = "";
+            each(markerArray, function (n, ele) {
+                ele.setMap(null);
+            });
+            markerArray.length = 0;
+            var novalue = document.createElement('div');
+            novalue.id = "no_value";
+            novalue.innerHTML = "对不起，没有搜索到你要找的结果!";
+            bside.appendChild(novalue);
+            isNoValue = true;
+        }
+    });
+});
+
+function setAnchor(marker, flag) {
+    var left = marker.index * 27;
+    if (flag == true) {
+        var anchor = new qq.maps.Point(10, 30),
+                origin = new qq.maps.Point(left, 0),
+                size = new qq.maps.Size(27, 33),
+                icon = new qq.maps.MarkerImage("__IMG__/merchant/marker10.png", size, origin, anchor);
+        marker.setIcon(icon);
+    } else {
+        var anchor = new qq.maps.Point(10, 30),
+                origin = new qq.maps.Point(left, 35),
+                size = new qq.maps.Size(27, 33),
+                icon = new qq.maps.MarkerImage("__IMG__/merchant/marker10.png", size, origin, anchor);
+        marker.setIcon(icon);
+    }
+}
+function setCurrent(arr, index, isMarker) {
+    if (isMarker) {
+        each(markerArray, function (n, ele) {
+            if (n == index) {
+                setAnchor(ele, false);
+                ele.setZIndex(10);
+            } else {
+                if (!ele.isClicked) {
+                    setAnchor(ele, true);
+                    ele.setZIndex(9);
+                }
+            }
+        });
+    } else {
+        each(markerArray, function (n, ele) {
+            if (n == index) {
+                ele.div.style.background = "#DBE4F2";
+            } else {
+                if (!ele.div.isClicked) {
+                    ele.div.style.background = "#fff";
+                }
+            }
+        });
+    }
+}
+function setFlagClicked(arr, index) {
+    each(markerArray, function (n, ele) {
+        if (n == index) {
+            ele.isClicked = true;
+            ele.div.isClicked = true;
+            var str = '<div style="width:250px;">' + ele.div.children[1].innerHTML.toString() + '</div>';
+            var latLng = ele.getPosition();
+			document.getElementById("js_latitude").value = latLng.getLat().toFixed(10);
+		    document.getElementById("js_longitude").value = latLng.getLng().toFixed(10);
+			$('#pos_id').val(ele.adcode);
+			var d_address=ele.address+ele.title;
+			d_address=d_address.replace(ele.province,'').replace(ele.city,'').replace(ele.district,'');
+			$('#searchSubmit').val(d_address);
+			var optfullname='',optdistrict=$.trim(ele.district),optv=0;
+			$('#districtS option').each(function(mm){
+			   optfullname=$(this).data('fullname');
+			   optfullname=$.trim(optfullname);
+			   if(optfullname==optdistrict){
+				 $(this).attr("selected",true);
+				 optv=$(this).attr('value');
+			     $('#districtS').val(optv);
+				 $('#districtinfo').val(optv+'-'+optfullname);
+			   }
+			});
+        } else {
+            ele.isClicked = false;
+            ele.div.isClicked = false;
+        }
+    });
+}
+/*var url4;
+$(".search_t").autocomplete({
+    source:function(request,response){
+        url4 = encodeURI("http://apis.map.qq.com/ws/place/v1/suggestion/?keyword=" + request.term + "&region=" + curCity.children[0].innerHTML + "&key=K76BZ-W3O2Q-RFL5S-GXOPR-3ARIT-6KFE5&output=jsonp&&callback=?");
+        $.getJSON(url4,function(result){
+
+            response($.map(result.data,function(item){
+                return({
+                    label:item.title
+
+                })
+            }));
+        });
+    }
+});*/
+
+    
+
+  </script>
+</block>

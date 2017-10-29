@@ -1,0 +1,320 @@
+<extend name="Public/base"/>
+
+<block name="title">商户订单列表</block>
+
+<block name="levels"><li><a href="{:U("Manage/Index/index")}">后台首页</a></li><li>代理商功能</li></block>
+
+<block name="body">
+<div class="row">
+            	<div class="col-lg-12" style="">
+            	    <div class="ibox float-e-margins">
+<div class="ibox-content"> 
+   <nav class="ui-nav clearfix"> 
+    <!--<div class="pull-right common-helps-entry"> 
+     <a href="" target="_blank"> <span class="help-icon"></span> 查看【收银台】使用教程 </a> 
+    </div>-->
+   </nav> 
+   <div class="app__content js-app-main page-cashier">
+    <div>
+      <!-- 实时交易信息展示区域 --> 
+      <!-- 实时交易信息展示区域 -->
+<!--        <div class="cashier-realtime"> 
+         <div class="realtime-title-block clearfix"> 
+                  
+         </div> 
+        </div> -->
+      <div class="cashier-realtime"> 
+       <div class="realtime-title-block clearfix"> 
+           <ul class="pull-left" style="height: 30px; padding: 0;">
+                          <li style="width: 200px;">
+                                  <!--<input type="text" class="form-control input-sm m-b-xs" id="filter" placeholder="订单号" onkeydown="doSearch(arguments[0]||event)">-->
+                                  <!--<div class="frm_control_group">--> 
+				 <!--<label for="" class="frm_label">商户</label>--> 
+<!--				 <div class="frm_controls"> 
+				  <div id="js_category_dom"> -->
+				   <!--<div class="js_category_container">-->
+				    <select name="merchant" id="merchant" class="form-control" onchange="">
+                                        <option value="0" data-cname="全部">全部商户</option>
+					<?php foreach($merchants as $ckk=>$cvv){?>
+                                        <option value="<?php echo $cvv['userId']?>" data-cname="<?php echo $cvv['userName']?>" <?php if($cvv['userId'] == $merchant){?>selected="selected"<?php }?>><?php echo $cvv['userName']?></option>
+					<?php }?>
+				   </select>
+                                   
+
+				   <!--</div>-->
+				   
+<!--				  </div> 
+				 </div> -->
+				<!--</div>--> 
+                          </li>
+                   </ul>        
+               <ul class="pull-left" style="height: 30px; padding: 0;">
+                <li>
+                    <select name="paytype" id="paytype" class="form-control" onchange="">
+                        <option value="0" data-cname="全部类型" <?php if($paytype == 0){?>selected="selected"<?php }?>>全部类型</option>
+                            <option value="1" data-cname="微信支付"  <?php if($paytype == 1){?>selected="selected"<?php }?>>微信支付</option>
+                            <option value="2" data-cname="支付宝支付"  <?php if($paytype == 2){?>selected="selected"<?php }?>>支付宝支付</option>
+                       </select>
+                </li>
+                </ul>
+                  <ul class="pull-right" style="height: 30px;">
+<!--                          <li>
+            <div data-toggle="buttons" class="btn-group" style="margin-bottom: 30px;">
+                <label class="btn btn-sm btn-white <eq name='paytype' value='wx'> active </eq>" onclick="datebtn('wx')">
+                    <input type="radio" >微信</label>
+                <label class="btn btn-sm btn-white <eq name='paytype' value='ali'> active </eq>" onclick="datebtn('ali')">
+                    <input type="radio">支付宝</label>
+                <label class="btn btn-sm btn-white <eq name='paytype' value='all'> active </eq>" onclick="datebtn('all')">
+                    <input type="radio">所有</label>
+            </div>
+      </li>-->
+      <li>
+          <div class="input-daterange input-group" id="datepicker">
+                  <div class="input-group date">
+                          <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                          <input id="stime" type="text" class="input-sm form-control" name="start" value="{$starttime}" style="border-radius:0px;">
+                      </div>
+                  <span class="input-group-addon" style="background-color: #FBFBFB"> 至 </span>
+                                                  <div class="input-group date">
+                          <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                          <input id="etime" type="text" class="input-sm form-control" name="end" value="{$endtime}" style="border-radius:0px;">
+                      </div>
+          </div>
+      </li>
+      <li>
+          <button id="dosearch" type="button" class="btn btn-primary btn-sm" style="margin-bottom: 15px;">查询</button>
+          <button id="downdetail" type="button" class="btn btn-danger btn-sm" style="margin-bottom: 15px;">下载</button>
+      </li>
+                  </ul>                   
+        </div> 
+            <div>
+               <div class="realtime-title">收款情况</div>               
+               <div class="realtime-title " id="totalMoney" name="totalMoney">  <?php if($totalMoney != 0){ echo '：'.$totalMoney.'元('.$totalNum.'笔) | ';  }?></div>
+               <div class="realtime-title " id="weixinMoney" name="weixinMoney">  <?php if($weixinMoney != 0){echo ' 微信：'.$weixinMoney.'元('.$weixinNum.'笔) | '; }?></div>
+               <div class="realtime-title " id="alipayMoney" name="alipayMoney">  <?php if($alipayMoney != 0){echo ' 支付宝：'.$alipayMoney.'元('.$alipayNum.'笔) | '; }?></div>
+               
+            </div>
+        </div> 
+      <div class="js-real-time-region realtime-list-box loading">
+       <div class="widget-list">
+        <div class="js-list-filter-region clearfix ui-box" style="position: relative;">
+         <div class="widget-list-filter"></div>
+        </div> 
+        <div class="ui-box"> 
+         <table class="ui-table ui-table-list" data-page-size="20" style="padding: 0px;"> 
+          <thead class="js-list-header-region tableFloatingHeaderOriginal">
+           <tr class="widget-list-header">
+		    <th>订单号</th>
+            <th data-hide="phone">付款人</th> 
+            <th data-hide="phone">付款时间</th> 
+            <th data-hide="phone">付款理由</th> 
+			<th data-hide="phone">来源</th> 
+            <th data-hide="phone">付款金额(元)</th>
+			<th data-hide="phone">退款情况</th> 
+            <th>操作</th>
+           </tr>
+          </thead>
+          <tbody class="js-list-body-region" id="table-list-body">
+		   <?php if(!empty($order)){
+		      foreach($order as $ovv){
+		   ?>
+           <tr class="widget-list-item">
+            <td><?php echo $ovv['order_id'];?></td> 
+            <td><?php if(!empty($ovv['nickname'])){
+				echo $ovv['nickname'];
+			}elseif(!empty($ovv['truename'])){
+			     echo htmlspecialchars_decode($ovv['truename'],ENT_QUOTES);
+			}elseif(!empty($ovv['openid'])){
+			    echo $ovv['openid'];
+			}else{
+			    echo '未知客户';
+			}?></td> 
+            <td><?php $paytime=$ovv['paytime'] > 0 ? $ovv['paytime'] : $ovv['add_time']; echo date('Y-m-d H:i:s',$paytime);?></td> 
+            <td><?php if($ovv['pay_way']=='weixin'){?>
+               微信
+               <?php }elseif($ovv['pay_way']=='alipay'){?>
+               支付宝
+               <?php }else{?>
+               其他
+               <?php }?>
+                -
+                <?php echo htmlspecialchars_decode($ovv['goods_name'],ENT_QUOTES);?></td> 
+<!--			<td><?php if($ovv['comefrom']==0){echo '本平台';}elseif($ovv['comefrom']==1){echo '微信营销';}elseif($ovv['comefrom']==2){echo '电商平台';}elseif($ovv['comefrom']==3){echo 'O2O平台';}
+			if($ovv['pay_way']=='alipay'){echo '支付宝';}elseif($ovv['pay_way']=='weixin'){echo '微信';}else{echo '其他';}echo $ovv['goods_describe'];?></td>-->
+			<td><?php echo $merchantName[$ovv['uid']];?></td>
+                        <td><?php echo $ovv['goods_price'];?></td>
+			<td><?php if($ovv['refund']==1){?>
+			     <font>退款中...</font>
+			<?php }elseif($ovv['refund']==2){?>
+			     <font color="#2e6da4">已退款</font>
+			<?php }elseif($ovv['refund']==3){?>
+			     <font color="#ed5565">退款失败</font>
+			 <?php }else{
+			     echo '<font color="#44b549">已支付</font>';
+			 } ?>
+			</td> 
+            <td><button class="btn btn-sm btn-info" onclick="GetDetail({$ovv.id});"><strong>支付详情</strong></button><!--   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-sm btn-danger" onclick="deltheOrder(this,<?php echo $ovv['id'];?>,<?php echo $ovv['pmid'];?>);"><strong> 删 除 </strong></button> --></td>
+           </tr>
+		   <?php }}else{?>
+		   <tr class="widget-list-item"><td colspan="8">暂无订单</td></tr>
+		   <?php }?>
+          </tbody> 
+         </table> 
+         <div class="js-list-empty-region"></div> 
+        </div> 
+        <div class="js-list-footer-region ui-box">
+         <div class="widget-list-footer"></div>
+        </div> 
+       </div>
+      </div> 
+     </div>
+    </div>
+   </div> 
+  </div>   
+</block>
+
+<block name="top">
+<link href="__CSS__/wxCoupon.css" rel="stylesheet">
+<link href="__CSS__/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+<link href="__CSS__/footable.core.css" rel="stylesheet">
+<link href="__CSS__/cashier.css" rel="stylesheet">
+
+
+<link href="__CSS__/dataTables/datepicker3.css" rel="stylesheet">
+<link href="__CSS__/plugins/ui.jqgrid.css" rel="stylesheet">
+
+	<style>
+		.ibox-title h5 {
+  			margin: 10px 0 0px;
+		}
+		select.input-sm {
+  			height: 35px;
+  			line-height: 35px;
+		}
+		.float-e-margins .btn-info{
+			margin-bottom:0px;
+		}
+		.fa-paste{
+			margin-right:7px;
+			padding: 0px;
+		}
+		.dz-preview{
+			display:none;
+		}
+		.ibox-title ul{ list-style: outside none none !important; margin: 0; padding: 0;}
+		.ibox-title li:nth-child(1) { float: left;width: 30%; }
+		.ibox-title li:nth-child(2) { float: left;width: 32%; }
+		.ibox-title li:nth-child(3){width: 35%; }
+		#commonpage {float: right;margin-bottom: 10px;}
+		#table-list-body .btn-st{background-color: #337ab7;border-color: #2e6da4;cursor:auto;}
+		#oderinfo{overflow-y: scroll;}
+		.float-e-margins .ibox-content{border-style:none;}
+		.nav-tabs > li > a:hover,
+		.nav-tabs > li > a:focus {
+		 background-color: #FFF;
+		}
+		.nav-tabs li.active  a {border-color:#dddddd #dddddd #fff}
+		.nav-tabs li.active  a:hover,.nav-tabs li.active a:focus {border-color:#dddddd #dddddd #fff;background-color:#FFF;}
+                
+                
+                
+                ul.pull-right li{
+			float: left;
+			margin-right: 5px;
+		}
+		.ibox-title h5 {
+  			margin: 10px 0 0px;
+		}
+		select.input-sm {
+  			height: 35px;
+  			line-height: 35px;
+		}
+		.float-e-margins .btn-info{
+			margin-bottom:0px;
+		}
+		.fa-paste{
+			margin-right:7px;
+			padding: 0px;
+		}
+		.dz-preview{
+			display:none;
+		}
+		
+
+		.page-cashier tbody tr{height:34px;}
+		.ui-jqgrid .ui-jqgrid-title{margin:5px; font-weight: 700;}
+		.ui-jqgrid tr.jqgfirstrow{height:0px;}
+		.ui-jqgrid .ui-jqgrid-pager, .ui-jqgrid .ui-jqgrid-toppager{border-top:none;}
+	</style>
+	<script src="__JS__/footable.all2.min.js"></script>
+</block>
+<block name="bottom">
+<div class="modal inmodal" tabindex="-1" role="dialog"  id="oderinfo">
+		<div class="modal-dialog">
+			<div class="modal-content animated bounceInRight">
+				<div class="modal-header">
+                    <button type="button" class="close _close"><span style="font-size: 35px;">×</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">支付详情</h4>
+                </div>
+				<div class="modal-body">
+				</div>
+				<div class="modal-footer">
+                    <button type="button" class="btn btn-white _close">关闭</button>
+                </div>
+			</div>
+		</div>
+	</div>
+    
+ <script src="__JS__/plugins/bootstrap-datepicker.js"></script>
+<script src="__JS__/plugins/grid.locale-cn.js"></script>
+<script src="__JS__/plugins/jquery.jqGrid.min.js"></script>
+
+ <script>
+ 	if(is_mobile()){
+	  $('.row .col-lg-12').css('padding','1px');
+	  $('.float-e-margins .ibox-content').css('padding','15px 5px 20px 5px');
+	  $('.nav-tabs li a').css('padding','10px');
+  }
+$(document).ready(function(){
+
+   $('.ui-table-list').footable();
+   
+   $("#dosearch").click(function(){
+		var stime = $("#stime").val();
+		var etime = $("#etime").val();
+                var merchant = $("#merchant").val();
+                var paytype = $("#paytype").val();                
+		window.location.href="{:U('Manage/Agent/orderLists')}?stime="+stime+"&etime="+etime+"&merchant="+merchant+"&paytype="+paytype;
+	});
+    
+  });
+
+	var screenH=$(window).height();
+	screenH=  screenH-20;
+	$('#oderinfo').css('height',screenH);
+
+	function is_mobile(){
+		var ua = navigator.userAgent.toLowerCase();
+		if ((ua.match(/(iphone|ipod|android|ios|ipad|mobile)/i))){
+				return true;
+		}else{
+			return false;
+		}
+	}
+        
+        $("#datepicker.input-daterange").datepicker({
+		keyboardNavigation: false,
+		forceParse: false,
+		format: "yyyy-mm-dd",
+		autoclose: true
+	});
+        
+        function datebtn(type){
+            alert(type);
+// 		window.location.href="{:U('SX/Statistics/orderLists')}?datetype="+type;
+ 	}
+
+	var odurl="{:U('Manage/Statistics/odetail')}";
+ </script>
+ <script src="__JS__/cashier/lhsw.js"></script>
+</block>

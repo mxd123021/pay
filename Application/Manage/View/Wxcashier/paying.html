@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no" /> 
+    <title>自助支付</title>
+    <script language="javascript">
+      var paytype = "{$data['paytype']}";
+      var param ={$jsApiParameters};
+
+        function callpay(){
+          document.getElementById("callpay").style.display="";
+          if(paytype == 'weixin'){
+            callweixin();
+          }else if(paytype == 'alipay'){
+            callalipay();
+          }
+        }
+
+        function callweixin(){
+          WeixinJSBridge.invoke("getBrandWCPayRequest",param,function(res){
+            WeixinJSBridge.log(res.err_msg);
+            if(res.err_msg=="get_brand_wcpay_request:ok"){
+              document.getElementById("payDom").style.display="none";
+              document.getElementById("successDom").style.display="";
+              window.location.href = '{:U("Manage/Wxcashier/successTips@".C('SITE_URL'),array('id'=>$data['openid'],'tprice'=>$data['tprice'],'userId'=>$data['userId'],'storeId'=>$data['storeId'],'usId'=>$data['usId'],'paytype'=>$data['paytype']))}';
+            }else{
+              if(res.err_msg == "get_brand_wcpay_request:cancel"){
+                var err_msg = "您取消了支付";
+              }else if(res.err_msg == "get_brand_wcpay_request:fail"){
+                var err_msg = "支付失败";
+              }else{
+                var err_msg = res.err_msg +"<br/>"+res.err_desc;
+              }
+              document.getElementById("payDom").style.display="none";
+              document.getElementById("failDom").style.display="";
+              document.getElementById("failRt").innerHTML=err_msg;
+            }
+          });
+        }
+
+        function callalipay(){
+          AlipayJSBridge.call("tradePay",param,function(res){
+            if(res.resultCode=="9000"){
+              document.getElementById("payDom").style.display="none";
+              document.getElementById("successDom").style.display="";
+              window.location.href = '{:U("Manage/Wxcashier/successTips@".C('SITE_URL'),array('id'=>$data['openid'],'tprice'=>$data['tprice'],'userId'=>$data['userId'],'storeId'=>$data['storeId'],'usId'=>$data['usId'],'paytype'=>$data['paytype']))}';
+            }else{
+              if(res.resultCode == "6001"){
+                var err_msg = "您取消了支付";
+              }else if(res.resultCode == "4000"){
+                var err_msg = "支付失败";
+              }else{
+                var err_msg = res.resultCode;
+              }
+              document.getElementById("payDom").style.display="none";
+              document.getElementById("failDom").style.display="";
+              document.getElementById("failRt").innerHTML=err_msg;
+            }
+          });
+          //window.location.href = '{$pay_url}';
+        }
+    </script>
+    <link href="__CSS__/style.css" rel="stylesheet"/>
+    <link href="__CSS__/weixin_pay.css" rel="stylesheet"/>
+  </head>
+  <body style="padding-top:20px;">
+    <div id="payDom" class="cardexplain">
+      <div class="sk-spinner sk-spinner-wave" style="margin-top:50%;">
+        <div class="sk-rect1"></div>
+        <div class="sk-rect2"></div>
+        <div class="sk-rect3"></div>
+        <div class="sk-rect4"></div>
+        <div class="sk-rect5"></div>
+      </div>
+      <div id="callpay" class="footReturn" style="text-align:center; display: none;">
+        <input type="button" style="margin:20px auto;width:50%"  onclick="callpay()"  class="submitbtn" value="点击进行支付" />
+      </div>
+    </div>
+    <div id="failDom" style="display:none" class="cardexplain">
+      <ul class="round">
+        <li class="title mb"><span class="none">支付结果</span></li>
+        <li class="nob">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0" class="kuang">
+            <tr><th style="font-weight: bold; font-size: 15px; color:red"><div id="failRt"></div></th></tr>
+          </table>
+        </li>
+      </ul>
+      <div class="footReturn" style="text-align:center">
+        <input type="button" style="margin:0 auto 20px auto;width:100%"  onclick="callpay()"  class="submitbtn" value="重新进行支付" />
+      </div>
+    </div>
+    <div id="successDom" style="display:none" class="cardexplain">
+      <ul class="round">
+        <li class="title mb"><span class="none">支付成功</span></li>
+        <li class="nob">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0" class="kuang"><tr><td>您已支付成功，页面正在跳转...</td></tr></table>
+          <div id="failRt"></div>
+        </li>
+      </ul>
+    </div>
+    <script language="javascript">
+      window.onload=function(){
+        setTimeout(callpay,2000);
+      }
+    </script>
+  </body>
+</html>

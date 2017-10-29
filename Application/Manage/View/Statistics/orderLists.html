@@ -1,0 +1,437 @@
+<extend name="Public/base"/>
+
+<block name="title">订单列表</block>
+
+<block name="levels"><li><a href="{:U("Manage/Index/index")}">后台首页</a></li><li>数据统计</li></block>
+
+<block name="body">
+	<div class="row">
+		<div class="col-lg-12">
+		    <div class="ibox float-e-margins">
+				<div class="ibox-content">
+				   <div class="app__content js-app-main page-cashier">
+				    <div>
+				      <!-- 实时交易信息展示区域 -->
+				      <div class="cashier-realtime"> 
+				       <div class="realtime-title-block clearfix"> 
+				       		<ul class="pull-left" style="height: 25px; padding: 0;">
+				       			<li style="width: 150px;">
+                                                            <select name="mendian" id="mendian" class="form-control">
+                                                                <option value="0" data-cname="全部">全部门店</option>
+                                                                <?php foreach($mendians as $ckk=>$cvv){?>
+                                                                <option value="<?php echo $cvv['storeId']?>" data-cname="<?php echo $cvv['branch_name']?>" <?php if($cvv['storeId'] == $mendian){?>selected="selected"<?php }?>><?php echo $cvv['branch_name']?></option>
+                                                                <?php }?>
+                                                           </select>
+                                                            <input type="text" class="form-control input-sm m-b-xs" id="filter" placeholder="门店/收银员" onkeydown="doSearch(arguments[0]||event)" style="display: none">
+				       			</li>
+				       		</ul>
+                                                <ul class="pull-left" style="height: 28px; padding: 0;">
+                                                                <li>
+                                                                    <select name="paytype" id="paytype" class="form-control" onchange="">
+                                                                        <option value="0" data-cname="全部类型" <?php if($paytype == 0){?>selected="selected"<?php }?>>全部类型</option>
+                                                                            <option value="1" data-cname="微信支付"  <?php if($paytype == 1){?>selected="selected"<?php }?>>微信支付</option>
+                                                                            <option value="2" data-cname="支付宝支付"  <?php if($paytype == 2){?>selected="selected"<?php }?>>支付宝支付</option>
+                                                                       </select>
+                                                                </li>
+                                                                </ul>
+					        <ul class="pull-right" style="height: 30px;">
+						        <li>
+									<div data-toggle="buttons" class="btn-group" style="margin-bottom: 30px;">
+                                    <label class="btn btn-sm btn-white <eq name='datetype' value='tdy'> active </eq>" onclick="datebtn('tdy')">
+                                        <input type="radio" >今日</label>
+                                    <label class="btn btn-sm btn-white <eq name='datetype' value='ydy'> active </eq>" onclick="datebtn('ydy')">
+                                        <input type="radio">昨日</label>
+                                    <label class="btn btn-sm btn-white <eq name='datetype' value='wk'> active </eq>" onclick="datebtn('wk')">
+                                        <input type="radio">最近一周</label>
+                                	</div>
+	                            </li>
+	                            <li>
+	                            	<div class="input-daterange input-group" id="datepicker">
+		                            	<div class="input-group date">
+			                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+			                                <input id="stime" type="text" class="input-sm form-control" name="start" value="{$starttime}" style="border-radius:0px;">
+			                            
+                                                </div>
+                                            <span class="input-group-addon" style=" padding: 0px; ">
+                                            <select name="shour" id="shour" class="form-control pull-right" onchange="" style=" height: 28px; width: 60px;padding: 0; margin-left: -30px;border-radius:0px;">
+                                                                            <option value="00:00" data-cname="00:00" <?php if($shour == "00:00"){?>selected="selected"<?php }?>>00:00</option>
+                                                                            <option value="02:00" data-cname="02:00"  <?php if($shour == "02:00"){?>selected="selected"<?php }?>>02:00</option>
+                                                                            <option value="06:00" data-cname="06:00"  <?php if($shour == "06:00"){?>selected="selected"<?php }?>>06:00</option>
+                                                                            <option value="08:00" data-cname="08:00"  <?php if($shour == "08:00"){?>selected="selected"<?php }?>>08:00</option>
+                                                                            <option value="09:00" data-cname="09:00"  <?php if($shour == "09:00"){?>selected="selected"<?php }?>>09:00</option>
+                                                                            <option value="10:00" data-cname="10:00"  <?php if($shour == "10:00"){?>selected="selected"<?php }?>>10:00</option>
+                                                                            <option value="11:00" data-cname="11:00"  <?php if($shour == "11:00"){?>selected="selected"<?php }?>>11:00</option>
+                                                                            <option value="12:00" data-cname="12:00"  <?php if($shour == "12:00"){?>selected="selected"<?php }?>>12:00</option>
+                                                                            <option value="13:00" data-cname="13:00"  <?php if($shour == "13:00"){?>selected="selected"<?php }?>>13:00</option>
+                                                                            <option value="14:00" data-cname="14:00"  <?php if($shour == "14:00"){?>selected="selected"<?php }?>>14:00</option>
+                                                                            <option value="15:00" data-cname="15:00"  <?php if($shour == "15:00"){?>selected="selected"<?php }?>>15:00</option>
+                                                                            <option value="16:00" data-cname="16:00"  <?php if($shour == "16:00"){?>selected="selected"<?php }?>>16:00</option>
+                                                                            <option value="17:00" data-cname="17:00"  <?php if($shour == "17:00"){?>selected="selected"<?php }?>>17:00</option>
+                                                                            <option value="18:00" data-cname="18:00"  <?php if($shour == "18:00"){?>selected="selected"<?php }?>>18:00</option>
+                                                                            <option value="19:00" data-cname="19:00"  <?php if($shour == "19:00"){?>selected="selected"<?php }?>>19:00</option>
+                                                                            <option value="20:00" data-cname="20:00"  <?php if($shour == "20:00"){?>selected="selected"<?php }?>>20:00</option>
+                                                                            <option value="21:00" data-cname="21:00"  <?php if($shour == "21:00"){?>selected="selected"<?php }?>>21:00</option>
+                                                                            <option value="22:00" data-cname="22:00"  <?php if($shour == "22:00"){?>selected="selected"<?php }?>>22:00</option>
+                                                                            <option value="23:00" data-cname="23:00"  <?php if($shour == "23:00"){?>selected="selected"<?php }?>>23:00</option>
+                                                                            
+                                                                       </select>
+                                         </span>
+                                           
+
+		                                <span class="input-group-addon" style="background-color: #FBFBFB"> 至 </span>
+										<div class="input-group date">
+			                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+			                                <input id="etime" type="text" class="input-sm form-control" name="end" value="{$endtime}" style="border-radius:0px;">
+			                            </div>
+                                                
+                                             <span class="input-group-addon" style=" padding: 0px; ">
+                                            <select name="ehour" id="ehour" class="form-control pull-right" onchange="" style=" height: 28px; width: 60px;padding: 0; margin-left: -30px;border-radius:0px;">
+                                                                            <option value="00:00" data-cname="00:00" <?php if($ehour == "00:00"){?>selected="selected"<?php }?>>00:00</option>
+                                                                            <option value="02:00" data-cname="02:00"  <?php if($ehour == "02:00"){?>selected="selected"<?php }?>>02:00</option>
+                                                                            <option value="06:00" data-cname="06:00"  <?php if($ehour == "06:00"){?>selected="selected"<?php }?>>06:00</option>
+                                                                            <option value="08:00" data-cname="08:00"  <?php if($ehour == "08:00"){?>selected="selected"<?php }?>>08:00</option>
+                                                                            <option value="09:00" data-cname="09:00"  <?php if($ehour == "09:00"){?>selected="selected"<?php }?>>09:00</option>
+                                                                            <option value="10:00" data-cname="10:00"  <?php if($ehour == "10:00"){?>selected="selected"<?php }?>>10:00</option>
+                                                                            <option value="11:00" data-cname="11:00"  <?php if($ehour == "11:00"){?>selected="selected"<?php }?>>11:00</option>
+                                                                            <option value="12:00" data-cname="12:00"  <?php if($ehour == "12:00"){?>selected="selected"<?php }?>>12:00</option>
+                                                                            <option value="13:00" data-cname="13:00"  <?php if($ehour == "13:00"){?>selected="selected"<?php }?>>13:00</option>
+                                                                            <option value="14:00" data-cname="14:00"  <?php if($ehour == "14:00"){?>selected="selected"<?php }?>>14:00</option>
+                                                                            <option value="15:00" data-cname="15:00"  <?php if($ehour == "15:00"){?>selected="selected"<?php }?>>15:00</option>
+                                                                            <option value="16:00" data-cname="16:00"  <?php if($ehour == "16:00"){?>selected="selected"<?php }?>>16:00</option>
+                                                                            <option value="17:00" data-cname="17:00"  <?php if($ehour == "17:00"){?>selected="selected"<?php }?>>17:00</option>
+                                                                            <option value="18:00" data-cname="18:00"  <?php if($ehour == "18:00"){?>selected="selected"<?php }?>>18:00</option>
+                                                                            <option value="19:00" data-cname="19:00"  <?php if($ehour == "19:00"){?>selected="selected"<?php }?>>19:00</option>
+                                                                            <option value="20:00" data-cname="20:00"  <?php if($ehour == "20:00"){?>selected="selected"<?php }?>>20:00</option>
+                                                                            <option value="21:00" data-cname="21:00"  <?php if($ehour == "21:00"){?>selected="selected"<?php }?>>21:00</option>
+                                                                            <option value="22:00" data-cname="22:00"  <?php if($ehour == "22:00"){?>selected="selected"<?php }?>>22:00</option>
+                                                                            <option value="23:00" data-cname="23:00"  <?php if($ehour == "23:00"){?>selected="selected"<?php }?>>23:00</option>
+                                                                            <option value="24:00" data-cname="24:00"  <?php if($ehour == "24:00"){?>selected="selected"<?php }?>>24:00</option>
+                                                                       </select>
+                                         </span>
+                            		</div>
+	                            </li>
+	                            <li>
+	                            	<button id="datesearch" type="button" class="btn btn-primary btn-sm" style="margin-bottom: 15px;">查询</button>
+	                            	<button id="downdetail" type="button" class="btn btn-danger btn-sm" style="margin-bottom: 15px;">下载</button>
+	                            </li>
+					        </ul>
+				       </div> 
+                                            <div>
+                                                <div class="realtime-title">收款情况</div>               
+                                                <div class="realtime-title " id="totalMoney" name="totalMoney">  <?php if($totalMoney != 0){ echo '：'.$totalMoney.'元('.$totalNum.'笔) | ';  }?></div>
+                                                <div class="realtime-title " id="weixinMoney" name="weixinMoney">  <?php if($weixinMoney != 0){echo ' 微信：'.$weixinMoney.'元('.$weixinNum.'笔) | '; }?></div>
+                                                <div class="realtime-title " id="alipayMoney" name="alipayMoney">  <?php if($alipayMoney != 0){echo ' 支付宝：'.$alipayMoney.'元('.$alipayNum.'笔) | '; }?></div>
+                                             </div>
+				      </div> 
+					<div class="js-real-time-region realtime-list-box loading">
+				     	<div class="widget-list">
+					        <div class="js-list-filter-region clearfix ui-box" style="position: relative;">
+					        	<div class="widget-list-filter"></div>
+					        </div> 
+					        <div class="ui-box">
+								<div class="jqGrid_wrapper">
+		                            <table id="table_list_1"></table>
+		                            <div id="pager_list_1"></div>
+		                        </div>
+
+					        	<div class="js-list-empty-region"></div> 
+					        </div> 
+				        	<div class="js-list-footer-region ui-box">
+						         <div class="widget-list-footer"></div>
+						        </div> 
+							</div>
+						</div> 
+			 		</div>
+				</div>
+			</div>
+  		</div>
+
+	</div> 
+</block>
+
+<block name="top">
+<link href="__CSS__/wxCoupon.css" rel="stylesheet">
+
+<link href="__CSS__/dataTables/datepicker3.css" rel="stylesheet">
+<link href="__CSS__/footable.core.css" rel="stylesheet">
+<link href="__CSS__/cashier.css" rel="stylesheet">
+<link href="__CSS__/plugins/ui.jqgrid.css" rel="stylesheet">
+	<style>
+		ul.pull-right li{
+			float: left;
+			margin-right: 5px;
+		}
+		.ibox-title h5 {
+  			margin: 10px 0 0px;
+		}
+		select.input-sm {
+  			height: 35px;
+  			line-height: 35px;
+		}
+		.float-e-margins .btn-info{
+			margin-bottom:0px;
+		}
+		.fa-paste{
+			margin-right:7px;
+			padding: 0px;
+		}
+		.dz-preview{
+			display:none;
+		}
+		.ibox-title ul{ list-style: outside none none !important; margin: 0; padding: 0;}
+		.ibox-title li:nth-child(1) { float: left;width: 30%; }
+		.ibox-title li:nth-child(2) { float: left;width: 32%; }
+		.ibox-title li:nth-child(3){width: 35%; }
+		#commonpage {float: right;margin-bottom: 10px;}
+		#table-list-body .btn-st{background-color: #337ab7;border-color: #2e6da4;cursor:auto;}
+		#oderinfo{overflow-y: scroll;}
+		.float-e-margins .ibox-content{border-style:none;}
+		.nav-tabs > li > a:hover,
+		.nav-tabs > li > a:focus {
+		 background-color: #FFF;
+		}
+		.nav-tabs li.active  a {border-color:#dddddd #dddddd #fff}
+		.nav-tabs li.active  a:hover,.nav-tabs li.active a:focus {border-color:#dddddd #dddddd #fff;background-color:#FFF;}
+
+		.page-cashier tbody tr{height:34px;}
+		.ui-jqgrid .ui-jqgrid-title{margin:5px; font-weight: 700;}
+		.ui-jqgrid tr.jqgfirstrow{height:0px;}
+		.ui-jqgrid .ui-jqgrid-pager, .ui-jqgrid .ui-jqgrid-toppager{border-top:none;}
+	</style>
+	<script src="__JS__/footable.all2.min.js"></script>
+</block>
+<block name="bottom">
+<div class="modal inmodal" tabindex="-1" role="dialog"  id="oderinfo">
+		<div class="modal-dialog">
+			<div class="modal-content animated bounceInRight">
+				<div class="modal-header">
+                    <button type="button" class="close _close"><span style="font-size: 35px;">×</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">支付详情</h4>
+                </div>
+				<div class="modal-body">
+				</div>
+				<div class="modal-footer">
+                    <button type="button" class="btn btn-white _close">关闭</button>
+                </div>
+			</div>
+		</div>
+	</div>
+
+<script src="__JS__/plugins/bootstrap-datepicker.js"></script>
+<script src="__JS__/plugins/grid.locale-cn.js"></script>
+<script src="__JS__/plugins/jquery.jqGrid.min.js"></script>
+ <script>
+ 	if(is_mobile()){
+	  $('.row .col-lg-12').css('padding','1px');
+	  $('.float-e-margins .ibox-content').css('padding','15px 5px 20px 5px');
+	  $('.nav-tabs li a').css('padding','10px');
+  }
+ $(document).ready(function(){
+	$('.ui-table-list').footable();
+
+	$('#datesearch').click(function(){
+		var stime = $("#stime").val();
+		var etime = $("#etime").val();
+                var mendian = $("#mendian").val();
+                var paytype = $("#paytype").val();
+                var shour = $("#shour").val();
+                var ehour = $("#ehour").val();
+		window.location.href="{:U('Manage/Statistics/orderLists')}?stime="+stime+"&etime="+etime+"&mendian="+mendian+"&paytype="+paytype+"&shour="+shour+"&ehour="+ehour;
+	});
+
+	$('#downdetail').click(function(){
+		var stime = $("#stime").val();
+		var etime = $("#etime").val();
+		window.open("{:U('Manage/Statistics/downdetail')}?stime="+stime+"&etime="+etime);
+	});
+
+	$("#datepicker.input-daterange").datepicker({
+		keyboardNavigation: false,
+		forceParse: false,
+		format: "yyyy-mm-dd",
+		autoclose: true
+	})
+
+    $.jgrid.defaults.styleUI = "Bootstrap";
+    var a = [
+		<?php 
+			if(!empty($orders)){
+				foreach($orders as $ovv){
+					echo "{orderid:'".$ovv['order_id']."',";
+					if(!empty($ovv['truename'])){
+						$name = $ovv['truename'];
+					}elseif(!empty($ovv['openid'])){
+					    $name = $ovv['openid'];
+					}else{
+					    $name = '未知客户';
+					}
+                                        echo "mch_id:'".$ovv['mch_id']."',";
+					echo "name:'".$name."',";
+					$paytime=$ovv['paytime'] > 0 ? $ovv['paytime'] : $ovv['add_time'];
+					echo "paytime:'".date('Y-m-d H:i:s',$paytime)."',";
+					if($store[$ovv['storeid']]==""){
+						$sto = "无";
+					}else{
+						$sto = $store[$ovv['storeid']];
+					}
+					echo "sto:'".$sto."',";
+					if($ustaff[$ovv['eid']]==""){
+						$ust = "无";
+					}else{
+						$ust = $ustaff[$ovv['eid']];
+					}
+					echo "ust:'".$ust."',";
+					echo "price:'".$ovv['goods_price']."元',";
+					if($ovv['pay_way'] == "weixin"){
+						$source = '微信';
+					}elseif($ovv['pay_way'] == "alipay"){
+					    $source = '支付宝';
+					}else{
+					    $source = '其它';
+					}
+					echo "source:'".$source."',";
+					if($ovv['refund']==1){
+					     $refund = "<font>退款中</font>";
+					}elseif($ovv['refund']==2){
+					     $refund = "<font color=\"#2e6da4\">已退款</font>";
+					}elseif($ovv['refund']==3){
+					     $refund = "<font color=\"#ed5565\">退款失败</font>";
+					}else{
+                                            if($ovv['ispay']==1){
+                                                $refund = '<font color="#44b549">已支付</font>';
+                                            }else{
+                                                $refund = '<font color="#ed5565">未支付</font>';
+                                            }       
+//					     $refund = "<font color=\"#44b549\">已支付</font>";
+					}
+					echo "refund:'".$refund."',";
+					echo "caozuo:'<a class=\"btn btn-white btn-bitbucket\" onclick=\"GetDetail(".$ovv['id'].");\"><i class=\"fa fa-list\"></i></a>'},";
+				}
+			}
+		?>
+	];
+    $("#table_list_1").jqGrid({
+        data: a,
+        datatype: "local",
+        height: "100%",
+        footerrow:true, 
+        autowidth: true,
+        shrinkToFit: true,
+        rowNum: 30,
+        rowList: [10, 20, 30],
+        colNames: ["订单号", "付款人", "收款账户", "付款时间", "门店", "收银员", "来源", "付款金额", "付款情况", "详细"],
+        colModel: [{
+            name: "orderid",
+            index: "orderid",
+            width: 115,
+            sorttype: "int",
+        }, {
+            name: "name",
+            index: "name",
+            width: 150
+        }, {
+            name: "mch_id",
+            index: "mch_id",
+            width: 60
+        },{
+            name: "paytime",
+            index: "paytime",
+            width: 90
+        }, {
+            name: "sto",
+            index: "sto",
+            width: 80
+        }, {
+            name: "ust",
+            index: "ust",
+            width: 60
+        }, {
+            name: "source",
+            index: "price",
+            width: 30,
+        }, {
+            name: "price",
+            index: "price",
+            width: 70,
+            align: "right",
+            sorttype: "float"
+        }, {
+            name: "refund",
+            index: "refund",
+            width: 70,
+            align:"center"
+        }, {
+            name: "caozuo",
+            index: "caozuo",
+            width: 34,
+            sortable: false
+        }],
+        pager: "#pager_list_1",
+        viewrecords: true,
+        caption: "收款情况",
+        hidegrid: false,
+        gridComplete:function(){
+        	var rowNum=parseInt($(this).getGridParam("records"),10);
+            if(rowNum>0){
+                $(".ui-jqgrid-sdiv").show();
+                var price=$(this).getCol("price",false,"sum");
+                 var searchFiler = $("#filter").val();
+                 if (searchFiler.length === 0) {
+                 	var countIncome = "总计(不含退款)：{$countIncome}";
+                 }else{
+                 	var countIncome = "总计";
+                 }
+                $(this).footerData("set",{"orderid":countIncome,"price":price.toFixed(2)+"元"});
+            }else{
+                $(".ui-jqgrid-sdiv").hide();
+            }
+        }
+    });
+
+});
+
+ 	function datebtn(type){
+                var mendian = $("#mendian").val();
+                var paytype = $("#paytype").val();
+ 		window.location.href="{:U('Manage/Statistics/orderLists')}?datetype="+type+"&mendian="+mendian+"&paytype="+paytype;
+ 	}
+
+	var timeoutHnd;
+	function doSearch(ev) {
+	  if (timeoutHnd)
+	    clearTimeout(timeoutHnd);
+	    timeoutHnd = setTimeout(gridReload, 500);
+	}
+
+	function gridReload(ev) {
+		 var searchFiler = $("#filter").val(), grid = $("#table_list_1"), f;
+		 if (searchFiler.length === 0) {
+		  grid[0].p.search = false;
+		  $.extend(grid[0].p.postData,{filters:""});
+		 }
+		 f = {groupOp:"OR",rules:[]};
+		 f.rules.push({field:"sto",op:"cn",data:searchFiler});
+		 f.rules.push({field:"ust",op:"cn",data:searchFiler});
+		 grid[0].p.search = true;
+		 $.extend(grid[0].p.postData,{filters:JSON.stringify(f)});
+		 grid.trigger("reloadGrid",[{page:1,current:true}]);
+	}
+
+
+	var screenH=$(window).height();
+	screenH=  screenH-20;
+	$('#oderinfo').css('height',screenH);
+
+	function is_mobile(){
+		var ua = navigator.userAgent.toLowerCase();
+		if ((ua.match(/(iphone|ipod|android|ios|ipad|mobile)/i))){
+				return true;
+		}else{
+			return false;
+		}
+	}
+
+	var odurl="{:U('Manage/Statistics/odetail')}";
+ </script>
+ <script src="__JS__/cashier/lhsw.js"></script>
+</block>

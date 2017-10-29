@@ -1,0 +1,120 @@
+<extend name="Public/base" />
+<block name="title">角色编辑</block>
+<block name="levels">
+    <li>
+        <a href="{:U(" SX/Index/index ")}">后台首页</a></li>
+    <li>系统配置</li>
+    <li>管理员配置</li></block>
+<block name="body">
+    <div class="row">
+        <form id="employersForm" class="form" action="{:U('SX/Index/rolesAppemd')}" method="post">
+            <input type="hidden" name="roleId" value="{$roles['roleId']}">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <div class="form-group">
+                            <label>
+                                <span class="mustInput">*</span>角色名称:</label>
+                            <input type="text" id="roleName" placeholder="请输入角色名称" name="roleName" value="{$roles['roleName']}" class="form-control required"></div>
+                    </div>
+                </div>
+            </div>
+			<div class="col-lg-12">
+				<div class="ibox">
+	    	    	<div class="ibox-title">
+	    	       		<h5>权限设置</h5>
+	    	    	</div>
+	    	    	<div class="ibox-content">
+	    	        	<div id="permission_list">
+								<div class="part_item">
+									<div class="part_item_t">
+										<p><b><input type="checkbox" class="checkAll">系统配置</b></p>
+									</div>
+									<div class="part_item_b">
+											<p><input type="checkbox" name="authority[]" value="sys_wz" <if condition="strstr($roles['grant'],'sys_wz')">checked</if>>网站配置</p>
+											<p><input type="checkbox" name="authority[]" value="sys_zf" <if condition="strstr($roles['grant'],'sys_zf')">checked</if>>支付配置</p>
+											<p><input type="checkbox" name="authority[]" value="sys_wx" <if condition="strstr($roles['grant'],'sys_wx')">checked</if>>微信配置</p>
+											<p><input type="checkbox" name="authority[]" value="sys_admin" <if condition="strstr($roles['grant'],'sys_admin')">checked</if>>管理员配置</p>
+											<p><input type="checkbox" name="authority[]" value="sys_pass" <if condition="strstr($roles['grant'],'sys_pass')">checked</if>>修改密码</p>
+									</div>
+								</div>
+
+								<div class="part_item">
+									<div class="part_item_t">
+										<p><b><input type="checkbox" class="checkAll">网站商家</b></p>
+									</div>
+									<div class="part_item_b">
+											<p><input type="checkbox" name="authority[]" value="user_lists" <if condition="strstr($roles['grant'],'user_lists')">checked</if>>商家列表</p>
+									</div>
+								</div>
+
+                                <div class="part_item">
+                                    <div class="part_item_t">
+                                        <p><b><input type="checkbox" class="checkAll">营销功能</b></p>
+                                    </div>
+                                    <div class="part_item_b">
+                                            <p><input type="checkbox" name="authority[]" value="market_ad" <if condition="strstr($roles['grant'],'market_ad')">checked</if>>微信广告</p>
+                                            <p><input type="checkbox" name="authority[]" value="market_re" <if condition="strstr($roles['grant'],'market_re')">checked</if>>预约留言</p>
+                                    </div>
+                                </div>
+
+								<div class="part_item">
+									<div class="part_item_t">
+										<p><b><input type="checkbox" class="checkAll">财务管理</b></p>
+									</div>
+									<div class="part_item_b">
+                                            <p><input type="checkbox" name="authority[]" value="money_dstx" <if condition="strstr($roles['grant'],'money_dstx')">checked</if>>代收商户提现</p>
+											<p><input type="checkbox" name="authority[]" value="money_cz" <if condition="strstr($roles['grant'],'money_cz')">checked</if>>商户充值列表</p>
+									</div>
+								</div>
+						</div>
+	    	    	</div>
+	    		</div>
+			</div>
+            <div class="col-lg-12">
+				<button type="submit" class="btn btn-primary pull-right">保存</button></div>
+        </form>
+        </div>
+</block>
+<block name="top">
+    <link href="__CSS__/footable.core.css" rel="stylesheet">
+    <link href="__CSS__/plugins/custom.css" rel="stylesheet">
+    <style>.ibox{ border: 1px solid #e7eaec; } .part_item { background: none repeat scroll 0 0 #fff; border: 1px solid #ccc; border-radius: 5px; padding-bottom: 15px; margin-bottom: 10px; } .form .part_item p { display: inline-block; font-size: 14px; overflow: hidden; padding: 10px 20px 0; text-overflow: ellipsis; white-space: nowrap; } .part_item_b { border-top: 1px solid #ccc; margin-top: 10px; } .form .part_item p.active { color: #f87b00; } .part_item input { font-size: 14px; margin-bottom: 2px; margin-right: 5px; } .pagination{ margin:0px; } .mustInput { color: red; margin-right: 5px; } @media (min-width: 768px){ .form .part_item p { width: 37%; } } @media (min-width: 992px){ .form .part_item p { width: 24%; } }</style></block>
+<block name="bottom">
+    <script src="__JS__/plugins/icheck.min.js"></script>
+    <script src="__JS__/jquery.validate.min.js"></script>
+    <!-- Page-Level Scripts -->
+    <script>$(document).ready(function() {
+            employers.init();
+        }); !
+        function(a, b) {
+            var employers = employers || {};
+            employers.init = function() {
+                var c = employers;
+                b('.part_item .checkAll').click(function() {
+                    var checkItems = b(this).parents('.part_item_t').siblings('.part_item_b').find('p').find('input[name="authority[]"]');
+                    if (b(this).is(':checked') == false) {
+                        checkItems.each(function(ke, el) {
+                            $(el).iCheck('uncheck');
+                        });
+                    } else {
+                        checkItems.each(function(ke, el) {
+                            $(el).iCheck('check');
+                        });
+                    }
+                });
+                jQuery.extend(jQuery.validator.messages, {
+                    required: "必填字段",
+                    remote: "请修正该字段",
+                    maxlength: jQuery.validator.format("请输入一个长度最多是 {0} 的字符串"),
+                    minlength: jQuery.validator.format("请输入一个长度最少是 {0} 的字符串"),
+                });
+                b('#employersForm').validate({
+                    errorPlacement: function(error, element) {
+                        element.before(error);
+                    }
+                });
+            };
+            a.employers = employers;
+        } (window, jQuery);</script>
+</block>

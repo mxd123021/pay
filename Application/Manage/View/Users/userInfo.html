@@ -1,0 +1,135 @@
+
+<extend name="Public/base"/>
+
+<block name="title">个人信息</block>
+
+<block name="levels"><li><a href="{:U("Manage/Index/index")}">后台首页</a></li><li>商家设置</li></block>
+
+<block name="body">
+            <div class="row">
+				<form id="employersForm" class="form" action="{:U('Manage/Users/saveUserInfo')}" method="post">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+            	    	<div class="ibox-title">
+            	       		<h5>个人信息</h5>
+            	    	</div>
+                        <div class="ibox-content">
+							<div class="form-group">
+								<label><span class="mustInput">*</span>昵称:</label>
+								<input type="text" id="username" placeholder="请输入昵称" name="username" value="{$userinfo['userName']}" class="form-control required">
+							</div>
+							<div class="form-group">
+								<label><span class="mustInput">*</span>邮箱:</label>
+								<input type="text" id="userEmail" placeholder="请输入邮箱" name="userEmail" value="{$userinfo['userEmail']}" class="form-control email">
+							</div>
+							<div class="form-group">
+								<label><span class="mustInput">*</span>手机号:</label>
+								<input type="tel" id="userPhone" placeholder="请输入员工的手机号" name="userPhone" value="{$userinfo['userPhone']}" class="form-control required" aria-required="true" readonly>
+							</div>
+								<ul class="todo-list m-t small-list ui-sortable" >
+		                            <li>
+		                            	<if condition="$wxinfo eq ''">
+											<button id="bdwx" type="button" class="btn btn-primary btn-xs" style="margin: 0 20px 0 0;">点击绑定微信</button>
+										<else />
+											<img src="{$wxinfo.headimgurl}" style="width: 40px;height:40px;">
+											<span class="label" style="margin-right: 10px;">已绑定</span>
+										</if>
+		                                <i class="fa fa-info-circle"></i> 用于提现、收银和系统通知
+		                                <span class="label label-danger pull-right">重要</span>
+		                            </li>
+                        		</ul>
+                        </div>
+                    </div>
+                </div>
+				<div class="col-lg-12">
+               	 	<button type="submit" class="btn btn-primary pull-right">保存</button>
+           		</div>
+				</form>
+            </div>
+</block>
+
+<block name="top">
+    <link href="__CSS__/footable.core.css" rel="stylesheet">
+	<link href="__CSS__/plugins/custom.css" rel="stylesheet">
+	<style>
+		.fl{float: left; margin-left: 5px;}
+		.clearfix:after {
+		  content: " ";
+		  display: block;
+		  clear: both;
+		  height: 0;
+		}
+		.clearfix {
+		  zoom: 1;
+		}
+		.ibox{
+		 	border: 1px solid #e7eaec;
+		}
+		.pagination{
+			margin:0px;
+		}
+		.mustInput {
+  			color: red;
+  			margin-right: 5px;
+		}
+		.dz-preview{
+			display:none;
+		}
+		.code-box{width:172px;height:172px;padding:3px 4px;position:relative;margin-top: 5px;background:#fff;}
+		.codebox-tips{background: #44b549;margin: 5px 0 0 0;color: #fff;height:27px;line-height:16px;font-size:14px;text-align: center;padding:5px 6px;width:172px;}
+		.codebox-tips i{ display:inline-block;background:url(__IMG__/pay_icon/czzx_btn0723.png) no-repeat 0 -86px;_background:url(__IMG__/pay_icon/czzx_btn0723_png8.png) no-repeat 0 -86px;width:18px;height:16px;margin-right:3px;vertical-align:middle}
+		#qr-code img{vertical-align: middle; width: 164px;}
+		#qr-code {line-height: 164px;}
+		.inp_unselected{color: #B3B3B3;}
+		.inp_selected{color: #555;}
+	</style>
+</block>
+<block name="bottom">
+	<div class="modal inmodal" tabindex="-1" role="dialog"  id="bdweixin">
+		<div class="modal-dialog">
+			<div class="modal-content animated bounceInRight">
+				<div class="modal-header">
+                    <button type="button" class="close _close"><span style="font-size: 35px;">×</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">微信绑定流程</h4>
+                </div>
+				<div class="modal-body">
+					<div class="fl">
+			            <div class="code-box">
+			            	<div id="qr-code"><img src="http://open.weixin.qq.com/qr/code/?username={$configs.wxId}"></div>
+			            </div>
+			            <div class="codebox-tips"><i>1</i>请使用微信扫描关注</div>
+		            </div>
+					<div class="fl">
+			            <div class="code-box">
+			            	<div id="qr-code"><img src="__IMG__/lcbdwx1.png"></div>
+			            </div>
+			            <div class="codebox-tips"><i>2</i>点击账号绑定</div>
+		            </div>
+					<div class="fl">
+			            <div class="code-box">
+			            	<div id="qr-code"><img src="__IMG__/lcbdwx2.png"></div>
+			            </div>
+			            <div class="codebox-tips"><i>3</i>输入账号进行绑定</div>
+		            </div>
+		            <div class="clearfix"></div>
+				</div>
+				<div class="modal-footer">
+                    <button type="button" class="btn btn-white _close">关闭</button>
+                </div>
+			</div>
+		</div>
+	</div>
+    <script>
+        $(document).ready(function() {
+        	
+        	$('#bdwx').click(function(){
+        		$('#bdweixin').show();
+        	});
+
+			$("#bdweixin ._close").click(function(){
+			  $('#bdweixin').hide();
+			  $('.modal-backdrop').remove();
+			});
+        });
+    </script>
+</block>

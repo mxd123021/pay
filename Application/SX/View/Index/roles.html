@@ -1,0 +1,341 @@
+<extend name="Public/base"/>
+
+<block name="title">角色列表</block>
+
+<block name="levels"><li><a href="{:U("SX/Index/index")}">后台首页</a></li><li>系统配置</li><li>管理员配置</li></block>
+
+<block name="body">
+	            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-content">
+                            <input type="text" class="form-control input-sm m-b-xs" id="filter" placeholder="搜索角色名称">
+							<form action="{:U('SX/Index/rolesDelAll')}" class="rolesDelAll" method="post">
+                            <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="10" data-filter=#filter>
+                                <thead>
+                                <tr>
+                                    <th data-sort-ignore="true" class="check-mail"><input type="checkbox" class="i-checks" id="check_box"></th>
+                                    <th>角色名称</th>
+                                    <th data-sort-ignore="true">操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+								<?php foreach($roles as $key=>$val){ ?>
+                                <tr>
+                                    <td class="check-mail"><input type="checkbox" class="i-checks" value="<?php echo $val['roleId'];?>" name="id[]"></td>
+                                    <td><?php echo $val['roleName'];?></td>
+                                    <td class="center">
+										<div class="btn-group">
+                                            <a href="{:U('SX/Index/rolesEdit',array('roleId' => $val['roleId']))}" class="btn btn-white btn-sm employersEdit"><i class="fa fa-pencil"></i> 编辑</a>
+                                            <a href="javascript:void(0)" class="btn btn-white btn-sm rolesDel" data-id="<?php echo $val['roleId'];?>"><i class="fa fa-times"></i> 删除</a>
+                                        </div>
+									</td>
+                                </tr>
+								<?php }?>
+                                </tbody>
+                            </table>
+							</form>
+							<div class="tooltip-demo">
+								<button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal5" data-toggle="tooltip" data-placement="left" title="" data-original-title="添加员工"><i class="fa fa-plus"></i> 添加</button>
+								<button class="btn btn-white btn-sm info_del_all" data-toggle="tooltip" data-placement="top" title="" data-original-title="删除角色"><i class="fa fa-trash-o"></i> </button>
+								<ul class="pagination pull-right"></ul>
+							</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+</block>
+
+<block name="top">
+<link href="__CSS__/footable.core.css" rel="stylesheet">
+<link href="__CSS__/plugins/custom.css" rel="stylesheet">
+	<style>
+		.ibox{
+		 	border: 1px solid #e7eaec;
+		}
+		.part_item {
+  			background: none repeat scroll 0 0 #fff;
+  			border: 1px solid #ccc;
+  			border-radius: 5px;
+  			padding-bottom: 15px;
+  			margin-bottom: 10px;
+		}
+		.form .part_item p {
+  			display: inline-block;
+  			font-size: 14px;
+  			overflow: hidden;
+  			padding: 10px 20px 0;
+  			text-overflow: ellipsis;
+  			white-space: nowrap;
+		}
+		.part_item_b {
+  			border-top: 1px solid #ccc;
+  			margin-top: 10px;
+		}
+		.form .part_item p.active {
+  			color: #f87b00;
+		}
+		.part_item input {
+  			font-size: 14px;
+  			margin-bottom: 2px;
+  			margin-right: 5px;
+		}
+		.pagination{
+			margin:0px;
+		}
+		.mustInput {
+  			color: red;
+  			margin-right: 5px;
+		}
+		@media (min-width: 768px){
+			.form .part_item p {
+				width: 37%;
+			}
+		}
+		@media (min-width: 992px){
+			.form .part_item p {
+				width: 24%;
+			}
+		}
+	.form-control, .single-line{width: 50%;}
+	</style>
+</block>
+<block name="bottom">
+	<div class="modal inmodal fade" id="myModal5" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+    	<div class="modal-dialog modal-lg">
+        	<div class="modal-content">
+            	<div class="modal-header">
+				 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">添加角色</h4>
+                </div>
+                <div class="modal-body clearfix">
+					<form id="employersForm" class="form" action="{:U('SX/Index/rolesAdd')}" method="post">
+						<div class="col-lg-12">
+							<div class="ibox">
+                        		<div class="ibox-title">
+                           			<h5>角色信息</h5>
+                        		</div>
+                        		<div class="ibox-content">
+                            		<div class="form-group">
+										<label><span class="mustInput">*</span>角色名称:<span class="f999">(20字以内)</span></label>
+										<input type="text"  id="username" placeholder="请输入角色名称" name="username" class="form-control required" aria-required="true">
+									</div>
+                        		</div>
+                    		</div>
+						</div>
+						<div class="col-lg-12">
+							<div class="ibox">
+                    	    	<div class="ibox-title">
+                    	       		<h5>权限设置</h5>
+                    	    	</div>
+                    	    	<div class="ibox-content">
+                    	        	<div id="permission_list">
+											<div class="part_item">
+												<div class="part_item_t">
+													<p><b><input type="checkbox" class="checkAll">系统配置</b></p>
+												</div>
+												<div class="part_item_b">
+														<p><input type="checkbox" name="authority[]" value="sys_wz">网站配置</p>
+														<p><input type="checkbox" name="authority[]" value="sys_zf">支付配置</p>
+														<p><input type="checkbox" name="authority[]" value="sys_wx">微信配置</p>
+														<p><input type="checkbox" name="authority[]" value="sys_admin">管理员配置</p>
+														<p><input type="checkbox" name="authority[]" value="sys_pass" checked>修改密码</p>
+												</div>
+											</div>
+
+											<div class="part_item">
+												<div class="part_item_t">
+													<p><b><input type="checkbox" class="checkAll">网站商家</b></p>
+												</div>
+												<div class="part_item_b">
+														<p><input type="checkbox" name="authority[]" value="user_lists">商家列表</p>
+												</div>
+											</div>
+
+					                        <div class="part_item">
+					                            <div class="part_item_t">
+					                                <p><b><input type="checkbox" class="checkAll">营销功能</b></p>
+					                            </div>
+					                            <div class="part_item_b">
+					                                    <p><input type="checkbox" name="authority[]" value="market_ad">微信广告</p>
+					                                    <p><input type="checkbox" name="authority[]" value="market_re">预约留言</p>
+					                            </div>
+					                        </div>
+
+											<div class="part_item">
+												<div class="part_item_t">
+													<p><b><input type="checkbox" class="checkAll">财务管理</b></p>
+												</div>
+												<div class="part_item_b">
+														<p><input type="checkbox" name="authority[]" value="money_dstx">代收商户提现</p>
+														<p><input type="checkbox" name="authority[]" value="money_cz">商户充值列表</p>
+												</div>
+											</div>
+									</div>
+                    	    	</div>
+                    		</div>
+						</div>
+					</form>
+               	</div>
+
+                <div class="modal-footer">
+                	<button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
+                	<button type="button" class="btn btn-primary formSubmit">保存</button>
+                </div>
+          	</div>
+        </div>
+    </div>
+
+    <!-- FooTable -->
+    <script src="__JS__/footable.all.min.js"></script>
+	
+	<!-- iCheck -->
+    <script src="__JS__/plugins/icheck.min.js"></script>
+	
+	<!-- Jquery Validate -->
+    <script src="__JS__/jquery.validate.min.js"></script>
+
+    <!-- Page-Level Scripts -->
+    <script>
+        $(document).ready(function() {
+			employers.init();
+        });
+		!function(a,b){
+			var employers = employers || {};
+			employers.init = function(){
+				var c = employers;
+				b('.footable').footable();
+				b('.i-checks').iCheck({
+                	checkboxClass: 'icheckbox_square-green',
+                	radioClass: 'iradio_square-green',
+            	});
+				b('#check_box').on('ifChanged', function(){
+					c.selectall('id[]','check_box');
+				});
+				b('.info_del_all').click(function(){
+					c.delAll();
+				});
+				b('.part_item .checkAll').click(function(){
+					var checkItems = b(this).parents('.part_item_t').siblings('.part_item_b').find('p').find('input[name="authority[]"]');
+					if (b(this).is(':checked') == false) {
+						checkItems.each(function(ke,el){
+							$(el).iCheck('uncheck');
+						});
+					}else{
+						checkItems.each(function(ke,el){
+							$(el).iCheck('check');
+						});
+					}
+				});
+				jQuery.extend(jQuery.validator.messages, {
+  					required: "必填字段",
+  					remote: "请修正该字段",
+  					maxlength: jQuery.validator.format("请输入一个长度最多是 {0} 的字符串"),
+  					minlength: jQuery.validator.format("请输入一个长度最少是 {0} 的字符串"),
+				});
+				b('#employersForm').validate({
+                    errorPlacement: function (error, element){
+                            element.before(error);
+                    }
+                });
+				b('.status-checkbox').change(function(){
+					var i = b(this).attr('data-id'),s = b(this).is(':checked') ? 1 : 0;
+					$.post('{:U("Manage/Ustaffs/editisOpen")}',{usId:i,status:s},function(re){
+						if(re.status == -1){
+							swal("错误", re.msg, "error");
+						}
+					},'json');
+				});
+				b('.formSubmit').click(function(){
+					b('#employersForm').submit();
+				});
+				b('.rolesDel').click(function(){
+					var c = b(this);
+					swal({
+        				title: "是否删除这条数据?",
+        				text: "删除数据后将无法恢复，确认要删除吗！",
+        				type: "warning",
+                   	 	confirmButtonColor: "#DD6B55",
+                   	 	confirmButtonText: "删除",
+                    	cancelButtonText: "取消",
+                    	closeOnConfirm: false,
+                    	showCancelButton: true,
+    				}, function (){
+						$.post('{:U("SX/Index/rolesDel")}',{roleId:c.attr('data-id')},function(re){
+							if(re.status == 1){
+								swal("成功", re.msg, "success");
+								c.parents('tr').remove();
+								b('.footable').footable();
+
+							}else{
+								swal("错误", re.msg, "error");
+							}
+						},'json');
+    				});
+				});
+				b('.employersEdit').click(function(){
+					c.edit(b(this).attr('data-id'));
+				});
+			};
+			employers.selectall = function(name,id){
+				var checkItems = b('input[name="'+name+'"]');
+				if ($("#"+id).is(':checked') == false) {
+					checkItems.each(function(ke,el){
+						$(el).iCheck('uncheck');
+					});
+				}else{
+					checkItems.each(function(ke,el){
+						$(el).iCheck('check');
+					});
+				}
+			}
+			employers.delAll = function(){
+				swal({
+        			title: "是否删除选中?",
+        			text: "删除数据后将无法恢复，确认要删除吗！",
+        			type: "warning",
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "删除",
+                    cancelButtonText: "取消",
+                    closeOnConfirm: false,
+                    showCancelButton: true,
+    			}, function (){
+					var checkItems = b('input[name="id[]"]'),c = false;
+			
+					checkItems.each(function(ke,el){
+						if($(el).is(':checked') == true){
+							c = true;
+						}
+					});
+					if(c == false){
+						swal("错误", "你至少需要选中一项 :)", "error");
+						return false;
+					}
+					$('.rolesDelAll').submit();
+    			});
+			}
+			employers.iframeRresponsible = function(){
+				var $allObjects = $("iframe, object, embed"),
+        		$fluidEl = $("figure");
+
+   	 			$allObjects.each(function() {
+        			$(this)
+           			 // jQuery .data does not work on object/embed elements
+            		.attr('data-aspectRatio', this.height / this.width)
+            		.removeAttr('height')
+            		.removeAttr('width');
+    			});
+   		 		$(window).resize(function() {
+        			var newWidth = $fluidEl.width();
+        			$allObjects.each(function() {
+        			    var $el = $(this);
+        			    $el
+        			    .width(newWidth)
+        			    .height(newWidth * $el.attr('data-aspectRatio'));
+        			});
+    			}).resize();
+			}
+			a.employers = employers;
+		}(window,jQuery);
+    </script>
+</block>

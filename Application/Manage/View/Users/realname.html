@@ -1,0 +1,635 @@
+
+<extend name="Public/base"/>
+
+<block name="title">实名认证</block>
+
+<block name="levels"><li><a href="{:U("Manage/Index/index")}">后台首页</a></li><li>商家设置</li></block>
+
+<block name="body">
+            <div class="row">
+				<form id="employersForm" class="form" action="{:U('Manage/Users/saverealInfo')}" method="post" enctype="multipart/form-data">
+				<div id="wizard" class="wizard clearfix" style="margin-left: 9px;">
+					<div class="steps clearfix"><ul role="tablist"><li role="tab" class="first <if condition="$userinfo['userStep'] eq 1">current<else/>done</if>" aria-disabled="false" aria-selected="true"><a id="wizard-t-0" href="#wizard-h-0" aria-controls="wizard-p-0"><span class="current-info audible">审核步骤： </span><span class="number">1.</span> 填写商户信息</a></li><li role="tab" class="<if condition="$userinfo['userStep'] eq 2">current<elseif condition="$userinfo['userStep'] eq 3"/>done<else/>disabled</if>" aria-disabled="true"><a id="wizard-t-1" href="#wizard-h-1" aria-controls="wizard-p-1"><span class="number">2.</span> 验证银行信息</a></li><li role="tab" class="<if condition="$userinfo['userStep'] eq 3">current<else/>disabled</if> last" aria-disabled="true"><a id="wizard-t-2" href="#wizard-h-2" aria-controls="wizard-p-2"><span class="number">3.</span> 审核成功</a></li></ul></div>
+				</div>
+				<div class="col-lg-12">
+					<if condition="$userinfo['userAudit'] eq 0">
+						<div class="alert alert-info alert-dismissable" style="margin-bottom: 10px;">
+                        	<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>所有必填项(*)填完后将进入审核阶段
+            			</div>
+        			</if>
+					<if condition="($userinfo['userAudit'] eq 3) and ($userinfo['reson'] neq '')">
+						<div class="alert alert-danger alert-dismissable" style="margin-bottom: 10px;">
+                        	<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>失败原因：{$userinfo['reson']}
+            			</div>
+        			</if>
+	            </div>
+	            <input type="hidden" name="step" value="{$userinfo['userStep']}">
+	            <if condition="($userinfo['userStep'] eq 1) OR ($userinfo['userStep'] eq 3)">
+				<div class="col-lg-12">
+					<div class="ibox">
+            	    	<div class="ibox-title">
+            	       		<h5>商户详细信息</h5>
+            	       		<if condition="$userinfo['userAudit'] eq 0"><span class="label label-danger pull-right">审核通过后无法修改</span><elseif condition=" $userinfo['userAudit'] eq 1"/><span class="label label-primary pull-right">审核通过</span><elseif condition=" $userinfo['userAudit'] eq 2"/><span class="label label-warning pull-right">审核中</span><elseif condition=" $userinfo['userAudit'] eq 3"/><span class="label label-danger pull-right">审核失败</span></if>
+            	    	</div>
+						<div class="ibox-content">
+							<div class="form-group">
+								<label><span class="mustInput">*</span>店铺/商户简称</label>
+								<input type="tel" id="zz_jc" placeholder="请输入店铺/商户简称" name="zz_jc" value="{$userinfo['zz_jc']}" class="form-control required" <?php if($userinfo['userAudit'] == 1 or $userinfo['userAudit'] == 2){ echo "disabled";}?>>
+							</div>
+							<div class="form-group">
+								<label><span class="mustInput">*</span>商户类型</label><font color="green">(个体/企业)</font><label>:</label>
+								<select style="width: 20%" name="zz_jyxz" class="form-control" <?php if($userinfo['userAudit'] == 1 or $userinfo['userAudit'] == 2){ echo "disabled";}?>>
+									<option value="2" <eq name="userinfo.zz_jyxz" value="2">selected</eq>>个体</option>
+									<option value="1" <eq name="userinfo.zz_jyxz" value="1">selected</eq>>企业</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label><span class="mustInput">*</span>行业类别</label><label>:</label>
+								<div>
+									<select style="width: 20%; float: left;" class="form-control" onchange="getGdCategory(this)" <?php if($userinfo['userAudit'] == 1 or $userinfo['userAudit'] == 2){ echo "disabled";}?>>
+										<option value="-1">请选择</option>
+										<option value="个体工商户" <eq name="incategory.namearr.0" value="个体工商户">selected</eq>>个体工商户</option>
+										<option value="企业" <eq name="incategory.namearr.0" value="企业">selected</eq>>企业</option>
+										<option value="事业单位" <eq name="incategory.namearr.0" value="事业单位">selected</eq>>事业单位</option>
+									</select>
+									<div id="incatory" style="float: left; width: 80%;">
+										<if condition="$incategory neq ''">
+											<select style="float:left; width:20%" class="form-control" onchange="getGdCategory2(this);" <?php if($userinfo['userAudit'] == 1 or $userinfo['userAudit'] == 2){ echo "disabled";}?>>
+												<option value="-1">请选择</option>
+												<?php foreach($incategory['level2'] as $in=>$iv){
+													$name = explode("-",$iv['name']);
+													if(in_array($name[1],$names)==false) {
+														$names[] = $name[1];
+														$sel = "";
+														if($name[1] == $incategory['namearr'][1]){
+															$sel = "selected";
+														}
+														echo "<option value='$name[1]' $sel>$name[1]</option>";
+													}
+												}?>
+											</select>
+											<div id="incatory2" style="float:left">
+												<select class="form-control" name="incode" <?php if($userinfo['userAudit'] == 1 or $userinfo['userAudit'] == 2){ echo "disabled";}?>>
+													<option value="-1">请选择</option>
+													<?php foreach($incategory['level3'] as $in=>$iv){
+														$name = explode("-",$iv['name']);
+														$sel = "";
+														if($iv[code] == $incategory['code']){
+															$sel = "selected";
+														}
+														echo "<option value='$iv[code]' $sel>$name[2]</option>";
+													}?>
+												</select>
+											</div>
+										</if>
+									</div>
+								</div>
+							</div>
+							<div class="clearfix"></div>
+							<div class="form-group" style="margin-top: 15px;">
+								<label><span class="mustInput">*</span>所在地区</label><font color="green">(公司和开户行地址)</font><label>:</label>
+								<div>
+									<select id="gdcity" style="width: 20%; float: left;" class="form-control" onchange="getGdCity(this)" name="fid" <?php if($userinfo['userAudit'] == 1 or $userinfo['userAudit'] == 2){ echo "disabled";}?>>
+										<option value="-1">请选择</option>
+										<?php foreach($district as $akk=>$avv){
+											$sel = "";
+											if($avv['sid'] == $userinfo['fid']){
+												$sel = "selected";
+											}
+											echo "<option value='$avv[sid]' $sel>$avv[name]</option>";
+										}?>
+									</select>
+									<div id="city" style="float: left; width: 80%;">
+										<if condition="district2 neq ''">
+											<select id="gdcity2" style="float:left; width:20%" class="form-control" name="sid" <?php if($userinfo['userAudit'] == 1 or $userinfo['userAudit'] == 2){ echo "disabled";}?>>
+												<option value="-1">请选择</option>
+												<?php foreach($district2 as $akk=>$avv){
+													$sel = "";
+													if($avv['sid'] == $userinfo['sid']){
+														$sel = "selected";
+													}
+													echo "<option value='$avv[sid]' $sel>$avv[name]</option>";
+												}?>
+											</select>
+										</if>
+									</div>
+								</div>
+							</div>
+							<div class="clearfix"></div>
+							<div class="form-group" style="margin-top: 15px;">
+								<label><span class="mustInput">*</span>证件持有人姓名</label><font color="green">(姓名需与证件上的法人/姓名一致)</font><label>:</label>
+								<input type="tel" id="zz_name" placeholder="请输入证件持有人姓名" name="zz_name" value="{$userinfo['zz_name']}" class="form-control required" <?php if($userinfo['userAudit'] == 1 or $userinfo['userAudit'] == 2){ echo "disabled";}?>>
+							</div>
+							<div class="form-group">
+								<label><span class="mustInput">*</span>法人/经办人证件类型</label><font color="green">(身份证/护照，个体工商户只能提供法人本人的证件)</font><label>:</label>
+								<select name="zz_sftype" class="form-control" <?php if($userinfo['userAudit'] == 1 or $userinfo['userAudit'] == 2){ echo "disabled";}?>>
+									<option value="1" <eq name="userinfo.zz_sftype" value="1">selected</eq>>身份证</option>
+									<option value="2" <eq name="userinfo.zz_sftype" value="2">selected</eq>>护照</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label><span class="mustInput">*</span>法人/经办人证件号码</label><font color="green">(如 51010719881111****)</font><label>:</label>
+								<input type="tel" id="zz_sfz" placeholder="请输入企业法人/经办人证件号码" name="zz_sfz" value="{$userinfo['zz_sfz']}" class="form-control required" <?php if($userinfo['userAudit'] == 1 or $userinfo['userAudit'] == 2){ echo "disabled";}?>>
+							</div>
+							<div class="form-group">
+								<label><span class="mustInput">*</span>证件有效期</label><font color="green">(如 2035-4-1)</font><label>:</label>
+								<input type="text" id="zz_yxq" placeholder="请输入正确的证件有效期" name="zz_yxq" value="{$userinfo['zz_yxq']}" class="form-control required" <?php if($userinfo['userAudit'] == 1 or $userinfo['userAudit'] == 2){ echo "disabled";}?>>
+							</div>
+	            	    	<?php if($userinfo['userAudit'] == 0 or $userinfo['userAudit'] == 3){?>
+								<div class="form-group uploade">
+									<label><span class="mustInput">*</span>身份证正面照片</label><span style="margin-left: 20px; color:green;">必须为彩色图片且小于500K,jpg格式</span>
+									<input type="text" placeholder="身份证正面照片" <if condition=" $userinfo['sfzz']  neq '' "> value="身份证正面已上传" readonly="readonly" <else /> value="" </if>  class="form-control">
+									<input type="hidden" placeholder="身份证正面照片" value="<?php echo $userinfo['sfzz'];?>" name="sfzz" class="hiddeninput">
+									<div class="dropz" style="height: 34px;line-height: 34px;border: 1px solid #e5e6e7;width: 70px;text-align: center;position: relative;top: -34px;float: right;cursor: pointer;">文件上传</div>
+								</div>
+								<div class="form-group uploade">
+									<label><span class="mustInput">*</span>身份证反面照片</label><span style="margin-left: 20px; color:green;">必须为彩色图片且小于500K,jpg格式</span>
+									<input type="text" placeholder="身份证反面照片" <if condition=" $userinfo['sfzf']  neq '' "> value="身份证反面已上传" readonly="readonly" <else /> value="" </if>  class="form-control">
+									<input type="hidden" placeholder="身份证反面照片" value="<?php echo $userinfo['sfzf'];?>" name="sfzf" class="hiddeninput">
+									<div class="dropz" style="height: 34px;line-height: 34px;border: 1px solid #e5e6e7;width: 70px;text-align: center;position: relative;top: -34px;float: right;cursor: pointer;">文件上传</div>
+								</div>
+	            	    		<div class="form-group uploade">
+									<label>营业执照</label><span style="margin-left: 20px; color:green;">需年检章齐全（当年成立公司除外），必须为彩色图片且不超过500K</span>
+									<input type="text" placeholder="营业执照" <if condition=" $userinfo['yyzz']  neq '' "> value="营业执照已上传" readonly="readonly" <else /> value="" </if> class="form-control" >
+									<input type="hidden" placeholder="营业执照" value="<?php echo $userinfo['yyzz'];?>" name="yyzz" class="hiddeninput">
+									<div class="dropz" style="height: 34px;line-height: 34px;border: 1px solid #e5e6e7;width: 70px;text-align: center;position: relative;top: -34px;float: right;cursor: pointer;">文件上传</div>
+								</div>
+								<div class="form-group uploade">
+									<label>组织机构代码证</label><span style="margin-left: 20px; color:green;">必须为彩色图片且小于500K；若你的企业三证合一，此处请再次上传营业执照</span>
+									<input type="text" placeholder="组织机构代码证" <if condition=" $userinfo['zzjg']  neq '' "> value="组织机构代码证已上传" readonly="readonly" <else /> value="" </if> class="form-control">
+									<input type="hidden" placeholder="组织机构代码证" value="<?php echo $userinfo['zzjg'];?>" name="zzjg" class="hiddeninput">
+									<div class="dropz" style="height: 34px;line-height: 34px;border: 1px solid #e5e6e7;width: 70px;text-align: center;position: relative;top: -34px;float: right;cursor: pointer;">文件上传</div>
+								</div>
+								<div class="form-group uploade">
+									<label>特殊资质</label><span style="margin-left: 20px; color:green;">特殊行业如许可证，授权书，备案表等，有则必填</span>
+									<input type="text" placeholder="特殊资质(有则必填)" <if condition=" $userinfo['tszz']  neq '' "> value="身份证反面已上传" readonly="readonly" <else /> value="" </if>  class="form-control">
+									<input type="hidden" placeholder="特殊资质(有则必填)" value="<?php echo $userinfo['tszz'];?>" name="tszz" class="hiddeninput">
+									<div class="dropz" style="height: 34px;line-height: 34px;border: 1px solid #e5e6e7;width: 70px;text-align: center;position: relative;top: -34px;float: right;cursor: pointer;">文件上传</div>
+								</div>
+							<?php }else{ ?>
+								<div class="form-group uploade">
+									<label><span class="mustInput">*</span>身份证正面照片</label><span style="margin-left: 20px; color:green;">必须为彩色图片且小于500K,jpg格式</span>
+									<div><if condition=" $userinfo['sfzz']  neq '' "><img width="50%" src="/{$userinfo['sfzz']}"><else/>无</if></div>
+								</div>
+								<div class="form-group uploade">
+									<label><span class="mustInput">*</span>身份证反面照片</label><span style="margin-left: 20px; color:green;">必须为彩色图片且小于500K,jpg格式</span>
+									<div><if condition=" $userinfo['sfzf']  neq '' "><img width="50%" src="/{$userinfo['sfzf']}"><else/>无</if></div>
+								</div>
+	            	    		<div class="form-group uploade">
+									<label>营业执照</label><span style="margin-left: 20px; color:green;">需年检章齐全（当年成立公司除外），必须为彩色图片且不超过500K</span>
+									<div><if condition=" $userinfo['yyzz']  neq '' "><img width="50%" src="/{$userinfo['yyzz']}"><else/>无</if></div>
+								</div>
+								<div class="form-group uploade">
+									<label>组织机构代码证</label><span style="margin-left: 20px; color:green;">必须为彩色图片且小于500K；若你的企业三证合一，此处请再次上传营业执照</span>
+									<div><if condition=" $userinfo['zzjg']  neq '' "><img width="50%" src="/{$userinfo['zzjg']}"><else/>无</if></div>
+								</div>
+								<div class="form-group uploade">
+									<label>特殊资质</label><span style="margin-left: 20px; color:green;">特殊行业如许可证，授权书，备案表等，有则必填</span>
+									<div><if condition=" $userinfo['tszz']  neq '' "><img width="50%" src="/{$userinfo['tszz']}"><else/>无</if></div>
+								</div>
+							<?php } ?>
+							<div class="form-group">
+								<label>主体全称</label><font color="green">(商户名称需与营业执照登记公司名称一致)</font><label>:</label>
+								<input type="tel" id="zz_shname" placeholder="请输入企业/商户名称" name="zz_shname" value="{$userinfo['zz_shname']}" class="form-control" <?php if($userinfo['userAudit'] == 1 or $userinfo['userAudit'] == 2){ echo "disabled";}?>>
+							</div>
+							<div class="form-group">
+								<label>注册/地址</label><font color="green">(与营业执照登记的注册地址一致)</font><label>:</label>
+								<input type="tel" id="zz_zcdz" placeholder="注册/地址" name="zz_zcdz" value="{$userinfo['zz_zcdz']}" class="form-control" <?php if($userinfo['userAudit'] == 1 or $userinfo['userAudit'] == 2){ echo "disabled";}?>>
+							</div>
+							<div class="form-group">
+								<label>营业执照注册号:</label>
+								<input type="tel" id="zz_license" placeholder="请输入营业执照注册号" name="zz_license" value="{$userinfo['zz_license']}" class="form-control" <?php if($userinfo['userAudit'] == 1 or $userinfo['userAudit'] == 2){ echo "disabled";}?>>
+							</div>
+						</div>
+            	    </div>
+            	</div>
+            	</if>
+
+				<div class="col-lg-12">
+					<div class="ibox">
+            	    	<div class="ibox-title">
+            	       		<h5>银行信息</h5>
+            	       		<if condition="$userinfo['userStep'] eq 2">
+            	       			<if condition="$userinfo['userAudit'] eq 0"><span class="label label-danger pull-right">审核通过后无法修改</span><elseif condition=" $userinfo['userAudit'] eq 1"/><span class="label label-primary pull-right">审核通过</span><elseif condition=" $userinfo['userAudit'] eq 2"/><span class="label label-warning pull-right">审核中</span><elseif condition=" $userinfo['userAudit'] eq 3"/><span class="label label-danger pull-right">审核失败</span></if>
+            	       		</if>
+            	    	</div>
+            	    	<div class="ibox-content">
+							<div class="form-group">
+								<label><span class="mustInput">*</span>账户类型:</label>
+								<select name="zz_banktype" class="form-control" <?php if($userinfo['userAudit'] == 1 or $userinfo['userAudit'] == 2 or $userinfo['userStep'] == 2){ echo "disabled";}?>>
+									<option value="2" <eq name="userinfo.zz_banktype" value="2">selected</eq>>个人账户</option>
+									<option value="1" <eq name="userinfo.zz_banktype" value="1">selected</eq>>对公账户</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label><span class="mustInput">*</span>开户人/开户名称:</label><font color="green">(对私账户填开户人名称/对公账户填公司名称)</font><label>:</label>
+								<input id="zz_accountname" placeholder="请输入银行开户时所填名称" name="zz_accountname" value="{$userinfo['zz_accountname']}" class="form-control required" <?php if($userinfo['userAudit'] == 1 or $userinfo['userAudit'] == 2){ echo "disabled";}?>>
+							</div>
+							<div class="form-group">
+								<label><span class="mustInput">*</span>开户银行:</label>
+								<select id="khbank" name="zz_bank" class="form-control required" <?php if($userinfo['userAudit'] == 1 or $userinfo['userAudit'] == 2){ echo "disabled";}?>>
+		   						  <option value="" <eq name="userinfo.zz_bank" value="0">selected</eq>>请选择</option>
+									<?php foreach($bank as $akk=>$avv){?>
+									  <option value="<?php echo $avv['codeid']?>" <eq name="userinfo.zz_bank" value="$avv.codeid">selected</eq>><?php echo $avv['name']?></option>
+									<?php }?>
+								</select>
+							</div>
+							<div class="form-group">
+								<label><span class="mustInput">*</span>开户银行全称</label><font color="green">(详细到支行,没找到银行信息请检查所选择的开户地址和开户银行是否正确)</font><label>:</label>
+								<input onkeyup="getBankBranch(this,event)" onblur="hidebank()" onfocus="areashow()" autocomplete="off" type="tel" id="zz_bankqc" placeholder="开户银行全称" name="zz_bankqc" value="{$userinfo['zz_bankqc']}" class="form-control inp_selected required" <?php if($userinfo['userAudit'] == 1 or $userinfo['userAudit'] == 2){ echo "disabled";}?>>
+								<div id="bankinfo" style="position: absolute; width: 50%; display: none;">
+                                </div>
+                                <div id="areashow" style="padding-top:5px;min-width:278px;">
+                                </div>
+                                <input id="backcode" name="backcode" value="{$userinfo['backcode']}" type="hidden" class="required">
+							</div>
+							<div class="form-group">
+								<label><span class="mustInput">*</span>预留手机号:</label><font color="green">(在银行开卡所填手机号)</font><label>:</label>
+								<input type="tel" id="bankPhone" placeholder="请输入银行预留手机号" name="bankPhone" value="{$userinfo['bankPhone']}" class="form-control required" <?php if($userinfo['userAudit'] == 1 or $userinfo['userAudit'] == 2){ echo "disabled";}?>>
+							</div>
+							<div class="form-group">
+								<label><span class="mustInput">*</span>结算账户</label><font color="green">(企业需对公账户，个体户提供法人名下4、5、6开头的个人银行卡号)</font><label>:</label>
+								<input type="tel" id="zz_bankinfo" placeholder="请输入银行账号" name="zz_bankinfo" value="{$userinfo['zz_bankinfo']}" class="form-control required" <?php if($userinfo['userAudit'] == 1 or $userinfo['userAudit'] == 2){ echo "disabled";}?>>
+							</div>
+            			</div>
+					</div>
+				</div>
+
+				<if condition="($userinfo['userAudit'] eq 0) OR ($userinfo['userAudit'] eq 3)">
+					<div class="col-lg-12">
+	               	 	<button type="submit" class="btn btn-primary pull-right">提交</button>
+	           		</div>
+	           	</if>
+				</form>
+            </div>
+</block>
+
+<block name="top">
+    <link href="__CSS__/footable.core.css" rel="stylesheet">
+	<link href="__CSS__/plugins/custom.css" rel="stylesheet">
+	<link href="__CSS__/jquery.steps.css" rel="stylesheet">
+	<style>
+		.fl{float: left; margin-left: 5px;}
+		.clearfix:after {
+		  content: " ";
+		  display: block;
+		  clear: both;
+		  height: 0;
+		}
+		.clearfix {
+		  zoom: 1;
+		}
+		.ibox{
+		 	border: 1px solid #e7eaec;
+		}
+		.part_item {
+  			background: none repeat scroll 0 0 #fff;
+  			border: 1px solid #ccc;
+  			border-radius: 5px;
+  			padding-bottom: 15px;
+  			margin-bottom: 10px;
+		}
+		.form .part_item p {
+  			display: inline-block;
+  			font-size: 14px;
+  			overflow: hidden;
+  			padding: 10px 20px 0;
+  			text-overflow: ellipsis;
+  			white-space: nowrap;
+		}
+		.part_item_b {
+  			border-top: 1px solid #ccc;
+  			margin-top: 10px;
+		}
+		.form .part_item p.active {
+  			color: #f87b00;
+		}
+		.part_item input {
+  			font-size: 14px;
+  			margin-bottom: 2px;
+  			margin-right: 5px;
+		}
+		.pagination{
+			margin:0px;
+		}
+		.mustInput {
+  			color: red;
+  			margin-right: 5px;
+		}
+		@media (min-width: 768px){
+			.form .part_item p {
+				width: 37%;
+			}
+		}
+		@media (min-width: 992px){
+			.form .part_item p {
+				width: 24%;
+			}
+		}
+		.dz-preview{
+			display:none;
+		}
+		.code-box{width:172px;height:172px;padding:3px 4px;position:relative;margin-top: 5px;background:#fff;}
+		.codebox-tips{background: #44b549;margin: 5px 0 0 0;color: #fff;height:27px;line-height:16px;font-size:14px;text-align: center;padding:5px 6px;width:172px;}
+		.codebox-tips i{ display:inline-block;background:url(__IMG__/pay_icon/czzx_btn0723.png) no-repeat 0 -86px;_background:url(__IMG__/pay_icon/czzx_btn0723_png8.png) no-repeat 0 -86px;width:18px;height:16px;margin-right:3px;vertical-align:middle}
+		#qr-code img{vertical-align: middle; width: 164px;}
+		#qr-code {line-height: 164px;}
+		.inp_unselected{color: #B3B3B3;}
+		.inp_selected{color: #555;}
+	</style>
+</block>
+<block name="bottom">
+	<div class="modal inmodal" tabindex="-1"  id="bankbranchSet">
+		<div class="modal-dialog">
+			<div class="modal-content animated bounceInRight">
+				<div class="modal-header">
+                    <button type="button" class="close _close"><span>×</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">手动输入开户行全称</h4>
+                </div>
+				<div class="modal-body">
+					<div class="setting_rows">
+						<div id="wxActionBox" class="wxpay_box">
+							<div class="form-group">
+								<label><span class="mustInput">*</span>开户行全称</label>
+								<input id="sdbankname" type="text" placeholder="银行全称(详细到支行)" value="" class="form-control">
+							</div>
+							<div class="form-group">
+								<label>联行号</label>
+								<input id="sdbankbranch" type="text" placeholder="联行号(不知道可不填)" value="" class="form-control">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary _sure">确定</button>
+                    <button type="button" class="btn btn-default _close">关闭</button>
+                </div>
+			</div>
+		</div>
+	</div>
+	<script src="__JS__/plugins/dropzone.js"></script>
+    <script src="__JS__/plugins/icheck.min.js"></script>
+    <script src="__JS__/jquery.validate.min.js"></script>
+    <!-- Page-Level Scripts -->
+    <script>
+        $(document).ready(function() {
+			employers.init();
+			$(".dropz").dropzone({
+				url: "{:U('Manage/Xingye/img_upload')}",
+				addRemoveLinks: false,
+				maxFilesize: 2,
+				acceptedFiles: ".jpg,.png,.gif,.jpeg",
+				uploadMultiple: false,
+				init: function() {
+					this.on("success", function(file,responseText) {
+						if(responseText.status == 1){
+							/***这里的this.element 是 $(".dropz")****/
+							$(this.element).siblings('.form-control').val('文件已上传');
+							$(this.element).siblings('.form-control').attr('readonly','readonly');
+							$(this.element).siblings('.hiddeninput').val(responseText.savepath);
+						}else{
+							swal({title: "温馨提示",text:responseText.error,type: "error"});
+						}
+					});
+				}
+			});
+        });
+		!function(a,b){
+			var employers = employers || {};
+			employers.init = function(){
+				var c = employers;
+				b('.part_item .checkAll').click(function(){
+					var checkItems = b(this).parents('.part_item_t').siblings('.part_item_b').find('p').find('input[name="authority[]"]');
+					if (b(this).is(':checked') == false) {
+						checkItems.each(function(ke,el){
+							$(el).iCheck('uncheck');
+						});
+					}else{
+						checkItems.each(function(ke,el){
+							$(el).iCheck('check');
+						});
+					}
+				});
+				jQuery.extend(jQuery.validator.messages, {
+  					required: "必填字段",
+  					remote: "请修正该字段",
+  					email: "请输入正确格式的电子邮件",
+  					equalTo: "请再次输入相同的值",
+  					maxlength: jQuery.validator.format("请输入一个长度最多是 {0} 的字符串"),
+  					minlength: jQuery.validator.format("请输入一个长度最少是 {0} 的字符串"),
+				});
+				b('#employersForm').validate({
+                    errorPlacement: function (error, element){
+                            element.before(error);
+                    },
+                    rules: {
+                        bankPhone: {
+			                minlength: 11,
+			                maxlength: 11
+						},
+						zz_bankinfo:{
+							minlength: 16,
+			                maxlength: 20
+						}
+                    },messages: {
+                        bankPhone: {
+			                minlength: "请输入正确的手机号码",
+			                maxlength: "请输入正确的手机号码"
+						},
+						zz_bankinfo: {
+			                minlength: "请输入正确的银行卡号",
+			                maxlength: "请输入正确的银行卡号"
+						}
+                    }
+                });
+			};
+			a.employers = employers;
+		}(window,jQuery);
+
+	function getGdCategory(obj){
+		if(obj.value == -1){
+			$("#incatory").html("");
+		}else{
+			var html='<select style="float:left; width:20%" class="form-control" onchange="getGdCategory2(this);"><option value="-1">请选择</option>'
+			$.post('{:U("Manage/Users/getGdCategory")}',{key:obj.value},function(ret){
+				if(ret.data[0]){
+					var names = [];
+					$.each(ret.data,function(nn,vv){
+						var name = vv.name.split("-");
+						name = name[1];
+						if($.inArray(name,names)==-1) {
+							names.push(name);
+							html+='<option value="'+obj.value+'-'+name+'">'+name+'</option>';
+						}
+					});
+					html+='</select><div id="incatory2" style="float:left"></div>';
+					$("#incatory").html(html);
+				}
+				
+			},'JSON');
+		}
+  	}
+
+	function getGdCategory2(obj){
+		if(obj.value == -1){
+			$("#incatory2").html("");
+		}else{
+			var html='<select class="form-control" name="incode"><option value="-1">请选择</option>'
+			$.post('{:U("Manage/Users/getGdCategory")}',{key:obj.value},function(ret){
+				if(ret.data[0]){
+					var names = [];
+					$.each(ret.data,function(nn,vv){
+						var name = vv.name.split("-");
+						name = name[2];
+						if($.inArray(name,names)==-1) {
+							names.push(name);
+							html+='<option value="'+vv.code+'">'+name+'</option>';
+						}
+					});
+					html+='</select>';
+					$("#incatory2").html(html);
+				}
+				
+			},'JSON');
+		}
+  	}
+
+	function getGdCity(obj){
+		if(obj.value == -1){
+			$("#city").html("");
+		}else{
+			var html='<select id="gdcity2" style="float:left; width:20%" class="form-control" name="sid"><option value="-1">请选择</option>'
+			$.post('{:U("Manage/Users/getGdCity")}',{fid:obj.value},function(ret){
+				if(ret.data[0]){
+					$.each(ret.data,function(nn,vv){
+						html+='<option value="'+vv.sid+'">'+vv.name+'</option>';
+					});
+					html+='</select>';
+					$("#city").html(html);
+				}
+				
+			},'JSON');
+		}
+  	}
+
+	function getBankBranch(obj,event){
+		/*$('#zz_bankqc').removeClass("inp_selected");
+		$('#zz_bankqc').addClass("inp_unselected");*/
+        if(event.keyCode!=13&&event.keyCode!=38&&event.keyCode!=40){
+			if(obj.value.length ==0){
+				$('#bankinfo').html("");
+				$('#bankinfo').hide();
+			}else if(obj.value.length >=1){
+				var gdcity = $('#gdcity').find("option:selected").text();
+				var gdcity2 = $('#gdcity2').find("option:selected").text();
+				var khbank = $('#khbank').find("option:selected").text();
+				if(gdcity == "请选择"){
+					gdcity = "";
+				}
+				if(gdcity2 == "请选择"){
+					gdcity2 = "";
+				}
+				if(khbank == "请选择"){
+					khbank = "";
+				}
+				$.post('{:U("Manage/Users/getGdBankBranch")}',{key:obj.value,gdcity:gdcity,gdcity2:gdcity2,khbank:khbank},function(ret){
+					if(ret.data[0]){
+						var html = '<select id="bankinfo" class="form-control" multiple="">';
+						$.each(ret.data,function(nn,vv){
+							html+='<option onclick="setBankinfo(this,\''+vv.name+'\')" value="'+vv.code+'">'+vv.name+'</option>';
+						});
+						html+='</select>';
+						$("#bankinfo").html(html);
+						$('#bankinfo').show();
+					}else{
+						$('#bankinfo').html("");
+						$('#bankinfo').hide();
+						//html+='<option onclick="showBankbranch();">没找到银行信息点此手动输入</option>';
+					}
+				},'JSON');
+			}
+        }
+	}
+
+	function setBankinfo(obj,name){
+		$('#zz_bankqc').removeClass("inp_unselected");
+		$('#zz_bankqc').addClass("inp_selected");
+		$('#zz_bankqc').val(name);
+		$('#backcode').val(obj.value);
+		$('#bankinfo').hide();
+	}
+
+	function setBankstatus(){
+		$('#zz_bankqc').removeClass("inp_unselected");
+		$('#zz_bankqc').addClass("inp_selected");
+	}
+
+	function areashow(){
+		var gdcity = $('#gdcity').find("option:selected").text();
+		var gdcity2 = $('#gdcity2').find("option:selected").text();
+		var khbank = $('#khbank').find("option:selected").text();
+		if(gdcity == "请选择"){
+			gdcity = "";
+		}
+		if(gdcity2 == "请选择" || gdcity2 == gdcity){
+			gdcity2 = "";
+		}
+		if(khbank == "请选择"){
+			khbank = "";
+		}
+		$('#areashow').html('<small class="label label-primary"><i class="fa fa-map-marker"></i> '+gdcity+' '+gdcity2+' '+khbank+'</small>');
+	}
+
+	function hidebank(){
+		if($('#zz_bankqc').hasClass('inp_unselected')){
+			$('#zz_bankqc').val("");
+			if($('#bankinfo').hasClass('hover') == false){
+				$('#bankinfo').html("");
+				$('#bankinfo').hide();
+			}
+		}
+	}
+
+	$("#bankinfo").hover(
+	  function () {
+	    $(this).addClass("hover");
+	  },
+	  function () {
+	  	$('#bankinfo').html("");
+		$('#bankinfo').hide();
+	    $(this).removeClass("hover");
+	  }
+	);
+
+	function showBankbranch(){
+		var winW=$(window).width();
+		if(winW<750){
+		   $('#bankbranchSet .modal-dialog').css('width','92%');
+		}else{
+		   $('#bankbranchSet .modal-dialog').width(730);
+		}
+		$('body').append('<div class="modal-backdrop in"></div>');
+		$('#bankbranchSet').show();
+	}
+
+	  $("#bankbranchSet ._sure").click(function(){
+		  $('#bankbranchSet').hide();
+		  $('#zz_bankqc').val('');
+		  $('#backcode').val('');
+		  $('#zz_bankqc').val($('#sdbankname').val());
+		  $('#backcode').val($('#sdbankbranch').val());
+		  $('#zz_bankqc').removeClass("inp_unselected");
+		  $('#zz_bankqc').addClass("inp_selected");
+		  $('.modal-backdrop').remove();
+	  });
+
+	  $("#bankbranchSet ._close").click(function(){
+		  $('#bankbranchSet').hide();
+		  $('#sdbankname').val('');
+		  $('#sdbankbranch').val('');
+		  $('.modal-backdrop').remove();
+	  });
+    </script>
+    <!--如果银行编码不为空，设置银行全称状态为已填写-->
+	<if condition="$userinfo['backcode'] neq ''"><script>setBankstatus();</script></if>
+</block>

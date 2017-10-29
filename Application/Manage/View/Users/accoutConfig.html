@@ -1,0 +1,382 @@
+<extend name="Public/base"/>
+
+<block name="title">收银管理</block>
+
+<block name="levels"><li><a href="{:U("Manage/Index/index")}">后台首页</a></li><li>商家设置</li></block>
+
+<block name="body">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="ibox float-e-margins">
+							<div class="ibox-title clearfix">
+								<ul class="nav">
+									<li>
+										<button class="btn btn-primary" type="button" checked="checked" data-toggle="modal" data-target="#weixinSetting"> <i class="fa fa-plus"></i> 添加收银账户</button>
+									</li>
+
+								</ul>
+							</div>
+							<div class="ibox-content">
+								<nav class="ui-nav clearfix"></nav>
+								<div class="app__content js-app-main page-cashier">
+									<div>
+										<!-- 实时交易信息展示区域 -->
+										<div class="cashier-realtime">
+											<div class="realtime-title-block clearfix">
+												<h1 class="realtime-title">账户列表 共:({$printers['total']} 个)</h1>
+											</div>
+										</div>
+										<div class="js-real-time-region realtime-list-box loading">
+											<div class="widget-list">
+												<div class="js-list-filter-region clearfix ui-box"
+													style="position: relative;">
+													<div class="widget-list-filter"></div>
+												</div>
+												<div class="ui-box">
+													<table class="ui-table ui-table-list" data-page-size="20" style="padding: 0px;">
+														<thead class="js-list-header-region tableFloatingHeaderOriginal">
+															<tr class="widget-list-header">
+																<th>商户号</th>
+																<th>商户秘钥<a data-rel="popover" data-container="body" title="" data-content="打印机名称" data-original-title="提示" class="tipa">
+												                  <i class="fa fa-question-circle"></i>
+												                </a></th>
+																<th>appid<a data-rel="popover" data-container="body" title="" data-content="打印机编码sn" data-original-title="提示" class="tipa">
+												                  <i class="fa fa-question-circle"></i>
+												                </a></th>
+																<th data-hide="phone">appsecret</th>
+<!--																<th data-hide="phone">版权提示信息</th>
+																<th data-hide="phone">电话</th>
+																<th data-hide="phone">二维码信息</th>-->
+																<th data-hide="phone">操作</th>
+															</tr>
+														</thead>
+														<tbody class="js-list-body-region" id="table-list-body">
+															<if condition="!empty($printers['root'])">
+															<volist name="printers['root']" id="ovv" key='i'>
+															<tr class="widget-list-item">
+																<td>
+                                                                                                                                    {$ovv.printer_id}
+                                                                                                                                </td>
+																<td>
+                                                                                                                                    {$ovv.printer_name}
+																</td>
+																<td>
+                                                                                                                                    {$ovv.printer_sn}
+																</td>
+																<td>
+                                                                                                                                    {$ovv.printer_key}
+                                                                                                                                </td>
+																
+																<td>
+																	<a class="btn btn-sm btn-info" href="{:U('Manage/Users/showPrinterDetail',array('printer_id' => $ovv['printer_id']))}" style="vertical-align: top;"> 打印机详情 </a>
+																	
+																	<button class="btn btn-sm btn-danger delete" data-id="<?php echo $ovv['printer_id'];?>"><strong>删&nbsp;&nbsp;&nbsp;除 </strong></button>
+																	                                                                                                                                       
+																	
+																</td>
+															</tr>
+															</volist>
+															<else />
+																<tr class="widget-list-item">
+																	<td colspan="9">暂无配置收银账户</td>
+																</tr>
+															</if>
+														</tbody>
+													</table>
+													<div class="js-list-empty-region"></div>
+												</div>
+												<div class="js-list-footer-region ui-box">
+													<div class="widget-list-footer"></div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				{$stores['pager']}
+            </div>
+</block>
+
+<block name="top">
+<link href="__CSS__/wxCoupon.css" rel="stylesheet">
+<link href="__CSS__/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+<link href="__CSS__/plugins/custom.css" rel="stylesheet">
+<link href="__CSS__/footable.core.css" rel="stylesheet">
+<style>
+.tipa {display:inline-block; *display:inline; zoom: 1; vertical-align: middle;}
+.fa-question-circle {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+    margin: -4px 3px 0;
+    color: #44B549;
+    font-size: 18px;
+}
+.ibox-title h5 {
+	margin: 10px 0 0px;
+}
+
+select.input-sm {
+	height: 35px;
+	line-height: 35px;
+}
+
+.float-e-margins .btn-info {
+	margin-bottom: 0px;
+}
+
+.fa-paste {
+	margin-right: 7px;
+	padding: 0px;
+}
+
+.dz-preview {
+	display: none;
+}
+
+.ibox-title ul {
+	list-style: outside none none !important;
+	margin: 0 0 0 10px;
+	padding: 0;
+}
+
+.ibox-title li {
+	float: left;
+	width: 15%;
+}
+
+#commonpage {
+	float: right;
+	margin-bottom: 10px;
+}
+
+#table-list-body .btn-st {
+	background-color: #337ab7;
+	border-color: #2e6da4;
+	cursor: auto;
+}
+
+#select_Cardtype .i-checks label {
+	cursor: pointer;
+}
+
+#ewmPopDiv .modal-body {
+	text-align: center;
+}
+
+.modal-footer {
+	text-align: center;
+}
+
+.modal-footer .btn {
+	padding: 7px 30px;
+}
+
+.js_modify_quantity .fa {
+	margin-left: 10px;
+}
+
+#ewmPopDiv .downewm {
+	font-size: 14px;
+	padding: 15px;
+	text-align: center;
+}
+
+.modal-body {
+	padding: 20px 30px 15px;
+}
+
+#select_Cardtype p {
+	margin-bottom: 8px;
+}
+</style>
+<script src="__JS__/footable.all2.min.js"></script>
+</block>
+<block name="bottom">
+	<div class="modal inmodal" tabindex="-1" role="dialog" id="popgetshop">
+		<div class="modal-dialog">
+			<div class="modal-content animated bounceInRight">
+				<div class="modal-header">
+					<h4 class="modal-title">正在获取微信门店数据....</h4>
+				</div>
+				<div class="modal-body">
+					<div class="spiner-example" style="padding-top: 30px;">
+						<div class="sk-spinner sk-spinner-circle" style="height: 100px; width: 100px;">
+							<div class="sk-circle1 sk-circle"></div>
+							<div class="sk-circle2 sk-circle"></div>
+							<div class="sk-circle3 sk-circle"></div>
+							<div class="sk-circle4 sk-circle"></div>
+							<div class="sk-circle5 sk-circle"></div>
+							<div class="sk-circle6 sk-circle"></div>
+							<div class="sk-circle7 sk-circle"></div>
+							<div class="sk-circle8 sk-circle"></div>
+							<div class="sk-circle9 sk-circle"></div>
+							<div class="sk-circle10 sk-circle"></div>
+							<div class="sk-circle11 sk-circle"></div>
+							<div class="sk-circle12 sk-circle"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+    
+    <div class="modal inmodal" tabindex="-1" role="dialog" aria-hidden="true" id="weixinSetting">
+		<div class="modal-dialog">
+			<div class="modal-content animated bounceInRight">
+				<form action="" method="post" enctype="multipart/form-data">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                        <h4 class="modal-title">支付配置</h4>
+                                    </div>
+                                                    <div class="modal-body">
+                                                            <div class="setting_rows">
+                                                                    <div id="new_wxpay_box" class="wxpay_box">
+
+                                                                                    <div class="form-group">
+                                                                                            <label>商户号</label>
+                                                                                            <input type="text" placeholder="实名认证后由系统分配" value="{$configs['gd_mchId']}" name="gd_mchId" class="form-control">
+                                                                                    </div>
+                                                                                    <div class="form-group">
+                                                                                            <label>商户秘钥</label>
+                                                                                            <input type="text" placeholder="实名认证后由系统分配" value="{$configs['xy_key']}" name="xy_key" class="form-control">
+                                                                                    </div>	
+                                                                                    <div class="form-group">
+                                                                                            <label>Appid</label>
+                                                                                            <input type="text" placeholder="Appid" value="{$configs['wx_appId']}" name="wx_appId" class="form-control" >
+                                                                                    </div>
+                                                                                    <div class="form-group">
+                                                                                            <label>AppSecret</label>
+                                                                                            <input type="text" placeholder="应用密钥" value="{$configs['wx_appSecret']}" name="wx_appSecret" class="form-control">
+                                                                                    </div>
+                                                                    </div>
+                                                            </div>
+                                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
+                                        <button type="button" class="btn btn-primary btn-confirm">确定</button>
+                                    </div>
+				</form>
+			</div>
+		</div>
+	</div>
+<script src="__JS__/plugins/icheck.min.js"></script>
+<script>
+$(document).ready(function(){
+	$('.ui-table-list').footable();
+	$('#select_Cardtype .i-checks').iCheck({
+		checkboxClass: 'icheckbox_square-green',
+		radioClass: 'iradio_square-green',
+	});
+
+    $('[rel="popover"],[data-rel="popover"]').popover({
+        trigger: 'hover',
+        html: true,
+        placement: 'auto'
+    });
+           
+	
+	$("#pop_add_printer").click(function(){
+		window.location.href="{:U('Manage/Users/createPrinter')}";
+	});
+
+	$('.delete').click(function(){
+		var id = $(this).attr('data-id');		
+		swal({
+			title: "删除打印机",   
+			text: "您真的要删除该打印机吗？",
+			type: "warning",   
+			showCancelButton: true,   
+			confirmButtonText: "删除",   
+			cancelButtonText: "取消",   
+			closeOnConfirm: false,   
+			closeOnCancel: true 
+		}, function(isConfirm){
+			if (isConfirm) {
+				$.ajax({
+					url:"{:U('Manage/Printer/delPrinter')}",
+					type:"get",
+					data:{'printer_id':id},
+					dataType:"JSON",
+					success:function(ret){
+						if(ret.status == 1){
+							swal({
+								  title: "删除成功",
+								  text: '打印机删除成功',
+								  type: "success",
+								  closeOnConfirm: false
+								 },function(){
+									location.reload();
+								});
+						} else {
+							swal("删除打印机失败", ret.errmsg, "error");
+					   }
+					}
+				});
+			}
+		});
+	});
+        
+        $('.printer').click(function(){
+		var id = 1;		
+		swal({
+			title: "打印",   
+			text: "确定测试打印？",
+			type: "warning",   
+			showCancelButton: true,   
+			confirmButtonText: "打印",   
+			cancelButtonText: "取消",   
+			closeOnConfirm: false,   
+			closeOnCancel: true 
+		}, function(isConfirm){
+			if (isConfirm) {
+				$.ajax({
+					url:"{:U('Manage/Printer/toPrintOrder')}",
+					type:"get",
+					data:{'printer_id':id},
+					dataType:"JSON",
+					success:function(ret){
+						if(ret.status == 1){
+							swal({
+								  title: "成功",
+								  text: '打印成功',
+								  type: "success",
+								  closeOnConfirm: false
+								 },function(){
+									location.reload();
+								});
+						} else {
+							swal("打印失败", ret.errmsg, "error");
+					   }
+					}
+				});
+			}
+		});
+	});
+
+});
+
+
+
+$('.status-checkbox').change(function(){
+	var i = $(this).attr('data-id'),s = $(this).is(':checked') ? 1 : 0;
+	$.post('{:U("Manage/Stores/editisSend")}',{storeId:i,status:s},function(re){
+		if(re.status == -1){
+			swal("错误", re.msg, "error");
+		}
+	},'json');
+});
+
+$('.status-checkbox2').change(function(){
+	var i = $(this).attr('data-id'),s = $(this).is(':checked') ? 1 : 0;
+	$.post('{:U("Manage/Stores/editisallSend")}',{storeId:i,status:s},function(re){
+		if(re.status == -1){
+			swal("错误", re.msg, "error");
+		}
+	},'json');
+});
+</script>
+</block>

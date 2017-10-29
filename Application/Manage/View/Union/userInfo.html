@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>商家资料 - 网站管理后台</title>
+    <include file="Public:header" />
+    <link href="__CSS__/footable.core.css" rel="stylesheet">
+	<link href="__CSS__/plugins/custom.css" rel="stylesheet">
+	<style>
+		body{background-color: #fff; width: 80%; margin:0 auto;}
+		.ibox{
+		 	border: 1px solid #e7eaec;
+		}
+		.part_item {
+  			background: none repeat scroll 0 0 #fff;
+  			border: 1px solid #ccc;
+  			border-radius: 5px;
+  			padding-bottom: 15px;
+  			margin-bottom: 10px;
+		}
+		.form .part_item p {
+  			display: inline-block;
+  			font-size: 14px;
+  			overflow: hidden;
+  			padding: 10px 20px 0;
+  			text-overflow: ellipsis;
+  			white-space: nowrap;
+		}
+		.part_item_b {
+  			border-top: 1px solid #ccc;
+  			margin-top: 10px;
+		}
+		.form .part_item p.active {
+  			color: #f87b00;
+		}
+		.part_item input {
+  			font-size: 14px;
+  			margin-bottom: 2px;
+  			margin-right: 5px;
+		}
+		.pagination{
+			margin:0px;
+		}
+		.mustInput {
+  			color: red;
+  			margin-right: 5px;
+		}
+		@media (min-width: 768px){
+			.form .part_item p {
+				width: 37%;
+			}
+		}
+		@media (min-width: 992px){
+			.form .part_item p {
+				width: 24%;
+			}
+		}
+		.dz-preview{
+			display:none;
+		}
+	</style>
+</head>
+<body>
+    <div id="wrapper">
+		<div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-10">
+                <h2>商家资料</h2>
+            </div>
+		</div>
+		<div class="row">
+				<form id="employersForm" class="form" action="{:U('Manage/Union/saveUserInfo')}" method="post">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-content">
+							<div class="form-group">
+								<label><span class="mustInput">*</span>昵称:</label>
+								<input type="text" id="username" placeholder="请输入昵称" name="username" value="{$userinfo['userName']}" class="form-control required">
+							</div>
+							<div class="form-group">
+								<label><span class="mustInput">*</span>邮箱:</label>
+								<input type="text" id="userEmail" placeholder="请输入邮箱" name="userEmail" value="{$userinfo['userEmail']}" class="form-control email">
+							</div>
+							<div class="form-group">
+								<label><span class="mustInput">*</span>手机号:</label>
+								<input type="tel" id="userPhone" placeholder="请输入员工的手机号" name="userPhone" value="{$userinfo['userPhone']}" class="form-control required" aria-required="true">
+							</div>
+							<if condition="($userinfo['parentId'] eq 0)">
+								<label>业务经理</label>(没有可不填)<label>:</label>
+								<select name="businessId" class="form-control" <if condition="($userinfo['businessId'] neq 0)">disabled</if>>
+		   						  <option value="0" <eq name="userinfo.businessId" value="0">selected</eq>>选择后无法修改</option>
+								  <option value="43" <eq name="userinfo.businessId" value="43">selected</eq>>胡昆</option>
+								  <option value="44" <eq name="userinfo.businessId" value="44">selected</eq>>李岚</option>
+								  <option value="45" <eq name="userinfo.businessId" value="45">selected</eq>>杜云升</option>
+								  <option value="46" <eq name="userinfo.businessId" value="46">selected</eq>>陶磊</option>
+								</select>
+							</if>
+                        </div>
+                    </div>
+                </div>
+				<div class="col-lg-12">
+					<div class="ibox">
+            	    	<div class="ibox-title">
+            	       		<h5>公司资质</h5>
+            	       		<if condition="$userinfo['userAudit'] eq 0"><span class="label label-danger pull-right">审核通过后无法修改</span><elseif condition=" $userinfo['userAudit'] eq 1"/><span class="label label-primary pull-right">审核通过</span><elseif condition=" $userinfo['userAudit'] eq 2"/><span class="label label-warning pull-right">审核中</span><elseif condition=" $userinfo['userAudit'] eq 3"/><span class="label label-danger pull-right">审核失败</span></if>
+            	    	</div>
+
+            	    		<div class="ibox-content">
+            	    		<if condition="($userinfo['userAudit'] eq 3) and ($userinfo['reson'] neq '')">
+								<div class="alert alert-danger alert-dismissable">
+	                            	<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>失败原因：{$userinfo['reson']}
+	                			</div>
+                			</if>
+							<div class="form-group">
+								<label>证件持有人姓名</label><font color="green">(姓名需与个体户营业执照上的经营人/法人一致)</font><label>:</label>
+								<input type="tel" id="zz_name" placeholder="请输入证件持有人姓名" name="zz_name" value="{$userinfo['zz_name']}" class="form-control" <if condition="($userinfo['userAudit'] eq 1) OR ($userinfo['userAudit'] eq 2)">disabled</if>>
+							</div>
+							<div class="form-group">
+								<label>法人/经办人证件类型</label><font color="green">(身份证/护照，个体工商户只能提供法人本人的证件)</font><label>:</label>
+								<select name="zz_sftype" class="form-control" <if condition="($userinfo['userAudit'] eq 1) OR ($userinfo['userAudit'] eq 2)">disabled</if>>
+									<option value="1" <eq name="userinfo.zz_sftype" value="1">selected</eq>>身份证</option>
+									<option value="2" <eq name="userinfo.zz_sftype" value="2">selected</eq>>护照</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label>法人/经办人证件号码:</label>
+								<input type="tel" id="zz_sfz" placeholder="请输入企业法人/经办人证件号码" name="zz_sfz" value="{$userinfo['zz_sfz']}" class="form-control" <if condition="($userinfo['userAudit'] eq 1) OR ($userinfo['userAudit'] eq 2)">disabled</if>>
+							</div>
+							<div class="form-group">
+								<label>证件有效期</label><font color="green">(如 2015/4/1-2035/4/1)</font><label>:</label>
+								<input type="text" id="zz_yxq" placeholder="请输入正确的证件有效期" name="zz_yxq" value="{$userinfo['zz_yxq']}" class="form-control" <if condition="($userinfo['userAudit'] eq 1) OR ($userinfo['userAudit'] eq 2)">disabled</if>>
+							</div>
+							<div class="form-group">
+								<label>店铺/商户简称:</label>
+								<input type="tel" id="zz_jc" placeholder="请输入店铺/商户简称" name="zz_jc" value="{$userinfo['zz_jc']}" class="form-control" <if condition="($userinfo['userAudit'] eq 1) OR ($userinfo['userAudit'] eq 2)">disabled</if>>
+							</div>
+							<div class="form-group">
+								<label>经营性质</label><font color="green">(个体工商户/企业)</font><label>:</label>
+								<select name="zz_jyxz" class="form-control" <if condition="($userinfo['userAudit'] eq 1) OR ($userinfo['userAudit'] eq 2)">disabled</if>>
+									<option value="1" <eq name="userinfo.zz_jyxz" value="1">selected</eq>>企业</option>
+									<option value="2" <eq name="userinfo.zz_jyxz" value="2">selected</eq>>个体工商户</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label>主体全称</label><font color="green">(商户名称需与营业执照登记公司名称一致)</font><label>:</label>
+								<input type="tel" id="zz_shname" placeholder="请输入企业/商户名称" name="zz_shname" value="{$userinfo['zz_shname']}" class="form-control" <if condition="($userinfo['userAudit'] eq 1) OR ($userinfo['userAudit'] eq 2)">disabled</if>>
+							</div>
+							<div class="form-group">
+								<label>注册/地址</label><font color="green">(与营业执照登记的注册地址一致)</font><label>:</label>
+								<input type="tel" id="zz_zcdz" placeholder="注册/地址" name="zz_zcdz" value="{$userinfo['zz_zcdz']}" class="form-control" <if condition="($userinfo['userAudit'] eq 1) OR ($userinfo['userAudit'] eq 2)">disabled</if>>
+							</div>
+							<div class="form-group">
+								<label>营业执照注册号:</label>
+								<input type="tel" id="zz_license" placeholder="请输入营业执照注册号" name="zz_license" value="{$userinfo['zz_license']}" class="form-control" <if condition="($userinfo['userAudit'] eq 1) OR ($userinfo['userAudit'] eq 2)">disabled</if>>
+							</div>
+							<div class="form-group">
+								<label>账户类型:</label>
+								<select name="zz_banktype" class="form-control" <if condition="($userinfo['userAudit'] eq 1) OR ($userinfo['userAudit'] eq 2)">disabled</if>>
+									<option value="1" <eq name="userinfo.zz_banktype" value="1">selected</eq>>对公账户</option>
+									<option value="2" <eq name="userinfo.zz_banktype" value="2">selected</eq>>法人账户</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label>开户银行</label><font color="green">(如果找不到开户银行，请选择其他银行)</font><label>:</label>
+								<select name="zz_bank" class="form-control" <if condition="($userinfo['userAudit'] eq 1) OR ($userinfo['userAudit'] eq 2)">disabled</if>>
+		   						  <option value="0" <eq name="userinfo.zz_bank" value="0">selected</eq>>请选择</option>
+								  <option value="招商银行" <eq name="userinfo.zz_bank" value="招商银行">selected</eq>>招商银行</option>
+								  <option value="中国工商银行" <eq name="userinfo.zz_bank" value="中国工商银行">selected</eq>>中国工商银行</option>
+								  <option value="中国建设银行" <eq name="userinfo.zz_bank" value="中国建设银行">selected</eq>>中国建设银行</option>
+								  <option value="浦发银行" <eq name="userinfo.zz_bank" value="浦发银行">selected</eq>>浦发银行</option>
+								  <option value="中国银行" <eq name="userinfo.zz_bank" value="中国银行">selected</eq>>中国银行</option>
+								  <option value="中国农业银行" <eq name="userinfo.zz_bank" value="中国农业银行">selected</eq>>中国农业银行</option>
+								  <option value="中国民生银行" <eq name="userinfo.zz_bank" value="中国民生银行">selected</eq>>中国民生银行</option>
+								  <option value="平安银行" <eq name="userinfo.zz_bank" value="平安银行">selected</eq>>平安银行</option>
+								  <option value="兴业银行" <eq name="userinfo.zz_bank" value="兴业银行">selected</eq>>兴业银行</option>
+								  <option value="交通银行" <eq name="userinfo.zz_bank" value="交通银行">selected</eq>>交通银行</option>
+								  <option value="中信银行" <eq name="userinfo.zz_bank" value="中信银行">selected</eq>>中信银行</option>
+								  <option value="中国光大银行" <eq name="userinfo.zz_bank" value="中国光大银行">selected</eq>>中国光大银行</option>
+								  <option value="农村信用合作社" <eq name="userinfo.zz_bank" value="农村信用合作社">selected</eq>>农村信用合作社</option>
+								  <option value="上海银行" <eq name="userinfo.zz_bank" value="上海银行">selected</eq>>上海银行</option>
+								  <option value="华夏银行" <eq name="userinfo.zz_bank" value="华夏银行">selected</eq>>华夏银行</option>
+								  <option value="广发银行" <eq name="userinfo.zz_bank" value="广发银行">selected</eq>>广发银行</option>
+								  <option value="北京银行" <eq name="userinfo.zz_bank" value="北京银行">selected</eq>>北京银行</option>
+								  <option value="邮政储蓄银行" <eq name="userinfo.zz_bank" value="邮政储蓄银行">selected</eq>>邮政储蓄银行</option>
+								  <option value="南京银行" <eq name="userinfo.zz_bank" value="南京银行">selected</eq>>南京银行</option>
+								  <option value="宁波银行" <eq name="userinfo.zz_bank" value="宁波银行">selected</eq>>宁波银行</option>
+								  <option value="上海农商银行" <eq name="userinfo.zz_bank" value="上海农商银行">selected</eq>>上海农商银行</option>
+								  <option value="华润银行" <eq name="userinfo.zz_bank" value="华润银行">selected</eq>>华润银行</option>
+								  <option value="江苏银行" <eq name="userinfo.zz_bank" value="江苏银行">selected</eq>>江苏银行</option>
+								  <option value="广东南粤银行" <eq name="userinfo.zz_bank" value="广东南粤银行">selected</eq>>广东南粤银行</option>
+								  <option value="其他银行" <eq name="userinfo.zz_bank" value="其他银行">selected</eq>>其他银行</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label>开户银行全称</label><font color="green">(详细到支行)</font><label>:</label>
+								<input type="tel" id="zz_bankqc" placeholder="开户银行全称" name="zz_bankqc" value="{$userinfo['zz_bankqc']}" class="form-control" <if condition="($userinfo['userAudit'] eq 1) OR ($userinfo['userAudit'] eq 2)">disabled</if>>
+							</div>
+							<div class="form-group">
+								<label>结算账户</label><font color="green">(企业需对公账户，个体户提供法人名下4、5、6开头的个人银行卡号)</font><label>:</label>
+								<input type="tel" id="zz_bankinfo" placeholder="请输入银行账号" name="zz_bankinfo" value="{$userinfo['zz_bankinfo']}" class="form-control" <if condition="($userinfo['userAudit'] eq 1) OR ($userinfo['userAudit'] eq 2)">disabled</if>>
+							</div>
+            	    	<if condition="($userinfo['userAudit'] eq 0) OR ($userinfo['userAudit'] eq 3)">
+            	    		<input type="hidden" name="sh" value="sh">
+            	    		<div class="form-group uploade">
+								<label>营业执照</label><span style="margin-left: 20px; color:green;">需年检章齐全（当年成立公司除外），必须为彩色图片且不超过500K</span>
+								<input type="text" placeholder="营业执照" <if condition=" $userinfo['yyzz']  neq '' "> value="营业执照已上传" readonly="readonly" <else /> value="" </if> class="form-control" >
+								<input type="hidden" placeholder="营业执照" value="{$userinfo['yyzz']|urldecode}" name="yyzz" class="hiddeninput">
+								<div class="dropz" style="height: 34px;line-height: 34px;border: 1px solid #e5e6e7;width: 70px;text-align: center;position: relative;top: -34px;float: right;cursor: pointer;">文件上传</div>
+							</div>
+							<div class="form-group uploade">
+								<label>组织机构代码证</label><span style="margin-left: 20px; color:green;">必须为彩色图片且小于500K；若你的企业三证合一，此处请再次上传营业执照</span>
+								<input type="text" placeholder="组织机构代码证" <if condition=" $userinfo['zzjg']  neq '' "> value="组织机构代码证已上传" readonly="readonly" <else /> value="" </if> class="form-control">
+								<input type="hidden" placeholder="组织机构代码证" value="{$userinfo['zzjg']|urldecode}" name="zzjg" class="hiddeninput">
+								<div class="dropz" style="height: 34px;line-height: 34px;border: 1px solid #e5e6e7;width: 70px;text-align: center;position: relative;top: -34px;float: right;cursor: pointer;">文件上传</div>
+							</div>
+							<div class="form-group uploade">
+								<label>身份证正面照片</label><span style="margin-left: 20px; color:green;">必须为彩色图片且小于500K</span>
+								<input type="text" placeholder="身份证正面照片" <if condition=" $userinfo['sfzz']  neq '' "> value="身份证正面已上传" readonly="readonly" <else /> value="" </if>  class="form-control">
+								<input type="hidden" placeholder="身份证正面照片<" value="{$userinfo['sfzz']|urldecode}" name="sfzz" class="hiddeninput">
+								<div class="dropz" style="height: 34px;line-height: 34px;border: 1px solid #e5e6e7;width: 70px;text-align: center;position: relative;top: -34px;float: right;cursor: pointer;">文件上传</div>
+							</div>
+							<div class="form-group uploade">
+								<label>身份证反面照片</label><span style="margin-left: 20px; color:green;">必须为彩色图片且小于500K</span>
+								<input type="text" placeholder="身份证反面照片" <if condition=" $userinfo['sfzf']  neq '' "> value="身份证反面已上传" readonly="readonly" <else /> value="" </if>  class="form-control">
+								<input type="hidden" placeholder="身份证反面照片" value="{$userinfo['sfzf']|urldecode}" name="sfzf" class="hiddeninput">
+								<div class="dropz" style="height: 34px;line-height: 34px;border: 1px solid #e5e6e7;width: 70px;text-align: center;position: relative;top: -34px;float: right;cursor: pointer;">文件上传</div>
+							</div>
+							<div class="form-group uploade">
+								<label>特殊资质</label><span style="margin-left: 20px; color:green;">特殊行业如许可证，授权书，备案表等，有则必填</span>
+								<input type="text" placeholder="特殊资质(有则必填)" <if condition=" $userinfo['tszz']  neq '' "> value="身份证反面已上传" readonly="readonly" <else /> value="" </if>  class="form-control">
+								<input type="hidden" placeholder="特殊资质(有则必填)" value="{$userinfo['tszz']|urldecode}" name="tszz" class="hiddeninput">
+								<div class="dropz" style="height: 34px;line-height: 34px;border: 1px solid #e5e6e7;width: 70px;text-align: center;position: relative;top: -34px;float: right;cursor: pointer;">文件上传</div>
+							</div>
+						<else />
+            	    		<div class="form-group uploade">
+								<label>营业执照</label><span style="margin-left: 20px; color:green;">需年检章齐全（当年成立公司除外），必须为彩色图片且不超过500K</span>
+								<div><img width="50%" src="__ROOT__{$userinfo['yyzz']}"></div>
+							</div>
+							<div class="form-group uploade">
+								<label>组织机构代码证</label><span style="margin-left: 20px; color:green;">必须为彩色图片且小于500K；若你的企业三证合一，此处请再次上传营业执照</span>
+								<div><img width="50%" src="__ROOT__{$userinfo['zzjg']}"></div>
+							</div>
+							<div class="form-group uploade">
+								<label>身份证正面照片</label><span style="margin-left: 20px; color:green;">必须为彩色图片且小于500K</span>
+								<div><img width="50%" src="__ROOT__{$userinfo['sfzz']}"></div>
+							</div>
+							<div class="form-group uploade">
+								<label>身份证反面照片</label><span style="margin-left: 20px; color:green;">必须为彩色图片且小于500K</span>
+								<div><img width="50%" src="__ROOT__{$userinfo['sfzf']}"></div>
+							</div>
+							<div class="form-group uploade">
+								<label>特殊资质</label><span style="margin-left: 20px; color:green;">特殊行业如许可证，授权书，备案表等，有则必填</span>
+								<div><img width="50%" src="__ROOT__{$userinfo['tszz']}"></div>
+							</div>
+						</if>
+            			</div>
+					</div>
+				</div>
+				<input type="hidden" value="union" name="type">
+				<input type="hidden" value="{$userinfo['tgId']}" name="tgId">
+				<input type="hidden" value="{$token}" name="token">
+				<div class="col-lg-12">
+               	 	<button type="submit" class="btn btn-primary pull-right">保存</button>
+           		</div>
+				</form>
+            </div>
+
+	</div>
+</body>
+	<script src="__JS__/plugins/dropzone.js"></script>
+    <script src="__JS__/plugins/icheck.min.js"></script>
+    <script src="__JS__/jquery.validate.min.js"></script>
+    <!-- Page-Level Scripts -->
+    <script>
+        $(document).ready(function() {
+			employers.init();
+			$(".dropz").dropzone({
+				url: "{:U('Manage/Union/img_Upload',array('tgId'=>$userinfo['tgId'],'token'=>$token,'type'=>'union','key'=>rand(1,9999999)))}",
+				addRemoveLinks: false,
+				maxFilesize: 2,
+				acceptedFiles: ".jpg,.png,.gif,.jpeg",
+				uploadMultiple: false,
+				init: function() {
+					this.on("success", function(file,responseText) {
+						if(responseText.status == 1){
+							/***这里的this.element 是 $(".dropz")****/
+							$(this.element).siblings('.form-control').val('文件已上传');
+							$(this.element).siblings('.form-control').attr('readonly','readonly');
+							$(this.element).siblings('.hiddeninput').val(responseText.savepath);
+						}else{
+							swal({title: "温馨提示",text:responseText.error,type: "error"});
+						}
+					});
+				}
+			});
+        });
+		!function(a,b){
+			var employers = employers || {};
+			employers.init = function(){
+				var c = employers;
+				b('.part_item .checkAll').click(function(){
+					var checkItems = b(this).parents('.part_item_t').siblings('.part_item_b').find('p').find('input[name="authority[]"]');
+					if (b(this).is(':checked') == false) {
+						checkItems.each(function(ke,el){
+							$(el).iCheck('uncheck');
+						});
+					}else{
+						checkItems.each(function(ke,el){
+							$(el).iCheck('check');
+						});
+					}
+				});
+				jQuery.extend(jQuery.validator.messages, {
+  					required: "必填字段",
+  					remote: "请修正该字段",
+  					email: "请输入正确格式的电子邮件",
+  					equalTo: "请再次输入相同的值",
+  					maxlength: jQuery.validator.format("请输入一个长度最多是 {0} 的字符串"),
+  					minlength: jQuery.validator.format("请输入一个长度最少是 {0} 的字符串"),
+				});
+				b('#employersForm').validate({
+                    errorPlacement: function (error, element){
+                            element.before(error);
+                    },
+                    rules: {
+                        confirm: {
+                            equalTo: "#password"
+                        },
+						account: {
+							minlength: 4
+						},
+						password: {
+							minlength: 4
+						}
+                    }
+                });
+			};
+			a.employers = employers;
+		}(window,jQuery);
+    </script>
+</html>

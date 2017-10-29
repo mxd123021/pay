@@ -1,0 +1,256 @@
+<extend name="Public/base"/>
+
+<block name="title">收银台</block>
+
+<block name="levels"><li><a href="{:U("Manage/Index/index")}">首页</a></li></block>
+
+<block name="body">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <div class="pull-right" style="width: 330px;">
+                        <div class="pull-left"><i class="fa fa-info-circle"></i> 用于收银和系统通知</div>
+                        <if condition="$wxinfo neq ''">
+                            <span class="label" style="margin-left: 10px;">已绑定微信</span>
+                            <div class="switch" style="width: 60px; float: right; margin-left: 15px;">
+                                <div class="onoffswitch">
+                                    <input type="checkbox" <?php if($wxinfo['isSend'] == 1){ echo 'checked'; }?> class="status-checkbox onoffswitch-checkbox" data-id="<?php echo $wxinfo['id'];?>" id="staff<?php echo $wxinfo['id'];?>">
+                                    <label class="onoffswitch-label" for="staff<?php echo $wxinfo['id'];?>">
+                                        <span class="onoffswitch-inner"></span>
+                                        <span class="onoffswitch-switch"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="pull-right" style="margin-left:10px;width: 25px;">
+                                <img src="{$wxinfo.headimgurl}" style="width: 25px;height:25px;">
+                            </div>
+                        <else />
+                            <button id="bdwx" type="button" class="btn btn-danger btn-xs" style="margin-left: 10px;">点击绑定微信</button>
+                        </if>
+                    </div>
+                    <h5>基本信息</h5>
+                    
+                </div>
+                <div class="ibox-content">
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h1 class="no-margins">{$configs.userName}</h1>
+                            <div><small>公司名称</small></div>
+                        </div>
+                        <div class="col-md-6">
+                            <h1 class="no-margins">{$stores.business_name}</h1>
+                            <div><small>店铺名称</small></div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <span class="label label-success pull-right">今日</span>
+                    <h5>当前员工收入</h5>
+                </div>
+                <div class="ibox-content">
+                    <h1 class="no-margins">{$data['curmIncome']}</h1>
+                    <div class="stat-percent font-bold <if condition="$data['perIncome'] eq 0">text-success<elseif condition="$data['perIncome'] gt 0"/>text-info<elseif condition="$data['perIncome'] lt 0"/>text-danger</if>">{$data['perIncome']}% <i class="fa <if condition="$data['perIncome'] eq 0">fa-bolt<elseif condition="$data['perIncome'] gt 0"/>fa-level-up<elseif condition="$data['perIncome'] lt 0"/>fa-level-down</if>"></i>
+                    </div>
+                    <small>总收入</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <span class="label label-info pull-right">今年</span>
+                    <h5>当前员工订单</h5>
+                </div>
+                <div class="ibox-content">
+                    <h1 class="no-margins">{$data['curTotal']}</h1>
+                    <div class="stat-percent font-bold <if condition="$data['lastTotal'] eq 0">text-success<elseif condition="$data['lastTotal'] gt 0"/>text-info<elseif condition="$data['lastTotal'] lt 0"/>text-danger</if>">{$data['lastTotal']}% <i class="fa <if condition="$data['lastTotal'] eq 0">fa-bolt<elseif condition="$data['lastTotal'] gt 0"/>fa-level-up<elseif condition="$data['lastTotal'] lt 0"/>fa-level-down</if>"></i>
+                    </div>
+                    <small>订单数</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <div>
+                        <span class="pull-right text-right">
+                        <div class="legend"><table style="position:absolute;top:9px;right:37px;;font-size:smaller;color:#838383"><tbody><tr><td class="legendColorBox"><div style="border:1px solid #000000;padding:1px"><div style="width:4px;height:0;border:5px solid RGB(220,220,220);overflow:hidden"></div></div></td><td class="legendLabel">总金额</td></tr><tr><td class="legendColorBox"><div style="border:1px solid #000000;padding:1px"><div style="width:4px;height:0;border:5px solid RGB(26,179,148);overflow:hidden"></div></div></td><td class="legendLabel">订单数</td></tr></tbody></table></div>
+                        </span>
+                        <h3 class="font-bold no-margins">
+                        半年收入利润率
+                    </h3>
+                        <small>明细表</small>
+                    </div>
+
+                    <div class="m-t-sm">
+
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div>
+                                    <canvas id="lineChart" height="175" width="463" style="width: 463px; height: 175px;"></canvas>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <ul class="stat-list m-t-lg">
+                                    <li>
+                                        <h2 class="no-margins">{$data.lastmOrder}</h2>
+                                        <small>上个月总订单</small>
+                                        <div class="progress progress-mini">
+                                            <div class="progress-bar" style="width:<?php echo $data['lastmOrder']/($data['lastmOrder']+$data['curmTotal'])*100; ?>%;"></div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <h2 class="no-margins ">{$data.curmTotal}</h2>
+                                        <small>当月订单</small>
+                                        <div class="progress progress-mini">
+                                            <div class="progress-bar" style="width:<?php echo $data['curmTotal']/($data['lastmOrder']+$data['curmTotal'])*100; ?>%;"></div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="m-t-md">
+                        <small class="pull-right">
+                        <i class="fa fa-clock-o"> </i>
+                        {:date('Y.m.d')}更新
+                    </small>
+                        <small>
+                        <strong>说明：</strong> 本期销售额比上期增长了{$data['perIncome']}%。
+                    </small>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+
+<block name="top">
+<style>
+.fl{float: left; margin-left: 5px;}
+.clearfix:after {
+  content: " ";
+  display: block;
+  clear: both;
+  height: 0;
+}
+.code-box{width:172px;height:172px;padding:3px 4px;position:relative;margin-top: 5px;background:#fff;}
+.codebox-tips{background: #44b549;margin: 5px 0 0 0;color: #fff;height:27px;line-height:16px;font-size:14px;text-align: center;padding:5px 6px;width:172px;}
+.codebox-tips i{ display:inline-block;background:url(__IMG__/pay_icon/czzx_btn0723.png) no-repeat 0 -86px;_background:url(__IMG__/pay_icon/czzx_btn0723_png8.png) no-repeat 0 -86px;width:18px;height:16px;margin-right:3px;vertical-align:middle}
+#qr-code img{vertical-align: middle; width: 164px;}
+#qr-code {line-height: 164px;}
+</style>
+</block>
+
+<block name="bottom">
+<div class="modal inmodal" tabindex="-1" role="dialog"  id="bdweixin">
+        <div class="modal-dialog">
+            <div class="modal-content animated bounceInRight">
+                <div class="modal-header">
+                    <button type="button" class="close _close"><span style="font-size: 35px;">×</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">微信绑定流程</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="fl">
+                        <div class="code-box">
+                            <div id="qr-code"><img src="http://open.weixin.qq.com/qr/code/?username={$sysconfigs.wxId}"></div>
+                        </div>
+                        <div class="codebox-tips"><i>1</i>请使用微信扫描关注</div>
+                    </div>
+                    <div class="fl">
+                        <div class="code-box">
+                            <div id="qr-code"><img src="__IMG__/lcbdwx1.png"></div>
+                        </div>
+                        <div class="codebox-tips"><i>2</i>点击账号绑定</div>
+                    </div>
+                    <div class="fl">
+                        <div class="code-box">
+                            <div id="qr-code"><img src="__IMG__/lcbdwx2.png"></div>
+                        </div>
+                        <div class="codebox-tips"><i>3</i>输入账号进行绑定</div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white _close">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+ <script src="__JS__/Chart.min.js"></script>
+ <script>
+        $(document).ready(function() {
+
+            $('#bdwx').click(function(){
+                $('#bdweixin').show();
+            });
+
+            $("#bdweixin ._close").click(function(){
+              $('#bdweixin').hide();
+              $('.modal-backdrop').remove();
+            });
+
+    var lineData = {
+        labels: ["{$months.month.0}","{$months.month.1}","{$months.month.2}","{$months.month.3}","{$months.month.4}","{$months.month.5}","{$months.month.6}"],
+        datasets: [{
+            label: "总收入",
+            fillColor: "rgba(220,220,220,0.5)",
+            strokeColor: "rgba(220,220,220,1)",
+            pointColor: "rgba(220,220,220,1)",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(220,220,220,1)",
+            data: [{$months.price.0}, {$months.price.1}, {$months.price.2}, {$months.price.3}, {$months.price.4}, {$months.price.5}, {$months.price.6}]
+        }, {
+            label: "订单数",
+            fillColor: "rgba(26,179,148,0.5)",
+            strokeColor: "rgba(26,179,148,0.7)",
+            pointColor: "rgba(26,179,148,1)",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(26,179,148,1)",
+            data: [{$months.total.0}, {$months.total.1}, {$months.total.2}, {$months.total.3}, {$months.total.4}, {$months.total.5}, {$months.total.6}]
+        }]
+    };
+
+    var lineOptions = {
+        scaleShowGridLines: true,
+        scaleGridLineColor: "rgba(0,0,0,.05)",
+        scaleGridLineWidth: 1,
+        bezierCurve: true,
+        bezierCurveTension: 0.4,
+        pointDot: true,
+        pointDotRadius: 4,
+        pointDotStrokeWidth: 1,
+        pointHitDetectionRadius: 20,
+        datasetStroke: true,
+        datasetStrokeWidth: 2,
+        datasetFill: true,
+        responsive: true,
+    };
+    var ctx = document.getElementById("lineChart").getContext("2d");
+    var myNewChart = new Chart(ctx).Line(lineData, lineOptions)
+});
+
+$('.status-checkbox').change(function(){
+    var i = $(this).attr('data-id'),s = $(this).is(':checked') ? 1 : 0;
+    $.post('{:U("Manage/Index/editisSend")}',{id:i,status:s},function(re){
+        if(re.status == -1){
+            swal("错误", re.msg, "error");
+        }
+    },'json');
+});
+    </script>
+</block>

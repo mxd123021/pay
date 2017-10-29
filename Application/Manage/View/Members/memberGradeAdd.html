@@ -1,0 +1,120 @@
+<extend name="Public/base"/>
+
+<block name="title">会员等级添加</block>
+
+<block name="levels"><li><a href="{:U("Manage/Index/index")}">后台首页</a></li><li>会员等级</li></block>
+
+<block name="body">
+<div class="col-lg-12">
+    <div class="row" style="background-color: #ffffff;">
+        <div>
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>会员等级添加</h5></div>
+                <div class="ibox-content">
+                    <div class="toleft">
+                        <form method="POST" action="{:U("Manage/Members/gradeAdd")}" id="editCardform" class="form-horizontal" onclick="return false;">
+                            <div class="form-group">
+                                <label class="collabel control-label">等级名称</label>
+                                <div class="col-sm-4 input-group">
+                                    <input type="text" name="title" id="miniscore" value="" class="form-control" placeholder="如：初级会员">
+                                    <span class="help-block m-b-none"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="collabel control-label">等级经验值</label>
+                                <div class="col-sm-4 input-group">
+                                    <input type="text" name="exp" id="miniscore" value="" class="form-control" placeholder="如：100">
+                                    <span class="help-block m-b-none"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="collabel control-label">折扣率</label>
+                                <div class="col-sm-4 input-group">
+                                    <input type="text" name="discount" id="miniscore" value="" class="form-control" placeholder="如：9.8">
+                                    <span class="help-block m-b-none"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="collabel control-label">排序</label>
+                                <div class="col-sm-4 input-group">
+                                    <input type="text" name="sort" id="miniscore" value="" class="form-control" placeholder="如：1">
+                                    <span class="help-block m-b-none">序号越大越靠前</span></div>
+                            </div>
+                            <input type="hidden" name="grade_id" value="">
+                            <div class="form-group">
+                                <div class="col-lg-offset-2 ">
+                                    <a class="btn btn-sm btn-primary asubmit" href="javascript:;" id="submit_apply">保 &nbsp;&nbsp; 存</a></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</block>
+
+<block name="top">
+<style>
+.vipcard{position:relative;margin:0 auto;text-align:left}
+#cardbg,.vipcard{width:267px;height:159px}
+#cardbg{position:absolute;top:0;left:0;z-index:1;-webkit-border-radius:8px;-moz-border-radius:8px;border-radius:8px;-webkit-box-shadow:0 0 8px rgba(0,0,0,.6);-moz-box-shadow:0 0 4px rgba(0,0,0,.6);box-shadow:0 0 4px rgba(0,0,0,.6)}
+.vipcard .logo{position:absolute;top:8px;left:5px;z-index:2;max-height:70px;height: 70px;}
+.vipcard .verify{top:105px;right:9pt;display:inline-block;height:40px;font-size:20px;line-height:24px}
+.vipcard .verify,.vipcard h1{z-index:2;color:#000;text-align:right;text-shadow:0 1px hsla(0,0%,100%,.2)}
+.vipcard h1{position:absolute;top:7px;right:10px;font-weight:400;font-size:11px;line-height:25px}
+.vipcard .verify span{display:inline-block;text-align:left}
+.vipcard .verify em{display:block;font-weight:normal;font-style:normal;font-size:10px;line-height:13px}
+.frm_input,.frm_textarea{width:100%;outline:0 0;border:0 none;background-color:transparent}
+.frm_input{margin:4px 0;height:25px}
+button,input,select,textarea{font-size:inherit;font-family:inherit;line-height:inherit}
+.frm_input_box{position:relative;display:inline-block;padding:0 10px;width:220px;height:auto;min-height:30px;border:1px solid #e7e7eb;border-radius:0;background-color:#fff;box-shadow:none;vertical-align:middle;font-size:14px;line-height:30px}
+.toleft{width:58%}
+.toleft,.toright{float:left}
+.form-horizontal .collabel{position:relative;float:left;padding-right:15px;padding-left:15px;width:15%;min-height:1px}
+.form-horizontal .input-group{float:left;display:inline-block;padding-right:15px}
+.form-horizontal .input-group-r,.form-horizontal .input-group-r input{display:inline-block}
+.i-checks label{cursor:pointer}
+.pdo{position:absolute;top:0;left:0;display:inline-block}
+.toright .red{color: #f00;display: block;font-size: 15px;margin-top: 7px;}
+.dbutton{height: 34px;line-height: 34px;border: 1px solid #e5e6e7;width: 85px;text-align: center;cursor: pointer; display: inline-block; background-color: #fff;}
+.col-lg-offset-2{margin-left:35%;}
+.dropz1 .dz-image-preview{display:none;}
+.dropz2 .dz-image-preview{display:none;}
+.formdiv{ color: #555;font-size: 14px;height: 34px;line-height: 1.42857;padding: 6px 1px;}
+#datepicker2 input{width: 45%;display: inline-block;}
+#datepicker2{padding:0px;}
+</style>
+</block>
+
+<block name="bottom">
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#submit_apply').click(function(){
+        $.ajax({
+            url:$('#editCardform').attr('action'),
+            type:"post",
+            data:$('form').serialize(),
+            dataType:"JSON",
+            success:function(sta){
+                console.log(sta);
+                if(!sta.err_code){
+                    swal({
+                          title: "温馨提示",
+                          text: "保存成功！",
+                          type: "success",
+                          closeOnConfirm: false
+                         },function(){
+                            location.href = '{:U("Manage/Members/memberGrade")}';
+                        });
+                } else {
+                    swal("温馨提示", sta.err_msg, "error");
+               }
+            }
+        });
+        return false;
+    });
+});
+</script>
+</block>

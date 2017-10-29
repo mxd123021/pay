@@ -1,0 +1,335 @@
+<extend name="Public/base"/>
+
+<block name="title">管理员列表</block>
+
+<block name="levels"><li><a href="{:U("SX/Index/index")}">后台首页</a></li><li>系统配置</li><li>管理员配置</li></block>
+
+<block name="body">
+	            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-content">
+                            <input type="text" class="form-control input-sm m-b-xs" id="filter" placeholder="搜索管理员">
+							<form action="{:U('SX/Index/employersDelAll')}" class="employersDelAll" method="post">
+                            <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="10" data-filter=#filter>
+                                <thead>
+                                <tr>
+                                    <th data-sort-ignore="true" class="check-mail"><input type="checkbox" class="i-checks" id="check_box"></th>
+                                    <th>管理员名称</th>
+                                    <th>登陆账号</th> 
+                                    <th data-hide="phone">所属角色</th>
+                                    <th data-hide="phone">最后登录IP</th>
+                                    <th data-hide="phone">最后登录时间</th>
+                                    <th data-sort-ignore="true">操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+								<?php foreach($staffs as $key=>$val){ ?>
+                                <tr>
+                                    <td class="check-mail"><input type="checkbox" class="i-checks" value="<?php echo $val['staffId'];?>" name="id[]"></td>
+                                    <td><?php echo $val['staffName'];?></td>
+                                    <td><?php echo $val['userName'];?></td>
+                                    <td><?php echo $role[$val['staffRoleId']];?></td>
+                                    <td><?php echo $val['lastIP'];?></td>
+                                    <td><?php echo $val['lastTime'];?></td>
+                                    <td class="center">
+										<div class="btn-group">
+                                            <a href="{:U('SX/Index/employersEdit',array('id' => $val['staffId']))}" class="btn btn-white btn-sm employersEdit"><i class="fa fa-pencil"></i> 编辑</a>
+                                            <a href="javascript:void(0)" class="btn btn-white btn-sm employersDel" data-id="<?php echo $val['staffId'];?>"><i class="fa fa-times"></i> 删除</a>
+                                        </div>
+									</td>
+                                </tr>
+								<?php }?>
+                                </tbody>
+                            </table>
+							</form>
+							<div class="tooltip-demo">
+								<button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal5" data-toggle="tooltip" data-placement="left" title="" data-original-title="添加员工"><i class="fa fa-plus"></i> 添加</button>
+								<button class="btn btn-white btn-sm info_del_all" data-toggle="tooltip" data-placement="top" title="" data-original-title="删除管理员"><i class="fa fa-trash-o"></i> </button>
+								<ul class="pagination pull-right"></ul>
+							</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+</block>
+
+<block name="top">
+<link href="__CSS__/footable.core.css" rel="stylesheet">
+<link href="__CSS__/plugins/custom.css" rel="stylesheet">
+	<style>
+		.ibox{
+		 	border: 1px solid #e7eaec;
+		}
+		.part_item {
+  			background: none repeat scroll 0 0 #fff;
+  			border: 1px solid #ccc;
+  			border-radius: 5px;
+  			padding-bottom: 15px;
+  			margin-bottom: 10px;
+		}
+		.form .part_item p {
+  			display: inline-block;
+  			font-size: 14px;
+  			overflow: hidden;
+  			padding: 10px 20px 0;
+  			text-overflow: ellipsis;
+  			white-space: nowrap;
+		}
+		.part_item_b {
+  			border-top: 1px solid #ccc;
+  			margin-top: 10px;
+		}
+		.form .part_item p.active {
+  			color: #f87b00;
+		}
+		.part_item input {
+  			font-size: 14px;
+  			margin-bottom: 2px;
+  			margin-right: 5px;
+		}
+		.pagination{
+			margin:0px;
+		}
+		.mustInput {
+  			color: red;
+  			margin-right: 5px;
+		}
+		@media (min-width: 768px){
+			.form .part_item p {
+				width: 37%;
+			}
+		}
+		@media (min-width: 992px){
+			.form .part_item p {
+				width: 24%;
+			}
+		}
+	.form-control, .single-line{width: 50%;}
+	</style>
+</block>
+<block name="bottom">
+	<div class="modal inmodal fade" id="myModal5" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+    	<div class="modal-dialog modal-lg">
+        	<div class="modal-content">
+            	<div class="modal-header">
+				 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">添加管理员</h4>
+                </div>
+                <div class="modal-body clearfix">
+					<form id="employersForm" class="form" action="{:U('SX/Index/employersAdd')}" method="post">
+						<div class="col-lg-12">
+							<div class="ibox">
+                        		<div class="ibox-title">
+                           			<h5>管理员信息</h5>
+                        		</div>
+                        		<div class="ibox-content">
+                            		<div class="form-group">
+										<label><span class="mustInput">*</span>管理员名称:<span class="f999">(20字以内)</span></label>
+										<input type="text"  id="username" placeholder="请输入管理员名称" name="username" class="form-control required" aria-required="true">
+									</div>
+									<div class="form-group">
+										<label><span class="mustInput">*</span>登录账号:</label>
+										<input type="text" id="account" placeholder="请输入登录账号" name="account" class="form-control required"aria-required="true">
+									</div>
+									<div class="form-group">
+										<label><span class="mustInput">*</span>密码:</label>
+										<input type="password" id="password" placeholder="请输入密码(6到20个字符)" name="password" class="form-control required" aria-required="true">
+									</div>
+									<div class="form-group">
+										<label><span class="mustInput">*</span>确认密码:<span class="f999"></span></label>
+										<input type="password" id="confirm" placeholder="" name="confirm" class="form-control required" aria-required="true">
+									</div>
+									<div class="form-group">
+										<label><span class="mustInput"></span>角色选择：<span class="f999"></span></label>
+										 <select id="roleId" name="roleId" class="form-control" aria-required="true" min="1" style="z-index:999">
+										  <option value="0">请选择门</option>
+										  <?php foreach($roles as $svv){?>
+										   <option  value="<?php echo $svv['roleId'];?>" ><?php echo $svv['roleName'];?>
+										   </option>
+										  <?php }?>
+										 </select>
+									</div>
+
+                        		</div>
+                    		</div>
+						</div>
+					</form>
+               	</div>
+                <div class="modal-footer">
+                	<button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
+                	<button type="button" class="btn btn-primary formSubmit">保存</button>
+                </div>
+          	</div>
+        </div>
+    </div>
+
+    <!-- FooTable -->
+    <script src="__JS__/footable.all.min.js"></script>
+	
+	<!-- iCheck -->
+    <script src="__JS__/plugins/icheck.min.js"></script>
+	
+	<!-- Jquery Validate -->
+    <script src="__JS__/jquery.validate.min.js"></script>
+
+    <!-- Page-Level Scripts -->
+    <script>
+        $(document).ready(function() {
+			employers.init();
+        });
+		!function(a,b){
+			var employers = employers || {};
+			employers.init = function(){
+				var c = employers;
+				b('.footable').footable();
+				b('.i-checks').iCheck({
+                	checkboxClass: 'icheckbox_square-green',
+                	radioClass: 'iradio_square-green',
+            	});
+				b('#check_box').on('ifChanged', function(){
+					c.selectall('id[]','check_box');
+				});
+				b('.info_del_all').click(function(){
+					c.delAll();
+				});
+				b('.part_item .checkAll').click(function(){
+					var checkItems = b(this).parents('.part_item_t').siblings('.part_item_b').find('p').find('input[name="authority[]"]');
+					if (b(this).is(':checked') == false) {
+						checkItems.each(function(ke,el){
+							$(el).iCheck('uncheck');
+						});
+					}else{
+						checkItems.each(function(ke,el){
+							$(el).iCheck('check');
+						});
+					}
+				});
+				jQuery.extend(jQuery.validator.messages, {
+  					required: "必填字段",
+  					remote: "请修正该字段",
+  					equalTo: "请再次输入相同的值",
+  					min: jQuery.validator.format("请选择角色"),
+  					maxlength: jQuery.validator.format("请输入一个长度最多是 {0} 的字符串"),
+  					minlength: jQuery.validator.format("请输入一个长度最少是 {0} 的字符串"),
+				});
+				b('#employersForm').validate({
+                    errorPlacement: function (error, element){
+                            element.before(error);
+                    },
+                    rules: {
+                        confirm: {
+                            equalTo: "#password"
+                        },
+						account: {
+							minlength: 4
+						},
+						password: {
+							minlength: 4
+						}
+                    }
+                });
+				b('.formSubmit').click(function(){
+					if(b('#account').val() != ''){
+						$.post('{:U("SX/Index/checkAccount")}',{account:b('#account').val()},function(re){
+							if(re.status == -1){
+								b('#account').addClass('error');
+								swal(re.msg, "请修改登陆账号", "error");
+							}else if(re.status == 1){
+								b('#employersForm').submit();
+							}
+						},'json');
+					}else{
+						b('#employersForm').submit();
+					}
+				});
+				b('.employersDel').click(function(){
+					var c = b(this);
+					swal({
+        				title: "是否删除这条数据?",
+        				text: "删除数据后将无法恢复，确认要删除吗！",
+        				type: "warning",
+                   	 	confirmButtonColor: "#DD6B55",
+                   	 	confirmButtonText: "删除",
+                    	cancelButtonText: "取消",
+                    	closeOnConfirm: false,
+                    	showCancelButton: true,
+    				}, function (){
+						$.post('{:U("SX/Index/employersDel")}',{staffId:c.attr('data-id')},function(re){
+							if(re.status == 1){
+								swal("成功", re.msg, "success");
+								c.parents('tr').remove();
+								b('.footable').footable();
+
+							}else{
+								swal("错误", re.msg, "error");
+							}
+						},'json');
+    				});
+				});
+				b('.employersEdit').click(function(){
+					c.edit(b(this).attr('data-id'));
+				});
+			};
+			employers.selectall = function(name,id){
+				var checkItems = b('input[name="'+name+'"]');
+				if ($("#"+id).is(':checked') == false) {
+					checkItems.each(function(ke,el){
+						$(el).iCheck('uncheck');
+					});
+				}else{
+					checkItems.each(function(ke,el){
+						$(el).iCheck('check');
+					});
+				}
+			}
+			employers.delAll = function(){
+				swal({
+        			title: "是否删除选中?",
+        			text: "删除数据后将无法恢复，确认要删除吗！",
+        			type: "warning",
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "删除",
+                    cancelButtonText: "取消",
+                    closeOnConfirm: false,
+                    showCancelButton: true,
+    			}, function (){
+					var checkItems = b('input[name="id[]"]'),c = false;
+			
+					checkItems.each(function(ke,el){
+						if($(el).is(':checked') == true){
+							c = true;
+						}
+					});
+					if(c == false){
+						swal("错误", "你至少需要选中一项 :)", "error");
+						return false;
+					}
+					$('.employersDelAll').submit();
+    			});
+			}
+			employers.iframeRresponsible = function(){
+				var $allObjects = $("iframe, object, embed"),
+        		$fluidEl = $("figure");
+
+   	 			$allObjects.each(function() {
+        			$(this)
+           			 // jQuery .data does not work on object/embed elements
+            		.attr('data-aspectRatio', this.height / this.width)
+            		.removeAttr('height')
+            		.removeAttr('width');
+    			});
+   		 		$(window).resize(function() {
+        			var newWidth = $fluidEl.width();
+        			$allObjects.each(function() {
+        			    var $el = $(this);
+        			    $el
+        			    .width(newWidth)
+        			    .height(newWidth * $el.attr('data-aspectRatio'));
+        			});
+    			}).resize();
+			}
+			a.employers = employers;
+		}(window,jQuery);
+    </script>
+</block>

@@ -1,0 +1,329 @@
+<extend name="Public/base"/>
+
+<block name="title">支付配置</block>
+
+<block name="levels"><li><a href="{:U("SX/Index/index")}">后台首页</a></li><li>系统配置</li></block>
+
+<block name="body">
+	<div class="row">
+		<div class="col-sm-7">
+	        <div class="tabs-container">
+	            <div class="tabs-left">
+	                <ul class="nav nav-tabs">
+	                    <li class="active"><a data-toggle="tab" href="tabs_panels.html#tab-1" aria-expanded="true">基本配置</a>
+	                    </li>
+	                    <li class=""><a data-toggle="tab" href="tabs_panels.html#tab-2" aria-expanded="false">消息推送</a>
+	                    </li>
+	                </ul>
+	                <div class="tab-content ">
+						<div id="tab-1" class="tab-pane active">
+							<div class="panel-body">
+								<form action enctype="multipart/form-data" onsubmit="return false">
+									<div class="form-group"><label>微信公众号</label>
+										<input type="text" placeholder="公众号码" name="wxId" class="form-control" value="{$configs.wxId}">
+									</div>
+	                                <div class="form-group">
+	                                	<button id="saveWxconfig" class="btn btn-primary pull-right" type="submit">保存内容</button>
+	                                </div>
+	                            </form>
+							</div>
+	                	</div>
+	                    <div id="tab-2" class="tab-pane">
+							<div class="panel-body">
+	                            <div class="panel-group" id="accordion">
+	                                <div class="panel panel-default">
+	                                    <div class="panel-heading">
+	                                        <h5 class="panel-title">
+	                                                <a data-toggle="collapse" data-parent="#accordion" href="tabs_panels.html#collapseOne">支付成功</a>
+	                                            </h5>
+	                                    </div>
+	                                    <div id="collapseOne" class="panel-collapse collapse in">
+	                                        <div class="panel-body panel-info" style="margin-left: 0; width: 100%; border: none; border-top: 1px solid #ddd;">
+	                                        		<form action enctype="multipart/form-data" onsubmit="return false">
+	                                        			<?php if(isset($paytemp)){ ?>
+														<div class="form-group"><label>模板ID</label>
+															<div class="input-group">
+						                                        <input type="text" class="form-control" name="tempId" id="tempIdzf" value="<?php echo $paytemp['tempId'] ?>"> <span class="input-group-btn"> <button type="button" class="btn btn-primary" onclick="wxTemplateset('zf');">获取模板</button></span>
+						                                    </div>
+						                                    <div id="divtempzf" style="margin-top: 10px;">
+						                                    	<div class="form-group"><label>标题</label><input type="text" placeholder="标题" name="first" class="form-control" value="<?php echo $paytemp['first'] ?>"></div>
+						                                    	<?php
+						                                    		$i=0;
+						                                    		foreach($paytemp as $key=>$vo){ 
+																	if(strpos($key,'keyword')===0){
+																	$i++;
+																?>
+																	<div class="form-group"><label><?php echo $paytemp[kname.$i]; ?></label><select class="form-control m-b" name="keyword<?php echo $i;?>"><option value="1" <?php if($paytemp[keyword.$i]==1){echo selected;}?>>商品金额</option><option value="2" <?php if($paytemp[keyword.$i]==2){ echo selected;}?>>商户名称</option><option value="3" <?php if($paytemp[keyword.$i]==3){ echo selected;}?>>支付方式</option><option value="4" <?php if($paytemp[keyword.$i]==4){ echo selected;}?>>交易单号</option><option value="5" <?php if($paytemp[keyword.$i]==5){ echo selected;}?>>交易时间</option></select><input name="keyname<?php echo $i;?>" type="hidden" value="<?php echo $paytemp[keyname.$i]; ?>"><input name="kname<?php echo $i;?>" type="hidden" value="<?php echo $paytemp[kname.$i]; ?>"></div>
+						                                    	<?php }}?>
+						                                    	<div class="form-group"><label>备注</label><input type="text" placeholder="备注" name="remark" class="form-control" value="<?php echo $paytemp['remark']; ?>"></div>
+						                                    	<div class="form-group"><label>URL地址</label><input type="text" placeholder="点击跳转地址" name="url" class="form-control" value="<?php echo $paytemp['url']; ?>"></div>
+						                                    	<div class="well"><h5>内容示例</h5><?php echo $paytemp['example']; ?></div><input name="example" type="hidden" value="<?php echo $paytemp['example']; ?>">
+						                                    </div>
+						                                    <button id="saveTempzf" class="btn btn-primary pull-right" type="submit">保存内容</button>
+	                                                    </div>
+	                                                    <?php }else{ ?>
+														<div class="form-group"><label>模板ID</label>
+															<div class="input-group">
+						                                        <input type="text" class="form-control" name="tempId" id="tempIdzf"> <span class="input-group-btn"> <button type="button" class="btn btn-primary" onclick="wxTemplateset('zf');">获取模板</button></span>
+						                                    </div>
+						                                    <div id="divtempzf" style="margin-top: 10px;">
+						                                    </div>
+						                                    <button id="saveTempzf" class="btn btn-primary pull-right" type="submit" style="display: none;">保存内容</button>
+	                                                    </div>
+	                                                    <?php } ?>
+                                                    </form>
+	                                        </div>
+
+	                                    </div>
+	                                </div>
+	                                <div class="panel panel-default">
+	                                    <div class="panel-heading">
+	                                        <h4 class="panel-title">
+	                                                <a data-toggle="collapse" data-parent="#accordion" href="tabs_panels.html#collapseTwo">用户绑定</a>
+	                                            </h4>
+	                                    </div>
+	                                    <div id="collapseTwo" class="panel-collapse collapse">
+	                                        <div class="panel-body panel-info" style="margin-left: 0; width: 100%; border: none; border-top: 1px solid #ddd;">
+	                                        		<form action enctype="multipart/form-data" onsubmit="return false">
+	                                        			<?php if(isset($bindtemp)){ ?>
+														<div class="form-group"><label>模板ID</label>
+															<div class="input-group">
+						                                        <input type="text" class="form-control" name="tempId" id="tempIdbind" value="<?php echo $bindtemp['tempId'] ?>"> <span class="input-group-btn"> <button type="button" class="btn btn-primary" onclick="wxTemplateset('bind');">获取模板</button></span>
+						                                    </div>
+						                                    <div id="divtempbind" style="margin-top: 10px;">
+						                                    	<div class="form-group"><label>标题</label><input type="text" placeholder="标题" name="first" class="form-control" value="<?php echo $bindtemp['first'] ?>"></div>
+						                                    	<?php
+						                                    		$i=0;
+						                                    		foreach($bindtemp as $key=>$vo){ 
+																	if(strpos($key,'keyword')===0){
+																	$i++;
+																?>
+																	<div class="form-group"><label><?php echo $bindtemp[kname.$i]; ?></label><select class="form-control m-b" name="keyword<?php echo $i;?>"><option value="1" <?php if($bindtemp[keyword.$i]==1){echo selected;}?>>用户名</option><option value="2" <?php if($bindtemp[keyword.$i]==2){ echo selected;}?>>商品名称</option><option value="3" <?php if($bindtemp[keyword.$i]==3){ echo selected;}?>>用户类型</option><option value="4" <?php if($bindtemp[keyword.$i]==4){ echo selected;}?>>商品金额</option><option value="5" <?php if($bindtemp[keyword.$i]==5){ echo selected;}?>>时间</option></select><input name="keyname<?php echo $i;?>" type="hidden" value="<?php echo $bindtemp[keyname.$i]; ?>"><input name="kname<?php echo $i;?>" type="hidden" value="<?php echo $bindtemp[kname.$i]; ?>"></div>
+						                                    	<?php }}?>
+						                                    	<div class="form-group"><label>备注</label><input type="text" placeholder="备注" name="remark" class="form-control" value="<?php echo $bindtemp['remark']; ?>"></div>
+						                                    	<div class="form-group"><label>URL地址</label><input type="text" placeholder="点击跳转地址" name="url" class="form-control" value="<?php echo $bindtemp['url']; ?>"></div>
+						                                    	<div class="well"><h5>内容示例</h5><?php echo $bindtemp['example']; ?></div><input name="example" type="hidden" value="<?php echo $bindtemp['example']; ?>">
+						                                    </div>
+						                                    <button id="saveTempbind" class="btn btn-primary pull-right" type="submit">保存内容</button>
+	                                                    </div>
+	                                                    <?php }else{ ?>
+														<div class="form-group"><label>模板ID</label>
+															<div class="input-group">
+						                                        <input type="text" class="form-control" name="tempId" id="tempIdbind"> <span class="input-group-btn"> <button type="button" class="btn btn-primary" onclick="wxTemplateset('bind');">获取模板</button></span>
+						                                    </div>
+						                                    <div id="divtempbind" style="margin-top: 10px;">
+						                                    </div>
+						                                    <button id="saveTempbind" class="btn btn-primary pull-right" type="submit" style="display: none;">保存内容</button>
+	                                                    </div>
+	                                                    <?php } ?>
+                                                    </form>
+	                                        </div>
+	                                    </div>
+                                            
+                                            <!--/j结算通知/-->
+                                            <div class="panel panel-default">
+	                                    <div class="panel-heading">
+	                                        <h4 class="panel-title">
+	                                                <a data-toggle="collapse" data-parent="#accordion" href="tabs_panels.html#collapseThree">结算通知</a>
+	                                            </h4>
+	                                    </div>
+	                                    <div id="collapseThree" class="panel-collapse collapse">
+	                                        <div class="panel-body panel-info" style="margin-left: 0; width: 100%; border: none; border-top: 1px solid #ddd;">
+	                                        		<form action enctype="multipart/form-data" onsubmit="return false">
+	                                        			<?php if(isset($balancetemp)){ ?>
+														<div class="form-group"><label>模板ID</label>
+															<div class="input-group">
+						                                        <input type="text" class="form-control" name="tempId" id="tempIdbalance" value="<?php echo $balancetemp['tempId'] ?>"> <span class="input-group-btn"> <button type="button" class="btn btn-primary" onclick="wxTemplateset('balance');">获取模板</button></span>
+						                                    </div>
+						                                    <div id="divtempbalance" style="margin-top: 10px;">
+						                                    	<div class="form-group"><label>标题</label><input type="text" placeholder="标题" name="first" class="form-control" value="<?php echo $balancetemp['first'] ?>"></div>
+						                                    	<?php
+						                                    		$i=0;
+						                                    		foreach($balancetemp as $key=>$vo){ 
+																	if(strpos($key,'keyword')===0){
+																	$i++;
+																?>
+																	<div class="form-group"><label><?php echo $balancetemp[kname.$i]; ?></label><select class="form-control m-b" name="keyword<?php echo $i;?>"><option value="1" <?php if($balancetemp[keyword.$i]==1){echo selected;}?>>商户名称</option><option value="2" <?php if($balancetemp[keyword.$i]==2){ echo selected;}?>>收银账户</option><option value="3" <?php if($balancetemp[keyword.$i]==3){ echo selected;}?>>收银员</option><option value="4" <?php if($balancetemp[keyword.$i]==4){ echo selected;}?>>收银笔数</option><option value="5" <?php if($balancetemp[keyword.$i]==5){ echo selected;}?>>收银金额</option></select><input name="keyname<?php echo $i;?>" type="hidden" value="<?php echo $balancetemp[keyname.$i]; ?>"><input name="kname<?php echo $i;?>" type="hidden" value="<?php echo $balancetemp[kname.$i]; ?>"></div>
+						                                    	<?php }}?>
+						                                    	<div class="form-group"><label>备注</label><input type="text" placeholder="备注" name="remark" class="form-control" value="<?php echo $balancetemp['remark']; ?>"></div>
+						                                    	<div class="form-group"><label>URL地址</label><input type="text" placeholder="点击跳转地址" name="url" class="form-control" value="<?php echo $balancetemp['url']; ?>"></div>
+						                                    	<div class="well"><h5>内容示例</h5><?php echo $balancetemp['example']; ?></div><input name="example" type="hidden" value="<?php echo $balancetemp['example']; ?>">
+						                                    </div>
+						                                    <button id="saveTempbalance" class="btn btn-primary pull-right" type="submit">保存内容</button>
+	                                                    </div>
+	                                                    <?php }else{ ?>
+														<div class="form-group"><label>模板ID</label>
+															<div class="input-group">
+						                                        <input type="text" class="form-control" name="tempId" id="tempIdbalance"> <span class="input-group-btn"> <button type="button" class="btn btn-primary" onclick="wxTemplateset('balance');">获取模板</button></span>
+						                                    </div>
+						                                    <div id="divtempbalance" style="margin-top: 10px;">
+						                                    </div>
+						                                    <button id="saveTempbalance" class="btn btn-primary pull-right" type="submit" style="display: none;">保存内容</button>
+	                                                    </div>
+	                                                    <?php } ?>
+                                                    </form>
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                        </div>
+	                    </div>
+
+	                </div>
+
+	            </div>
+
+	        </div>
+	    </div>
+
+
+	</div>
+</block>
+
+<block name="top">
+	<link href="__CSS__/footable.core.css" rel="stylesheet">
+</block>
+
+<block name="bottom">
+	<div class="modal inmodal" tabindex="-1"  id="wxTemplate">
+		<div class="modal-dialog">
+			<div class="modal-content animated bounceInRight">
+				<div class="modal-header">
+                    <button type="button" class="close _close"><span>×</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">获取微信公众平台消息模板</h4>
+                </div>
+				<div class="modal-body">
+					<input type="text" class="form-control input-sm m-b-xs" id="filter"
+                               placeholder="搜索模板">
+					<table class="footable table table-stripped toggle-arrow-tiny" data-page-size="8" data-filter=#filter>
+                            <thead>
+                            <tr>
+                                <th width="100">序号</th>
+                                <th>名称</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody id="tempappend">
+                            </tbody>
+					</table>
+				</div>
+				<div class="modal-footer">
+                    <button type="button" class="btn btn-primary _close">关闭</button>
+                </div>
+			</div>
+		</div>
+	</div>
+
+	<script src="__JS__/footable.all.min.js"></script>
+	<script>
+	var tempstr = [];
+
+    $(document).ready(function() {
+        $('.footable').footable();
+    });
+
+    function wxTemplateset(type){
+		$('#wxTemplate').show();
+		$.post('{:U("SX/Index/getTemplate")}',function(ret){
+			var template_list = ret.template_list;
+			if(template_list){
+				var i = 0;
+				for(var temp in template_list){
+					i++;
+					tempstr[temp] = JSON.stringify(template_list[temp]);
+					$('#tempappend').append('<tr><td>'+i+'</td><td>'+template_list[temp].title+'</td><td><a href="javascript:;" onclick="templateappend('+temp+',\''+type+'\');"><i class="fa fa-check text-navy"></i> 使用</a></td></tr>');
+			     }  
+			}else{
+				swal({title: "模板不存在",text:"请去微信公众平台添加模板",type: "error"});
+			}
+		},'JSON');
+    }
+
+	  $("#wxTemplate ._close").click(function(){
+		  $('#wxTemplate').hide();
+		  $('#tempappend').html('');
+	  });
+
+	  $("#saveWxconfig").click(function(){
+	  	  var tempData = $(this).parents('form').serialize();
+		  $.post('{:U("SX/Index/saveWxconfig")}',{data:htmlToArray(tempData)},function(result){
+		  	if(result.status == 1){
+		  		swal({title: "温馨提示",text:"保存成功",type: "success"});
+		  	}else{
+		  		swal({title: "温馨提示",text:"保存失败",type: "error"});
+		  	}
+		  },'JSON');
+	  });
+
+	  $("#saveTempzf").click(function(){
+	  	  var tempData = $(this).parents('form').serialize();
+		  $.post('{:U("SX/Index/saveTempzf")}',{data:htmlToArray(tempData)},function(result){
+		  	if(result.status == 1){
+		  		swal({title: "温馨提示",text:"保存成功",type: "success"});
+		  	}else{
+		  		swal({title: "温馨提示",text:"保存失败",type: "error"});
+		  	}
+		  },'JSON');
+	  });
+
+	  $("#saveTempbind").click(function(){
+	  	  var tempData = $(this).parents('form').serialize();
+		  $.post('{:U("SX/Index/saveTempbind")}',{data:htmlToArray(tempData)},function(result){
+		  	if(result.status == 1){
+		  		swal({title: "温馨提示",text:"保存成功",type: "success"});
+		  	}else{
+		  		swal({title: "温馨提示",text:"保存失败",type: "error"});
+		  	}
+		  },'JSON');
+	  });
+          
+          $("#saveTempbalance").click(function(){
+	  	  var tempData = $(this).parents('form').serialize();
+		  $.post('{:U("SX/Index/saveTempbalance")}',{data:htmlToArray(tempData)},function(result){
+		  	if(result.status == 1){
+		  		swal({title: "温馨提示",text:"保存成功",type: "success"});
+		  	}else{
+		  		swal({title: "温馨提示",text:"保存失败",type: "error"});
+		  	}
+		  },'JSON');
+	  });
+
+	  function templateappend(temp,type){
+	  	var tempjson = jQuery.parseJSON(tempstr[temp]);
+	  	var tempcontent = tempjson.content;
+		tempcontent = tempjson.content.replace(/{{/g, "").split(".DATA}}");
+
+	  	$('#tempId'+type).val(tempjson.template_id);
+	  	var num = 0;
+	  	var str = '<div class="form-group"><label>标题</label><input type="text" placeholder="标题" name="first" class="form-control" value="'+tempjson.title+'"></div>';
+	  	for(var tempco=0;tempco<tempcontent.length-1;tempco++){
+	  		var temps = tempcontent[tempco].split("：");
+	  		if(temps[1]){
+	  			num++;
+	  			str += '<div class="form-group"><label>'+temps[0]+'</label><select class="form-control m-b" name="keyword'+num+'"><option value="1">用户名</option><option value="2">商品名称</option><option value="3">用户类型</option><option value="4">商品金额</option><option value="5">时间</option></select><input name="keyname'+num+'" type="hidden" value="'+temps[1]+'"><input name="kname'+num+'" type="hidden" value="'+temps[0]+'"></div>';
+	  		}
+		}
+		str += '<div class="form-group"><label>备注</label><input type="text" placeholder="备注" name="remark" class="form-control" value=""></div>';
+		str += '<div class="well"><h5>内容示例</h5>'+tempjson.example+'</div><input name="example" type="hidden" value="'+tempjson.example+'">';
+
+	  	$('#divtemp'+type).html(str);
+		$('#saveTemp'+type).show();
+	  	
+		$('#wxTemplate').hide();
+		$('#tempappend').html('');
+	  }
+
+	function htmlToArray(data){
+		data = data.split('&');
+		var info = {};
+		$.each(data,function(k,v){
+			v = v.replace('%5D','').split('=');
+			var s = v[0].split('%5B');
+			typeof(info[s[0]]) == 'undefined' && (info[s[0]] = {}),info[s[0]] = v[1];
+		});
+		return info;
+	}
+
+	</script>
+</block>
+

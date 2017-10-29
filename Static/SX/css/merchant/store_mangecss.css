@@ -1,0 +1,188 @@
+.main_hd_bd h2 {
+	position: relative;
+	line-height: normal;
+	margin-bottom: 16px;
+	border-bottom: 1px solid #e7e7eb;
+	padding-right: 10em;
+	margin-bottom: 26px;
+	margin-top: 20px;
+	padding-bottom: 17px
+}
+
+.main_hd_bd .extra_info {
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: 14px
+}
+
+.main_hd_bd .extra_info.align_title {
+	margin-top: 4px;
+	line-height: normal
+}
+
+.store_build {
+	padding: 0 30px 30px
+}
+
+.frm_title {
+	font-size: 14px;
+	height: 32px;
+	line-height: 32px;
+	border-bottom: 1px solid #e7e7eb;
+	margin-bottom: 25px;
+	font-weight: normal
+}
+
+.frm_title .frm_title_dec {
+	color: #8d8d8d;
+	margin-left: 1em;
+	font-weight: normal
+}
+
+.frm_section.service_info {
+	position: relative
+}
+
+.frm_label .frm_label_dec {
+	color: #8d8d8d
+}
+
+.frm_tips {
+	width: auto
+}
+
+.upload_box.has_demo {
+	position: relative;
+	margin-left: 0;
+	min-height: 130px
+}
+
+.upload_box .upload_tips {
+	display: block;
+	width: 400px;
+	margin-left: 0
+}
+
+.frm_input_box {
+	width: 392px
+}
+
+.frm_controls.with_hint .frm_input_box {
+	width: 371px
+}
+
+.frm_hint {
+	color: #8d8d8d;
+	margin-left: .5em
+}
+
+.frm_textarea_box {
+	width: 401px
+}
+
+.frm_control_row {
+	margin-left: 50px;
+}
+
+.frm_control_row .frm_controls {
+	display: block;
+}
+
+.frm_control_row .frm_controls:after {
+	content: " "
+}
+
+.frm_control_row .frm_input_box {
+	width: 304px
+}
+
+.frm_controls .dropdown_menu {
+	margin-right: 16px
+}
+
+.frm_controls .input_btn .frm_input_box {
+	margin-right: 15px
+}
+
+.frm_controls .map {
+	position: relative;
+	width: 100%;
+	height: 500px
+}
+
+.frm_controls .map.map_result .map-canvas {
+	margin-left: 267px
+}
+
+.map_panel .resultPanel {
+	height: 100%
+}
+
+.js_result_content {
+	position: relative
+}
+
+.resultPanel_ft {
+	background-color: #fff;
+	width: 100%;
+	height: 40px;
+	padding: 7px 0 0 15px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box
+}
+
+.map_panel {
+	width: 883px;
+	border: 1px solid #e7e7eb
+}
+
+.map_panel .map_top .ico {
+	display: inline-block;
+	zoom: 1;
+	height: 16px;
+	width: 16px;
+	vertical-align: middle;
+	margin-top: -2px
+}
+
+.map_panel .btn_mark {
+	margin-right: -1px;
+	border-radius: 0;
+	-moz-border-radius: 0;
+	-webkit-border-radius: 0
+}
+
+.map_panel .btn_mark .ico {
+	background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/page/store_manage/store_mange_z28a292.png") 0 0 no-repeat
+}
+
+.map_panel .btn_screen .ico {
+	background: url("/mpres/zh_CN/htmledition/comm_htmledition/style/page/store_manage/store_mange_z28a292.png") 0 -26px no-repeat
+}
+
+.map_dialog_top {
+	padding: 10px 20px;
+	border-bottom: 1px solid #e7e7eb
+}
+
+.upload_wrp {
+	margin-top: 5px;
+	width: 580px
+}
+
+.upload_wrp .upload_preview {
+	display: inline;
+	vertical-align: top;
+	margin: 0
+}
+
+.upload_wrp .upload_file_box {
+	top: 0;
+	left: 110px
+}
+
+.map_tip_title {
+	font-weight: bold
+}

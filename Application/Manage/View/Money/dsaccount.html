@@ -1,0 +1,488 @@
+<extend name="Public/base"/>
+
+<block name="title">代收管理</block>
+
+<block name="levels"><li><a href="{:U("Manage/Index/index")}">后台首页</a></li><li>财务管理</li></block>
+
+<block name="body">
+<if condition="$bind.openid eq ''">
+    <div class="alert alert-danger alert-dismissable">
+        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>提示：您当前没有绑定微信，无法提现 <a href="{:U("Manage/Users/userInfo")}">前去绑定</a>
+    </div>
+</if>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="profile-page">
+              <div class="hd basic-infor clearfix">
+                <div class="user-pic">
+                  <img src="__IMG__/default-pic.png" alt=""></div>
+                <table class="profile-info income">
+                  <tbody>
+                    <tr>
+                      <td class="tr-top">账户名称：{:session('SX_USERS.userName')}</td>
+                      <td class="tr-top">账户类型：代收</td>
+                      <td class="tr-top">手续费：0.6%</td></tr>
+                    <tr>
+                      <td class="tr-bottom">
+                        <span style="font-size:14px; display:inline-block; *display:inline; zoom: 1; vertical-align: middle">待划账金额</span>
+                        <a data-rel="popover" data-container="body" title="" data-content="金额>=500元时每天17:00自动划账" data-original-title="提示" class="tipa">
+                          <i class="fa fa-question-circle"></i>
+                        </a>：
+                        <span style="display:inline-block; *display:inline; zoom: 1; vertical-align: middle">{$money.dsshmoney}元</span></td>
+                      <td class="tr-bottom">
+                        <span style="font-size:14px; display:inline-block; *display:inline; zoom: 1; vertical-align: middle">可申请金额</span>
+                        <a data-rel="popover" data-container="body" title="" data-content="您还未申请提现的金额" data-original-title="提示" class="tipa">
+                          <i class="fa fa-question-circle"></i>
+                        </a>：
+                        <span style="display:inline-block; *display:inline; zoom: 1; vertical-align: middle">{$money.dscurmoney}元</span></td>
+                      <td class="tr-bottom">
+                        <span style="font-size:14px; display:inline-block; *display:inline; zoom: 1; vertical-align: middle">待支付金额</span>
+                        <a data-rel="popover" data-container="body" title="" data-content="您已申请且未完成支付的金额" data-original-title="提示" class="tipa">
+                          <i class="fa fa-question-circle"></i>
+                        </a>：
+                        <span style="display:inline-block; *display:inline; zoom: 1; vertical-align: middle">{$money.dstxmoney}元</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="btn-box">
+                  <if condition="$money.dscurmoney egt 500 and $bind.openid neq ''">
+                    <button type="button" onclick="withdrawal()" class="opration-btn">申请提现</button>
+                  <else />
+                    <button type="button" class="btn btn-default btn-lg opration-btn" disabled="disabled">申请提现</button>
+                  </if>
+                </div>
+              </div>
+            </div>
+
+            <div class="ibox float-e-margins">
+              <div class="ibox-content">
+                <div class="app__content js-app-main page-cashier">
+                  <div>
+                    <!-- 实时交易信息展示区域 -->
+                    <div class="cashier-realtime">
+                      <div class="realtime-title-block clearfix">
+                        <ul class="pull-left" style="height: 30px; padding: 0;">
+                          <li style="width: 200px;">
+                            <input type="text" class="form-control input-sm m-b-xs" id="filter" placeholder="提现单号" onkeydown="doSearch(arguments[0]||event)"></li>
+                        </ul>
+                        <ul class="pull-right" style="height: 30px;">
+                          <li>
+                            <div data-toggle="buttons" class="btn-group" style="margin-bottom: 30px;">
+                              <label class="btn btn-sm btn-white <eq name='datetype' value='tdy'> active </eq>" onclick="datebtn('tdy')">
+                                <input type="radio">今日</label>
+                              <label class="btn btn-sm btn-white <eq name='datetype' value='ydy'> active </eq>" onclick="datebtn('ydy')">
+                                <input type="radio">昨日</label>
+                              <label class="btn btn-sm btn-white <eq name='datetype' value='wk'> active </eq>" onclick="datebtn('wk')">
+                                <input type="radio">最近一周</label></div>
+                          </li>
+                          <li>
+                            <div class="input-daterange input-group" id="datepicker">
+                              <div class="input-group date">
+                                <span class="input-group-addon">
+                                  <i class="fa fa-calendar"></i>
+                                </span>
+                                <input id="stime" type="text" class="input-sm form-control" name="start" value="{$starttime}" style="border-radius:0px;"></div>
+                              <span class="input-group-addon" style="background-color: #FBFBFB">至</span>
+                              <div class="input-group date">
+                                <span class="input-group-addon">
+                                  <i class="fa fa-calendar"></i>
+                                </span>
+                                <input id="etime" type="text" class="input-sm form-control" name="end" value="{$endtime}" style="border-radius:0px;"></div>
+                            </div>
+                          </li>
+                          <li>
+                            <button id="datesearch" type="button" class="btn btn-primary btn-sm" style="margin-bottom: 15px;">查询</button></li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="js-real-time-region realtime-list-box loading">
+                      <div class="widget-list">
+                        <div class="js-list-filter-region clearfix ui-box" style="position: relative;">
+                          <div class="widget-list-filter"></div>
+                        </div>
+                        <div class="ui-box">
+                          <div class="jqGrid_wrapper">
+                            <table id="table_list_1"></table>
+                            <div id="pager_list_1"></div>
+                          </div>
+                          <div class="js-list-empty-region"></div>
+                        </div>
+                        <div class="js-list-footer-region ui-box">
+                          <div class="widget-list-footer"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+    </div>
+</block>
+
+<block name="top">
+<link href="__CSS__/wxCoupon.css" rel="stylesheet">
+
+<link href="__CSS__/dataTables/datepicker3.css" rel="stylesheet">
+<link href="__CSS__/footable.core.css" rel="stylesheet">
+<link href="__CSS__/cashier.css" rel="stylesheet">
+<link href="__CSS__/plugins/ui.jqgrid.css" rel="stylesheet">
+<style type="text/css">
+.profile-page {
+    background-color: #fff;
+    font-size:13px;
+}
+.profile-page .hd {
+    background-color: #03acdc;
+    color: #fff;
+    height: 100px;
+    margin-bottom: 20px;
+}
+.profile-page .hd .user-pic {
+    width: 100px;
+    height: 100%;
+    border-right: 1px solid #039ac6;
+    float: left;
+}
+.profile-page .hd .user-pic img {
+    border-radius: 999px;
+    overflow: hidden;
+    margin: 17px 0 0 17px;
+}
+.profile-page .hd.basic-infor .user-pic {
+    width: 10%;
+    min-width: 100px;
+}
+.profile-page .hd.basic-infor .user-pic img {
+    margin: 17px 21px;
+}
+.profile-page .hd .profile-info.income {
+    float: left;
+    width: auto;
+}
+.profile-page .hd .profile-info.income td.tr-top {
+    padding-top: 20px;
+}
+.profile-page .hd .profile-info.income td.tr-bottom {
+    padding: 10px 0 20px 20px;
+}
+.profile-page .hd .btn-box {
+    float: right;
+    margin-right: 20px;
+}
+.profile-page .hd a.opration-btn, .profile-page .hd button.opration-btn {
+    padding: 15px 20px;
+    background: #fff;
+    border: solid 1px #0093d1;
+    color: #333;
+    font-weight: bold;
+    font-size: 15px;
+    display: block;
+    margin-top: 25px;
+}
+.profile-page .hd .profile-info td {
+    padding-left: 20px;
+}
+.profile-page .hd .profile-info.income td.tr-bottom span {
+    font-size: 18px;
+}
+.tipa {display:inline-block; *display:inline; zoom: 1; vertical-align: middle;}
+.tr-bottom .fa-question-circle {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+    margin: -4px 3px 0;
+    color: #fff;
+    font-size: 18px;
+}
+ul.pull-right li{
+    float: left;
+    margin-right: 5px;
+}
+#apply{overflow-y: scroll;}
+.inmodal .modal-header{padding: 20px;}
+.modal-header {
+    border: none;
+    background: #e4393c;
+    color: #FFF;
+    font-size: 20px;
+}
+.modal-footer {
+    background-color: #f6f7fb;
+    border-top: 1px solid #e7e4ed;
+    text-align: center;
+}
+.modal-footer .btn {
+    display: inline-block;
+    padding: 0 20px;
+    height: 38px;
+    line-height: 38px;
+    border: 1px solid #e4393c;
+}
+.modal-footer .btn-default {
+    background-color: #fff;
+    color: #585858;
+    border-color: #c2bdcc;
+}
+.modal-footer .btn-primary {
+    background-color: #e4393c;
+    color: #FFF;
+}
+.modal-body ul.content-menu{
+  padding: 0;
+  margin: 0;
+}
+.modal-body ul.content-menu li.charge{
+  line-height: 50px;
+  font-size: 18px;
+  font-weight: bold;
+}
+.modal-body ul.content-menu li.invoice{line-height: 50px;}
+.modal-body ul.content-menu li.note{line-height:24px;color: #808080;}
+.modal-body .invoice-tit{
+  font-size:16px;
+  font-weight:bold;
+  line-height:50px;
+}
+.modal-body table.invoice-tab{
+  border: solid 1px #797979;
+}
+.modal-body table.invoice-tab tr{
+  text-align: center;
+  height: 30px;
+  line-height:30px;
+}
+.modal-body p{line-height: 20px;}
+.modal-body table.invoice-tab.bgm{
+  width: 100%;
+  border: none;
+  margin-bottom: 10px;
+}
+.modal-body table.invoice-tab.bgm tr{
+  line-height: 30px;
+  height:82px;
+}
+.modal-body table.invoice-tab.bgm tr.sec-trbg{
+  height:62px;
+  line-height: 62px;
+}
+.modal-body table.invoice-tab.bgm tr td span{
+  font-size: 20px;
+}
+.modal-body table.invoice-tab.bgm tr.sec-trbg span{
+  color: #e32629;
+  font-size: 20px;
+  padding: 0 10px;
+  font-weight: bold;
+}
+.page-cashier tbody tr{height:34px;}
+.ui-jqgrid .ui-jqgrid-title{margin:5px; font-weight: 700;}
+.ui-jqgrid tr.jqgfirstrow{height:0px;}
+.ui-jqgrid .ui-jqgrid-pager, .ui-jqgrid .ui-jqgrid-toppager{border-top:none;}
+.modal-dialog{margin-top: 50px;}
+</style>
+<script src="__JS__/footable.all2.min.js"></script>
+</block>
+<block name="bottom">
+<div class="modal inmodal" tabindex="-1" role="dialog"  id="apply">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close _close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="applycash">申请提现</h4>
+            </div>
+            <div class="modal-body">
+                <table class="invoice-tab bgm">
+                    <tr class="sec-trbg">
+                        <td>
+                            <span>实际到账金额：<span id="balance"><?php echo $money['dscurmoney'] - $money['dscurmoney'] * 0.006;?> 元</span></span>
+                        </td>
+                    </tr>
+                </table>
+
+                <ul class="content-menu">
+                    <li class="note" id="showTaxTxt"></li>
+                    <li class="note">注：实际到账金额 = 提现金额 - （提现金额 X 0.6%）微信手续费为0.6%</li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-primary" id="getcode-btn" onclick="this.disabled=true;pretreat();">确认申请</a>
+                <a class="btn btn-default _close">取消</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="__JS__/plugins/bootstrap-datepicker.js"></script>
+<script src="__JS__/plugins/grid.locale-cn.js"></script>
+<script src="__JS__/plugins/jquery.jqGrid.min.js"></script>
+<script type="text/javascript">
+if(is_mobile()){
+  $('.row .col-lg-12').css('padding','1px');
+  $('.float-e-margins .ibox-content').css('padding','15px 5px 20px 5px');
+  $('.nav-tabs li a').css('padding','10px');
+}
+
+$(document).ready(function(){
+    $("#datepicker.input-daterange").datepicker({
+        keyboardNavigation: false,
+        forceParse: false,
+        format: "yyyy-mm-dd",
+        autoclose: true
+    });
+
+    $('[rel="popover"],[data-rel="popover"]').popover({
+        trigger: 'hover',
+        html: true,
+        placement: 'auto'
+    });
+
+    $('#datesearch').click(function(){
+        var stime = $("#stime").val();
+        var etime = $("#etime").val();
+        window.location.href="{:U('Manage/Money/dsaccount')}?stime="+stime+"&etime="+etime;
+    });
+
+    $.jgrid.defaults.styleUI = "Bootstrap";
+    var a = [
+        <?php 
+            if(!empty($withdraw)){
+                foreach($withdraw as $ovv){
+                    echo "{orderid:'".$ovv['orderid']."',";
+                    echo "applytime:'".date('Y-m-d H:i:s',$ovv['applytime'])."',";
+                    echo "dprice:'".$ovv['dprice']."元',";
+                    echo "txprice:'".$ovv['txprice']."元',";
+                    echo "price:'".$ovv['price']."元',";
+                    echo "stime:'".date('Y-m-d H:i:s',$ovv['stime'])."',";
+                    if($ovv['status']==1){
+                         $status = "<font color=\"#44b549\">已提现</font>";
+                    }elseif($ovv['status']==2){
+                         $status = "<font color=\"#2e6da4\">正在申请</font>";
+                    }elseif($ovv['status']==3){
+                         $status = "<font color=\"#ed5565\">申请失败</font>";
+                    }
+                    echo "status:'".$status."'},";
+                }
+            }
+        ?>
+    ];
+
+    $("#table_list_1").jqGrid({
+        data: a,
+        datatype: "local",
+        height: "100%",
+        autowidth: true,
+        shrinkToFit: true,
+        rowNum: 30,
+        rowList: [10, 20, 30],
+        colNames: ["提现单号", "申请时间", "代扣税金额", "提现金额", "实际到账金额", "状态变更时间","状态"],
+        colModel: [{
+            name: "orderid",
+            index: "orderid",
+            width: 115,
+            sorttype: "int",
+            align:"center"
+        },{
+            name: "applytime",
+            index: "applytime",
+            width: 90,
+            align:"center"
+        }, {
+            name: "dprice",
+            index: "dprice",
+            width: 80,
+            align: "right",
+            sorttype: "float"
+        }, {
+            name: "txprice",
+            index: "txprice",
+            width: 80,
+            align: "right",
+            sorttype: "float"
+        }, {
+            name: "price",
+            index: "price",
+            width: 80,
+            align: "right",
+            sorttype: "float"
+        }, {
+            name: "stime",
+            index: "stime",
+            width: 90,
+            align:"center"
+        }, {
+            name: "status",
+            index: "status",
+            width: 40,
+            align:"center"
+        }],
+        pager: "#pager_list_1",
+        viewrecords: true,
+        caption: "提现申请记录",
+        hidegrid: false
+    });
+
+});
+function datebtn(type){
+    window.location.href="{:U('Manage/Money/dsaccount')}?datetype="+type;
+}
+
+function pretreat(){
+  $.post('{:U("Manage/Money/addWithdraw")}',function(ret){
+    if(ret.status == 1){
+      sweetAlert({
+        title: "恭喜您，申请成功!",
+        text:"",
+        type: "success",
+        closeOnConfirm: false
+      }, function(){
+        window.location.reload();
+      })
+    }else{
+      swal({title:'抱歉，申请失败！',text:'', type: "error"});
+    }
+  },'json');
+}
+
+var timeoutHnd;
+function doSearch(ev) {
+  if (timeoutHnd)
+    clearTimeout(timeoutHnd);
+    timeoutHnd = setTimeout(gridReload, 500);
+}
+
+function gridReload(ev) {
+     var searchFiler = $("#filter").val(), grid = $("#table_list_1"), f;
+     if (searchFiler.length === 0) {
+      grid[0].p.search = false;
+      $.extend(grid[0].p.postData,{filters:""});
+     }
+     f = {groupOp:"OR",rules:[]};
+     f.rules.push({field:"orderid",op:"cn",data:searchFiler});
+     grid[0].p.search = true;
+     $.extend(grid[0].p.postData,{filters:JSON.stringify(f)});
+     grid.trigger("reloadGrid",[{page:1,current:true}]);
+}
+
+var screenH=$(window).height();
+screenH=  screenH-20;
+$('#apply').css('height',screenH);
+
+function is_mobile(){
+    var ua = navigator.userAgent.toLowerCase();
+    if ((ua.match(/(iphone|ipod|android|ios|ipad|mobile)/i))){
+            return true;
+    }else{
+        return false;
+    }
+}
+
+function withdrawal(){
+  $('#apply').show();
+}
+$("#apply ._close").click(function(){
+  $('#apply').hide();
+});
+</script>
+</block>

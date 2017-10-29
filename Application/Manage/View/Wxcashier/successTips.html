@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<meta name="format-detection" content="telephone=no" />	
+		<title>支付提示</title>
+		<link href="__CSS__/weixin_pay.css" rel="stylesheet"/>
+		<link href="__CSS__/weixin_business.css" rel="stylesheet"/>
+		<style>
+		#footReturn li{
+		    margin: 5px 20px;
+		    text-align: center;
+			height: 50px;
+			line-height: 50px;
+			font-size: 22px;
+			background-color: #179F00;
+			padding: 10px 20px;
+			text-decoration: none;
+			border: 1px solid #0B8E00;
+			background-image: linear-gradient(bottom, #179F00 0%, #5DD300 100%);
+			background-image: -o-linear-gradient(bottom, #179F00 0%, #5DD300 100%);
+			background-image: -moz-linear-gradient(bottom, #179F00 0%, #5DD300 100%);
+			background-image: -webkit-linear-gradient(bottom, #179F00 0%, #5DD300 100%);
+			background-image: -ms-linear-gradient(bottom, #179F00 0%, #5DD300 100%);
+			background-image: -webkit-gradient(
+			linear,
+			left bottom,
+			left top,
+			color-stop(0, #179F00),
+			color-stop(1, #5DD300)
+			);
+			-webkit-box-shadow: 0 1px 0 #94E700 inset, 0 1px 2px rgba(0, 0, 0, 0.5);
+			-moz-box-shadow: 0 1px 0 #94E700 inset, 0 1px 2px rgba(0, 0, 0, 0.5);
+			box-shadow: 0 1px 0 #94E700 inset, 0 1px 2px rgba(0, 0, 0, 0.5);
+			-webkit-border-radius: 5px;
+			-moz-border-radius: 5px;
+			-o-border-radius: 5px;
+			border-radius: 5px;
+			color: #ffffff;
+			display: block;
+			text-align: center;
+			text-shadow: 0 1px rgba(0, 0, 0, 0.2);
+		}
+		#footReturn{background-color: #ffffff;}
+		.weui_icon_msg:before{font-size:25px;}
+		.weui_icon_circle:before{font-size:12px;}
+		#new_cookie_dialog .close{
+			position: absolute;
+		    font-size: 21px;
+		    color: #f2f2f2;
+		    top: 1px;
+		    right: 1px;
+			speak: none;
+			display:block;
+			width:27px;
+			height:27px;
+		}
+                
+                .extend{
+                                      
+                    
+                }
+                
+                .theboxad{
+                    margin:0 auto;
+                    border:1px solid #aaa;
+                    width:90%;
+                    height:8rem;                    
+                    border-radius:5px;                    
+                    background-color: white;
+                    
+                    
+                }
+                .theboxpic{
+                    width:100%;
+                    height:6rem;    
+                   overflow:hidden;
+                }
+                .thetitle{
+                    height: 0.8rem;
+                    float:left;
+                    margin-left: 0.2rem;
+                    margin-top: 0.2rem;
+                    font-size: 18px;
+                }
+                
+                .thepic{                      
+                    /*max-width:300px;*/
+                    /*_width:expression(this.width > 300 ? "300px" : this.width);*/
+                    /*width:auto;*/
+                    /*height:auto;*/
+                    /*max-width:100%;*/
+                    max-height:100%;
+                }
+                .thefooter{
+                    height: 0.8rem;
+                    float:left;
+                    margin-left: 0.2rem;
+                    margin-top: 0.3rem;
+                    font-size: 16px;
+                }
+               
+                .searchItem{
+                    margin: 1rem auto 0;
+                    border-radius:6px;
+                    width: 90%;
+                    background: white;
+                    height: auto;
+                    padding:0.5rem 0;
+
+                }
+		</style>
+
+    <script language="javascript">
+      var paytype = "{$data['paytype']}";
+      function redpack(){
+		window.location.href = '{:U("Manage/Wxmarket/sendredpack@".C('SITE_URL'),array('id'=>$data['openid'],'userId'=>$data['userId'],'tprice'=>$data['tprice'],'storeId'=>$data['storeId'],'usId'=>$data['usId'],'paytype'=>$data['paytype']))}'
+      }
+
+      function closedialog(){
+      	 document.getElementById('addialog').style.display = "none"; 
+      }
+
+      function closeWindow(){
+//          alert('closewindow');
+	      if(paytype == 'weixin'){	        
+                WeixinJSBridge.call('closeWindow');
+	      }else if(paytype == 'alipay'){
+	        AlipayJSBridge.call('exitApp');
+	      }  	
+      }
+      
+      function gotoadurl(){
+          var url = document.getElementById('adurl').value;
+//          alert(url);
+          window.location.href = url;
+      }
+    </script>
+
+	</head>
+	<body>
+		<div class="weui_msg">
+		    <div class="weui_text_area">
+		        <h2 class="weui_msg_title" style="text-align:center; margin-right: 15px;"><i class="weui_icon_success weui_icon_msg"></i> 支付成功</h2>
+		        <p class="weui_msg_desc">支付金额：<span style="font-weight: bold; font-size: 15px; color:red">{$data.tprice} 元</span></p>
+		    </div>
+
+                    
+                        <?php if(1 == $adv['isshow']){ ?>   
+                            <?php if(1 == $adv['adtype']){?>
+                            <div id="addialog">
+				<div id="new_cookie_dialog" class="dialog-wrapper new_cookie_dialog" style="position: fixed;left:50%;margin-left:-150px; top:50px; z-index: 9999;"><a href="javascript:void(0)" class="close" onclick="closedialog();" title="关闭窗口"></a><div class="diginfo"><div class="new_cookie_dialog"><ul><li><a href="{$adv['url']}" style="display: block;"><img  width="300" src="__ROOT__/{$adv['photo_url']}" style="cursor:default"></a></li></ul></div></div></div>
+				<div class="dialog-overlay" style="width: 100%; height: 100%; opacity: 0.5; position: absolute; overflow: hidden; left: 0px; top: 0px; z-index: 9998; background: rgb(0, 0, 0);"></div>
+                            </div>
+                            <?php }elseif(2 == $adv['adtype']){?>
+                           <div class="weui_panel weui_panel_access">
+                             <!--<div class="weui_panel_hd">图文组合列表</div>-->
+                             <div class="weui_panel_bd">
+                               <a href="{$adv['url']}" class="weui_media_box weui_media_appmsg">
+                                 <div class="weui_media_hd">
+                                   <img class="weui_media_appmsg_thumb" src="__ROOT__/{$adv['photo_url']}" alt="">
+                                 </div>
+                                 <div class="weui_media_bd ">
+                                     <h4 class="weui_media_desc float_left extend"><?php echo $adv['title']?></h4>
+                                   <p class="weui_media_desc float_left"><?php echo $adv['content']?></p>
+                                 </div>
+                               </a>
+                             </div>
+                             <!--<a class="weui_panel_ft" href="javascript:void(0);">查看更多</a>-->
+                           </div>
+                            
+                            
+                            <?php }elseif(3 == $adv['adtype']){?>
+                            <!--refund({$v.id});-->
+                            <div class="theboxad" >
+                            <a href="javascript:;"  onclick="gotoadurl()">
+                                <div class='thetitle'>
+                                    <?php echo $adv['title']?>
+                                </div>
+                   
+                                  
+                                 <div class='theboxpic'>
+                                   <!--<img style="width: 100%;" src="__ROOT__/{$adv['photo_url']}" alt="">-->
+                                    <img class="thepic" src="__ROOT__/{$adv['photo_url']}" alt="">
+                                 </div>
+                                 <div class='thefooter'>
+                                     阅读全文<span style="float:right">》</span>
+                                </div>
+                                </a>
+                            </div>
+                           <?php }?>                 
+                        <?php }?> 
+                   
+                    
+                    <input type='hidden' value="{$adv['url']}"  name="adurl" id="adurl">
+                    
+                    <!--<script src="http://wm.lrswl.com/page/s.php?s=236803&w=200&h=200"></script>-->
+                    
+		    <div class="weui_opr_area">
+		        <p class="weui_btn_area">
+					<if condition="$rp eq 'open'">
+		    			<a href="javascript:;" onclick="redpack()" style="background-color:#ed5565;" class="weui_btn weui_btn_primary">领取红包</a>
+		    		</if>
+		            <a href="javascript:;" onclick="closeWindow()" class="weui_btn weui_btn_default">关闭窗口</a>
+		        </p>
+		    </div>
+		</div>
+
+	    <if condition="!empty($business)">
+			<div id="guessLike" class="guess-like">
+				<dl class="list" style="opacity: 1;">
+				    <dd><dl class="list" style="opacity: 1;">
+				        <dt>猜你喜欢</dt>
+				    </dd>
+					<volist name="business" id="ovv" key='i'>
+						<dd>
+							<?php
+								$radLat1 = $myLat * pi() / 180;
+								$radLat2 = $ovv['latitude'] * pi() / 180;
+
+								$a = $radLat1 - $radLat2;
+								$b = $myLng * pi() / 180 - $ovv['longitude'] * pi() / 180;
+								$s = 2 * asin(sqrt(pow(sin($a / 2), 2) + cos($radLat1) * cos($radLat2) * pow(sin(b / 2), 2)));
+								$s = $s * 63781.37;
+								$s = round($s * 10000) / 10000;
+								
+								if($s<=1){
+									$s = round($s*1000,2)."米";
+								}else{
+									$s = round($s,2)."公里";
+								}	
+							?>
+							<a href="javascript:void(0)"  class="react ">
+								<div class="dealcard" >
+								        <span class="dealcard-nobooking"></span>
+								        <div class="dealcard-img imgbox" data-com="unveil" style="background: none;"><img src="__ROOT__/{$ovv.photo_url}" style="width: 100%;"></div>
+								    <div class="dealcard-block-right">
+								                <div class="dealcard-brand single-line">{$ovv.title}</div>
+
+								        <div class="title text-block"><if condition="!empty($ovv['district'])">[{$ovv.district}]<else />[{$ovv.city}]</if> {$ovv.describe}</div>
+								        <div class="price">
+								            <span class="strong">{$ovv.avg_price}</span><span class="strong-color">元</span>
+								                <del> {$ovv.avg_price2} 元</del>
+									            <span class="line-right">
+									            	<i class="weui_icon_circle"></i> {$s}
+									            </span>
+								        </div>
+								    </div>
+								</div>
+							</a>
+						</dd>
+					</volist>
+				    <dd style="margin: 12px 0; text-align: center;"><a href="javascript:;" class="weui_btn weui_btn_mini weui_btn_default" style="width: 120px;">查看更多</a></dd>
+				</dl>
+			</div>
+		</if>
+		
+                
+        
+<!--		<if condition="$adv['isshow'] eq 1">
+			<div id="addialog">
+				<div id="new_cookie_dialog" class="dialog-wrapper new_cookie_dialog" style="position: fixed;left:50%;margin-left:-150px; top:50px; z-index: 9999;"><a href="javascript:void(0)" class="close" onclick="closedialog();" title="关闭窗口"></a><div class="diginfo"><div class="new_cookie_dialog"><ul><li><a href="{$adv['url']}" style="display: block;"><img  width="300" src="__ROOT__/{$adv['photo_url']}" style="cursor:default"></a></li></ul></div></div></div>
+				<div class="dialog-overlay" style="width: 100%; height: 100%; opacity: 0.5; position: absolute; overflow: hidden; left: 0px; top: 0px; z-index: 9998; background: rgb(0, 0, 0);"></div>
+			</div>
+		</if>-->
+	</body>
+</html>

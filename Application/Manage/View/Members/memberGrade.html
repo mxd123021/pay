@@ -1,0 +1,94 @@
+<extend name="Public/base"/>
+
+<block name="title">会员等级</block>
+
+<block name="levels"><li><a href="{:U("Manage/Index/index")}">后台首页</a></li>会员等级<li></li></block>
+
+<block name="body">
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title clearfix">
+                <span>
+                    <a class="btn btn-sm btn-info" href="{:U("Manage/Members/memberGradeAdd")}" style="vertical-align: top;">添加</a></span>
+            </div>
+            <div class="ibox-content">
+                <div class="app__content js-app-main page-cashier">
+                    <div>
+                        <div class="js-real-time-region realtime-list-box loading">
+                            <div class="widget-list">
+                                <div class="js-list-filter-region clearfix ui-box" style="position: relative;">
+                                    <div class="widget-list-filter"></div>
+                                </div>
+                                <div class="ui-box">
+                                    <table class="ui-table ui-table-list" data-page-size="20" style="padding: 0px;">
+                                        <thead class="js-list-header-region tableFloatingHeaderOriginal">
+                                            <tr class="widget-list-header">
+                                                <th data-hide="phone">等级名称</th>
+                                                <th data-hide="phone">经验值</th>
+                                                <th data-hide="phone">折扣率</th>
+                                                <th data-hide="phone">排序</th>
+                                                <th data-hide="phone">操作</th></tr>
+                                        </thead>
+                                        <tbody class="js-list-body-region" id="table-list-body">
+                                        	<volist name="grade" id="ovv" key='i'>
+	                                            <tr class="widget-list-item">
+	                                                <td>{$ovv.name}</td>
+	                                                <td>{$ovv.exp}</td>
+	                                                <td>{$ovv.discount} 折</td>
+	                                                <td>{$ovv.sort}</td>
+	                                                <td class="footable-visible footable-last-column">
+	                                                    <a class="btn btn-sm btn-info" href="{:U("Manage/Members/memberGradeEdit",array("id"=>$ovv['id']))}" style="vertical-align: top;">修 改</a>&nbsp;&nbsp;
+	                                                    <button onclick="deltheItem(this,{$ovv.id});" class="btn btn-sm btn-danger"><strong>删 除</strong></button>
+	                                                </td>
+	                                            </tr>
+                                        	</volist>
+                                        </tbody>
+                                    </table>
+                                    <div class="js-list-empty-region"></div>
+                                </div>
+                                <div class="js-list-footer-region ui-box">
+                                    <div class="widget-list-footer"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</block>
+
+<block name="top">
+<link href="__CSS__/wxCoupon.css" rel="stylesheet">
+</block>
+
+<block name="bottom">
+<script src="__JS__/footable.all2.min.js"></script>
+<script src="__JS__/plugins/icheck.min.js"></script>
+<script type="text/javascript">
+	/****删除****/
+	function deltheItem(obj,cdid){
+		swal({
+			title: "温馨提示",
+			text: "您确认要删除此项吗？!",
+			type: "warning",
+				showCancelButton: true,
+				confirmButtonColor: "#DD6B55",
+				confirmButtonText: "确定删除",
+				cancelButtonText: "取消",
+				closeOnConfirm: false
+		}, function(){
+			$.get('{:U("Manage/Members/memberGradeDel")}',{id:cdid},function(ret){
+				if(!ret.err_code){
+					swal("温馨提示","删除成功！","success");
+					$(obj).parent('td').parent('tr').remove();
+				}else{
+					swal("温馨提示",ret.err_msg,"error");
+				}
+			},'JSON');
+		});
+	}
+</script>
+</block>

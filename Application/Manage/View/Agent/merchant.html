@@ -1,0 +1,329 @@
+<extend name="Public/base"/>
+
+<block name="title">商户管理</block>
+
+<block name="levels"><li><a href="{:U("Manage/Index/index")}">后台首页</a></li><li>商家设置</li></block>
+
+<block name="body">
+    <div class="row">
+            
+            <div class="col-sm-3">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <span class="label label-success pull-right">今日</span>
+                        <h5>今日收入</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <h1 class="no-margins">{$data['curdIncome']}</h1>
+                        <small>今日收入金额</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <span class="label label-info pull-right">本月</span>
+                        <h5>本月收入</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <h1 class="no-margins">{$data['curmIncome']}</h1>
+                        <small>本月收入金额</small>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+	            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-content">
+                            <input type="text" class="form-control input-sm m-b-xs" id="filter" placeholder="搜索商户">
+                            <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="10" data-filter=#filter>
+                                <thead>
+                                <tr>
+                                    <th>公司名称</th>
+                                    <th data-hide="phone">商户账号</th>
+                                    <th data-hide="phone">状态</th>
+                                    <th data-sort-ignore="true">操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php if(!empty($merchants)){
+								 foreach($merchants as $key=>$val){ ?>
+                                <tr>
+                                    <td><?php echo $val['userName'];?></td>
+                                    <td><?php echo $val['loginName'];?></td>
+                                    <td><?php switch($val['userAudit']){
+                                    	case 0:
+                                    		echo "<font color='red'>末审核</font>";
+                                    	break;
+                                    	case 1:
+                                    		echo "<font color='green'>审核通过</font>";
+                                    	break;
+                                    	case 2:
+                                    		echo "审核中";
+                                    	break;
+                                    	case 3:
+                                    		echo "<font color='red'>审核驳回</font>";
+                                    	break;
+                                    }?></td>
+                                    <td class="center">
+										<div class="btn-group">
+                                            <a href="{:U('Manage/Agent/merchantdetail',array('id' => $val['userId']))}" class="btn btn-white btn-sm" data-id="<?php echo $val['usId'];?>"><i class="fa fa-search"></i> 查看</a>
+                                        </div>
+									</td>
+                                </tr>
+								<?php }}else{ ?>
+								<tr><td colspan="4" style="text-align: center; font-size: 16px;">您还没有商户</td></tr>
+								<?php }?>
+                                </tbody>
+                            </table>
+							<div class="tooltip-demo">
+								<button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal5" data-toggle="tooltip" data-placement="left" title="" data-original-title="添加商户"><i class="fa fa-plus"></i> 添加</button>
+								<ul class="pagination pull-right"></ul>
+							</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+</block>
+
+<block name="top">
+<link href="__CSS__/footable.core.css" rel="stylesheet">
+<link href="__CSS__/plugins/custom.css" rel="stylesheet">
+	<style>
+		.ibox{
+		 	border: 1px solid #e7eaec;
+		}
+		.part_item {
+  			background: none repeat scroll 0 0 #fff;
+  			border: 1px solid #ccc;
+  			border-radius: 5px;
+  			padding-bottom: 15px;
+  			margin-bottom: 10px;
+		}
+		.form .part_item p {
+  			display: inline-block;
+  			font-size: 14px;
+  			overflow: hidden;
+  			padding: 10px 20px 0;
+  			text-overflow: ellipsis;
+  			white-space: nowrap;
+		}
+		.part_item_b {
+  			border-top: 1px solid #ccc;
+  			margin-top: 10px;
+		}
+		.form .part_item p.active {
+  			color: #f87b00;
+		}
+		.part_item input {
+  			font-size: 14px;
+  			margin-bottom: 2px;
+  			margin-right: 5px;
+		}
+		.pagination{
+			margin:0px;
+		}
+		.mustInput {
+  			color: red;
+  			margin-right: 5px;
+		}
+		@media (min-width: 768px){
+			.form .part_item p {
+				width: 37%;
+			}
+		}
+		@media (min-width: 992px){
+			.form .part_item p {
+				width: 24%;
+			}
+		}
+	.form-control, .single-line{width: 50%;}
+	</style>
+</block>
+<block name="bottom">
+	<div class="modal inmodal fade" id="myModal5" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+    	<div class="modal-dialog modal-lg">
+        	<div class="modal-content">
+            	<div class="modal-header">
+				 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">添加商户</h4>
+                </div>
+                <div class="modal-body clearfix">
+					<form id="employersForm" class="form" action="{:U('Manage/Agent/merchantsAdd')}" method="post">
+						<div class="col-lg-12">
+							<div class="ibox">
+                        		<div class="ibox-title">
+                           			<h5>账户信息</h5>
+                        		</div>
+                        		<div class="ibox-content">
+                            		<div class="form-group">
+										<label><span class="mustInput">*</span>公司名称:<span class="f999">(20字以内)</span></label>
+										<input type="text"  id="username" placeholder="请输入公司名称" name="username" class="form-control required" aria-required="true">
+									</div>
+									<div class="form-group">
+										<label><span class="mustInput">*</span>账号名称:</label>
+										<input type="text" id="account" placeholder="请输入商户账号" name="account" class="form-control required"aria-required="true">
+									</div>
+									<div class="form-group">
+										<label><span class="mustInput">*</span>手机号:</label>
+										<input type="tel" id="phone" placeholder="请输入商户的手机号" name="phone" class="form-control required" aria-required="true">
+									</div>
+									<div class="form-group">
+										<label><span class="mustInput">*</span>邮箱:</label>
+										<input type="email" id="email" placeholder="请输入商户的邮箱" name="email" class="form-control required" aria-required="true">
+									</div>
+									<div class="form-group">
+										<label><span class="mustInput">*</span>密码:</label>
+										<input type="password" id="password" placeholder="请输入密码(6到20个字符)" name="password" class="form-control required" aria-required="true">
+									</div>
+									<div class="form-group">
+										<label><span class="mustInput">*</span>确认密码:<span class="f999"></span></label>
+										<input type="password" id="confirm" placeholder="" name="confirm" class="form-control required" aria-required="true">
+									</div>
+                        		</div>
+                    		</div>
+						</div>
+					</form>
+               	</div>
+
+                <div class="modal-footer">
+                	<button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
+                	<button type="button" class="btn btn-primary formSubmit">添加</button>
+                </div>
+          	</div>
+        </div>
+    </div>
+
+    <!-- FooTable -->
+    <script src="__JS__/footable.all.min.js"></script>
+	
+	<!-- iCheck -->
+    <script src="__JS__/plugins/icheck.min.js"></script>
+	
+	<!-- Jquery Validate -->
+    <script src="__JS__/jquery.validate.min.js"></script>
+
+    <!-- Page-Level Scripts -->
+    <script>
+        $(document).ready(function() {
+			employers.init();
+        });
+		!function(a,b){
+			var employers = employers || {};
+			employers.init = function(){
+				var c = employers;
+				b('.footable').footable();
+				b('.i-checks').iCheck({
+                	checkboxClass: 'icheckbox_square-green',
+                	radioClass: 'iradio_square-green',
+            	});
+				b('#check_box').on('ifChanged', function(){
+					c.selectall('id[]','check_box');
+				});
+				b('.info_del_all').click(function(){
+					c.delAll();
+				});
+				b('.part_item .checkAll').click(function(){
+					var checkItems = b(this).parents('.part_item_t').siblings('.part_item_b').find('p').find('input[name="authority[]"]');
+					if (b(this).is(':checked') == false) {
+						checkItems.each(function(ke,el){
+							$(el).iCheck('uncheck');
+						});
+					}else{
+						checkItems.each(function(ke,el){
+							$(el).iCheck('check');
+						});
+					}
+				});
+				jQuery.extend(jQuery.validator.messages, {
+  					required: "必填字段",
+  					remote: "请修正该字段",
+  					email: "请输入正确格式的电子邮件",
+  					equalTo: "请再次输入相同的值",
+  					maxlength: jQuery.validator.format("长度最多是 {0} 位"),
+  					minlength: jQuery.validator.format("长度最少是 {0} 位"),
+  					rangelength:"请输入正确的手机号码"
+				});
+				b('#employersForm').validate({
+                    errorPlacement: function (error, element){
+                            element.before(error);
+                    },
+                    rules: {
+                        confirm: {
+                            equalTo: "#password"
+                        },
+						account: {
+							minlength: 4
+						},
+						password: {
+							minlength: 4
+						},
+						phone: {
+							minlength: 11,
+							maxlength: 11
+						}
+                    }
+                });
+				b('.formSubmit').click(function(){
+					if(b('#account').val() != ''){
+						$.post('{:U("Manage/Agent/checkLoginKey")}',{account:b('#account').val()},function(re){
+							if(re.status == -1){
+								b('#account').addClass('error');
+								swal("商户账号已存在", "请修改登陆账号", "error");
+							}else if(re.status == 1){
+								if(b('#phone').val() != '' && b('#phone').val().length ==11){
+									$.post('{:U("Manage/Agent/checkPhone")}',{phone:b('#phone').val()},function(re){
+										if(re.status == -1){
+											b('#phone').addClass('error');
+											swal("商户手机号已存在", "请修改手机号码", "error");
+										}else if(re.status == 1){
+											b('#employersForm').submit();
+										}
+									},'json');
+								}
+							}
+						},'json');
+					}else{
+						b('#employersForm').submit();
+					}
+				});
+			};
+			employers.selectall = function(name,id){
+				var checkItems = b('input[name="'+name+'"]');
+				if ($("#"+id).is(':checked') == false) {
+					checkItems.each(function(ke,el){
+						$(el).iCheck('uncheck');
+					});
+				}else{
+					checkItems.each(function(ke,el){
+						$(el).iCheck('check');
+					});
+				}
+			}
+			employers.iframeRresponsible = function(){
+				var $allObjects = $("iframe, object, embed"),
+        		$fluidEl = $("figure");
+
+   	 			$allObjects.each(function() {
+        			$(this)
+           			 // jQuery .data does not work on object/embed elements
+            		.attr('data-aspectRatio', this.height / this.width)
+            		.removeAttr('height')
+            		.removeAttr('width');
+    			});
+   		 		$(window).resize(function() {
+        			var newWidth = $fluidEl.width();
+        			$allObjects.each(function() {
+        			    var $el = $(this);
+        			    $el
+        			    .width(newWidth)
+        			    .height(newWidth * $el.attr('data-aspectRatio'));
+        			});
+    			}).resize();
+			}
+			a.employers = employers;
+		}(window,jQuery);
+    </script>
+</block>

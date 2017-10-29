@@ -1,0 +1,183 @@
+
+<!DOCTYPE html>
+<html class="" lang="zh-CN">
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+  <meta charset="utf-8" /> 
+  <meta name="keywords" content="" /> 
+  <meta name="HandheldFriendly" content="True" /> 
+  <meta name="MobileOptimized" content="320" /> 
+  <meta name="format-detection" content="telephone=no" /> 
+  <meta http-equiv="cleartype" content="on" /> 
+  <title><?php echo $branch_name?></title> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" /> 
+  <link href="__CSS__/foreverpay.css?v=1" rel="stylesheet"/>
+  <script src="__JS__/jquery-2.1.1.js"/></script>
+
+    <link rel="stylesheet" type="text/css" href="__STATIC__/weui/lib/weui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/weui/css/jquery-weui.min.css"/>
+    <script type="text/javascript" src="__STATIC__/weui/js/jquery-weui.min.js"></script>
+
+  <style>
+    body{background-color: #E8E8E8;}
+  </style>
+ </head> 
+ <body> 
+  <div class="container" style="margin-top:15px;"> 
+   <div class="content fixed-cash "> 
+   <form method="post" name="myform" id="subform">
+    <input type="hidden" name="buyer_id" value="{$buyer_id}">
+    <div class="cashier-info-container center">
+     <?php if(isset($wxuserinfo['headimgurl']) && !empty($wxuserinfo['headimgurl'])){?>
+     <div class="avatar cashier-avatar"> 
+      <a href="javascript:;"> <img class="circular" src="<?php echo $wxuserinfo['headimgurl'];?>" /> </a> 
+     </div> 
+     <?php } ?>
+     <!--<p class="avatar-price anonym"> <span class="rmb">￥ </span><span id="themoney">0</span> 元</p>--> 
+     <div class="block-wrapper-form payer-form"> 
+      <div class="block-form-item">
+       <label class="item-label">金额<div style="margin:5px 12px 0 0; font-size: 50px;">￥</div></label> 
+       <?php if($data['userId'] == 41){?>       
+       <!--<input type="number" class="item-input" name="tprice" id="tprice" onKeyPress="if(event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false">-->
+       <input type="number" class="item-input" id="js-payer-price" name="tprice" value="" onKeyPress="if(event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/>
+      <?php }else{?>
+       <input type="number" class="item-input" id="js-payer-price" name="tprice" value="" onKeyPress="if(event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/>
+       <!--<input type="number" class="item-input" id="js-payer-price" name="tprice" value="" onkeyup="value=value.replace(/[^1234567890.]+/g,'')"/>-->
+      <?php }?>
+      </div> 
+     </div> 
+
+     <div class="block-wrapper-form payer-form" style="display:none;"> 
+      <div class="block-form-item"> 
+       <label class="item-label">收款理由：</label> 
+       <input type="text" class="item-input" id="js-payer-name" name="tname" value="自助扫码支付" placeholder="输入收款理由（必填）"/> 
+      </div> 
+     </div>
+
+     <div class="block-wrapper-form payer-form">
+      <div class="block-form-item">
+       <label class="item-label">支付方式</label> 
+       <input type="text" class="item-input" id="js-payer-tname"  name="" value="{$pay_type}" readonly /> 
+      </div> 
+     </div>
+
+     <?php if(isset($wxuserinfo['nickname']) && !empty($wxuserinfo['nickname'])){?>
+     <div class="block-wrapper-form payer-form">
+      <div class="block-form-item">
+       <label class="item-label">付款人</label> 
+       <input type="hidden" class="item-input" id="js-payer-tname"  name="tname" value="<?php echo $wxuserinfo['nickname'];?>" /> 
+      </div> 
+     </div>
+     <?php }?>         
+
+    </div>
+  <input type="hidden" value="{$data.userId}"  name="userId">
+  <input type="hidden" value="{$data.usId}"  name="usId">
+  <input type="hidden" value="{$data.storeId}"  name="storeId">
+  <input type="hidden" value="{$data.parentId}"  name="parentId">
+  <input type="hidden" value="{$data.openid}"  name="openid">
+  <input type="hidden" value="autopay"  name="type">
+    <input type="hidden" value="{$data.paytype}" id="paytype" name="paytype">
+    </form>
+    <div class="action-container" id="js-cashier-action">
+     <div style="margin-bottom: 10px;"> 
+      <button class="btn-pay btn btn-block btn-large btn-umpay  btn-green subform"> 立即支付 </button>
+     </div>
+     <div style="margin-bottom: 10px;"> 
+      <!--<button type="button" data-pay-type="baiduwap" class="btn-pay btn btn-block btn-large btn-baiduwap  btn-white"> 储蓄卡付款 </button>-->
+     </div>
+    </div> 
+    
+    <!--<div class="center action-tip js-cashier-tip">
+     支付完成后，如需退款请及时联系卖家
+    </div>-->
+   </div> 
+  </div> 
+  <div class="footer"> 
+  </div> 
+  <script type="text/javascript">
+    function priceShow(vv){
+        vv=parseFloat(vv);
+        if(vv>0){
+          $('#themoney').text(vv);
+        }else{
+           $('#themoney').text('0');
+        }
+    }
+
+    var formPostUrl="{:U('Manage/Xingye/self_pay@'.C('SITE_URL'))}";
+
+       // function ByPay(){
+       //   var tprice=$('#js-payer-price').val();
+       //   var tname=$('#js-payer-tname').val();
+       //   if(tprice<=0 || tprice==""){
+       //      alert('付款金额不能小于0.01');
+       //      $('#js-payer-price').focus();
+       //      return false;
+       //   }else if(tname == ""){
+       //      $('#js-payer-tname').focus();
+       //      return false;
+       //   }
+       //   var myf=document.getElementById('mydataform');
+       //    myf.action=formPostUrl;
+       //    if($('#js-payer-name').size() >0){
+       //      var payername=$.trim($('#js-payer-name').val());
+       //      if(!payername){
+       //          $('#js-payer-name').focus();
+       //          return false;
+       //      }
+       //    }
+       //    document.myform.submit();
+       //  }
+
+      window.onload=function(){
+        $('#js-payer-price').trigger("focus");
+      }
+        
+
+        $('.subform').on('click', function(){
+            $('#subform').submit();
+        });
+        $('#subform').on('submit', function(){
+            var self = $(this);
+            $.ajax({
+                type:       "POST",
+                url:        formPostUrl,
+                data:       self.serialize(),
+                dataType:   "json",
+                beforeSend: beforeSend,
+                dataFilter: dataFilter,
+                complete:   complete,
+                success:    success,
+            });
+            return false;
+
+            function beforeSend()
+            {
+                $.showLoading();
+            }
+            function dataFilter(data)
+            {
+                $.hideLoading();
+                return data;
+            }
+            function success(data)
+            {
+                //alert(data.status);
+                //alert(data.pay_url);
+                if(data.status == 0)
+                {
+                    //$.toast(data.msg, function(){
+                        window.location.href = data.pay_url;
+                    //});
+                }
+                else
+                {
+                    $.toast(data.msg, 'forbidden');
+                }
+            }
+            function complete(){}
+        });
+  </script>
+ </body>
+</html>

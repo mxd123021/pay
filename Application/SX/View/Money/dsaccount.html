@@ -1,0 +1,211 @@
+<extend name="Public/base"/>
+
+<block name="title">代收商户提现</block>
+
+<block name="levels"><li><a href="{:U("SX/Index/index")}">后台首页</a></li><li>财务管理</li></block>
+
+<block name="body">
+	            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-content">
+                        	<div class="row m-b-sm m-t-sm">
+	                            <div class="col-md-1">
+	                            	<button id="refresh" type="button" class="btn btn-outline btn-white"><i class="fa fa-refresh"></i> 刷新</button>
+	                            </div>
+	                            <div class="btn-group">
+			                        <a href="{:U('SX/Money/dsaccount',array('type'=>2))}" class="btn btn-primary <eq name="type" value="2">active</eq>"><i class="fa fa-retweet"></i> 申请中</a>
+			                        <a href="{:U('SX/Money/dsaccount',array('type'=>1))}" class="btn btn-primary <eq name="type" value="1">active</eq>"><i class="fa fa-check-circle"></i> 已提现</a>
+			                        <a href="{:U('SX/Money/dsaccount',array('type'=>3))}" class="btn btn-primary <eq name="type" value="3">active</eq>"><i class="fa fa-times"></i> 申请失败</a>
+			                    </div>
+	                        </div>
+                            <div class="project-list">
+                                <table class="table table-hover">
+                                    <tbody>
+										<?php foreach($withdraw as $key=>$val){ ?>
+                                        <tr>
+                                            <td class="project-status">
+                                                <span class="label <eq name="type" value="1">label-primary</eq><eq name="type" value="2">label-default</eq><eq name="type" value="3">label-danger</eq>"><eq name="type" value="1">已处理</eq><eq name="type" value="2">待处理</eq><eq name="type" value="3">申请失败</eq>
+                                            </span></td>
+                                            <td>
+                                                商户ID: <?php echo $val['userId'];?>
+                                            </td>
+                                            <td class="project-title">
+                                                <a href="javascript:;"><font color="green">金额: <?php echo $val['price'];?>元</font></a>
+                                                <br>
+                                                <small>申请时间 <?php echo date('Y-m-d H:i:s',$val['applytime']);?></small>
+                                            </td>
+                                            <td>
+                                                代扣税金额: <?php echo $val['dprice'];?>元
+                                            </td>
+                                            <td>
+                                                提现单号: <?php echo $val['orderid'];?>
+                                            </td>
+                                            <eq name="type" value="2">
+	                                            <td class="project-actions">
+	                                                <a href="javascript:;" onclick="GetDetail('{$val.orderid}');" class="btn btn-white btn-sm" target="_blank"><i class="fa fa-check-square"></i> 处理 </a>
+	                                            </td>
+                                            </eq>
+                                        </tr>
+										<?php }?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+</block>
+
+<block name="top">
+<link href="__CSS__/footable.core.css" rel="stylesheet">
+<link href="__CSS__/plugins/custom.css" rel="stylesheet">
+<link href="__CSS__/cashier.css" rel="stylesheet">
+	<style>
+		.ibox{
+		 	border: 1px solid #e7eaec;
+		}
+		.part_item {
+  			background: none repeat scroll 0 0 #fff;
+  			border: 1px solid #ccc;
+  			border-radius: 5px;
+  			padding-bottom: 15px;
+  			margin-bottom: 10px;
+		}
+		.form .part_item p {
+  			display: inline-block;
+  			font-size: 14px;
+  			overflow: hidden;
+  			padding: 10px 20px 0;
+  			text-overflow: ellipsis;
+  			white-space: nowrap;
+		}
+		.part_item_b {
+  			border-top: 1px solid #ccc;
+  			margin-top: 10px;
+		}
+		.form .part_item p.active {
+  			color: #f87b00;
+		}
+		.part_item input {
+  			font-size: 14px;
+  			margin-bottom: 2px;
+  			margin-right: 5px;
+		}
+		.pagination{
+			margin:0px;
+		}
+		.mustInput {
+  			color: red;
+  			margin-right: 5px;
+		}
+		@media (min-width: 768px){
+			.form .part_item p {
+				width: 37%;
+			}
+		}
+		@media (min-width: 992px){
+			.form .part_item p {
+				width: 24%;
+			}
+		}
+	.form-control, .single-line{width: 50%;}
+	#oderinfo{overflow-y: scroll;}
+	</style>
+</block>
+<block name="bottom">
+<div class="modal inmodal" tabindex="-1" role="dialog"  id="oderinfo">
+		<div class="modal-dialog">
+			<div class="modal-content animated bounceInRight">
+				<div class="modal-header">
+                    <button type="button" class="close _close"><span style="font-size: 35px;">×</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">提现信息</h4>
+                </div>
+				<div class="modal-body">
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary _money">确定打款</button>
+                    <button type="button" class="btn btn-white _close">关闭</button>
+                </div>
+			</div>
+		</div>
+	</div>
+
+    <script src="__JS__/footable.all.min.js"></script>
+    <script>
+    	var screenH=$(window).height();
+		screenH=  screenH-20;
+		$('#oderinfo').css('height',screenH);
+
+        $(document).ready(function() {
+			employers.init();
+			$("#oderinfo ._close").click(function(){
+			  	$('#oderinfo').hide();
+			  	$('.modal-backdrop').remove();
+			  	$('#oderinfo .modal-body').html('');
+			});
+
+			$("#oderinfo ._money").click(function(){
+				var money = $("#money").html();
+				var bind = $("#bind").val();
+				var oid = $("#oid").val();
+				if(bind==1){
+					sweetAlert({
+					  title: money+"元",
+					  text: "确定打款吗？",
+					  type: "success",
+					  closeOnConfirm: false,
+					  showCancelButton: true,
+					  confirmButtonText: "确定",
+					  confirmButtonColor: "#44b549",
+					  cancelButtonText: "关闭",
+					}, function(){
+						$(".sa-button-container .confirm").hide();
+						$.post('{:U("SX/Money/withdraw")}',{id:oid},function(ret){
+					        if(ret.status == 1){
+					        	sweetAlert({
+								  title: "打款成功!",
+								  text: "",
+								  type: "success",
+								  closeOnConfirm: false
+								}, function(){
+								  window.location.reload();
+								})
+					        }else{
+								swal({title: "温馨提示",text:ret.msg,type: "error"});
+					        }
+				     	});
+					})
+				}else{
+					swal({title: "温馨提示",text:"该商户未绑定微信，无法打款",type: "error"});
+				}
+
+			});
+        });
+
+		function GetDetail(id){
+		   var getUrl=odurl+"?id="+id;
+		    $.get(getUrl,function(ret){
+			   if(ret){
+				  $('body').append('<div class="modal-backdrop in"></div>');
+			      $('#oderinfo .modal-body').html(ret);
+				  $('#oderinfo').show();
+			   }
+			},'html');
+		 }
+
+		!function(a,b){
+			var employers = employers || {};
+			employers.init = function(){
+				var c = employers;
+				b('.footable').footable();
+			};	
+			a.employers = employers;
+		}(window,jQuery);
+
+        $('#refresh').click(function() {
+        	window.location.reload();
+        });
+        var odurl="{:U('SX/Money/dsodetail')}";
+    </script>
+</block>

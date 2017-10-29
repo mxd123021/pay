@@ -1,0 +1,106 @@
+<nav role="navigation" class="navbar-default navbar-static-side">
+        <div class="sidebar-collapse">
+            <ul id="side-menu" class="nav metismenu">
+                <li class="nav-header">
+                    <div class="dropdown profile-element"> <span>
+							<i class="fa fa-pied-piper-alt" style="font-size:60px;color:#1ab394;"></i>
+                         </span>
+                        <a href="javascript:;" class="dropdown-toggle">
+                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{:session('SX_STAFF.staffName')}</strong>
+                             </span> <span class="text-muted text-xs block">网站管理后台</span> </span> </a>
+                    </div>
+					<div class="logo-element" style="text-align: center;">
+						<i class="fa fa-cogs" style="font-size:50px;color:#1ab394;"></i>
+							
+					</div>
+                </li>
+                <li <eq name="Think.const.CONTROLLER_NAME" value="Index"><eq name="Think.const.ACTION_NAME" value="index"> class="active" </eq></eq>>
+                    <a href="{:U("SX/Index/index")}"><i class="fa fa-home"></i> <span class="nav-label">首页</span><span class="label label-info pull-right"></span></a>
+                </li>
+                <if condition="in_array('sys_wz',session('SX_STAFF.grant')) or in_array('sys_zf',session('SX_STAFF.grant')) or in_array('sys_wx',session('SX_STAFF.grant')) or in_array('sys_admin',session('SX_STAFF.grant')) or in_array('sys_pass',session('SX_STAFF.grant'))">
+                    <li <eq name="Think.const.CONTROLLER_NAME" value="Index"><neq name="Think.const.ACTION_NAME" value="index"> class="active" </neq></eq>>
+                        <a href="#"><i class="fa fa-cog"></i> <span class="nav-label">系统配置</span></a>
+                        <ul class="nav nav-second-level collapse <eq name="Think.const.CONTROLLER_NAME" value="Index"><neq name="Think.const.ACTION_NAME" value="index"> class="active" </neq></eq>">
+                            <if condition="in_array('sys_wz',session('SX_STAFF.grant'))">
+                                <li <eq name="Think.const.CONTROLLER_NAME" value="Index"><eq name="Think.const.ACTION_NAME" value="toConfig"> class="active" </eq></eq>><a href="{:U("SX/Index/toConfig")}">网站配置</a></li>
+                            </if>
+                            <if condition="in_array('sys_zf',session('SX_STAFF.grant'))">
+                                <li <eq name="Think.const.CONTROLLER_NAME" value="Index"><eq name="Think.const.ACTION_NAME" value="payConfig"> class="active" </eq></eq>><a href="{:U("SX/Index/payConfig")}">支付配置</a></li>
+                            </if>
+                            <if condition="in_array('sys_wx',session('SX_STAFF.grant'))">
+                                <li <eq name="Think.const.CONTROLLER_NAME" value="Index"><eq name="Think.const.ACTION_NAME" value="wxConfig"> class="active" </eq></eq>><a href="{:U("SX/Index/wxConfig")}">微信配置</a></li>
+                            </if>
+                            <if condition="in_array('sys_admin',session('SX_STAFF.grant'))">
+                                <li <php> if(ACTION_NAME == 'employers' or ACTION_NAME == 'roles') echo "class='active'"; </php>>
+                                    <a href="index.html#">管理员配置<span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level collapse">
+                                        <li <eq name="Think.const.ACTION_NAME" value="employers"> class="active" </eq>>
+                                            <a href="{:U("SX/Index/employers")}">管理员管理</a>
+                                        </li>
+                                        <li <eq name="Think.const.ACTION_NAME" value="roles"> class="active" </eq>>
+                                            <a href="{:U("SX/Index/roles")}">角色管理</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </if>
+                            <if condition="in_array('sys_pass',session('SX_STAFF.grant'))">
+                                <li <eq name="Think.const.CONTROLLER_NAME" value="Index"><eq name="Think.const.ACTION_NAME" value="modifypwd"> class="active" </eq></eq>><a href="{:U("SX/Index/modifypwd")}">修改密码</a></li>
+                            </if>
+                        </ul>
+                    </li>
+                </if>
+                <if condition="in_array('user_lists',session('SX_STAFF.grant'))">
+    				<li <eq name="Think.const.CONTROLLER_NAME" value="Users"> class="active" </eq>>
+    					<a href="#"><i class="fa fa-puzzle-piece"></i> <span class="nav-label">网站商家</span></a>
+                        <ul class="nav nav-second-level collapse <eq name="Think.const.CONTROLLER_NAME" value="Users"> in </eq>">
+                            <if condition="in_array('user_lists',session('SX_STAFF.grant'))">
+                                <li <eq name="Think.const.CONTROLLER_NAME" value="Users"><eq name="Think.const.ACTION_NAME" value="merLists"> class="active" </eq></eq>><a href="{:U("SX/Users/merLists")}">商家列表</a></li>
+                            </if>
+<!--                            <if condition="in_array('user_lists',session('SX_STAFF.grant'))">
+                                <li <eq name="Think.const.CONTROLLER_NAME" value="Users"><eq name="Think.const.ACTION_NAME" value="auditrealname"> class="active" </eq></eq>><a href="{:U("SX/Users/auditrealname")}">实名认证审核</a></li>
+                            </if>-->
+                        </ul>
+                    </li>
+                </if>
+                <if condition="in_array('market_ad',session('SX_STAFF.grant')) or in_array('market_re',session('SX_STAFF.grant'))">
+                    <li <eq name="Think.const.CONTROLLER_NAME" value="Market"> class="active" </eq>>
+                        <a href="#"><i class="fa fa-slideshare"></i> <span class="nav-label">营销功能</span><span class="label label-info pull-right">NEW</span></a>
+                        <ul class="nav nav-second-level collapse <eq name="Think.const.CONTROLLER_NAME" value="Market"> in </eq>">
+                            <if condition="in_array('market_ad',session('SX_STAFF.grant'))">
+                                <li <eq name="Think.const.CONTROLLER_NAME" value="Market"><eq name="Think.const.ACTION_NAME" value="wxmarket"> class="active" </eq></eq>><a href="{:U("SX/Market/wxmarket")}">微信广告</a></li>
+                            </if>
+<!--                            <if condition="in_array('market_re',session('SX_STAFF.grant'))">
+                                <li <eq name="Think.const.CONTROLLER_NAME" value="Market"><eq name="Think.const.ACTION_NAME" value="rlist"> class="active" </eq></eq>><a href="{:U("SX/Market/rlist")}">预约留言</a></li>
+                            </if>-->
+                        </ul>
+                    </li>
+                </if>
+                <if condition="in_array('user_lists',session('SX_STAFF.grant'))">
+                    <li <eq name="Think.const.CONTROLLER_NAME" value="Statistics"> class="active" </eq>>
+                        <a href="#"><i class="fa fa-line-chart"></i> <span class="nav-label">数据统计</span></a>
+                        <ul class="nav nav-second-level collapse <eq name="Think.const.CONTROLLER_NAME" value="Statistics"> in </eq>">
+                            <if condition="in_array('user_lists',session('SX_STAFF.grant'))">
+                                <li <eq name="Think.const.CONTROLLER_NAME" value="Statistics"><eq name="Think.const.ACTION_NAME" value="orderLists"> class="active" </eq></eq>><a href="{:U("SX/Statistics/orderLists")}">收款订单列表</a></li>
+                            </if>
+                             
+                        </ul>                        
+                    </li>
+                   
+                </if>
+<!--                <if condition="in_array('money_cz',session('SX_STAFF.grant'))">
+                    <li <eq name="Think.const.CONTROLLER_NAME" value="Money"> class="active" </eq>>
+                        <a href="#"><i class="fa fa-money"></i> <span class="nav-label">财务管理</span></a>
+                        <ul class="nav nav-second-level collapse <eq name="Think.const.CONTROLLER_NAME" value="Money"> in </eq>">
+                            <if condition="in_array('money_dstx',session('SX_STAFF.grant'))">
+                                <li <eq name="Think.const.CONTROLLER_NAME" value="Money"><eq name="Think.const.ACTION_NAME" value="dsaccount"> class="active" </eq></eq>><a href="{:U("SX/Money/dsaccount")}">代收商户提现</a></li>
+                            </if>
+                            <if condition="in_array('money_cz',session('SX_STAFF.grant'))">
+                                <li <eq name="Think.const.CONTROLLER_NAME" value="Money"><eq name="Think.const.ACTION_NAME" value="paylist"> class="active" </eq></eq>><a href="{:U("SX/Money/paylist")}">商户充值列表</a></li>
+                            </if>
+                        </ul>
+                    </li>
+                </if>-->
+            </ul>
+
+        </div>
+    </nav>

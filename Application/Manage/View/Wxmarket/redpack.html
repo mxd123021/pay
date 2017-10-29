@@ -1,0 +1,415 @@
+<extend name="Public/base"/>
+
+<block name="title">红包营销 beta1.0</block>
+
+<block name="levels"><li><a href="{:U("Manage/Index/index")}">后台首页</a></li><li>微信营销</li></block>
+
+<block name="body">
+<div class="row" id="wrapper-content-list">
+					<div class="col-lg-12">
+						<div class="ibox float-e-margins">
+							<div class="ibox-title">
+								<div class="clearfix">
+									<div class="wh100 fl">
+										<div class="form-group"><label>红包开关</label>
+		                                    <div class="switch">
+		                                        <div class="onoffswitch">
+		                                            <input type="checkbox" <eq name="redpack['packStatus']" value="1"> checked="" </eq>  class="onoffswitch-checkbox" id="example1">
+		                                            <label class="onoffswitch-label" for="example1">
+		                                                <span class="onoffswitch-inner"></span>
+		                                                <span class="onoffswitch-switch"></span>
+		                                            </label>
+		                                        </div>
+		                                    </div>
+										</div>
+									</div>
+									<div class="wh250 fl">
+										<input type="text" class="form-control input-sm m-b-xs" id="rpnum" placeholder="单次最少充值10元(0.6%手续费)" onkeyup="value=value.replace(/[^1234567890.]+/g,'')">
+										<button class="btn btn-primary btn-sm" id="addrpmoney" title="" data-original-title="充值红包"><i class="fa fa-plus"></i> 充值红包</button>
+									</div>
+									<div class="wh200 fr">
+										可用余额：<span class="red">{$money.curmoney}</span>
+									</div>
+									<div class="wh200 fr">
+										红包余额：<span class="red">{$money.rpmoney}</span>
+									</div>
+								</div>
+							</div>
+
+							<div class="ibox-content" <neq name="redpack['packStatus']" value="1"> style="display:none" </neq>>
+								<if condition="$redpack['isEffect'] eq 1">
+									<div class="alert alert-success" style="font-size: 16px;"> 当前红包已生效,请使用员工账号进行收银</div>
+								<else />
+									<div class="alert alert-danger" style="font-size: 16px;"> 当前红包末生效，保存信息后方可生效</div>
+								</if>
+								<div class="group">
+									<div id="js_preview_area" class="media_preview_area">
+										<div class="msg_card"> 
+											<div class="msg_card_inner" style="padding-bottom: 0px;">
+												<p class="msg_title" style="margin: 0;">红包营销</p> 
+												<div class="js_preview msg_card_section shop disabled focus itemdiv"> 
+													<div id="js_color_preview" class="shop_panel" style="background-color: #be4d3b; height: 260px;"> 
+														<div class="logo_area group"> 
+															<span class="logo" style="margin:0 auto;"><img src="__IMG__/market/redpack.jpg" id="js_logo_url_preview"></span> 
+															<p style="text-align: center;" id="send_name_preview">{$redpack.sendName}</p> 
+														</div> 
+														<div class="msg_area"> 
+															<div class="tick_msg"> 
+																<p> <b id="title_preview">{$redpack.wishing}</b> </p> 
+																<br> 
+															</div>
+															<p class="time timetype1" <if condition="$redpack['dateType'] eq 1">hidden</if>><span id="js_time_preview">有效期：永久有效</span></p> 
+															<p class="time timetype2" <if condition="$redpack['dateType'] eq 0">hidden</if>><span id="js_time_preview">有效期：<span class="time1">{$redpack.dateStart}</span> - <span class="time2">{$redpack.dateEnd}</span></span></p> 
+														</div> 
+													</div> 
+													<div class="msg_card_mask"> 
+														<span class="vm_box"></span> 
+														<a class="js_edit_icon edit_oper" data-actionid="1" href="javascript:;"><i class="icon18_common edit_gray"></i></a> 
+													</div> 
+													<div class="deco"></div> 
+												</div> 
+												<div class="js_preview msg_card_section dispose disabled itemdiv"> 
+													<div id="js_destroy_title" class="unset"> 
+														<p>领取条件</p> 
+													</div> 
+													<div class="msg_card_mask"> 
+														<span class="vm_box"></span> 
+														<a class="js_edit_icon edit_oper" data-actionid="2" href="javascript:;"><i class="icon18_common edit_gray"></i></a> 
+													</div> 
+												</div> 
+												<div class="shop_detail"> 
+													<ul class="list"> 
+														<li class="msg_card_section js_preview last_li itemdiv"> 
+															<div href="" class="li_panel"> 
+																<div class="li_content"> 
+																	<p>适用门店</p> 
+																</div> 
+																<span class="ic ic_go"></span> 
+															</div> 
+															<div class="msg_card_mask"> 
+																<span class="vm_box"></span> 
+																<a class="js_edit_icon edit_oper" data-actionid="4" href="javascript:;"><i class="icon18_common edit_gray"></i></a> 
+															</div> 
+														</li>
+													</ul> 
+												</div> 
+												 
+											</div> 
+										</div>
+									</div> 
+									<form id="js_editform" name="js_editform" class="media_edit" novalidate="novalidate" method="POST" action="{:U('Manage/Wxmarket/saveRedpack')}"> 
+										<input type="hidden" id="is_card" value="0">
+										<div id="js_edit_area" class="media_edit_area" style="margin-top: 0px;">
+											<div class="js_edit_content portable_editor to_left appmsg_editor econtent1" style="display: block;"> 
+												<input type="hidden" value="5" name="ctype"> 
+												<div class="inner"> 
+													<div class="editor_section"> 
+														<h3 class="title"> 红包信息 </h3> 
+														 
+														<div class="appmsg_edit_item appmsg_input_submsg_item group appmsg_edit_item_label_mult"> 
+															<label class="frm_label" for=""> <strong class="title">商户名称</strong> <br></label> 
+															<div class="appmsg_edit_item frm_normal"> 
+																<span class="frm_input_box"> <input type="text" placeholder="请填写商户名称" class="frm_input ckinput" name="base_info[send_name]" id="send_name" value="{$redpack.sendName}"> </span>
+																<span class="tips"><span id="js_send_name_tip">0</span>/<span id="js_send_name_limit">12</span></span> 
+																<p class="frm_msg fail" style="display: none;"><span for="title" class="frm_msg_content">您已经超出长度了，超出了<strong></strong></span></p>
+																<p class="frm_tips">商户名称请保持在12汉子或24个英文字母以内</p> 
+															</div>
+														</div>
+														 
+														 
+														
+														<div class="appmsg_edit_item frm_normal"> 
+															<label class="frm_label" for=""> <strong class="title">红包祝福语</strong> </label> 
+															<span class="frm_input_box"> <input type="text" placeholder="祝您节日快乐！" class="frm_input ckinput" id="title" name="base_info[title]" value="{$redpack.wishing}"> </span> 
+															<span class="tips"><span id="js_title_tip">0</span>/<span id="js_title_limit">22</span></span> 
+															<p class="frm_msg fail"><span for="title" class="frm_msg_content">您已经超出长度了，超出了<strong></strong></span></p>
+															<p class="frm_tips">建议填写红包的祝福信息</p> 
+														</div>
+
+														<div class="radio_control_group group"> 
+															<label class="frm_radio_label" for="checkbox4"> <span class="lbl_content">红包详细信息：</span> 你参与【活动名称】，成功获得【商户名称】赠送的红包，【备注信息】 </label> 
+														</div>
+
+														<div class="appmsg_edit_item"> 
+															<label class="frm_label" for=""> <strong class="title">活动名称</strong> </label> 
+															<span class="frm_input_box"> <input type="text" placeholder="猜谜抢红包活动" class="frm_input ckinput" id="sub_title" name="base_info[sub_title]" value="{$redpack.actName}"> </span> 
+															<span class="tips"><span id="js_sub_title_tip">0</span>/<span id="js_sub_title_limit">32</span></span>
+															<p class="frm_msg fail"><span for="sub_title" class="frm_msg_content">您已经超出长度了，超出了<strong></strong></span></p> 
+														</div> 
+
+														<div class="appmsg_edit_item"> 
+														  <label class="frm_label" for=""> <strong class="title">备注信息</strong> </label> 
+														  <span class="frm_input_box"> <textarea type="text" placeholder="猜越多得越多，快来抢！" class="frm_input ckinput" id="source" name="base_info[source]" style="margin: 0px; width: 208px; height: 180px;">{$redpack.remark}</textarea></span> 
+														  <span class="tips"><span id="js_source_tip">0</span>/<span id="js_source_limit">128</span></span>
+														  <p class="frm_msg fail"><span for="source" class="frm_msg_content">您已经超出长度了，超出了<strong></strong></span></p>
+														 </div> 
+														
+														<div class="appmsg_edit_item radio_item"> 
+															<div class="frm_control_group radio_row"> 
+																<label class="frm_label" for="">红包金额</label>
+																<div class="alert alert-warning" style="font-size: 16px;"> 单个红包金额介于[1.00元，200.00元]之间,红包发放后72小时未被领取将进行退款</div>
+																<div class="frm_controls frm_vertical_lh">
+																	<div id="gd_price" class="input-daterange input-group <if condition="$redpack['redRand'] eq 1">hidden</if>">
+																		<span class="input-group-addon">固定金额</span>
+																		<input type="text" value="{$redpack.gdMoney}" name="base_info[gd_money]" class="input-sm form-control" id="least_money_to_use_bonus" placeholder="" onkeyup="value=value.replace(/[^1234567890.]+/g,'')">
+																		<span class="input-group-addon">元</span>
+																	</div>
+																	<div id="sj_price" class="input-daterange input-group <if condition="$redpack['redRand'] eq 0">hidden</if>">
+																		<span class="input-group-addon">随机金额</span>
+																		<input type="text" value="{$redpack.lMoney}" name="base_info[l_money]" class="input-sm form-control" placeholder="最低金额" onkeyup="value=value.replace(/[^1234567890.]+/g,'')">
+																		<span class="input-group-addon">元到</span>
+																		<input type="text" value="{$redpack.hMoney}" name="base_info[h_money]" class="input-sm form-control" placeholder="最高金额" onkeyup="value=value.replace(/[^1234567890.]+/g,'')">
+																		<span class="input-group-addon">元内</span>
+																	</div>
+																	<label class="frm_checkbox_label selected" for="checkbox11" style="margin-top: 10px;"> <i class="icon_checkbox"></i> <span class="lbl_content">红包金额随机</span> <input type="checkbox" id="red_rand" class="frm_radio frm_checkbox" <if condition="$redpack['redRand'] eq 1">checked</if> value="1" id="checkbox11" name="base_info[red_rand]"></label>
+																</div>
+																<label class="frm_label" for="">有效期</label> 
+																<div class="frm_controls frm_vertical_lh" style="padding: 5px;"> 
+																	<div class="radio_control_group group"> 
+																		<label class="frm_radio_label frm_radio_input selected" for="DATE_TYPE_PERMANENT"> <i class="icon_radio"></i><input type="radio" class="frm_radio js_validtime" value="0" id="DATE_TYPE_PERMANENT" <if condition="$redpack['dateType'] eq 0">checked</if> name="base_info[date_type]"><span class="lbl_content"> 永久有效 &nbsp;&nbsp;</span> </label> 
+																	</div> 
+																</div> 
+																<div class="frm_controls frm_vertical_lh" style="padding: 5px;"> 
+																	<div class="radio_control_group group"> 
+																		<label class="frm_radio_label frm_radio_input selected" for="DATE_TYPE_FIX_TIME_RANGE"> <i class="icon_radio"></i><input type="radio" class="frm_radio js_validtime" value="1" id="DATE_TYPE_FIX_TIME_RANGE" name="base_info[date_type]" <if condition="$redpack['dateType'] eq 1">checked</if>><span class="lbl_content"> 固定日期 &nbsp;&nbsp;</span> </label>
+																		<div id="ymdatepicker" class="input-daterange input-group">
+																			<div class="input-group date">
+												                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+												                                <input type="text" value="<if condition="$redpack['dateType'] eq 0">{:date('Y-m-d')}<else />{$redpack.dateStart}</if>" name="datestart" class="input-sm form-control" id="ymstart" placeholder="有效开始时间" style="border-radius:0px;">
+												                            </div>
+
+																			<span class="input-group-addon" style="background-color: #FBFBFB"> 至 </span>
+
+																				<div class="input-group date">
+												                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+												                                <input type="text" value="<if condition="$redpack['dateType'] eq 0">{:date('Y-m-d')}<else />{$redpack.dateEnd}</if>" name="dateend" class="input-sm form-control" id="ymend" placeholder="有效结束时间" style="border-radius:0px;">
+												                            </div>
+																		</div>
+																	</div> 
+																</div> 
+															</div> 
+														</div>
+														
+														 
+													</div> 
+												</div> 
+												<i style="margin-top: 0px;" class="arrow arrow_out"></i> 
+												<i style="margin-top: 0px;" class="arrow arrow_in"></i> 
+											</div> 
+											<div class="js_edit_content portable_editor to_left appmsg_editor econtent2" style="display: none;"> 
+												<div class="inner"> 
+													<div class="editor_section"> 
+														<h3 class="title"> 获取设置 </h3> 
+														<div class="appmsg_edit_item"> 
+															<label class="frm_label" for=""> <strong class="title">库存</strong> </label> 
+															<div class="input_submsg"> 
+																<span class="frm_input_box"><input type="text" class="frm_input" value="{$redpack.quantity}" name="base_info[quantity]" onkeyup="value=value.replace(/[^1234567890]+/g,'')"></span> 
+																<span class="input_sub_msg">份</span> 
+																<p class="frm_msg fail"><span for="quantity" class="frm_msg_content">库存只能是大于0的数字</span></p>
+															</div>
+															<p class="frm_tips">红包剩余数，默认为1000个</p> 
+														</div> 
+														<div class="appmsg_edit_item appmsg_edit_item_label_mult appmsg_input_submsg_item group"> 
+															<label class="frm_label l" for=""> <strong class="title">红包限制<br><span class="tips">(选填)</span></strong> </label> 
+															<div class="input_submsg l"> 
+																<span class="frm_input_box"><input type="text" placeholder="" class="frm_input" value="{$redpack.getLlimit}" name="base_info[get_limit]" onkeyup="value=value.replace(/[^1234567890]+/g,'')"></span> 
+																<span class="input_sub_msg">个</span> 
+															</div> 
+															<p class="frm_tips">每个用户领红包上限，如不填，则默认为1</p> 
+														</div> 
+
+														<div class="appmsg_edit_item bonus"> 
+															<label class="frm_label"><strong class="title">获取条件<br><span class="tips">(选填)</span></strong></label>
+															<div class="input-daterange input-group">
+																<span class="input-group-addon">订单满</span>
+																<input type="text" value="{$redpack.leastMoney}" name="base_info[least_money]" class="input-sm form-control" id="least_money_to_use_bonus" placeholder="" onkeyup="value=value.replace(/[^1234567890.]+/g,'')">
+																<span class="input-group-addon">元可得</span>
+															</div>
+															<p class="frm_tips">消费多少可以获得红包，如不填，则没有条件</p> 
+														</div>
+
+														<div id="js_share_type" class="appmsg_edit_item"> 
+															<div class="frm_control_group"> 
+																<div class="frm_controls frm_vertical_lh"> 
+																	<label class="frm_checkbox_label selected" for="checkbox11"> <i class="icon_checkbox"></i> <span class="lbl_content">是否分享后才能领取</span> <input id="red_rand" type="checkbox" class="frm_radio frm_checkbox" <if condition="$redpack['isShare'] eq 1">checked</if> value="1" name="base_info[can_share]"></label>
+																</div> 
+															</div> 
+														</div>
+													</div> 
+												
+												</div> 
+												<i style="margin-top: 0px;" class="arrow arrow_out"></i> 
+												<i style="margin-top: 0px;" class="arrow arrow_in"></i> 
+											</div> 
+											
+											<div class="js_edit_content portable_editor to_left appmsg_editor econtent4" style="display: none;"> 
+												<div class="inner"> 			 
+													<div class="editor_section">
+														<h3 class="title">适用门店&nbsp;&nbsp;&nbsp;(<span style="color:#F22910">请必须勾选一个门店</span>)</h3>
+														<div class="ibox float-e-margins">
+															<div class="table-responsive">
+																<table class="table table-striped">
+																	<thead>
+																		<tr>
+																			<th>请选择</th>
+																			<th>门店名</th>
+																			<th>地址</th>
+																		</tr>
+																	</thead>
+																	<tbody>
+																	<?php if(!empty($stores)){
+																		foreach($stores as $svv){
+																		?>
+																		<tr>
+																			<td><div class="icheckbox_square-green" style="position: relative;"><input type="checkbox" name="inputpoiid[]" value="<?php echo "(".$svv['storeId'].")";?>" class="i-checks" <if condition="strstr($redpack['redStoreId'],'('.$svv['storeId'].')')">checked</if>><ins class="iCheck-helper"></ins></div></td>
+																			<td><?php echo $svv['business_name'].$svv['branch_name']?></td>
+																			<td><?php echo $svv['address']?></td>
+																		</tr>
+																		<?php }}else{?>
+																		<tr>
+																			<td colspan="3">您还没有创建店铺，请到平台创建</td>
+																		</tr>
+																		<?php }?>
+																	</tbody>
+																</table>
+															</div>
+														</div>
+													</div>
+												</div> 
+												<i style="margin-top: 0px;" class="arrow arrow_out"></i> 
+												<i style="margin-top: 0px;" class="arrow arrow_in"></i> 
+											</div> 
+
+										</div> 
+									</form> 
+								</div> 
+								<div class="tool_bar border tc">
+									<button id="create_card" class="btn btn-primary" style="height: 36px;"> 保存信息 </button>
+								</div>
+							</div>
+						</div>
+                    </div>
+                </div>
+</block>
+
+<block name="top">
+<link href="__CSS__/wxmarket/card_control.css" rel="stylesheet">
+<link href="__CSS__/wxmarket/section_card_notification.css" rel="stylesheet">
+<link href="__CSS__/plugins/basic.css" rel="stylesheet">
+<link href="__CSS__/plugins/dropzone.css" rel="stylesheet">
+<link href="__CSS__/dataTables/datepicker3.css" rel="stylesheet">
+<style type="text/css">
+#dataselect .input-group-btn,#ym-select .input-group-btn{width: 12%;}
+#dataselect .input-sm ,#ym-select .input-sm{ border-radius: 7px; height:40px;}
+#dataselect .btn-primary ,#ym-select .btn-primary{ margin-left: 20px; border-radius:4px;margin-bottom: 0px;}
+#dataselect .input-group-addon,#ym-select .input-group-addon{border-radius: 7px;}
+.ibox-content{ min-height:800px;}
+.dropz .dz-image-preview{display:none;}
+.fl{float:left;}
+.fr{float:right;}
+.wh100{width: 100px;}
+.wh250{width: 250px; margin-left: 50px;}
+.wh200{width: 200px; color: #676A6C; margin:15px 5px; font-size: 13px; font-weight: 700;}
+.red{color: red;}
+</style>
+<script src="__JS__/plugins/bootstrap-datepicker.js"></script>
+<link href="__CSS__/plugins/custom.css" rel="stylesheet">
+</block>
+
+<block name="bottom">
+<script type="text/javascript">var wxCouponType = 5;var redpackurl = "{:U('Manage/Wxmarket/redpack')}";</script>
+<script src="__JS__/plugins/dropzone.js"></script>
+<script src="__JS__/plugins/icheck.min.js"></script>
+<script src="__JS__/market/commonfunc.js"></script>
+<script type="text/javascript">
+$(document).ready(function() { 
+	$('#ymdatepicker.input-daterange').datepicker({
+		keyboardNavigation: false,
+		forceParse: false,
+		format: "yyyy-mm-dd",
+		autoclose: true
+	});
+
+	$('#red_rand').click(function(){
+	    if($(this).attr('checked')){
+	       $("#gd_price").removeClass("hidden");
+	       $("#sj_price").addClass("hidden");
+	       $(this).removeAttr('checked');
+	    }else{
+	    	$("#gd_price").addClass("hidden");
+	        $("#sj_price").removeClass("hidden");
+	        $(this).attr("checked",'');
+	    }
+	});
+
+	$('#DATE_TYPE_PERMANENT').click(function(){
+	    $('.timetype1').show();
+		$('.timetype2').hide();
+	});
+	$('#DATE_TYPE_FIX_TIME_RANGE').click(function(){
+	   	$('.timetype1').hide();
+		$('.timetype2').show();
+		$('#js_time_preview .time1').text($('#ymstart').val());
+		$('#js_time_preview .time2').text($('#ymend').val());
+	});
+	$('.i-checks').iCheck({checkboxClass: 'icheckbox_square-green', radioClass: 'iradio_square-green',});
+	
+	$('.onoffswitch .onoffswitch-checkbox').click(function(){
+	    var isopen;
+	    if($(this).attr('checked')){
+	        isopen = 0;
+	       $(".ibox-content").hide();
+	       $(this).removeAttr('checked');
+	    }else{
+	        isopen = 1;
+	    }
+	    $.post('{:U("Manage/wxmarket/redpackisOpen")}',{isopen:isopen},function(ret){
+	        if(ret.status == -1){
+	            swal({title: "温馨提示",text:'修改失败！',type: "error"});
+	        }else{
+	        	if(isopen==1){
+	        		window.location.href=redpackurl;
+	        	}
+	        }
+	    });
+	});
+
+	$('#addrpmoney').click(function(){
+		 var rpnum = $('#rpnum').val();
+		 rpnum=parseFloat(rpnum);
+		 if(!(rpnum >= 10)){
+		   	swal({title:'最小充值金额为10元！',text:'', type: "error"});
+		    return false; 
+		 }
+	     $.post('{:U("Manage/wxmarket/addRpmoney")}',{rpnum:rpnum},function(ret){
+	        if(ret.status == -1){
+	            swal({title: "温馨提示",text:'充值失败！',type: "error"});
+	        }else if(ret.status == -2){
+	        	swal({title:ret.msg,text:"", type: "error"});
+	        }else if(ret.status == -3){
+				sweetAlert({
+				  title: ret.msg,
+				  type: "error",
+				  closeOnConfirm: false,
+				  showCancelButton: true,
+				  confirmButtonText: "前往充值",
+				  confirmButtonColor: "#44b549" 
+				}, function(){
+				  window.location.href=ret.tourl;
+				})
+	        }else{
+	        	sweetAlert({
+				  title: "充值红包余额："+rpnum+"元",
+				  text: "恭喜您，充值成功!",
+				  type: "success",
+				  closeOnConfirm: false
+				}, function(){
+				  window.location.reload();
+				})
+	        }
+	     });
+	});
+
+});
+</script>
+</block>

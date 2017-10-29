@@ -1,0 +1,83 @@
+2016-02-26 07:26:08  POST: array (
+)
+2016-02-26 07:26:08  GET: array (
+  'param' => 'qr',
+)
+2016-02-26 07:26:08  response: stdClass::__set_state(array(
+   'error_response' => 
+  stdClass::__set_state(array(
+     'code' => '40002',
+     'msg' => 'Invalid Arguments',
+     'sub_code' => 'isv.invalid-app-id',
+     'sub_msg' => '无效的AppID参数',
+  )),
+))
+2016-10-08 14:35:16  POST: array (
+)
+2016-10-08 14:35:16  GET: array (
+)
+2016-10-08 14:35:18  POST: array (
+)
+2016-10-08 14:35:18  GET: array (
+  'param' => 'qr',
+)
+2016-10-08 14:35:18  response: stdClass::__set_state(array(
+   'alipay_mobile_public_qrcode_create_response' => 
+  stdClass::__set_state(array(
+     'code' => 200,
+     'code_img' => 'https://mobilecodec.alipay.com/show.htm?code=pvx03183ynzvi1gkbtiuf4d&picSize=M',
+     'expire_second' => 1800,
+     'msg' => '成功',
+  )),
+   'sign' => 'F9bAaK8a2CHK4yEzpbvTF5O/1Ix75SeLbFbo71tKECvtmxrnzgFtRxylCltl01LqAcOXxgvlvlmp2eSrMnWfMCy1i5kt6u+n2pa5E/U7tCcA7LP5OvBbkoqF4e0KTN1zMa5G4or1yY8pwXaWxWCs8oL+0/mQCxwsMCaRZMfReEg=',
+))
+2016-10-08 14:35:18  返回的二维码地址：https://mobilecodec.alipay.com/show.htm?code=pvx03183ynzvi1gkbtiuf4d&picSize=M
+2016-10-08 14:35:29  POST: array (
+)
+2016-10-08 14:35:29  GET: array (
+  'param' => 'follow',
+)
+2016-10-08 14:35:30  response: stdClass::__set_state(array(
+   'alipay_mobile_public_follow_list_response' => 
+  stdClass::__set_state(array(
+     'code' => 200,
+     'count' => '1',
+     'data' => 
+    stdClass::__set_state(array(
+       'user_id_list' => 
+      stdClass::__set_state(array(
+         'string' => 
+        array (
+          0 => '20880039279404961102454242712959',
+        ),
+      )),
+    )),
+  )),
+   'sign' => 'cblnlet1aoDT6tg91bi5W4SZefmOENeNBzZ86313FBJQK+tlKS+yLDoO+DTOoc1N1bot/OzpfngtIapD/Lm3G11TCsQpGXreHRS4Ko1Cucq5VO0f+1AqjTlUxR+YdWr+YF4bz+Er3XKWVwgjEw7S0VSmxRX+v+V8hPnxmxBzMy4=',
+))
+2016-10-08 14:35:37  POST: array (
+)
+2016-10-08 14:35:37  GET: array (
+  'param' => 'gis',
+)
+2016-10-08 14:35:38  response: stdClass::__set_state(array(
+   'alipay_mobile_public_gis_get_response' => 
+  stdClass::__set_state(array(
+     'code' => 503,
+     'msg' => '系统错误',
+  )),
+   'sign' => 'U4Rg7/vHZyk/THaM9SlFQ9vos8Wp0FltEt6ggm2VD6neLqtIPfHV0TV3EOr6SFEJFT2pjikYY5fbhDqIqsKpFRHG8Czeb1WhRfjnVCZ9OTYIJvJyRY8VO0on0G1jJVTV0vR9xEIaXDDEGY8UrIhbGVIaYFF1XBXaUgnNMm8CagA=',
+))
+2016-10-08 14:35:41  POST: array (
+)
+2016-10-08 14:35:41  GET: array (
+  'param' => 'gis',
+)
+2016-10-08 14:35:41  response: stdClass::__set_state(array(
+   'alipay_mobile_public_gis_get_response' => 
+  stdClass::__set_state(array(
+     'code' => 503,
+     'msg' => '系统错误',
+  )),
+   'sign' => 'U4Rg7/vHZyk/THaM9SlFQ9vos8Wp0FltEt6ggm2VD6neLqtIPfHV0TV3EOr6SFEJFT2pjikYY5fbhDqIqsKpFRHG8Czeb1WhRfjnVCZ9OTYIJvJyRY8VO0on0G1jJVTV0vR9xEIaXDDEGY8UrIhbGVIaYFF1XBXaUgnNMm8CagA=',
+))

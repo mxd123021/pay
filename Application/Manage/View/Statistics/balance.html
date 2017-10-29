@@ -1,0 +1,437 @@
+<extend name="Public/base"/>
+
+<block name="title">结算管理</block>
+
+<block name="levels"><li><a href="{:U("Manage/Index/index")}">后台首页</a></li><li>数据统计</li></block>
+
+<block name="body">
+	<div class="row">
+		<div class="col-lg-12">
+		    <div class="ibox float-e-margins">
+				<div class="ibox-content">
+				   <div class="app__content js-app-main page-cashier">
+				    <div>
+				      <!-- 实时交易信息展示区域 -->
+				      <div class="cashier-realtime"> 
+				       <div class="realtime-title-block clearfix"> 
+				       		<ul class="pull-left" style="height: 25px; padding: 0;">
+				       			<li style="width: 150px;">
+                                                            <select name="mendian" id="mendian" class="form-control">
+                                                                <option value="0" data-cname="全部">全部门店</option>
+                                                                <?php foreach($mendians as $ckk=>$cvv){?>
+                                                                <option value="<?php echo $cvv['storeId']?>" data-cname="<?php echo $cvv['branch_name']?>" <?php if($cvv['storeId'] == $mendian){?>selected="selected"<?php }?>><?php echo $cvv['branch_name']?></option>
+                                                                <?php }?>
+                                                           </select>
+                                                            <input type="text" class="form-control input-sm m-b-xs" id="filter" placeholder="门店/收银员" onkeydown="doSearch(arguments[0]||event)" style="display: none">
+				       			</li>
+				       		</ul>
+                                                <ul class="pull-left" style="height: 30px; padding: 0;">
+                                                                <li>
+                                                                    <select name="paytype" id="paytype" class="form-control" onchange="">
+                                                                        <option value="0" data-cname="全部类型" <?php if($paytype == 0){?>selected="selected"<?php }?>>全部类型</option>
+                                                                            <option value="1" data-cname="微信支付"  <?php if($paytype == 1){?>selected="selected"<?php }?>>微信支付</option>
+                                                                            <option value="2" data-cname="支付宝支付"  <?php if($paytype == 2){?>selected="selected"<?php }?>>支付宝支付</option>
+                                                                       </select>
+                                                                </li>
+                                                                </ul>
+					        <ul class="pull-right" style="height: 30px;">
+<!--						        <li>
+									<div data-toggle="buttons" class="btn-group" style="margin-bottom: 30px;">
+                                    <label class="btn btn-sm btn-white <eq name='datetype' value='tdy'> active </eq>" onclick="datebtn('tdy')">
+                                        <input type="radio" >今日</label>
+                                    <label class="btn btn-sm btn-white <eq name='datetype' value='ydy'> active </eq>" onclick="datebtn('ydy')">
+                                        <input type="radio">昨日</label>
+                                    <label class="btn btn-sm btn-white <eq name='datetype' value='wk'> active </eq>" onclick="datebtn('wk')">
+                                        <input type="radio">最近一周</label>
+                                	</div>
+	                            </li>-->
+	                            <li>
+	                            	<div class="input-daterange input-group" id="datepicker">
+		                            	<div class="input-group date">
+			                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+			                                <input id="stime" type="text" class="input-sm form-control" name="start" value="{$starttime}" style="border-radius:0px;">
+			                            </div>
+		                                <span class="input-group-addon" style="background-color: #FBFBFB"> 至 </span>
+										<div class="input-group date">
+			                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+			                                <input id="etime" type="text" class="input-sm form-control" name="end" value="{$endtime}" style="border-radius:0px;">
+			                            </div>
+                            		</div>
+	                            </li>
+	                            <li>
+	                            	<button id="balancesearch" type="button" class="btn btn-primary btn-sm" style="margin-bottom: 15px;">查询</button>
+	                            	<button id="downbalancedetail" type="button" class="btn btn-danger btn-sm" style="margin-bottom: 15px;">下载</button>
+	                            </li>
+					        </ul>
+				       </div> 
+                                            <div>
+                                                <div class="realtime-title">注意：此表中的数据是以本商户后台的数据统计生成，费率如无特别注明，均是以0.6%的费率计算。</div>               
+                                                <div class="realtime-title">如商户使用了银行系统进行过退款等操作，会存在数据差异，存在数据差异时，均以银行系统为准。</div>               
+                                             </div>
+				      </div> 
+					<div class="js-real-time-region realtime-list-box loading">
+				     	<div class="widget-list">
+					        <div class="js-list-filter-region clearfix ui-box" style="position: relative;">
+					        	<div class="widget-list-filter"></div>
+					        </div> 
+					        <div class="ui-box">
+								<div class="jqGrid_wrapper">
+		                            <table id="table_list_1"></table>
+		                            <div id="pager_list_1"></div>
+		                        </div>
+
+					        	<div class="js-list-empty-region"></div> 
+					        </div> 
+				        	<div class="js-list-footer-region ui-box">
+						         <div class="widget-list-footer"></div>
+						        </div> 
+							</div>
+						</div> 
+			 		</div>
+				</div>
+			</div>
+  		</div>
+
+	</div> 
+</block>
+
+<block name="top">
+<link href="__CSS__/wxCoupon.css" rel="stylesheet">
+
+<link href="__CSS__/dataTables/datepicker3.css" rel="stylesheet">
+<link href="__CSS__/footable.core.css" rel="stylesheet">
+<link href="__CSS__/cashier.css" rel="stylesheet">
+<link href="__CSS__/plugins/ui.jqgrid.css" rel="stylesheet">
+	<style>
+		ul.pull-right li{
+			float: left;
+			margin-right: 5px;
+		}
+		.ibox-title h5 {
+  			margin: 10px 0 0px;
+		}
+		select.input-sm {
+  			height: 35px;
+  			line-height: 35px;
+		}
+		.float-e-margins .btn-info{
+			margin-bottom:0px;
+		}
+		.fa-paste{
+			margin-right:7px;
+			padding: 0px;
+		}
+		.dz-preview{
+			display:none;
+		}
+		.ibox-title ul{ list-style: outside none none !important; margin: 0; padding: 0;}
+		.ibox-title li:nth-child(1) { float: left;width: 30%; }
+		.ibox-title li:nth-child(2) { float: left;width: 32%; }
+		.ibox-title li:nth-child(3){width: 35%; }
+		#commonpage {float: right;margin-bottom: 10px;}
+		#table-list-body .btn-st{background-color: #337ab7;border-color: #2e6da4;cursor:auto;}
+		#oderinfo{overflow-y: scroll;}
+		.float-e-margins .ibox-content{border-style:none;}
+		.nav-tabs > li > a:hover,
+		.nav-tabs > li > a:focus {
+		 background-color: #FFF;
+		}
+		.nav-tabs li.active  a {border-color:#dddddd #dddddd #fff}
+		.nav-tabs li.active  a:hover,.nav-tabs li.active a:focus {border-color:#dddddd #dddddd #fff;background-color:#FFF;}
+
+		.page-cashier tbody tr{height:34px;}
+		.ui-jqgrid .ui-jqgrid-title{margin:5px; font-weight: 700;}
+		.ui-jqgrid tr.jqgfirstrow{height:0px;}
+		.ui-jqgrid .ui-jqgrid-pager, .ui-jqgrid .ui-jqgrid-toppager{border-top:none;}
+	</style>
+	<script src="__JS__/footable.all2.min.js"></script>
+</block>
+<block name="bottom">
+<div class="modal inmodal" tabindex="-1" role="dialog"  id="oderinfo">
+		<div class="modal-dialog">
+			<div class="modal-content animated bounceInRight">
+				<div class="modal-header">
+                    <button type="button" class="close _close"><span style="font-size: 35px;">×</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">支付详情</h4>
+                </div>
+				<div class="modal-body">
+				</div>
+				<div class="modal-footer">
+                    <button type="button" class="btn btn-white _close">关闭</button>
+                </div>
+			</div>
+		</div>
+	</div>
+
+<script src="__JS__/plugins/bootstrap-datepicker.js"></script>
+<script src="__JS__/plugins/grid.locale-cn.js"></script>
+<script src="__JS__/plugins/jquery.jqGrid.min.js"></script>
+ <script>
+ 	if(is_mobile()){
+	  $('.row .col-lg-12').css('padding','1px');
+	  $('.float-e-margins .ibox-content').css('padding','15px 5px 20px 5px');
+	  $('.nav-tabs li a').css('padding','10px');
+  }
+ $(document).ready(function(){
+	$('.ui-table-list').footable();
+
+	$('#balancesearch').click(function(){
+		var stime = $("#stime").val();
+		var etime = $("#etime").val();
+                if(Date.parse(new Date(etime)) - Date.parse(new Date(stime)) > 31*24*60*60*1000){
+                    alert('只能查询最近一个月的数据！')
+                    return;
+                }
+                var mendian = $("#mendian").val();
+                var paytype = $("#paytype").val();
+                searchtimedCount();//3秒间隔
+		window.location.href="{:U('Manage/Statistics/balance')}?stime="+stime+"&etime="+etime+"&mendian="+mendian+"&paytype="+paytype;
+	});
+
+	$('#downbalancedetail').click(function(){
+		var stime = $("#stime").val();
+		var etime = $("#etime").val();
+                downtimedCount();//5秒间隔
+                
+		window.open("{:U('Manage/Statistics/downbalancedetail')}?stime="+stime+"&etime="+etime);
+	});
+       
+        function downtimedCount()
+        {
+            document.getElementById("downbalancedetail").disabled = true;
+            setTimeout("document.getElementById('downbalancedetail').disabled = false;",5000);
+        }
+        
+        function searchtimedCount()
+        {
+            document.getElementById("balancesearch").disabled = true;
+            setTimeout("document.getElementById('balancesearch').disabled = false;",3000);
+        }
+
+        function reset()
+        {
+            document.getElementById('downbalancedetail').disabled = false;
+        }
+
+	$("#datepicker.input-daterange").datepicker({
+		keyboardNavigation: false,
+		forceParse: false,
+		format: "yyyy-mm-dd",
+		autoclose: true
+	});
+
+    $.jgrid.defaults.styleUI = "Bootstrap";
+    var a = [
+		<?php 
+			if(!empty($balanceList)){
+				foreach($balanceList as $ovv){
+					echo "{balanceTime:'".date('Y-m-d',$ovv['balanceTime'])."',";
+//					if(!empty($ovv['truename'])){
+//						$name = $ovv['truename'];
+//					}elseif(!empty($ovv['openid'])){
+//					    $name = $ovv['openid'];
+//					}else{
+//					    $name = '未知客户';
+//					}
+//					echo "name:'".$name."',";
+//					$paytime=$ovv['paytime'] > 0 ? $ovv['paytime'] : $ovv['add_time'];
+					echo "startTime:'".date('Y-m-d',$ovv['startTime'])."',";
+//					if($store[$ovv['storeid']]==""){//" endTime:'".date('Y-m-d',$ovv['endTime']).
+//						$sto = "无";
+//					}else{
+//						$sto = $store[$ovv['storeid']];
+//					}
+					echo "totalMoney:'".$ovv['totalMoney']."',";
+//					if($ustaff[$ovv['eid']]==""){
+//						$ust = "无";
+//					}else{
+//						$ust = $ustaff[$ovv['eid']];
+//					}
+					echo "count:'".$ovv['count']."',";
+					echo "refundMoney:'".$ovv['refundMoney']."',";
+//					if($ovv['pay_way'] == "weixin"){
+//						$source = '微信';
+//					}elseif($ovv['pay_way'] == "alipay"){
+//					    $source = '支付宝';
+//					}else{
+//					    $source = '其它';
+//					}
+					echo "refundCount:'".$ovv['refundCount']."',";
+//					if($ovv['refund']==1){
+//					     $refund = "<font>退款中</font>";
+//					}elseif($ovv['refund']==2){
+//					     $refund = "<font color=\"#2e6da4\">已退款</font>";
+//					}elseif($ovv['refund']==3){
+//					     $refund = "<font color=\"#ed5565\">退款失败</font>";
+//					}else{
+//                                            if($ovv['ispay']==1){
+//                                                $refund = '<font color="#44b549">已支付</font>';
+//                                            }else{
+//                                                $refund = '<font color="#ed5565">未支付</font>';
+//                                            }       
+////					     $refund = "<font color=\"#44b549\">已支付</font>";
+//					}
+					echo "haspayMoney:'".$ovv['haspayMoney']."',";
+                                        echo "fee:'".$ovv['fee']."',";
+                                        echo "incomeMoney:'".$ovv['incomeMoney']."'},";
+//					echo "caozuo:'<a class=\"btn btn-white btn-bitbucket\" onclick=\"GetDetail(".$ovv['id'].");\"><i class=\"fa fa-list\"></i></a>'},";
+				}
+			}
+		?>
+	];
+    $("#table_list_1").jqGrid({
+        data: a,
+        datatype: "local",
+        height: "100%",
+        footerrow:true, 
+        autowidth: true,
+        shrinkToFit: true,
+        rowNum: 30,
+        rowList: [10, 20, 30],
+        colNames: ["划账日期", "交易时间", "交易金额", "交易笔数", "退款金额", "退款笔数", "支付净额", "手续费金额", "划账金额"],
+        colModel: [{
+            name: "balanceTime",
+            index: "balanceTime",
+            width: 115,
+            
+        }, {
+            name: "startTime",
+            index: "startTime",
+            width: 150
+        }, {
+            name: "totalMoney",
+            index: "totalMoney",
+            width: 90,
+            formatter : "number",
+            formatoptions : {
+                decimalSeparator : ".",
+                thousandsSeparator : ",",
+                decimalPlaces : 2,
+                defaulValue : 0
+            }
+        }, {
+            name: "count",
+            index: "count",
+            width: 60,            
+        }, {
+            name: "refundMoney",
+            index: "refundMoney",
+            width: 60,
+            formatter : "number",
+            formatoptions : {
+                decimalSeparator : ".",
+                thousandsSeparator : ",",
+                decimalPlaces : 2,
+                defaulValue : 0
+            }
+        }, {
+            name: "refundCount",
+            index: "refundCount",
+            width: 50,
+        }, {
+            name: "haspayMoney",
+            index: "haspayMoney",
+            width: 70,
+            align: "right",
+            formatter : "number",
+            formatoptions : {
+                decimalSeparator : ".",
+                thousandsSeparator : ",",
+                decimalPlaces : 2,
+                defaulValue : 0
+            }
+        }, {
+            name: "fee",
+            index: "fee",
+            width: 70,
+            align:"center",
+            formatter : "number",
+            formatoptions : {
+                decimalSeparator : ".",
+                thousandsSeparator : ",",
+                decimalPlaces : 2,
+                defaulValue : 0
+            }
+        }, {
+            name: "incomeMoney",
+            index: "incomeMoney",
+            width: 70,
+            
+            formatter : "number",
+            formatoptions : {
+                decimalSeparator : ".",
+                thousandsSeparator : ",",
+                decimalPlaces : 2,
+                defaulValue : 0
+            }
+        }],
+        pager: "#pager_list_1",
+        viewrecords: true,
+        caption: "收款情况",
+        hidegrid: false,
+        gridComplete:function(){
+            
+        	var rowNum=parseInt($(this).getGridParam("records"),10);
+            if(rowNum>0){
+                $(".ui-jqgrid-sdiv").show();
+//                var price=$(this).getCol("price",false,"sum");
+//                 var searchFiler = $("#filter").val();
+//                 if (searchFiler.length === 0) {
+//                 	var countIncome = "总计(不含退款)：{$countIncome}";
+//                 }else{
+//                 	var countIncome = "总计";
+//                 }
+//                $(this).footerData("set",{"orderid":countIncome,"price":price.toFixed(2)+"元"});
+            }else{
+                $(".ui-jqgrid-sdiv").hide();
+            }
+        }
+    });
+
+});
+
+ 	function datebtn(type){
+                var mendian = $("#mendian").val();
+                var paytype = $("#paytype").val();
+ 		window.location.href="{:U('Manage/Statistics/orderLists')}?datetype="+type+"&mendian="+mendian+"&paytype="+paytype;
+ 	}
+
+	var timeoutHnd;
+	function doSearch(ev) {
+	  if (timeoutHnd)
+	    clearTimeout(timeoutHnd);
+	    timeoutHnd = setTimeout(gridReload, 500);
+	}
+
+	function gridReload(ev) {
+		 var searchFiler = $("#filter").val(), grid = $("#table_list_1"), f;
+		 if (searchFiler.length === 0) {
+		  grid[0].p.search = false;
+		  $.extend(grid[0].p.postData,{filters:""});
+		 }
+		 f = {groupOp:"OR",rules:[]};
+		 f.rules.push({field:"sto",op:"cn",data:searchFiler});
+		 f.rules.push({field:"ust",op:"cn",data:searchFiler});
+		 grid[0].p.search = true;
+		 $.extend(grid[0].p.postData,{filters:JSON.stringify(f)});
+		 grid.trigger("reloadGrid",[{page:1,current:true}]);
+	}
+
+
+	var screenH=$(window).height();
+	screenH=  screenH-20;
+	$('#oderinfo').css('height',screenH);
+
+	function is_mobile(){
+		var ua = navigator.userAgent.toLowerCase();
+		if ((ua.match(/(iphone|ipod|android|ios|ipad|mobile)/i))){
+				return true;
+		}else{
+			return false;
+		}
+	}
+
+	var odurl="{:U('Manage/Statistics/odetail')}";
+ </script>
+ <script src="__JS__/cashier/lhsw.js"></script>
+</block>

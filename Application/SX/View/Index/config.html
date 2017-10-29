@@ -1,0 +1,208 @@
+<extend name="Public/base" />
+<block name="title">网站配置</block>
+<block name="levels">
+    <li>
+        <a href="{:U(" SX/Index/index ")}">后台首页</a></li>
+    <li>系统配置</li></block>
+<block name="body">
+    <div class="row">
+        <div class="col-lg-7">
+            <div class="tabs-container weixin">
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a data-toggle="tab" href="#tab-1" aria-expanded="true">网站信息</a></li>
+                    <li class="">
+                        <a data-toggle="tab" href="#tab-2" aria-expanded="false">安全配置</a></li>
+<!--                    <li class="">
+                        <a data-toggle="tab" href="#tab-3" aria-expanded="false">业务收费</a></li>
+                    <li class="">
+                        <a data-toggle="tab" href="#tab-4" aria-expanded="false">计划任务</a></li>-->
+                </ul>
+                <div class="tab-content">
+                    <div id="tab-1" class="tab-pane active">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-sm-12 micropay">
+                                    <h3 class="m-t-none m-b">
+                                        <span class="label label-primary">基本信息</span></h3>
+                                    <div class="form-group">
+                                        <label>平台名称 (简称)</label>
+                                        <input type="text" placeholder="平台名称" name="sn" class="form-control" value="{$configs['siteName']}"></div>
+                                    <div class="form-group">
+                                        <label>网站域名</label>
+                                        <input type="text" placeholder="网站域名" name="su" class="form-control" value="{$configs['siteUrl']}"></div>
+                                    <h3 class="m-t-none m-b">
+                                        <span class="label label-primary">SEO配置</span></h3>
+                                    <div class="form-group">
+                                        <label>标题</label>
+                                        <input type="text" placeholder="标题" name="seot" class="form-control" value="{$configs['seoTitle']}"></div>
+                                    <div class="form-group">
+                                        <label>关键词</label>
+                                        <input type="text" placeholder="每个词间用，分隔" name="seok" class="form-control" value="{$configs['seoKeyword']}"></div>
+                                    <div class="form-group">
+                                        <label>描述</label>
+                                        <input type="text" placeholder="描述" name="seod" class="form-control" value="{$configs['seoDescription']}"></div>
+                                    <div>
+                                        <button class="btn btn-primary pull-right" type="button">
+                                            <i class="fa fa-check"></i>&nbsp;保存</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="tab-2" class="tab-pane">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-sm-12 micropay">
+                                    <div class="form-group">
+                                        <label>网站开关</label>
+                                        <div class="switch">
+                                            <div class="onoffswitch">
+                                                <input type="checkbox" <eq name="configs['isOpen']" value="1">checked=""</eq>class="onoffswitch-checkbox" id="example1">
+                                                <label class="onoffswitch-label" for="example1">
+                                                    <span class="onoffswitch-inner"></span>
+                                                    <span class="onoffswitch-switch"></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="tab-3" class="tab-pane">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-sm-12 micropay">
+                                    <h3 class="m-t-none m-b">
+                                        <span class="label label-primary">费用管理</span></h3>
+                                    <div class="form-group">
+                                        <label>微信社区开通费 (元)</label>
+                                        <input type="number" placeholder="开通费用" name="sn" class="form-control" value="{$configs['siteName']}"></div>
+                                    <div>
+                                        <button class="btn btn-primary pull-right" type="button">
+                                            <i class="fa fa-check"></i>&nbsp;保存</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="tab-4" class="tab-pane">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-sm-12 micropay">
+                                    <div class="alert alert-success">
+                                        Linux在Crontab中使用PHP执行脚本<br>
+                                        每天17点执行xxx.php如下：<br>
+                                        crontab -e<br>
+                                        0 17 * * * PHP路径/bin/php 网站路径/Crontab/xxx.php</div>
+                                    <div class="project-list">
+                                        <table class="table table-hover">
+                                            <tbody>
+                                                <tr>
+                                                    <td class="project-status">
+                                                        <span class="label label-primary">正常
+                                                    </span></td>
+                                                    <td class="project-title">
+                                                        <a href="javascript:;">代收的待划账金额满500元自动划账到可申请金额里</a>
+                                                        <br>
+                                                        <small>执行时间 每天17:00</small>
+                                                    </td>
+                                                    <td class="project-actions">
+                                                        <a href="javascript:;" class="btn btn-white btn-sm"><i class="fa fa-minus-square"></i> 停止 </a>
+                                                        <a href="javascript:;" onclick="crontab('__ROOT__/Crontab/Withdraw.php')" class="btn btn-white btn-sm" target="_blank"><i class="fa fa-check-square"></i> 立即运行 </a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="project-status">
+                                                        <span class="label label-default">停止
+                                                    </span></td>
+                                                    <td class="project-title">
+                                                        <a href="javascript:;">自动删除1年没有登陆的用户</a>
+                                                        <br>
+                                                        <small>执行时间 每天03:00</small>
+                                                    </td>
+                                                    <td class="project-actions">
+                                                        <a href="javascript:;" class="btn btn-white btn-sm"><i class="fa fa-caret-square-o-right"></i> 运行 </a>
+                                                        <a href="javascript:;" class="btn btn-white btn-sm"><i class="fa fa-check-square"></i> 立即运行 </a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+<block name="top"></block>
+<block name="bottom">
+    <script type="text/javascript">
+        $('.micropay .btn-primary').click(function() {
+            var sn = $.trim($("input[name='sn']").val());
+            var su = $.trim($("input[name='su']").val());
+            var seot = $.trim($("input[name='seot']").val());
+            var seok = $.trim($("input[name='seok']").val());
+            var seod = $.trim($("input[name='seod']").val());
+            $.post('{:U("SX/Index/saveSiteinfo")}', {
+                sn: sn,
+                su: su,
+                seot: seot,
+                seok: seok,
+                seod: seod
+            },
+            function(ret) {
+                if (ret.status == '1') {
+                    swal({
+                        title: "温馨提示",
+                        text: '修改成功',
+                        type: "success"
+                    });
+                } else {
+                    swal({
+                        title: "温馨提示",
+                        text: '修改失败！',
+                        type: "error"
+                    });
+                }
+            });
+        });
+
+        $('.onoffswitch .onoffswitch-checkbox').click(function() {
+            var isopen;
+            if ($(this).attr('checked')) {
+                isopen = 0;
+                $(this).removeAttr('checked');
+            } else {
+                isopen = 1;
+                $(this).attr("checked", '');
+            }
+            $.post('{:U("SX/Index/editisOpen")}', {
+                isopen: isopen
+            },
+            function(ret) {
+                if (ret.status != '1') {
+                    swal({
+                        title: "温馨提示",
+                        text: '修改失败！',
+                        type: "error"
+                    });
+                }
+            });
+        });
+
+function crontab(url){
+    $.post(url,function(ret){
+        swal({
+            title: "温馨提示",
+            text: '执行成功！',
+            type: "success"
+        });   
+    });
+}
+</script>
+</block>

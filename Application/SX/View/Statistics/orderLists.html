@@ -1,0 +1,349 @@
+<extend name="Public/base"/>
+
+<block name="title">订单列表</block>
+
+<block name="levels"><li><a href="{:U("SX/Index/index")}">后台首页</a></li><li>数据统计</li></block>
+
+<block name="body">
+	<div class="row">
+		<div class="col-lg-12">
+		    <div class="ibox float-e-margins">
+				<div class="ibox-content">
+				   <div class="app__content js-app-main page-cashier">
+				    <div>
+				      <!-- 实时交易信息展示区域 -->
+				      <div class="cashier-realtime"> 
+				       <div class="realtime-title-block clearfix"> 
+				       		<ul class="pull-left" style="height: 30px; padding: 0;">
+				       			<li style="width: 200px;">
+				       				<input type="text" class="form-control input-sm m-b-xs" id="filter" placeholder="订单号" onkeydown="doSearch(arguments[0]||event)">
+				       			</li>
+				       		</ul>
+					        <ul class="pull-right" style="height: 30px;">
+						        <li>
+									<div data-toggle="buttons" class="btn-group" style="margin-bottom: 30px;">
+                                    <label class="btn btn-sm btn-white <eq name='datetype' value='tdy'> active </eq>" onclick="datebtn('tdy')">
+                                        <input type="radio" >今日</label>
+                                    <label class="btn btn-sm btn-white <eq name='datetype' value='ydy'> active </eq>" onclick="datebtn('ydy')">
+                                        <input type="radio">昨日</label>
+                                    <label class="btn btn-sm btn-white <eq name='datetype' value='wk'> active </eq>" onclick="datebtn('wk')">
+                                        <input type="radio">最近一周</label>
+                                	</div>
+	                            </li>
+	                            <li>
+	                            	<div class="input-daterange input-group" id="datepicker">
+		                            	<div class="input-group date">
+			                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+			                                <input id="stime" type="text" class="input-sm form-control" name="start" value="{$starttime}" style="border-radius:0px;">
+			                            </div>
+		                                <span class="input-group-addon" style="background-color: #FBFBFB"> 至 </span>
+										<div class="input-group date">
+			                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+			                                <input id="etime" type="text" class="input-sm form-control" name="end" value="{$endtime}" style="border-radius:0px;">
+			                            </div>
+                            		</div>
+	                            </li>
+	                            <li>
+	                            	<button id="datesearch" type="button" class="btn btn-primary btn-sm" style="margin-bottom: 15px;">查询</button>
+	                            	<button id="downdetail" type="button" class="btn btn-danger btn-sm" style="margin-bottom: 15px;">下载</button>
+	                            </li>
+					        </ul>
+				       </div> 
+				      </div> 
+					<div class="js-real-time-region realtime-list-box loading">
+				     	<div class="widget-list">
+					        <div class="js-list-filter-region clearfix ui-box" style="position: relative;">
+					        	<div class="widget-list-filter"></div>
+					        </div> 
+					        <div class="ui-box">
+								<div class="jqGrid_wrapper">
+		                            <table id="table_list_1"></table>
+		                            <div id="pager_list_1"></div>
+		                        </div>
+					        	<div class="js-list-empty-region"></div> 
+					        </div> 
+				        	<div class="js-list-footer-region ui-box">
+						         <div class="widget-list-footer"></div>
+						        </div> 
+							</div>
+						</div> 
+			 		</div>
+				</div>
+			</div>
+  		</div>
+	</div> 
+</block>
+
+<block name="top">
+<link href="__CSS__/wxCoupon.css" rel="stylesheet">
+
+<link href="__CSS__/dataTables/datepicker3.css" rel="stylesheet">
+<link href="__CSS__/footable.core.css" rel="stylesheet">
+<link href="__CSS__/cashier.css" rel="stylesheet">
+<link href="__CSS__/plugins/ui.jqgrid.css" rel="stylesheet">
+<!--<link href="__CSS__/plugins/bootstrap-datetimepicker.min.css" rel="stylesheet">
+<link href="__CSS__/bootstrap.min.css" rel="stylesheet">-->
+
+	<style>
+		ul.pull-right li{
+			float: left;
+			margin-right: 5px;
+		}
+		.ibox-title h5 {
+  			margin: 10px 0 0px;
+		}
+		select.input-sm {
+  			height: 35px;
+  			line-height: 35px;
+		}
+		.float-e-margins .btn-info{
+			margin-bottom:0px;
+		}
+		.fa-paste{
+			margin-right:7px;
+			padding: 0px;
+		}
+		.dz-preview{
+			display:none;
+		}
+		.ibox-title ul{ list-style: outside none none !important; margin: 0; padding: 0;}
+		.ibox-title li:nth-child(1) { float: left;width: 30%; }
+		.ibox-title li:nth-child(2) { float: left;width: 32%; }
+		.ibox-title li:nth-child(3){width: 35%; }
+		#commonpage {float: right;margin-bottom: 10px;}
+		#table-list-body .btn-st{background-color: #337ab7;border-color: #2e6da4;cursor:auto;}
+		#oderinfo{overflow-y: scroll;}
+		.float-e-margins .ibox-content{border-style:none;}
+		.nav-tabs > li > a:hover,
+		.nav-tabs > li > a:focus {
+		 background-color: #FFF;
+		}
+		.nav-tabs li.active  a {border-color:#dddddd #dddddd #fff}
+		.nav-tabs li.active  a:hover,.nav-tabs li.active a:focus {border-color:#dddddd #dddddd #fff;background-color:#FFF;}
+
+		.page-cashier tbody tr{height:34px;}
+		.ui-jqgrid .ui-jqgrid-title{margin:5px; font-weight: 700;}
+		.ui-jqgrid tr.jqgfirstrow{height:0px;}
+		.ui-jqgrid .ui-jqgrid-pager, .ui-jqgrid .ui-jqgrid-toppager{border-top:none;}
+	</style>
+	<script src="__JS__/footable.all2.min.js"></script>
+</block>
+<block name="bottom">
+<div class="modal inmodal" tabindex="-1" role="dialog"  id="oderinfo">
+		<div class="modal-dialog">
+			<div class="modal-content animated bounceInRight">
+				<div class="modal-header">
+                    <button type="button" class="close _close"><span style="font-size: 35px;">×</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">支付详情</h4>
+                </div>
+				<div class="modal-body">
+				</div>
+				<div class="modal-footer">
+                    <button type="button" class="btn btn-white _close">关闭</button>
+                </div>
+			</div>
+		</div>
+	</div>
+
+<script src="__JS__/plugins/bootstrap-datepicker.js"></script>
+<script src="__JS__/plugins/grid.locale-cn.js"></script>
+<script src="__JS__/plugins/jquery.jqGrid.min.js"></script>
+<!--<script src="__JS__/plugins/bootstrap-datetimepicker.js"></script>
+<script src="__JS__/plugins/bootstrap-datetimepicker.zh-CN.js"></script>
+<script src="__JS__/jquery.min.js"></script>
+<script src="__JS__/bootstrap.min.js"></script>-->
+ <script>
+ 	if(is_mobile()){
+	  $('.row .col-lg-12').css('padding','1px');
+	  $('.float-e-margins .ibox-content').css('padding','15px 5px 20px 5px');
+	  $('.nav-tabs li a').css('padding','10px');
+  }
+ $(document).ready(function(){
+//	$('.ui-table-list').footable();
+
+	$('#datesearch').click(function(){
+		var stime = $("#stime").val();
+		var etime = $("#etime").val();
+		window.location.href="{:U('SX/Statistics/orderLists')}?stime="+stime+"&etime="+etime;
+	});
+
+	$('#downdetail').click(function(){
+		var stime = $("#stime").val();
+		var etime = $("#etime").val();
+		window.open("{:U('SX/Statistics/downdetail')}?stime="+stime+"&etime="+etime);
+	});
+
+	$("#datepicker.input-daterange").datepicker({
+		keyboardNavigation: false,
+		forceParse: false,
+		format: "yyyy-mm-dd",
+		autoclose: true
+	});
+        
+//        $("#datepicker.input-daterange").datetimepicker({
+////		language: 'zh-CN',//显示中文
+////                format: 'yyyy-mm-dd hh:ii',//显示格式
+////                minView: "month",//设置只显示到月份
+////                initialDate: new Date(),//初始化当前日期
+////                autoclose: true,//选中自动关闭
+////                todayBtn: true//显示今日按钮
+//		weekStart: 1,
+//        todayBtn:  1,
+//		autoclose: 1,
+//		todayHighlight: 1,
+//		startView: 2,
+//		forceParse: 0,
+//        showMeridian: 1
+//		
+//	});
+
+    $.jgrid.defaults.styleUI = "Bootstrap";
+    var a = [
+		<?php 
+			if(!empty($orders)){
+				foreach($orders as $ovv){
+					echo "{orderid:'".$ovv['order_id']."',";
+					if(!empty($ovv['truename'])){
+						$name = $ovv['truename'];
+					}elseif(!empty($ovv['openid'])){
+					    $name = $ovv['openid'];
+					}else{
+					    $name = '未知客户';
+					}
+					echo "name:'".$name."',";
+					$paytime=$ovv['paytime'] > 0 ? $ovv['paytime'] : $ovv['add_time'];
+					echo "paytime:'".date('Y-m-d H:i:s',$paytime)."',";
+					echo "price:'".$ovv['goods_price']."元',";
+					if($ovv['pay_way'] == "weixin"){
+						$source = '微信';
+					}elseif($ovv['pay_way'] == "alipay"){
+					    $source = '支付宝';
+					}else{
+					    $source = '其它';
+					}
+					echo "source:'".$source."',";
+					if($ovv['refund']==1){
+					     $refund = "<font>退款中</font>";
+					}elseif($ovv['refund']==2){
+					     $refund = "<font color=\"#2e6da4\">已退款</font>";
+					}elseif($ovv['refund']==3){
+					     $refund = "<font color=\"#ed5565\">退款失败</font>";
+					}else{
+					     $refund = "<font color=\"#44b549\">已支付</font>";
+					}
+					echo "refund:'".$refund."',";
+					echo "caozuo:'<a class=\"btn btn-white btn-bitbucket\" onclick=\"GetDetail(".$ovv['id'].");\"><i class=\"fa fa-list\"></i></a>'},";
+				}
+			}
+		?>
+	];
+    $("#table_list_1").jqGrid({
+        data: a,
+        datatype: "local",
+        height: "100%",
+        footerrow:true, 
+        autowidth: true,
+        shrinkToFit: true,
+        rowNum: 30,
+        rowList: [10, 20, 30],
+        colNames: ["订单号", "付款人", "付款时间", "付款金额", "来源", "退款情况", "详细"],
+        colModel: [{
+            name: "orderid",
+            index: "orderid",
+            width: 115,
+            sorttype: "int",
+        }, {
+            name: "name",
+            index: "name",
+            width: 150
+        }, {
+            name: "paytime",
+            index: "paytime",
+            width: 90
+        }, {
+            name: "source",
+            index: "price",
+            width: 30,
+        }, {
+            name: "price",
+            index: "price",
+            width: 70,
+            align: "right",
+            sorttype: "float"
+        }, {
+            name: "refund",
+            index: "refund",
+            width: 70,
+            align:"center"
+        }, {
+            name: "caozuo",
+            index: "caozuo",
+            width: 34,
+            sortable: false
+        }],
+        pager: "#pager_list_1",
+        viewrecords: true,
+        caption: "收款情况",
+        hidegrid: false,
+        gridComplete:function(){
+        	var rowNum=parseInt($(this).getGridParam("records"),10);
+            if(rowNum>0){
+                $(".ui-jqgrid-sdiv").show();
+                var price=$(this).getCol("price",false,"sum");
+                 var searchFiler = $("#filter").val();
+                 if (searchFiler.length === 0) {
+                 	var countIncome = "总计(不含退款)：{$countIncome}";
+                 }else{
+                 	var countIncome = "总计";
+                 }
+                $(this).footerData("set",{"orderid":countIncome,"price":price.toFixed(2)+"元"});
+            }else{
+                $(".ui-jqgrid-sdiv").hide();
+            }
+        }
+    });
+
+});
+
+ 	function datebtn(type){
+ 		window.location.href="{:U('SX/Statistics/orderLists')}?datetype="+type;
+ 	}
+
+	var timeoutHnd;
+	function doSearch(ev) {
+	  if (timeoutHnd)
+	    clearTimeout(timeoutHnd);
+	    timeoutHnd = setTimeout(gridReload, 500);
+	}
+
+	function gridReload(ev) {
+		 var searchFiler = $("#filter").val(), grid = $("#table_list_1"), f;
+		 if (searchFiler.length === 0) {
+		  grid[0].p.search = false;
+		  $.extend(grid[0].p.postData,{filters:""});
+		 }
+		 f = {groupOp:"OR",rules:[]};
+		 f.rules.push({field:"orderid",op:"cn",data:searchFiler});
+		 grid[0].p.search = true;
+		 $.extend(grid[0].p.postData,{filters:JSON.stringify(f)});
+		 grid.trigger("reloadGrid",[{page:1,current:true}]);
+	}
+
+
+	var screenH=$(window).height();
+	screenH=  screenH-20;
+	$('#oderinfo').css('height',screenH);
+
+	function is_mobile(){
+		var ua = navigator.userAgent.toLowerCase();
+		if ((ua.match(/(iphone|ipod|android|ios|ipad|mobile)/i))){
+				return true;
+		}else{
+			return false;
+		}
+	}
+
+	var odurl="{:U('SX/Statistics/odetail')}";
+ </script>
+ <script src="__JS__/cashier/lhsw.js"></script>
+</block>

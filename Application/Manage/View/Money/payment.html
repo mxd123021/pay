@@ -1,0 +1,141 @@
+<extend name="Public/base"/>
+
+<block name="title">在线支付预付款</block>
+
+<block name="levels"><li><a href="{:U("Manage/Index/index")}">后台首页</a></li><li>财务管理</li></block>
+
+<block name="body">
+<div class="col-sm-6">
+	<div class="row">
+		<div class="col-lg-12">
+		    <div class="ibox float-e-margins">
+		        <div class="ibox-title clearfix">
+		            <h5>微信支付在线充值</h5>
+		        </div>
+		        <div class="ibox-content">
+		        	<table class="table table-striped" style="margin:0">
+						<tbody>
+							<tr><td></td>
+	    	                    <td>当前余额</td>
+	    	                    <td style="color:red;font-weight:bold;">{$money.curmoney}</td>
+	    	                </tr>
+						</tbody></table>
+	                <div class="col-md-8 col-md-offset-2 m-t m-b">
+						<p class="text-center">
+		                        <div class="input-group">
+		                            <input type="text" name="cashier_value" placeholder="输入金额(至少10元)" class="input-sm form-control" onkeyup="value=value.replace(/[^1234567890.]+/g,'')"> <span class="input-group-btn">
+		                                    <span class="input-group-btn">
+		                                        <button type="submit" class="btn btn-sm btn-primary js-create-qrcode"> 生成二维码</button> 
+		                                    </span>
+		                        </span></div>
+							<div class="pay-weixin clearfix">
+						        <div class="mrR27 fl">
+						            <div class="code-box">
+						            <!-- http://pay.game.pps.tv/g/interface/pay_qr_code/display?game_id=4181&amp;qudao_id=8802&amp;server_id=2040469&amp;money=100&amp;user_id=1246262798&amp;device=web&amp;token=21cbdd8a3b759a66246f8396f36b8923 -->
+						            	<div class="qr-code" id="qr-code-zone">
+						            	</div>
+						                <div id="payQRCodeMask" class="codemask02">请输入金额</div>
+						            </div>
+						            <div class="codebox-tips"><i></i>请使用微信扫描支付</div>
+						        </div>
+							</div>
+							<div class="real-num">
+				            <div class="real"> 实付款：<span class="fuhao">￥</span><span class="real_pay"><span id="realPayMoney" style="font-size:22px">0</span> 元</span></div>
+				            <div class="regotCode">若二维码失效，可以点击<a href="javascript:;" id="refreshPayQRBtn">刷新</a>再次获取</div>
+				            <input type="hidden" id="user_id" value="1246262798"><input type="hidden" id="qudao_id_text" value="8802"></div>
+	                    </p>
+	                </div>
+		        </div>
+		    </div>
+		</div>
+    </div>
+	</div>
+	<div class="clearfix"></div>
+</block>
+
+<block name="top">
+<style>
+.ibox-content{height:420px;}
+.mrR27{ width:159px;margin-right:27px}
+.pay-weixin{ margin-top: 20px;}
+.pay-weixin .code-box{ border:4px solid #666;width:159px;height:158px;padding:3px 4px;position:relative}
+.qr-code{ width:143px}
+.codemask,.codemask02{cursor: pointer;display:inline-block;width:143px;height:143px;font-size: 12px;color:#fff;line-height: 143px;text-align: center;background:url(__IMG__/pay_icon/codemask_bg.jpg) no-repeat;position: absolute;top:3px;left:4px;z-index:3}
+.codemask02{ line-height: 160px;*padding-top: 60px}
+.codemask02 img{ width: 25px;height: 25px}
+.codemask-txt{display: inline-block;vertical-align: middle;line-height: normal;_margin-top:65px}
+.pay-weixin .codebox-tips{background: #44b549;margin: 5px 0 0 0;color: #fff;height:27px;line-height:16px;font-size:14px;text-align: center;padding:5px 6px}
+.pay-weixin .codebox-tips i{ display:inline-block;background:url(__IMG__/pay_icon/czzx_btn0723.png) no-repeat 0 -86px;_background:url(__IMG__/pay_icon/czzx_btn0723_png8.png) no-repeat 0 -86px;width:18px;height:16px;margin-right:3px;vertical-align:middle}
+
+.real-num{ width:300px;height:auto;border:none;background:none;text-align:left;margin:0;padding: 0;padding-top:15px;font-size:14px;display: none;}
+.real{ line-height:30px;height:30px;font-weight:700;}
+.fuhao{font-weight:normal;color:red;font-size:20px;}
+.real_pay{ font-size:20px;font-weight:100;color:red}
+.regotCode{font-size:12px;}
+.regotCode a{ margin:0 3px;color:#0f50e3}
+</style>
+</block>
+<block name="bottom">
+<script src="__JS__/cashier/canvas2image.js"></script>
+<script>
+	$(document).ready(function(){
+			function createqrcode(){
+				 var qwidth=qheight=143;
+				 var postdata={paytype:'wxpay'};
+				 postdata.tprice=$.trim($('input[name="cashier_value"]').val());
+				 postdata.tprice=parseFloat(postdata.tprice);
+				 if(!(postdata.tprice >= 10)){
+				   	swal({title:'最小充值金额为10元！',text:'', type: "error"});
+				    return false; 
+				 }
+				 $('.real-num').hide();
+				 $('#payQRCodeMask').show();
+				 $('#payQRCodeMask').html('<img src="__IMG__/pay_icon/loading.gif">');
+				 $.post('{:U("Manage/Money/getEwm")}',postdata,function(ret){
+					if(ret.status == 1){
+						$('#popPay').show();
+						$('#payQRCodeMask').hide();
+						$("#qr-code-zone").html('').css('background-color','#FFF').qrcode({ 
+							//render: "table", //table方式 
+							width: qwidth, //宽度 
+							height: qheight, //高度
+							text:ret.qrcode //任意内容 
+						});
+						$('.real-num').show();
+						$('#realPayMoney').html(postdata.tprice);
+
+						 var canvasobj=$('#qr-code-zone').find('canvas');
+						 if(canvasobj.size() >0 ){
+						 	var ewmobj = Canvas2Image.convertToPNG(canvasobj.get(0),143,143);
+						 	$("#qr-code-zone").html("<img src='"+ewmobj.src+"'>");
+						 }
+
+						 //实时查询
+						var Interval = setInterval(function(){
+							$.post("{:U('Manage/Money/tokenquery')}",{token:ret.token},function(data){
+								if(data.status == 1){
+									sweetAlert({
+									  title: "充值金额："+ret.price/100+"元",
+									  text: "恭喜您，充值成功!",
+									  type: "success",
+									  closeOnConfirm: false
+									}, function(){
+									  window.location.reload();
+									})
+								}
+							},'JSON');
+						},4000);
+					}else{
+						swal("失败", ret.msg , "error");
+					}
+				},'json');
+			}
+			$('.js-create-qrcode').click(function(){
+				createqrcode();
+			});
+			$('#refreshPayQRBtn').click(function(){
+				createqrcode();
+			});
+	});
+</script>
+</block>
