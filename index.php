@@ -16,4 +16,5 @@ define ( 'APP_PATH', './Application/' );
 /**
  * 引入框架核心文件
  */
+require './vendor/autoload.php';
 require "ThinkPHP/ThinkPHP.php";

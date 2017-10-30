@@ -1,5 +1,7 @@
 <?php
 namespace Manage\Controller;
+use GuzzleHttp\Client;
+
 class IndexController extends BaseController {
 	/**
 	 * 显示后台首页
