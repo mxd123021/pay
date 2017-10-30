@@ -1,0 +1,115 @@
+<extend name="Public/base"/>
+
+<block name="title">创建子商户</block>
+
+<block name="levels">
+    <li><a href="{:U(" Manage/Index/index")}">后台首页</a></li>
+    <li>商家设置</li>
+</block>
+
+<block name="body">
+    <div class="wrapper wrapper-content">
+        <div class="row">
+            <div class="col-md-12">
+                    <div class="panel panel-default">
+
+                        <div class="panel-heading">
+                            <div class="panel-title"><em class="fa fa-list"></em> 子商户信息填写</div>
+                        </div>
+                        <div class="panel-body">
+                            <form method="post" class="form-horizontal" action="{:U('SX/RelationMerchant/create')}" id="myform">
+
+                            <input type="hidden" value="<?php echo $id;?>" name="id">
+                            <fieldset>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">子商户名称</label>
+                                    <div class="col-sm-3"><input class="form-control" data-val="true" id="PassWord"
+                                                                 name="name" value="">
+                                        <div id="PassWordTip" class="onCorrect">&nbsp;</div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">银行商户号</label>
+                                    <div class="col-sm-3"><input class="form-control" data-val="true" id="NewPassWord"
+                                                                 name="bank_merchant_number" value="">
+                                        <div id="NewPassWordTip" class="onShow">请输入银行提供的商户号</div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">加密密钥</label>
+                                    <div class="col-sm-3"><input class="form-control" data-val="true" id="NewPassWord2"
+                                                                 name="bank_sign_key" value="">
+                                        <div id="NewPassWord2Tip" class="onShow">请输入银行提供的加密密钥</div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">查询密钥</label>
+                                    <div class="col-sm-3"><input class="form-control" data-val="true" id="Vcode"
+                                                                 name="bank_query_key" type="text" value="">
+                                        请输入银行提供的查询密钥
+                                    </div>
+                                </div>
+                            </fieldset>
+                            </form>
+                        </div>
+                        <div class="panel-footer text-left">
+                            <fieldset>
+                                <div class=" form-group">
+                                    <label class="col-sm-2 control-label"></label>
+                                    <div class="col-sm-3">
+                                        <button type="submit" id="submitBtn" class="mb-sm btn btn-success">提交</button>
+                                    </div>
+                                    <div class="col-sm-7"></div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $('#submitBtn').click(function (e) {
+            e.preventDefault();
+            var thisObj = $(this);
+            if (checkInPut()) {
+                thisObj.prop('disabled', true);
+                $.ajax({
+                    url: '{:U("SX/RelationMerchant/create")}',
+                    type: "post",
+                    data: $('form').serialize(),
+                    dataType: "JSON",
+                    success: function (ret) {
+                        if (!ret.error) {
+                            swal({
+                                title: "保存成功！",
+                                text: ret.msg,
+                                type: "success"
+                            }, function () {
+                                window.location.href = "{:U('SX/RelationMerchant/getList',array('id'=>$id))}";
+                            });
+                        } else {
+                            swal({
+                                title: "保存失败！",
+                                text: ret.msg,
+                                type: "error"
+                            }, function () {
+                                //window.location.reload();
+                            });
+                        }
+                        thisObj.prop('disabled', false);
+                    }
+                });
+            }
+        });
+        function checkInPut(){
+            return true;
+        }
+    </script>
+</block>

@@ -26,11 +26,11 @@
 	                    <a href="#"><i class="fa fa-gears"></i> <span class="nav-label">商家设置</span></a>
 	                    <ul class="nav nav-second-level collapse <eq name="Think.const.CONTROLLER_NAME" value="Users"><neq name="Think.const.ACTION_NAME" value="index"> in </neq></eq>">
 	                    	<if condition="empty($usId)">
-	                        	<li <eq name="Think.const.CONTROLLER_NAME" value="Users"><eq name="Think.const.ACTION_NAME" value="storefront"> class="active" </eq></eq>><a href="{:U("Manage/Users/storefront")}">门店管理</a></li>
+	                        	<li <eq name="Think.const.CONTROLLER_NAME" value="Users"><eq name="Think.const.ACTION_NAME" value="storefront"> class="active" </eq></eq>><a href="{:U("Manage/Users/storefront")}">子商户管理</a></li>
 	                        </if>
-	                        <if condition="empty($usId)">
-	                        	<li <eq name="Think.const.CONTROLLER_NAME" value="Users"><eq name="Think.const.ACTION_NAME" value="employers"> class="active" </eq></eq>><a href="{:U("Manage/Users/employers")}">员工管理</a></li>
-	                        </if>
+	                        <!--<if condition="empty($usId)">-->
+	                        	<!--<li <eq name="Think.const.CONTROLLER_NAME" value="Users"><eq name="Think.const.ACTION_NAME" value="employers"> class="active" </eq></eq>><a href="{:U("Manage/Users/employers")}">员工管理</a></li>-->
+	                        <!--</if>-->
 	                        <if condition="empty($usId)  or in_array('wx_zfsz',session('SX_USERS.grant'))">
 	                        	<li <eq name="Think.const.CONTROLLER_NAME" value="Users"><eq name="Think.const.ACTION_NAME" value="payConfig"> class="active" </eq></eq>><a href="{:U("Manage/Users/payConfig")}">支付配置</a></li>
 	                        </if>

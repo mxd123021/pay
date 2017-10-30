@@ -4,8 +4,58 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "f0cfef79380c71c67c7ce201d4f555b0",
+    "content-hash": "dd35daae593bc7849c2b7baec8dbbed4",
     "packages": [
+        {
+            "name": "bocharsky-bw/arrayzy",
+            "version": "v0.6.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bocharsky-bw/Arrayzy.git",
+                "reference": "2df9806a5c2383fd74992b95ec06a765da9262fd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/bocharsky-bw/Arrayzy/2df9806a5c2383fd74992b95ec06a765da9262fd.zip",
+                "reference": "2df9806a5c2383fd74992b95ec06a765da9262fd",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.5|^5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Arrayzy\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bocharsky Victor",
+                    "email": "bocharsky.bw@gmail.com"
+                }
+            ],
+            "description": "A native PHP arrays easy manipulation library in OOP way.",
+            "homepage": "https://github.com/bocharsky-bw/Arrayzy",
+            "keywords": [
+                "OOP",
+                "array",
+                "arrayzy",
+                "helper",
+                "manipulation",
+                "utility",
+                "wrapper"
+            ],
+            "time": "2016-07-20T17:49:22+00:00"
+        },
         {
             "name": "guzzlehttp/guzzle",
             "version": "6.3.0",

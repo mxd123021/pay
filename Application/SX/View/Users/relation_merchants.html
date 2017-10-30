@@ -1,0 +1,364 @@
+<extend name="Public/base"/>
+
+<block name="title">子商户管理</block>
+
+<block name="levels"><li><a href="{:U("SX/Index/index")}">后台首页</a></li><li>商家列表</li></block>
+
+<block name="body">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title clearfix">
+                    <ul class="nav">
+                        <li>
+                            <button class="btn btn-primary" id="pop_add_shop"><i class="fa fa-plus"></i> 创建子商户</button>
+                        </li>
+                    </ul>
+                </div>
+                <div class="ibox-content">
+                    <nav class="ui-nav clearfix"></nav>
+                    <div class="app__content js-app-main page-cashier">
+                        <div>
+                            <!-- 实时交易信息展示区域 -->
+                            <div class="cashier-realtime">
+                                <div class="realtime-title-block clearfix">
+                                    <h1 class="realtime-title">子商户列表 共:({$stores['total']} 个)</h1>
+                                </div>
+                            </div>
+                            <div class="js-real-time-region realtime-list-box loading">
+                                <div class="widget-list">
+                                    <div class="js-list-filter-region clearfix ui-box"
+                                         style="position: relative;">
+                                        <div class="widget-list-filter"></div>
+                                    </div>
+                                    <div class="ui-box">
+                                        <table class="ui-table ui-table-list" data-page-size="20" style="padding: 0px;">
+                                            <thead class="js-list-header-region tableFloatingHeaderOriginal">
+                                            <tr class="widget-list-header">
+                                                <th>编号</th>
+                                                <th data-hide="phone">门店名称</th>
+                                                <th data-hide="phone">门店电话</th>
+                                                <th data-hide="phone">操作</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody class="js-list-body-region" id="table-list-body">
+                                            <if condition="!empty($stores['root'])">
+                                                <volist name="stores['root']" id="ovv" key='i'>
+                                                    <tr class="widget-list-item">
+                                                        <td class="sid">{$ovv.id}</td>
+                                                        <td class="prelative"><span class="wxname">{$ovv.name|msubstr=0,10}</span>
+                                                            <input type="text" class="form-control" placeholder="请输入商户名称">&nbsp;&nbsp;&nbsp;
+                                                            <span class="tips"><i class="fa fa-edit"></i><span>保存修改</span></span>
+                                                        </td>
+                                                        <td>
+                                                            我是电话
+                                                        </td>
+                                                        <td>
+                                                            <a class="btn btn-sm btn-info" href="{:U('SX/RelationMerchant/edit',array('id' => $ovv['id']))}" style="vertical-align: top;"> 门店详情 </a>
+                                                            <?php if($ovv['available_state'] == 3 || $ovv['available_state'] == 0){?>
+                                                            <button class="btn btn-sm btn-danger delete" data-id="<?php echo $ovv['id'];?>" poi_id="0"><strong>删&nbsp;&nbsp;&nbsp;除 </strong></button>
+                                                            <?php }else{?>
+                                                            <button class="btn btn-sm btn-gray"><strong>不可删 </strong></button>
+                                                            <?php }?>
+                                                        </td>
+                                                    </tr>
+                                                </volist>
+                                                <else />
+                                                <tr class="widget-list-item">
+                                                    <td colspan="9">暂无商户</td>
+                                                </tr>
+                                            </if>
+                                            </tbody>
+                                        </table>
+                                        <div class="js-list-empty-region"></div>
+                                    </div>
+                                    <div class="js-list-footer-region ui-box">
+                                        <div class="widget-list-footer"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {$stores['pager']}
+    </div>
+</block>
+
+<block name="top">
+    <link href="__CSS__/wxCoupon.css" rel="stylesheet">
+    <link href="__CSS__/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="__CSS__/plugins/custom.css" rel="stylesheet">
+    <link href="__CSS__/footable.core.css" rel="stylesheet">
+    <style>
+        .tipa {display:inline-block; *display:inline; zoom: 1; vertical-align: middle;}
+        .fa-question-circle {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            vertical-align: middle;
+            margin: -4px 3px 0;
+            color: #44B549;
+            font-size: 18px;
+        }
+        .ibox-title h5 {
+            margin: 10px 0 0px;
+        }
+
+        select.input-sm {
+            height: 35px;
+            line-height: 35px;
+        }
+
+        .float-e-margins .btn-info {
+            margin-bottom: 0px;
+        }
+
+        .fa-paste {
+            margin-right: 7px;
+            padding: 0px;
+        }
+
+        .dz-preview {
+            display: none;
+        }
+
+        .ibox-title ul {
+            list-style: outside none none !important;
+            margin: 0 0 0 10px;
+            padding: 0;
+        }
+
+        .ibox-title li {
+            float: left;
+            width: 15%;
+        }
+
+        #commonpage {
+            float: right;
+            margin-bottom: 10px;
+        }
+
+        #table-list-body .btn-st {
+            background-color: #337ab7;
+            border-color: #2e6da4;
+            cursor: auto;
+        }
+
+        #select_Cardtype .i-checks label {
+            cursor: pointer;
+        }
+
+        #ewmPopDiv .modal-body {
+            text-align: center;
+        }
+
+        .modal-footer {
+            text-align: center;
+        }
+
+        .modal-footer .btn {
+            padding: 7px 30px;
+        }
+
+        .js_modify_quantity .fa {
+            margin-left: 10px;
+        }
+
+        #ewmPopDiv .downewm {
+            font-size: 14px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .modal-body {
+            padding: 20px 30px 15px;
+        }
+
+        #select_Cardtype p {
+            margin-bottom: 8px;
+        }
+    </style>
+    <style type="text/css">
+        #table-list-body .fa-edit{ color: #3DA142;font-size: 20px;}
+        #table-list-body .tips{ color: #3DA142;cursor: pointer;}
+        #table-list-body .tips span{ display: none;}
+        #table-list-body .prelative .form-control {
+            display: none;
+            vertical-align: middle;
+            width: auto;
+            height: 30px;
+            padding: 3px 10px;
+        }
+    </style>
+    <script src="__JS__/footable.all2.min.js"></script>
+</block>
+<block name="bottom">
+    <div class="modal inmodal" tabindex="-1" role="dialog" id="popgetshop">
+        <div class="modal-dialog">
+            <div class="modal-content animated bounceInRight">
+                <div class="modal-header">
+                    <h4 class="modal-title">正在获取微信门店数据....</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="spiner-example" style="padding-top: 30px;">
+                        <div class="sk-spinner sk-spinner-circle" style="height: 100px; width: 100px;">
+                            <div class="sk-circle1 sk-circle"></div>
+                            <div class="sk-circle2 sk-circle"></div>
+                            <div class="sk-circle3 sk-circle"></div>
+                            <div class="sk-circle4 sk-circle"></div>
+                            <div class="sk-circle5 sk-circle"></div>
+                            <div class="sk-circle6 sk-circle"></div>
+                            <div class="sk-circle7 sk-circle"></div>
+                            <div class="sk-circle8 sk-circle"></div>
+                            <div class="sk-circle9 sk-circle"></div>
+                            <div class="sk-circle10 sk-circle"></div>
+                            <div class="sk-circle11 sk-circle"></div>
+                            <div class="sk-circle12 sk-circle"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="__JS__/plugins/icheck.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('.ui-table-list').footable();
+            $('#select_Cardtype .i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+
+            $('[rel="popover"],[data-rel="popover"]').popover({
+                trigger: 'hover',
+                html: true,
+                placement: 'auto'
+            });
+
+            $("#pop_get_shop").click(function(){
+                $('body').append('<div class="modal-backdrop in"></div>');
+                $('#popgetshop').show();
+                $.post('{:U("Manage/Stores/getWxStore")}',function(rets){
+                    $('#popgetshop').hide();
+                    $('.modal-backdrop').remove();
+                    if(rets.status == -1){
+                        swal({
+                            title: "温馨提示",
+                            text: "没有已审核的门店可同步！",
+                            type: "error"
+                        });
+                    }else if(rets.status == -2){
+                        swal({
+                            title: "温馨提示",
+                            text: "请检查微信Appid和AppSecret是否正确",
+                            type: "error"
+                        });
+                    }else{
+                        swal({
+                            title: "温馨提示",
+                            text: "已经同步完微信门店数据！",
+                            type: "success"
+                        }, function () {
+                            window.location.reload();
+                        });
+                    }
+                },'JSON');
+            });
+
+            $("#pop_add_shop").click(function(){
+                window.location.href="{:U('SX/RelationMerchant/showCreate',array('id'=>$id))}";
+            });
+
+            $('.delete').click(function(){
+                var id = $(this).attr('data-id');
+                var poi_id = $(this).attr('poi_id');
+                swal({
+                    title: "删除子商户",
+                    text: "您真的要删除该子商户吗？",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: "删除",
+                    cancelButtonText: "取消",
+                    closeOnConfirm: false,
+                    closeOnCancel: true
+                }, function(isConfirm){
+                    if (isConfirm) {
+                        $.ajax({
+                            url:"{:U('SX/RelationMerchant/delete')}",
+                            type:"get",
+                            data:{id:id},
+                            dataType:"JSON",
+                            success:function(ret){
+                                if(ret.status == 1){
+                                    swal({
+                                        title: "删除成功",
+                                        text: '子商户删除成功',
+                                        type: "success",
+                                        closeOnConfirm: false
+                                    },function(){
+                                        location.reload();
+                                    });
+                                } else {
+                                    swal("删除子商户失败", ret.errmsg, "error");
+                                }
+                            }
+                        });
+                    }
+                });
+            });
+        });
+
+        $('.status-checkbox').change(function(){
+            var i = $(this).attr('data-id'),s = $(this).is(':checked') ? 1 : 0;
+            $.post('{:U("Manage/Stores/editisSend")}',{storeId:i,status:s},function(re){
+                if(re.status == -1){
+                    swal("错误", re.msg, "error");
+                }
+            },'json');
+        });
+
+        $('.status-checkbox2').change(function(){
+            var i = $(this).attr('data-id'),s = $(this).is(':checked') ? 1 : 0;
+            $.post('{:U("Manage/Stores/editisallSend")}',{storeId:i,status:s},function(re){
+                if(re.status == -1){
+                    swal("错误", re.msg, "error");
+                }
+            },'json');
+        });
+
+        $('#table-list-body .prelative .tips').click(function(){
+            if($(this).hasClass('fedit')){
+                var sid= $(this).parent().siblings('.sid').text();
+                sid=parseInt($.trim(sid));
+                var vv=$(this).siblings('.form-control').val();
+                vv=$.trim(vv);
+                if(!vv){
+                    swal({title: "温馨提示",text:'没填写内容！',type: "error"});
+                    return false;
+                }else{
+                    var _this= $(this);
+                    $.post('{:U("SX/RelationMerchant/updateName")}',{storeId:sid,name:vv},function(ret){
+                        if(ret.status == '1'){
+                            _this.siblings('.wxname').text(vv);
+                        }else{
+                            swal({title: "温馨提示",text:'修改失败！',type: "error"});
+                        }
+                        _this.siblings('.wxname').show();
+                        _this.siblings('.form-control').hide();
+                        _this.find('span').hide();
+                        _this.removeClass('fedit');
+                    },'JSON');
+                }
+            }else{
+                $(this).siblings('.wxname').hide();
+                var wxname=$(this).siblings('.wxname').text();
+                $(this).siblings('.form-control').val(wxname).show();
+                $(this).find('span').show();
+                $(this).addClass('fedit');
+            }
+        });
+
+    </script>
+</block>

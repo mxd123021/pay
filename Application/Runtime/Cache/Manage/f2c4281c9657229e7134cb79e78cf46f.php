@@ -4,7 +4,7 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>子商户管理 - 网站管理后台</title>
+    <title>门店详情 - 网站管理后台</title>
         <meta charset="utf-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
 	<meta name="format-detection" content="telephone=no">
@@ -26,112 +26,64 @@
 	<script src="/Static/SX/js/jquery.qrcode.min.js"></script>
     <!----开放式头部，请在自己的页面加上--</head>-->
     
-<link href="/Static/SX/css/wxCoupon.css" rel="stylesheet">
-<link href="/Static/SX/css/dataTables/dataTables.bootstrap.css" rel="stylesheet">
-<link href="/Static/SX/css/plugins/custom.css" rel="stylesheet">
-<link href="/Static/SX/css/footable.core.css" rel="stylesheet">
-<style>
-.tipa {display:inline-block; *display:inline; zoom: 1; vertical-align: middle;}
-.fa-question-circle {
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    vertical-align: middle;
-    margin: -4px 3px 0;
-    color: #44B549;
-    font-size: 18px;
-}
-.ibox-title h5 {
-	margin: 10px 0 0px;
+<link href="/Static/SX/css/merchant/store_mangecss.css" rel="stylesheet">
+<link href="/Static/SX/css/merchant/baseshop.css" rel="stylesheet">
+<link href="/Static/SX/css/merchant/widget_add_img.css" rel="stylesheet">
+
+<link href="/Static/SX/css/plugins/basic.css" rel="stylesheet">
+<link href="/Static/SX/css/plugins/dropzone.css" rel="stylesheet">
+<link href="/Static/SX/css/dataTables/datepicker3.css" rel="stylesheet">
+<style type="text/css">
+#dataselect .input-group-btn, #ym-select .input-group-btn {
+	width: 12%;
 }
 
-select.input-sm {
-	height: 35px;
-	line-height: 35px;
+#dataselect .input-sm, #ym-select .input-sm {
+	border-radius: 7px;
+	height: 40px;
 }
 
-.float-e-margins .btn-info {
+#dataselect .btn-primary, #ym-select .btn-primary {
+	margin-left: 20px;
+	border-radius: 4px;
 	margin-bottom: 0px;
 }
 
-.fa-paste {
-	margin-right: 7px;
-	padding: 0px;
+#dataselect .input-group-addon, #ym-select .input-group-addon {
+	border-radius: 7px;
 }
 
-.dz-preview {
+.ibox-content {
+	min-height: 800px;
+}
+
+#js_pic_url .dz-image-preview {
 	display: none;
 }
 
-.ibox-title ul {
-	list-style: outside none none !important;
-	margin: 0 0 0 10px;
-	padding: 0;
+.img_upload_preview_box p {
+	margin: 0px;
 }
 
-.ibox-title li {
+.js_category_container select {
+	width: 200px;
 	float: left;
-	width: 15%;
 }
 
-#commonpage {
-	float: right;
-	margin-bottom: 10px;
+#provinceS, #cityS, #districtS, #circleS {
+	display: inline-block;
+	width: auto;
 }
 
-#table-list-body .btn-st {
-	background-color: #337ab7;
-	border-color: #2e6da4;
-	cursor: auto;
+#js_latitude, #js_longitude {
+	width: 250px;
+	display: inline;
 }
-
-#select_Cardtype .i-checks label {
-	cursor: pointer;
-}
-
-#ewmPopDiv .modal-body {
-	text-align: center;
-}
-
-.modal-footer {
-	text-align: center;
-}
-
-.modal-footer .btn {
-	padding: 7px 30px;
-}
-
-.js_modify_quantity .fa {
-	margin-left: 10px;
-}
-
-#ewmPopDiv .downewm {
-	font-size: 14px;
-	padding: 15px;
-	text-align: center;
-}
-
-.modal-body {
-	padding: 20px 30px 15px;
-}
-
-#select_Cardtype p {
-	margin-bottom: 8px;
-}
+.frm_textarea_box,.frm_input_box{border:0; color: #8d8d8d;}
 </style>
-<style type="text/css">
-#table-list-body .fa-edit{ color: #3DA142;font-size: 20px;}
-#table-list-body .tips{ color: #3DA142;cursor: pointer;}
-#table-list-body .tips span{ display: none;} 
-#table-list-body .prelative .form-control {
-display: none;
-vertical-align: middle;
-width: auto;
-height: 30px;
-padding: 3px 10px;
-}
-</style>
-<script src="/Static/SX/js/footable.all2.min.js"></script>
+<!-- Data picker -->
+<script src="/Static/SX/js/plugins/bootstrap-datepicker.js"></script>
+<link href="/Static/SX/css/plugins/custom.css" rel="stylesheet">
 
 </head>
 <body>
@@ -327,11 +279,11 @@ padding: 3px 10px;
     </script>
          <div class="row wrapper border-bottom white-bg page-heading">
                 <div class="col-lg-10">
-                    <h2>子商户管理</h2>
+                    <h2>门店详情</h2>
                     <ol class="breadcrumb">
                         <li><a href="<?php echo U("Manage/Index/index");?>">后台首页</a></li><li>商家设置</li>
                         <li class="active">
-                            <strong>子商户管理</strong>
+                            <strong>门店详情</strong>
                         </li>
                     </ol>
                 </div>
@@ -342,115 +294,115 @@ padding: 3px 10px;
 
 <div class="wrapper wrapper-content animated fadeInRight">
     
-				<div class="row">
+				<div class="row" id="wrapper-content-list">
 					<div class="col-lg-12">
 						<div class="ibox float-e-margins">
-							<div class="ibox-title clearfix">
-								<ul class="nav">
-									<li>
-										<button class="btn btn-primary" id="pop_add_shop"><i class="fa fa-plus"></i> 创建子商户</button>
-									</li>
-								</ul>
-							</div>
 							<div class="ibox-content">
-								<nav class="ui-nav clearfix"></nav>
-								<div class="app__content js-app-main page-cashier">
-									<div>
-										<!-- 实时交易信息展示区域 -->
-										<div class="cashier-realtime">
-											<div class="realtime-title-block clearfix">
-												<h1 class="realtime-title">商户列表 共:(<?php echo ($stores['total']); ?> 个)</h1>
+								<div class="group main_bd">
+									<form novalidate="novalidate" class="store_build" id="js_store_build">
+										<div class="frm_section">
+											<h3 class="frm_title">
+												基本信息<span class="frm_title_dec">基本信息提交后不可修改</span>
+											</h3>
+											<div class="frm_control_group">
+												<label for="" class="frm_label">门店名</label>
+												<div class="frm_controls">
+													<span class="frm_input_box"><?php echo $store['business_name'];?></span>
+												</div>
 											</div>
-										</div>
-										<div class="js-real-time-region realtime-list-box loading">
-											<div class="widget-list">
-												<div class="js-list-filter-region clearfix ui-box"
-													style="position: relative;">
-													<div class="widget-list-filter"></div>
+											<div class="frm_control_group">
+												<label for="" class="frm_label">分店名</label>
+												<div class="frm_controls">
+													<span class="frm_input_box"><?php echo $store['branch_name'];?></span>
 												</div>
-												<div class="ui-box">
-													<table class="ui-table ui-table-list" data-page-size="20" style="padding: 0px;">
-														<thead class="js-list-header-region tableFloatingHeaderOriginal">
-															<tr class="widget-list-header">
-																<th>编号</th>
-																<th>管理收银通知<a data-rel="popover" data-container="body" title="" data-content="管理员是否接受通知" data-original-title="提示" class="tipa">
-												                  <i class="fa fa-question-circle"></i>
-												                </a></th>
-																<th>员工收银通知<a data-rel="popover" data-container="body" title="" data-content="开：通知所有员工 关：通知当前收银员" data-original-title="提示" class="tipa">
-												                  <i class="fa fa-question-circle"></i>
-												                </a></th>
-																<th data-hide="phone">门店名称</th>
-																<th data-hide="phone">地址</th>
-																<th data-hide="phone">电话</th>
-																<th data-hide="phone">状态</th>
-																<th data-hide="phone">操作</th>
-															</tr>
-														</thead>
-														<tbody class="js-list-body-region" id="table-list-body">
-															<?php if(!empty($stores['root'])): if(is_array($stores['root'])): $i = 0; $__LIST__ = $stores['root'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$ovv): $mod = ($i % 2 );++$i;?><tr class="widget-list-item">
-                                                                                                                            <td class="sid"><?php echo ($ovv["storeId"]); ?></td>
-																<td>
-																	<div class="switch">
-									                        			<div class="onoffswitch">
-									                        			    <input type="checkbox" <?php if($ovv['isSend'] == 1){ echo 'checked'; }?> class="status-checkbox onoffswitch-checkbox" data-id="<?php echo $ovv['storeId'];?>" id="example<?php echo $ovv['storeId'];?>">
-									                        			    <label class="onoffswitch-label" for="example<?php echo $ovv['storeId'];?>">
-									                        			        <span class="onoffswitch-inner"></span>
-									                        			        <span class="onoffswitch-switch"></span>
-									                        			    </label>
-									                        			</div>
-									                    			</div>
-																</td>
-																<td>
-																	<div class="switch">
-									                        			<div class="onoffswitch">
-									                        			    <input type="checkbox" <?php if($ovv['isallSend'] == 1){ echo 'checked'; }?> class="status-checkbox2 onoffswitch-checkbox" data-id="<?php echo $ovv['storeId'];?>" id="emall<?php echo $ovv['storeId'];?>">
-									                        			    <label class="onoffswitch-label" for="emall<?php echo $ovv['storeId'];?>">
-									                        			        <span class="onoffswitch-inner"></span>
-									                        			        <span class="onoffswitch-switch"></span>
-									                        			    </label>
-									                        			</div>
-									                    			</div>
-                                                                                                                                    <!--<?php echo (msubstr($ovv["business_name"],0,5)); ?>-->
-																</td>
-																<!--<td><?php echo (msubstr($ovv["branch_name"],0,5)); ?></td>-->
-                                                                                                                                <td class="prelative"><span class="wxname"><?php echo (msubstr($ovv["branch_name"],0,10)); ?></span><input type="text" class="form-control" placeholder="请输入商户名称">&nbsp;&nbsp;&nbsp;<span class="tips"><i class="fa fa-edit"></i><span>保存修改</span></span>
-                                                                                                                                
-																<td><?php echo ($ovv["province"]); echo ($ovv["city"]); echo (msubstr($ovv["address"],0,10)); ?></td>
-																<td><?php echo ($ovv["telephone"]); ?></td>
-																<td>
-																	
-																	<?php
- switch($ovv['available_state']){ case 0: echo "正常"; break; case 1: echo "<font color='red'>微信系统错误</font>"; break; case 2: echo "等待微信审核"; break; case 3: echo "<font color='green'>审核通过</font>"; break; case 4: echo "<font color='red'>审核驳回</font>"; break; } ?>
-																</td>
-																<td>
-																	<a class="btn btn-sm btn-info" href="<?php echo U('Manage/Users/storedetail',array('id' => $ovv['storeId']));?>" style="vertical-align: top;"> 门店详情 </a>
-																	<?php if($ovv['available_state'] == 3 || $ovv['available_state'] == 0){?>
-																	<button class="btn btn-sm btn-danger delete" data-id="<?php echo $ovv['storeId'];?>" poi_id="<?php echo $ovv['poi_id'];?>"><strong>删&nbsp;&nbsp;&nbsp;除 </strong></button>
-																	<?php }else{?>
-																	<button class="btn btn-sm btn-gray"><strong>不可删 </strong></button>
-																	<?php }?>
-																</td>
-															</tr><?php endforeach; endif; else: echo "" ;endif; ?>
-															<?php else: ?>
-																<tr class="widget-list-item">
-																	<td colspan="9">暂无门店</td>
-																</tr><?php endif; ?>
-														</tbody>
-													</table>
-													<div class="js-list-empty-region"></div>
+											</div>
+											<div class="frm_control_group">
+												<label for="" class="frm_label">类目</label>
+												<div class="frm_controls">
+													<span class="frm_input_box"><?php echo $store['categories'].'-'.$store['categories2'];?></span>
 												</div>
-												<div class="js-list-footer-region ui-box">
-													<div class="widget-list-footer"></div>
+											</div>
+											<div class="frm_control_group">
+												<label for="" class="frm_label">地址</label>
+												<div class="frm_controls">
+													<span class="frm_input_box"><?php echo $store['provincename'] . $store['cityname'] . $store['address'];?></span>
 												</div>
 											</div>
 										</div>
-									</div>
+										<div class="frm_control_group">
+											<label for="" class="frm_label">标注</label>
+											<div class="frm_controls">
+												<div id="js_upload_wrp">
+													<div class="img_upload_wrp group">
+														<div class="js_edit_pic_wrp">
+														<img alt="" src="http://apis.map.qq.com/ws/staticmap/v2/?center=<?php echo $store['latitude'];?>,<?php echo $store['longitude'];?>&zoom=16&size=600*300&maptype=roadmap&markers=size:large|color:blue|<?php echo $store['latitude'];?>,<?php echo $store['longitude'];?>&key=S6PBZ-D7BRQ-BNB5S-G2LBZ-PYAIO-DJF4K">
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="frm_section service_info">
+											<div class="frm_control_group">
+												<label for="" class="frm_label">门店图片</label>
+												<div class="frm_controls">
+													<div id="js_upload_wrp">
+														<div class="img_upload_wrp group">
+															<?php foreach ($photo_list as $photo) {?>
+																<?php if(!empty($photo)){?>
+																<div class="img_upload_box img_upload_preview_box js_edit_pic_wrp">
+																	<img src="/<?php echo $photo;?>">
+																</div>
+																<?php }else{?>
+																	没有图片
+																<?php }?>
+															<?php }?>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="frm_control_group">
+												<label for="" class="frm_label">电话</label>
+												<div class="frm_controls">
+													<span class="frm_input_box"><?php echo $store['telephone'];?></span>
+												</div>
+											</div>
+											<div class="frm_control_group">
+												<label for="" class="frm_label">人均价格</label>
+												<div class="frm_controls">
+													<span class="frm_input_box"><?php echo $store['avg_price'];?></span>
+												</div>
+											</div>
+											<div class="frm_control_group">
+												<label for="" class="frm_label">营业时间</label>
+												<div class="frm_controls">
+													<span class="frm_input_box"><?php echo $store['open_time'];?></span>
+												</div>
+											</div>
+											<div class="frm_control_group">
+												<label for="" class="frm_label">推荐</label>
+												<div class="frm_controls">
+													<div class="frm_textarea_box"><?php echo $store['recommend'];?></div>
+												</div>
+											</div>
+											<div class="frm_control_group">
+												<label for="" class="frm_label">特色服务</label>
+												<div class="frm_controls">
+													<div class="frm_textarea_box"><?php echo $store['special'];?></div>
+												</div>
+											</div>
+											<div class="frm_control_group">
+												<label for="" class="frm_label">简介</label>
+												<div class="frm_controls">
+													<div class="frm_textarea_box"><?php echo $store['introduction'];?></div>
+												</div>
+											</div>
+										</div>
+									</form>
 								</div>
 							</div>
 						</div>
 					</div>
-				<?php echo ($stores['pager']); ?>
-            </div>
+				</div>
 
 </div>
 
@@ -469,171 +421,7 @@ $("#side-menu li").click(function () {
 </script>
 </body>
 
-	<div class="modal inmodal" tabindex="-1" role="dialog" id="popgetshop">
-		<div class="modal-dialog">
-			<div class="modal-content animated bounceInRight">
-				<div class="modal-header">
-					<h4 class="modal-title">正在获取微信门店数据....</h4>
-				</div>
-				<div class="modal-body">
-					<div class="spiner-example" style="padding-top: 30px;">
-						<div class="sk-spinner sk-spinner-circle" style="height: 100px; width: 100px;">
-							<div class="sk-circle1 sk-circle"></div>
-							<div class="sk-circle2 sk-circle"></div>
-							<div class="sk-circle3 sk-circle"></div>
-							<div class="sk-circle4 sk-circle"></div>
-							<div class="sk-circle5 sk-circle"></div>
-							<div class="sk-circle6 sk-circle"></div>
-							<div class="sk-circle7 sk-circle"></div>
-							<div class="sk-circle8 sk-circle"></div>
-							<div class="sk-circle9 sk-circle"></div>
-							<div class="sk-circle10 sk-circle"></div>
-							<div class="sk-circle11 sk-circle"></div>
-							<div class="sk-circle12 sk-circle"></div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+<script src="/Static/SX/js/plugins/dropzone.js"></script>
 <script src="/Static/SX/js/plugins/icheck.min.js"></script>
-<script>
-$(document).ready(function(){
-	$('.ui-table-list').footable();
-	$('#select_Cardtype .i-checks').iCheck({
-		checkboxClass: 'icheckbox_square-green',
-		radioClass: 'iradio_square-green',
-	});
-
-    $('[rel="popover"],[data-rel="popover"]').popover({
-        trigger: 'hover',
-        html: true,
-        placement: 'auto'
-    });
-
-	$("#pop_get_shop").click(function(){
-		$('body').append('<div class="modal-backdrop in"></div>');
-		$('#popgetshop').show();
-		$.post('<?php echo U("Manage/Stores/getWxStore");?>',function(rets){
-			$('#popgetshop').hide();
-			$('.modal-backdrop').remove();
-			if(rets.status == -1){
-			     swal({
-					title: "温馨提示",
-					text: "没有已审核的门店可同步！",
-					type: "error"
-					});
-			}else if(rets.status == -2){
-			     swal({
-					title: "温馨提示",
-					text: "请检查微信Appid和AppSecret是否正确",
-					type: "error"
-					});
-			}else{
-				swal({
-					title: "温馨提示",
-					text: "已经同步完微信门店数据！",
-					type: "success"
-					}, function () {
-						window.location.reload();
-				});	 
-			}
-		},'JSON');
-	});
-	
-	$("#pop_add_shop").click(function(){
-		window.location.href="<?php echo U('Manage/Users/createStore');?>";
-	});
-
-	$('.delete').click(function(){
-		var id = $(this).attr('data-id');
-		var poi_id = $(this).attr('poi_id');
-		swal({
-			title: "删除门店",   
-			text: "您真的要删除该门店吗？",
-			type: "warning",   
-			showCancelButton: true,   
-			confirmButtonText: "删除",   
-			cancelButtonText: "取消",   
-			closeOnConfirm: false,   
-			closeOnCancel: true 
-		}, function(isConfirm){
-			if (isConfirm) {
-				$.ajax({
-					url:"<?php echo U('Manage/Stores/delWxStore');?>",
-					type:"get",
-					data:{'id':id,'poi_id':poi_id},
-					dataType:"JSON",
-					success:function(ret){
-						if(ret.status == 1){
-							swal({
-								  title: "删除成功",
-								  text: '门店删除成功',
-								  type: "success",
-								  closeOnConfirm: false
-								 },function(){
-									location.reload();
-								});
-						} else {
-							swal("删除门店失败", ret.errmsg, "error");
-					   }
-					}
-				});
-			}
-		});
-	});
-});
-
-$('.status-checkbox').change(function(){
-	var i = $(this).attr('data-id'),s = $(this).is(':checked') ? 1 : 0;
-	$.post('<?php echo U("Manage/Stores/editisSend");?>',{storeId:i,status:s},function(re){
-		if(re.status == -1){
-			swal("错误", re.msg, "error");
-		}
-	},'json');
-});
-
-$('.status-checkbox2').change(function(){
-	var i = $(this).attr('data-id'),s = $(this).is(':checked') ? 1 : 0;
-	$.post('<?php echo U("Manage/Stores/editisallSend");?>',{storeId:i,status:s},function(re){
-		if(re.status == -1){
-			swal("错误", re.msg, "error");
-		}
-	},'json');
-});
-
-$('#table-list-body .prelative .tips').click(function(){
-    if($(this).hasClass('fedit')){
-       var sid= $(this).parent().siblings('.sid').text();
-       sid=parseInt($.trim(sid));
-       var vv=$(this).siblings('.form-control').val();
-       vv=$.trim(vv);
-       if(!vv){
-          swal({title: "温馨提示",text:'没填写内容！',type: "error"});
-          return false;
-       }else{
-         var _this= $(this);
-         $.post('<?php echo U("Manage/Stores/editStoreName");?>',{storeId:sid,name:vv},function(ret){
-            if(ret.status == '1'){
-             _this.siblings('.wxname').text(vv);
-             }else{
-                swal({title: "温馨提示",text:'修改失败！',type: "error"});
-             }
-       _this.siblings('.wxname').show();
-       _this.siblings('.form-control').hide();
-       _this.find('span').hide();
-       _this.removeClass('fedit');
-         },'JSON');
-       }
-    }else{
-       $(this).siblings('.wxname').hide();
-       var wxname=$(this).siblings('.wxname').text();
-       $(this).siblings('.form-control').val(wxname).show();
-       $(this).find('span').show();
-       $(this).addClass('fedit');
-    }
- });
- 
-</script>
 
 </html>

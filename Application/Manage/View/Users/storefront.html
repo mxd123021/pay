@@ -1,6 +1,6 @@
 <extend name="Public/base"/>
 
-<block name="title">门店管理</block>
+<block name="title">子商户管理</block>
 
 <block name="levels"><li><a href="{:U("Manage/Index/index")}">后台首页</a></li><li>商家设置</li></block>
 
@@ -11,14 +11,8 @@
 							<div class="ibox-title clearfix">
 								<ul class="nav">
 									<li>
-										<button class="btn btn-primary" id="pop_add_shop"><i class="fa fa-plus"></i> 创建新门店</button>
+										<button class="btn btn-primary" id="pop_add_shop"><i class="fa fa-plus"></i> 创建子商户</button>
 									</li>
-									<if condition=" $configs['wx_issp']  eq '0' ">
-										<li>
-											<button class="btn btn-primary" id="pop_get_shop"><i class="fa fa-refresh"></i> 获取微信门店</button>
-										</li>
-									</if>
-
 								</ul>
 							</div>
 							<div class="ibox-content">
@@ -28,7 +22,7 @@
 										<!-- 实时交易信息展示区域 -->
 										<div class="cashier-realtime">
 											<div class="realtime-title-block clearfix">
-												<h1 class="realtime-title">门店列表 共:({$stores['total']} 个)</h1>
+												<h1 class="realtime-title">商户列表 共:({$stores['total']} 个)</h1>
 											</div>
 										</div>
 										<div class="js-real-time-region realtime-list-box loading">

@@ -1,0 +1,78 @@
+[ 2017-10-30T21:36:28+08:00 ] 127.0.0.1 /Upload/market/SX/596daf0f10f03.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000010s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000371s ]
+ERR: 无法加载模块:Upload
+
+[ 2017-10-30T21:36:28+08:00 ] 127.0.0.1 /Upload/market/SX/596daf0f10f03.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000586s ]
+ERR: 无法加载模块:Upload
+
+[ 2017-10-30T21:36:43+08:00 ] 127.0.0.1 /Static/SX/js/plugins/jquery.jqGrid.min.js.map
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000010s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000393s ]
+ERR: 无法加载模块:Static
+
+[ 2017-10-30T21:36:45+08:00 ] 127.0.0.1 /Static/SX/js/plugins/jquery.jqGrid.min.js.map
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000020s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000500s ]
+ERR: 无法加载模块:Static
+
+[ 2017-10-30T22:01:27+08:00 ] 127.0.0.1 /Common/getCode
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000010s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000372s ]
+ERR: 无法加载模块:Common
+
+[ 2017-10-30T22:01:27+08:00 ] 127.0.0.1 /Common/getCode
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000009s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000358s ]
+ERR: 无法加载模块:Common
+
+[ 2017-10-30T22:02:01+08:00 ] 127.0.0.1 /Common/getCode
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000011s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000444s ]
+ERR: 无法加载模块:Common
+
+[ 2017-10-30T22:02:01+08:00 ] 127.0.0.1 /Common/getCode
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000017s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000736s ]
+ERR: 无法加载模块:Common
+
+[ 2017-10-30T22:03:03+08:00 ] 127.0.0.1 /Common/getCode?code=0.7695971116958416
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000011s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000509s ]
+ERR: 无法加载模块:Common
+
+[ 2017-10-30T22:03:03+08:00 ] 127.0.0.1 /Common/getCode?code=0.48443111209946
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000029s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000783s ]
+ERR: 无法加载模块:Common
+
+[ 2017-10-30T22:08:53+08:00 ] 127.0.0.1 /merchants.php?m=Index&c=help&a=index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000010s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000530s ]
+ERR: 无法加载模块:Merchants
+
+[ 2017-10-30T23:33:25+08:00 ] 127.0.0.1 /Upload/market/SX/596daf0f10f03.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000569s ]
+ERR: 无法加载模块:Upload
+
+[ 2017-10-30T23:33:40+08:00 ] 127.0.0.1 /%20SX/Index/index%20.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000537s ]
+ERR: 无法加载模块: SX
+

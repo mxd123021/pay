@@ -15,7 +15,7 @@ class UsersController extends BaseController {
     public function storefront(){
         $this->isLogin();
         $u = D('Manage/Users');
-        $m = D('Manage/Stores');
+        $m = D('Manage/RelationMerchants');
 
         $stores = $m->queryByPage(session('SX_USERS.userId'));
         $store = new \Think\Page($stores['total'],$stores['pageSize']);
