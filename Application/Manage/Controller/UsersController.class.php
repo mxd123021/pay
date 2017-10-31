@@ -144,6 +144,17 @@ class UsersController extends BaseController {
         $this->display("createStore");
     }
 
+    public function loginLog(){
+        $uid = $this->getUserId();
+        $m = M('log_user_logins');
+        $list = $m->where(sprintf('userId=%d',$uid))->field([
+            'loginTime',
+            'loginIp',
+        ])->select();
+        $this->assign('items',$list);
+        $this->display('loginLog');
+    }
+
     /**
      * 修改密码
      */

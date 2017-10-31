@@ -27,6 +27,7 @@ class RelationMerchantController extends BaseController
     public function showCreate(){
         $id = I('id',0);
         $this->assign('id',$id);
+        $this->assign('mode','创建');
         return $this->display('/Users/createStore');
     }
 
@@ -50,11 +51,38 @@ class RelationMerchantController extends BaseController
     }
 
     /**
+     * 修改子商户信息
+     */
+    public function update(){
+        $data = I();
+        $res = $this->model->updateItemById($data['id'],$data);
+        if($res){
+            $this->makeResponse('ok',[
+                'status'=>1
+            ]);
+        }
+        $this->setResponseCode(412)->makeResponse('操作失败,请重试',[
+            'status'=>-1
+        ]);
+    }
+
+    /**
      * 删除item
      */
     public function delete(){
         $id = I('id');
         $res = $this->model->deleteById($id);
-        return $this->ajaxReturn($res);
+        $this->ajaxReturn($res);
+    }
+
+    public function edit(){
+        $merchantId = I('merchant_id');
+        $id = I('id');
+        $itemInfo = $this->model->find($id);
+        $this->assign('id',$merchantId);
+        $this->assign('item',json_encode($itemInfo));
+        $this->assign('is_edit',true);
+        $this->assign('mode','编辑');
+        return $this->display('/Users/createStore');
     }
 }

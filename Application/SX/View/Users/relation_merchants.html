@@ -54,7 +54,7 @@
                                                             我是电话
                                                         </td>
                                                         <td>
-                                                            <a class="btn btn-sm btn-info" href="{:U('SX/RelationMerchant/edit',array('id' => $ovv['id']))}" style="vertical-align: top;"> 门店详情 </a>
+                                                            <a class="btn btn-sm btn-info" href="{:U('SX/RelationMerchant/edit',array('id' => $ovv['id'],'merchant_id'=>$ovv['user_id']))}" style="vertical-align: top;"> 门店详情 </a>
                                                             <?php if($ovv['available_state'] == 3 || $ovv['available_state'] == 0){?>
                                                             <button class="btn btn-sm btn-danger delete" data-id="<?php echo $ovv['id'];?>" poi_id="0"><strong>删&nbsp;&nbsp;&nbsp;除 </strong></button>
                                                             <?php }else{?>

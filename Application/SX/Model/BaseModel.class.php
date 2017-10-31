@@ -14,4 +14,11 @@ class BaseModel extends Model {
 		}
 		return true;
 	}
+
+	public function updateItemById($id,$update){
+		if(method_exists($this,'filterOnlyData')){
+			$update = $this->filterOnlyData($update);
+		}
+		return (bool)$this->where(sprintf('id=%d',$id))->save($update);
+	}
 }

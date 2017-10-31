@@ -1,6 +1,6 @@
 <extend name="Public/base"/>
 
-<block name="title">创建子商户</block>
+<block name="title">{$mode}子商户</block>
 
 <block name="levels">
     <li><a href="{:U(" Manage/Index/index")}">后台首页</a></li>
@@ -75,13 +75,31 @@
         </div>
     </div>
     <script type="text/javascript">
+        var data = {};
+        var isEdit = {$is_edit};
+        <?php if(isset($is_edit)){
+                ?>
+            var data = {$item};
+            <?php
+
+                    }
+            ?>
+        for(var attr in data){
+            $('input[name='+attr+']').val(data[attr]);
+        }
+        if(isEdit){
+            var url = '{:U("SX/RelationMerchant/update")}';
+            $('input[name=id]').val(data.id);
+        }else{
+            var url = '{:U("SX/RelationMerchant/create")}';
+        }
         $('#submitBtn').click(function (e) {
             e.preventDefault();
             var thisObj = $(this);
             if (checkInPut()) {
                 thisObj.prop('disabled', true);
                 $.ajax({
-                    url: '{:U("SX/RelationMerchant/create")}',
+                    url: url,
                     type: "post",
                     data: $('form').serialize(),
                     dataType: "JSON",

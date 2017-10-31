@@ -3,7 +3,6 @@ namespace SX\Model;
 use Arrayzy\ArrayImitator;
 
 class RelationMerchantsModel extends BaseModel {
-
 	protected $fillable = [
 		'user_id',
 		'name',

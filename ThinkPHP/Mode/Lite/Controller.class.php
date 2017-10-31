@@ -21,6 +21,8 @@ abstract class Controller {
      */    
     protected $view     =  null;
 
+    protected $code = 200;
+
     /**
      * 控制器参数
      * @var config
@@ -210,6 +212,27 @@ abstract class Controller {
         }
         exit($data);
     }
+
+    /**
+     * @return int
+     */
+    public function getResponseCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * @param int $code
+     */
+    public function setResponseCode($code)
+    {
+        $this->code = $code;
+        return $this;
+    }
+
+
+
+
 
     /**
      * Action跳转(URL重定向） 支持指定模块和延时跳转

@@ -2,6 +2,39 @@
 namespace SX\Controller;
 use Think\Controller;
 class BaseController extends Controller {
+
+    protected $code = 200;
+
+    /**
+     * @return int
+     */
+    public function getResponseCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * @param int $code
+     */
+    public function setResponseCode($code)
+    {
+        $this->code = $code;
+        return $this;
+    }
+
+
+    /**
+     * 返回体
+     * @param $msg
+     * @param array $data
+     */
+    protected function makeResponse($msg,$data = []){
+        $result = array_merge([
+            'msg'=>$msg,
+            'code'=>$this->getResponseCode()
+        ],$data);
+        $this->ajaxReturn($result);
+    }
     /**
      * 登录操作验证
      */

@@ -2,6 +2,15 @@
 namespace Manage\Controller;
 use Think\Controller;
 class BaseController extends Controller {
+
+    /**
+     * 用户id
+     * @return mixed|null
+     */
+    public function getUserId(){
+        return session('SX_USERS.usId');
+    }
+
     /**
      * 登录操作验证
      */
