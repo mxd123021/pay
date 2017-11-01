@@ -1,7 +1,10 @@
 <?php
 namespace SX\Controller;
+use SX\Helper\ShanghaiBankPayHelper;
+
 class RelationMerchantController extends BaseController
 {
+    use ShanghaiBankPayHelper;
     public function __construct()
     {
         parent::__construct();
@@ -10,6 +13,9 @@ class RelationMerchantController extends BaseController
     }
 
     public function getList(){
+//        $res = $this->createPayOrder('WX_SCANCODE_JSAPI',sprintf('%s%s',time(),mt_rand(10000,99999)),'0.01','正新鸡排-披萨','127.0.0.1');
+//        dump($res);
+//        exit();
         $u = D('Manage/Users');
         $m = D('SX/RelationMerchants');
         $id = I('id',0);
