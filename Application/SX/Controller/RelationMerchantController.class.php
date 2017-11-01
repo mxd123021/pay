@@ -37,7 +37,7 @@ class RelationMerchantController extends BaseController
         $data['user_id'] = $data['id'];
         $model = D('SX/RelationMerchants');
         $res = $model->addStore($data);
-        return $this->ajaxReturn($res);
+        $this->ajaxReturn($res);
     }
 
     /**

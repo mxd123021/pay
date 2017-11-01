@@ -23,7 +23,7 @@
                             <fieldset>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">子商户名称</label>
-                                    <div class="col-sm-3"><input class="form-control" data-val="true" id="PassWord"
+                                    <div class="col-sm-4"><input class="form-control" data-val="true" id="PassWord"
                                                                  name="name" value="">
                                         <div id="PassWordTip" class="onCorrect">&nbsp;</div>
                                     </div>
@@ -32,7 +32,7 @@
                             <fieldset>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">银行商户号</label>
-                                    <div class="col-sm-3"><input class="form-control" data-val="true" id="NewPassWord"
+                                    <div class="col-sm-4"><input class="form-control" data-val="true" id="NewPassWord"
                                                                  name="bank_merchant_number" value="">
                                         <div id="NewPassWordTip" class="onShow">请输入银行提供的商户号</div>
                                     </div>
@@ -41,7 +41,7 @@
                             <fieldset>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">加密密钥</label>
-                                    <div class="col-sm-3"><input class="form-control" data-val="true" id="NewPassWord2"
+                                    <div class="col-sm-4"><input class="form-control" data-val="true" id="NewPassWord2"
                                                                  name="bank_sign_key" value="">
                                         <div id="NewPassWord2Tip" class="onShow">请输入银行提供的加密密钥</div>
                                     </div>
@@ -50,9 +50,18 @@
                             <fieldset>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">查询密钥</label>
-                                    <div class="col-sm-3"><input class="form-control" data-val="true" id="Vcode"
+                                    <div class="col-sm-4"><input class="form-control" data-val="true" id="Vcode"
                                                                  name="bank_query_key" type="text" value="">
                                         请输入银行提供的查询密钥
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">手机号码</label>
+                                    <div class="col-sm-4"><input class="form-control" data-val="true"
+                                                                 name="mobile_number" type="text" value="">
+                                        请输入子商户手机号码
                                     </div>
                                 </div>
                             </fieldset>
@@ -76,7 +85,7 @@
     </div>
     <script type="text/javascript">
         var data = {};
-        var isEdit = {$is_edit};
+        var isEdit = <?php echo isset($is_edit) ? 1:0?>;
         <?php if(isset($is_edit)){
                 ?>
             var data = {$item};

@@ -8,7 +8,8 @@ class RelationMerchantsModel extends BaseModel {
 		'name',
 		'bank_merchant_number',
 		'bank_sign_key',
-		'bank_query_key'
+		'bank_query_key',
+		'mobile_number'
 	];
 
 	/**
@@ -121,7 +122,7 @@ class RelationMerchantsModel extends BaseModel {
      * 添加门店信息
      */
 	public function addStore($data){
-     	$rd = array('status'=>-1);
+     	$rd = array('status'=>-1,'msg'=>'添加失败');
 		$data = $this->filterOnlyData($data);
 		$data = array_merge($data,[
 			'created_at'=>date('Y-m-d H:i:s'),
@@ -130,8 +131,8 @@ class RelationMerchantsModel extends BaseModel {
 		$rs = $this->add($data);
 		if(false !== $rs){
 			$rd['status'] = 1;
+			$rd['msg'] = '添加成功';
 		}
-		$rd['msg'] = '添加失败';
 		return $rd;
 	}
 

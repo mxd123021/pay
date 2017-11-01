@@ -19,6 +19,7 @@ class BaseModel extends Model {
 		if(method_exists($this,'filterOnlyData')){
 			$update = $this->filterOnlyData($update);
 		}
+		$update['updated_at'] = date('Y-m-d H-i-s');
 		return (bool)$this->where(sprintf('id=%d',$id))->save($update);
 	}
 }
