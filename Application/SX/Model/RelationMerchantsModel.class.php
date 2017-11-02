@@ -2,6 +2,7 @@
 namespace SX\Model;
 
 use Arrayzy\ArrayImitator;
+use Ramsey\Uuid\Uuid;
 use SX\Helper\ShanghaiBankPayHelper;
 
 class RelationMerchantsModel extends BaseModel
@@ -139,6 +140,7 @@ class RelationMerchantsModel extends BaseModel
         $data = array_merge($data, [
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
+            'unique_id'=>Uuid::uuid4()->toString()
         ]);
         $rs = $this->add($data);
         if (false !== $rs) {
@@ -146,6 +148,18 @@ class RelationMerchantsModel extends BaseModel
             $rd['msg'] = '添加成功';
         }
         return $rd;
+    }
+
+    /**
+     * 根据商户id随机获取子商户唯一id
+     * @param $id
+     * @return mixed
+     */
+    public function getRandomMerchantInfoByUserId($id){
+        $item = $this->where([
+            'user_id'=>$id
+        ])->order('rand()')->field(['unique_id','name'])->find();
+        return $item;
     }
 
     /**
