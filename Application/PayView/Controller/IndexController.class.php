@@ -1,5 +1,6 @@
 <?php
 namespace PayView\Controller;
+use Manage\Controller\BaseController;
 use Ramsey\Uuid\Uuid;
 use Think\Controller;
 
@@ -9,8 +10,8 @@ use Think\Controller;
  * Date: 2017/11/2 0002
  * Time: 17:07
  */
-class IndexController extends Controller{
-
+class IndexController extends BaseController{
+    use \ShanghaiBankPayHelper;
     public function test(){
         $users = D('Manage/Users')->field(['userId'])->select();
         foreach($users as $uid){
@@ -27,6 +28,7 @@ class IndexController extends Controller{
         $id = I('merchant_id');
     }
 
+    //显示支付页面
     public function index(){
         $uniqueId = I('id','');
         $userModel = D('SX/Users');
@@ -41,7 +43,34 @@ class IndexController extends Controller{
         echo '禁止访问';
     }
 
+    /**
+     * 获取js支付url
+     */
     public function getJsPayUrl(){
-        $id = I('id');
+        $id = I('id','');
+        if(empty($id)){
+            echo 'id有误';
+            return ;
+        }
+        $price = I('price',0,'floatval');
+        if($price <= 0){
+            echo '价格有误';
+            return ;
+        }
+        $isAliPay = I('alipay',0);
+        $info = $this->createJsOrderByMerchantUniqueId($isAliPay,$this->getOrderNumber(),$price,get_client_ip(),$id);
+        if(isset($info['r9_payinfo'])) {
+            $res = json_decode($info['r9_payinfo'],true);
+            $this->ajaxReturn([
+                'url'=>$res['url']
+            ]);
+        }
+        $this->ajaxReturn([
+            'msg'=>'数据获取失败'
+        ]);
+    }
+
+    public function payNotice(){
+        $this->notice();
     }
 }

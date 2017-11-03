@@ -2,17 +2,6 @@ $(function () {
     // var host = 'http://test.yunhuotong.net/';
     var host = '/';
     // var host = 'http://192.168.10.200:8080/';
-    var projectOne = 'yuntong-pay/';
-    // 获取用于RSA加密的模和公钥指数
-    var getPublicKeyAndModel = 'common/getPublicKeyAndModel.action';
-    // 根据支付资金号获取支付账号简单信息
-    var getPayUserSimpleByPayFundSn = 'payUser/getPayUserSimpleByPayFundSn.action';
-    // 根据CODE获取微信opendId
-    var getWeixXinOpenIdByCode = 'payFund/getWeixXinOpenIdByCode.action';
-    // 微信和支付宝支付接口
-    var sponsorJoinpayReceiptScanCode = 'payJoinpay/sponsorJoinpayReceiptScanCode.action';
-    // 微信查询交易记录是否成功
-    var getPayTransactionIfSuccess = 'payJoinpay/getPayTransactionIfSuccess.action';
     // 数字按钮
     var num = $('.js-num').children("li");
     // 删除
@@ -34,10 +23,13 @@ $(function () {
     var alipay = $('.alipay');
     var alipayLock = true;
     var money = $('#money');
-    var payUrl = 'http://pm-debug.dzsh.net/testPay';
+    var payUrl = '/PayView/Index/getJsPayUrl';
     var fail = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OEM0MDU1QkE0MDRBMTFFMkFDNjJEMTAxN0EwRjQ3ODAiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OEM0MDU1QkI0MDRBMTFFMkFDNjJEMTAxN0EwRjQ3ODAiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpDOUFEMzc1OTQwNDYxMUUyQUM2MkQxMDE3QTBGNDc4MCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpDOUFEMzc1QTQwNDYxMUUyQUM2MkQxMDE3QTBGNDc4MCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PpV29yAAAAM3SURBVHja7N3hcdNAEMVxxRWYEujAlJBKUEqgAzpIqECmEkowHVCC6UCcJsqQMZhYd/vevj12Z+4rsv+/eIguyuVunuchx2/uEiABEiAnARIgJwESICcBEiAnARIghzc70nXGss5lHYJ0Oayvd4RfafkEgNc4/55zWQfCNVvWYX2dLzMir4d+M4/zn6OMcBkfjoB8M9N8fRQRrsWHInjEV0R4Kz4MwSu+EsKt8SEInvEVELbGN0fwju+JUBvfFEEhvgdCa3wzBJX4TASr+CYIrVsRE+Bu8WdZ92V9B93hfitrb/zvPpR1ZO8FTcBbdQQCKn4TQi3ARNgnsURAx69GqAFgxLdEYMWvQqgBOJF3NVsQ2PGH9XV+QALs1zeljuAV/359vdD/A9QRQsRv/S5IFSFMfIsfSaohhIpv9TNhFYRw8a0AFBBCxrcE8ET4VNZjxPjWAF4I7DGLjwDoHcE0PgqgVwTz+EiA3hAg8dEAvSDA4jMAoiNA47MAoiLA4zMBoiFQ4rMBoiDQ4nsAqCNQ43sBqCLQ43sCqCG4xPcGUEFwi68A4I1wHJ6fYnCbncDHf/nK++p07S/eb17hEzAOz88aeeGjHoMMAeAZXwLBE0AhvjuCF4BSfFcEDwDF+G4IbADl+C4ITIAI8ekILIBI8akIDICI8WkIaIDI8SkISIAe4sMRUAA9xYciIAB6jP8aYXkW9agK4BF/ibInX/PBCmEXPP4S4f3A38Ox+01RwLFkrJleXX9f1snhNUicFeEdH3VuBQWhp/ghEXqLHw6hx/ihEHqNHwah5j7gTP6++zi0PTrCPFzk5b7kHfI+gPkQU2t805umDdsV8Dthxu/lWsRnfhKq9opatiKQCNbx0QjVG3Wte0EIBFR8FELbLqnYKYTTzDm20uq7o+ZTHpWOgmTFt0IwOWJT5TxOdvxWhB9W55sqHIrqFb8W4bTuvsqenr4FwTv+VgTT+Mi/H3ALgkr8WxHM46P/gsa/ENTiv4UAic/4GzJ/Q1CNfw0BFp8BcImgHv8SARrf4vT0LXfMH9dHOqLM57Keho7OishJgATISYAEyEmABMhJgATISYAE+O/nlwADAADMVJX9TVBJAAAAAElFTkSuQmCC';
-    // Sn
-    var payFundSn = getQueryStringArgs().payFundSn;
+    // 获取字符串
+    function getStr(string, str) {
+        var str_after = string.split(str)[1];
+        return str_after;
+    }
     var id = $('#merchant_id').val();
     $('.js-ok').click(function (e) {
         if(!IsWeixinOrAlipay()){
@@ -51,12 +43,6 @@ $(function () {
             return ;
         }
     });
-    // 获取字符串
-    function getStr(string, str) {
-        var str_after = string.split(str)[1];
-        return str_after;
-    }
-
     // 金额获取焦点事件
     moneyBox.on('touchstart', function () {
         remarkInput.blur();
@@ -196,10 +182,19 @@ $(function () {
             alipayLock = true;
             return;
         }
-        $.get(payUrl + '?alipay=1&price='+JE+'&id='+id,function(resp){
-            location.href = resp.url;
+        var remark = remarkInput.val() == '添加备注（20个字以内）' ? '' : remarkInput.val();
+        $.get(payUrl + '?alipay=1&price='+JE+'&id='+id+'&remark='+remark,function(resp){
+            if(resp.url){
+                location.href = resp.url;
+                return alipayLock = true;
+            }
+            return $.dialog({
+                type: 'info',
+                infoText: resp.msg,
+                infoIcon: fail,
+                autoClose: 3000
+            });
         });
-        alipayLock = true;
     });
     // 微信支付
     weixin.on('touchstart', function () {
@@ -230,9 +225,18 @@ $(function () {
             });
             weixinLock = true;
         }
-        $.get(payUrl + '/testPay?price='+JE+'&id='+id,function(resp){
-            location.href = resp.url;
-            weixinLock = true;
+        var remark = remarkInput.val() == '添加备注（20个字以内）' ? '' : remarkInput.val();
+        $.get(payUrl + '?price='+JE+'&id='+id+'&remark='+remark,function(resp){
+            if(resp.url){
+                location.href = resp.url;
+                return weixinLock = true;
+            }
+            return $.dialog({
+                type: 'info',
+                infoText: resp.msg,
+                infoIcon: fail,
+                autoClose: 3000
+            });
         });
     });
 });

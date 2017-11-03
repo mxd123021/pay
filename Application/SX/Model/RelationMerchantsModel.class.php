@@ -151,6 +151,19 @@ class RelationMerchantsModel extends BaseModel
     }
 
     /**
+     * 根据唯一id获取item
+     * @param $id
+     * @return mixed
+     */
+    public function getItemByUniqueId($id){
+        return $this->where([
+            'unique_id'=>$id
+        ])
+            ->field(['bank_sign_key','bank_merchant_number'])
+            ->find();
+    }
+
+    /**
      * 根据商户id随机获取子商户唯一id
      * @param $id
      * @return mixed
