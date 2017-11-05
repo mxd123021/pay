@@ -10,6 +10,31 @@ class XyOrderModel extends BaseModel
     protected $tableName        =   'order';
 
     /**
+     * 设置为已支付状态
+     * @param $oid
+     * @return bool
+     */
+    public function setOrderIsPay($oid)
+    {
+        return $this->where([
+            'order_id'=>$oid
+        ])->save([
+            'ispay'=>1,
+            'paytime'=>time()
+        ]);
+    }
+    /**
+     * 获取查询key
+     * @param $oid
+     * @return mixed
+     */
+    public function getQueryKeyByOrderId($oid){
+        return $this->where([
+            'order_id'=>$oid
+        ])->getField('bank_query_key');
+    }
+
+    /**
      * 添加订单
         out_trade_no uid eid storeid trade_type buyer_logon_id mch_id sub_mch_id
         goods_name goods_describe total_fee time_end openid transaction_id mchtype pmid
@@ -26,6 +51,7 @@ class XyOrderModel extends BaseModel
         $data['uid'] = empty($info['uid']) ? 0 : $info['uid']; //商户UID
         $data['eid'] = empty($info['eid']) ? 0 : $info['eid']; //员工添加则有员工ID
         $data['storeid'] = empty($info['storeid']) ? 0 : $info['storeid']; //有门店添加则有门店ID
+        $data['bank_query_key'] = isset($info['bank_query_key'])?$info['bank_query_key'] :'';
         if(strstr($info['trade_type'], "weixin"))
         {
             $data['pay_way'] = "weixin"; //支付平台
@@ -41,22 +67,28 @@ class XyOrderModel extends BaseModel
             $data['pay_way'] = "other";
         }
 
-        if(strstr($info['trade_type'], "micropay"))
+        if(!isset($info['pay_type']))
         {
-            $data['pay_type'] = "MICROPAY"; //支付类型
+            if(strstr($info['trade_type'], "micropay"))
+            {
+                $data['pay_type'] = "MICROPAY"; //支付类型
+            }
+            else if(strstr($info['trade_type'], "native"))
+            {
+                $data['pay_type'] = "NATIVE";
+            }
+            else if(strstr($info['trade_type'], "jspay"))
+            {
+                $data['pay_type'] = "JSAPI";
+            }
+            else
+            {
+                $data['pay_type'] = "OTHER";
+            }
+
+        }else{
+            $data['pay_type'] = $info['pay_type'];
         }
-        else if(strstr($info['trade_type'], "native"))
-        {
-            $data['pay_type'] = "NATIVE";
-        }
-        else if(strstr($info['trade_type'], "jspay"))
-        {
-            $data['pay_type'] = "JSAPI";
-        }
-        else
-        {
-            $data['pay_type'] = "OTHER";
-        }        
 
         $data['goods_type'] = "ordinary"; //商品类型
         $data['mch_id'] = empty($info['mch_id']) ? 0 : $info['mch_id']; //商户ID

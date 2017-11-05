@@ -9,7 +9,7 @@ include 'print.class.php';//易联云打印接口
 trait ShanghaiBankPayHelper{
 
     protected $apiUrl = 'http://bosc.cardinfo.com.cn/middlepaytrx/';
-    protected $callbackAction = 'PayView/Index/notice';
+    protected $callbackAction = 'PayView/Index/payNotice';
     /**
      * 获取订单字符串
      * @return string
@@ -31,9 +31,10 @@ trait ShanghaiBankPayHelper{
         }else{
             $type = 'WX_SCANCODE';
         }
+        $item = D('Manage/Users')->getItemBankInfoById($uid);
+        $orderData['bank_query_key'] = $item['bank_query_key'];
         $res = D('Manage/XyOrder')->addOrder($orderData);
         if($res){
-            $item = D('Manage/Users')->getItemBankInfoById($uid);
             return $this->createPayOrder($type,$orderNumber,$amount,'扫码支付',get_client_ip(),'',$item['bank_merchant_number'],$item['bank_sign_key']);
         }
         return false;
@@ -172,25 +173,30 @@ trait ShanghaiBankPayHelper{
      * 通知
      * @return string
      */
-    public function notice($callback = '')
+    public function notice($callback = '',$data)
     {
-        $merchantNumber = '70159480000002';
+        $merchantNumber = $data['r1_merchantNo'];
         //是否有订单号 && 商家号 && 状态值
         if(isset($data['r2_orderNumber']) && isset($data['r1_merchantNo']) && isset($data['r8_orderStatus'])){
             //订单状态是否是成功
             if($data['r8_orderStatus'] === 'SUCCESS'){
-                //查询订单
-                $orderInfo = $this->queryOrderInfoByOrderNumber($merchantNumber,$data['r2_orderNumber']);
-                if(isset($orderInfo['r8_orderStatus']) && $orderInfo['r8_orderStatus'] == 'SUCCESS'){
-                    //TODO 订单检测成功并且是支付成功的 下面代码块是处理订单的
-                    if(is_callable($callback)){
-                        $callback();
+                $queryKey = D('Manage/XyOrder')->getQueryKeyByOrderId($data['r2_orderNumber']);
+                if($queryKey){
+                    //查询订单
+                    $orderInfo = $this->queryOrderInfoByOrderNumber($merchantNumber,$data['r2_orderNumber'],$queryKey);
+                    if(isset($orderInfo['r8_orderStatus']) && $orderInfo['r8_orderStatus'] == 'SUCCESS'){
+                        //TODO 订单检测成功并且是支付成功的 下面代码块是处理订单的
+                        if(is_callable($callback)){
+                            $callback($data['r2_orderNumber']);
+                        }
+                        echo 'success';
+                        die();
                     }
-                    return 'success';
                 }
             }
         }
-        return 'fail';
+        echo 'fail';
+        die();
     }
 
 }

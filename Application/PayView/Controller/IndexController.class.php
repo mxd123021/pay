@@ -3,6 +3,7 @@ namespace PayView\Controller;
 use Manage\Controller\BaseController;
 use Ramsey\Uuid\Uuid;
 use Think\Controller;
+use Think\Log;
 
 /**
  * Created by PhpStorm.
@@ -71,6 +72,11 @@ class IndexController extends BaseController{
     }
 
     public function payNotice(){
-        $this->notice();
+        $data = I();
+        $this->notice(function($orderNumber){
+            D('Manage/XyOrder')->setOrderIsPay($orderNumber);
+            Log::write('成功');
+        },$data);
+//        $this->notice();
     }
 }

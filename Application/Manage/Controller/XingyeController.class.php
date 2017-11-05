@@ -3,6 +3,7 @@
 namespace Manage\Controller;
 
 use Endroid\QrCode\QrCode;
+use Think\Log;
 
 class XingyeController extends BaseController
 {
@@ -185,7 +186,15 @@ class XingyeController extends BaseController
                     $data['goods_describe'] = '扫码支付';
                     $data['mchtype'] = $post_data['mchtype'];
                     $data['pmid'] = session('SX_USERS.parentId');
+                    $data['pay_type'] = 'NATIVE';
                     $info = $this->createQrCodeOrderByUserId($isAliPay,$orderNumber,$data['total_fee'],session('SX_USERS.userId'),$data);
+                    if(!$info){
+                        $return = [
+                            'status'=>5010,
+                            'msg'=>'生成支付二维码失败'
+                        ];
+                        $this->ajaxReturn($return);
+                    }
                     $payInfo = json_decode($info['r9_payinfo'],true);
                     $qrCode = new QrCode($payInfo['qrCode']);
 //                    $qrCode->writeFile(sprintf('%s/%s.png',DATA_PATH,$orderNumber));
