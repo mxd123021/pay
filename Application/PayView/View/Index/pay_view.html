@@ -12,11 +12,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta content="telephone=no" name="format-detection">
     <meta content="email=no" name="format-detection">
-    <link rel="stylesheet" type="text/css" href="https://pm-debug.dzsh.net/test/css/base.css">
-    <link rel="stylesheet" type="text/css" href="https://pm-debug.dzsh.net/test/css/index.css?v=1.0.2.00">
+    <link rel="stylesheet" type="text/css" href="__CSS__/base.css">
+    <link rel="stylesheet" type="text/css" href="__CSS__/index.css?v=1.0.2.00">
     <link rel="stylesheet" type="text/css" href="https://pm-debug.dzsh.net/test/js/tools/dialog/dialog.css">
     <script src="https://cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
-    <script src="https://pm-debug.dzsh.net/test/js/fastclick/fastclick.js"></script>
+    <script src="__JS__/fastclick/fastclick.js"></script>
     <!-- 判断是微信还是支付宝 -->
     <script>
         // 调用FastClick.attach()
@@ -60,7 +60,7 @@
                 return "Alipay";
             }
             //哪个都不是
-            return false;
+            return 'WeiXIN';
         }
         $(
                 function() {
@@ -89,7 +89,7 @@
 <!-- 标题 -->
 <div class="wg-pay-title">
     <div class="title-logo">
-        <img src="https://pm-debug.dzsh.net/test/images/store.png" alt="">
+        <img src="__IMG__/store.png" alt="">
     </div>
     <div class="title-name">{$info['name']}</div>
 </div>
@@ -103,7 +103,7 @@
         <a>￥</a>
         <div id="hint">请输入付款金额</div>
         <div id="money"></div>
-        <img src="https://pm-debug.dzsh.net/test/images/cursor.gif" id="js-cursor">
+        <img src="__IMG__/cursor.gif" id="js-cursor">
     </div>
 </div>
 <!-- 备注 -->
@@ -111,7 +111,7 @@
     <!-- <input class="wg-remark-input" value="" maxlength="20" type="text" placeholder="添加备注（20个字以内）"> -->
     <!-- <div contenteditable class="wg-remark-input" maxlength="20"></div> -->
     <textarea class="wg-remark-input" maxlength="20" onfocus="if(value=='添加备注（20个字以内）'){value=''}" onblur="if (value ==''){value='添加备注（20个字以内）'}">添加备注（20个字以内）</textarea>
-    <img src="https://pm-debug.dzsh.net/test/images/remark.png" alt="" class="wg-remark-img" id="wg-remark-img">
+    <img src="__IMG__/remark.png" alt="" class="wg-remark-img" id="wg-remark-img">
 </div>
 <!-- 数字键盘 -->
 <div class="ui-keyboard js-keyboard ZFB on" style="display: block;">
@@ -134,7 +134,7 @@
     </ul>
 </div>
 
-<script src="https://pm-debug.dzsh.net/test/js/tools/dialog/dialog.js"></script>
+<script src="__JS__/tools/dialog/dialog.js"></script>
 <script src="__JS__/index.js"></script>
 <script>
 </script>

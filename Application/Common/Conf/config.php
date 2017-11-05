@@ -7,10 +7,10 @@ return array(
 	'SITE_URL' => 'www.test.com',//域名地址
 
 	'DB_TYPE'  => 'mysql',// 数据库类型 
-	'DB_HOST'  => '127.0.0.1',// 数据库服务器地址
-	'DB_NAME'  => 'pay',// 数据库名称
-	'DB_USER'  => 'root',// 数据库用户名
-	'DB_PWD'  => 'ABCabc2017',// 数据库密码
+	'DB_HOST'  => 'bdm244728438.my3w.com',// 数据库服务器地址
+	'DB_NAME'  => 'bdm244728438_db',// 数据库名称
+	'DB_USER'  => 'bdm244728438',// 数据库用户名
+	'DB_PWD'  => 'worinima0',// 数据库密码
 	'DB_PREFIX'  => 'de_',// 保持默认
 	'DB_CHARSET' => 'utf8',// 网站编码
 	'DB_PORT'  => '3306',// 数据库端口

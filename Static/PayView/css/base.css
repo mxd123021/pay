@@ -1,0 +1,458 @@
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+form,
+fieldset,
+input,
+textarea,
+p,
+blockquote，th,
+td {
+    margin: 0;
+    padding: 0;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+fieldset,
+img {
+    border: 0;
+}
+
+address,
+caption,
+cite,
+code,
+dfn,
+em,
+strong,
+i,
+th,
+var {
+    font-style: normal;
+    font-weight: normal;
+}
+
+ol,
+ul {
+    list-style: none;
+}
+
+caption,
+th {
+    text-align: left;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-size: 100%;
+    font-weight: normal;
+}
+
+q:before,
+q:after {
+    content: ' '
+}
+
+abbr,
+acronym {
+    border: 0;
+}
+
+a,
+a:hover,
+a:focus {
+    text-decoration: none;
+}
+
+
+/*屏蔽部分手机浏览器 点击链接出现蓝色虚线框*/
+
+* {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-appearance: none;
+}
+
+
+/*默认自动填充背景为白色*/
+
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px white inset;
+}
+
+
+/* icon-font */
+
+@font-face {
+    font-family: 'iconfont';
+    src: url(/skin/fonts/maintenance/iconfont.eot), url(/skin/fonts/maintenance/iconfont.woff), url(/skin/fonts/maintenance/iconfont.ttf);
+}
+
+.iconfont {
+    font-family: "iconfont" !important;
+    font-style: normal;
+}
+
+
+/* font-style */
+
+.fwb {
+    font-weight: bold;
+}
+
+.fwn {
+    font-weight: normal;
+}
+
+
+/* safe color */
+
+.c0 {
+    color: #000;
+}
+
+.c3 {
+    color: #333;
+}
+
+.c5 {
+    color: #555;
+}
+
+.c6 {
+    color: #666;
+}
+
+.c8 {
+    color: #888;
+}
+
+.c9 {
+    color: #999;
+}
+
+.cf {
+    color: #fff;
+}
+
+.cc {
+    color: #ccc;
+}
+
+.cb {
+    color: #bbb;
+}
+
+.cd {
+    color: #ddd;
+}
+
+
+/* display */
+
+.dn {
+    display: none;
+}
+
+.di {
+    display: inline;
+}
+
+.db {
+    display: block;
+}
+
+.dib {
+    display: inline-block;
+}
+
+
+/* text-decoration */
+
+.tdu {
+    text-decoration: underline;
+}
+
+.tdn {
+    text-decoration: none;
+}
+
+
+/* text-align */
+
+.tal {
+    text-align: left;
+}
+
+.tac {
+    text-align: center;
+}
+
+.tar {
+    text-align: right;
+}
+
+
+/* center */
+
+.vam {
+    vertical-align: middle;
+}
+
+.bc {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/* float */
+
+.fl {
+    float: left;
+    *display: inline;
+}
+
+.fr {
+    float: right;
+    *display: inline;
+}
+
+.fn {
+    float: none;
+}
+
+
+/* clear */
+
+.cb {
+    clear: both;
+}
+
+.clearfix:after {
+    content: '.';
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden
+}
+
+.clearfix {
+    *display: inline-block;
+}
+
+*html .clearfix {
+    height: 1%
+}
+
+.clearfix {
+    /*display:block;*/
+}
+
+
+/* position */
+
+.pr {
+    position: relative;
+}
+
+.pa {
+    position: absolute;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.none {
+    display: none;
+}
+
+.ovh {
+    overflow: hidden;
+}
+
+
+/*初始化*/
+
+html {
+    font-family: "Helvetica Neue", "Heiti SC", "Microsoft YaHei";
+    width: 100%;
+    outline: 0;
+    -webkit-text-size-adjust: none;
+    font-size: 10px;
+}
+
+body {
+    height: 100%;
+    margin: 0;
+    -webkit-user-select: none;
+    position: relative;
+}
+
+
+/*----------常用控件----------*/
+
+
+/*按钮
+<div class="glo-btn">提 交</div>*/
+
+.glo-btn {
+    color: #fff;
+    background: #00a1d8;
+    text-align: center;
+    border-radius: .1rem;
+    margin: 2rem auto .5rem auto;
+    padding: .5rem 5.8rem;
+    font-size: .7rem;
+    border: none;
+    display: block;
+}
+
+
+/*花
+<em class="glo-flo">*</em>*/
+
+.glo-flo {
+    padding-right: .2rem;
+    font-size: 1.2rem;
+    color: #47dac0;
+    height: 1rem;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+
+/*圆圈
+<em class="glo-circle"></em>
+<em class="glo-circle on"></em>*/
+
+.glo-circle {
+    margin-right: .2rem;
+    width: .8rem;
+    height: .8rem;
+    border-radius: 50%;
+    display: inline-block;
+    background: #dce0e3;
+    vertical-align: text-bottom;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.glo-circle.on {
+    background: #47dac0;
+    outline: none;
+}
+
+
+/*描述框
+  <div class="pr"><em class="glo-flo">*</em><span>报修描述：</span>
+      <i class="glo-describe-top iconfont">&#xe6de;</i>
+      <textarea class="glo-describe">lasdfjlsa</textarea>
+  </div>*/
+
+.glo-describe-top {
+    position: absolute;
+    top: 1.1rem;
+    color: #ddd;
+    background: #fff;
+    font-size: .9rem;
+    left: 1rem;
+    z-index: 100
+}
+
+.glo-describe {
+    margin-top: .5rem;
+    width: 12.5rem;
+    height: 3rem;
+    border: 1px solid #ddd;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: .1rem;
+    outline: none;
+    font-size: .7rem;
+    padding: .3rem;
+    overflow: hidden;
+    resize: none;
+    color: #6b7e8c;
+}
+
+
+/*添加图片
+<div class="iconfont glo-add">&#xe6da;</div>*/
+
+.glo-add {
+    color: #ddd;
+    border: 2px dashed #ddd;
+    width: 1.2rem;
+    height: 1.2rem;
+    text-align: center;
+    padding: .3rem;
+    border-radius: .2rem;
+    font-size: 1.2rem;
+    display: inline-block;
+    font-weight: 600;
+}
+
+
+/*弹出框
+<link rel="stylesheet" href="/skin/css/maintenance/bootstrap.css">
+<script src="/skin/js/bootstrap/jquery-2.1.3.min.js"></script> 
+<script src="/skin/css/maintenance/bootstrap.js"></script> 
+
+<button type="button" class="btn btn-primary glo-btn" data-toggle="modal" data-target=".bs-example-modal-sm">提 交</button>
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <div class="head">提交成功</div>
+        <div class="con">我们将于ADSL费加阿斯顿飞就死定了</div>
+    </div>
+  </div>
+</div>*/
+
+.modal {
+    color: #3b4851;
+}
+
+.modal .close {
+    background: none;
+    border: none;
+    font-size: 1rem;
+    color: #47dac0;
+    float: right;
+    height: 1rem;
+    padding: 0;
+    margin-right: .2rem;
+}
+
+.modal .head {
+    text-align: center;
+    padding: 1.5rem 0 0 0;
+}
+
+.modal .con {
+    text-align: center;
+    padding: .5rem .3rem 1.5rem;
+}
