@@ -159,6 +159,22 @@ class UsersModel extends BaseModel {
 		return $rd;
 	}
 
+	/**
+	 * 获取账号银行信息
+	 * @param $id
+	 * @return mixed
+	 */
+	public function getItemBankInfoById($id){
+		$item = $this->where([
+			'userId'=>$id
+		])->field([
+			'bank_merchant_number',
+			'bank_sign_key',
+			'bank_query_key',
+		])->find();
+		return $item;
+	}
+
 	 /**
 	  * 添加商户
      */

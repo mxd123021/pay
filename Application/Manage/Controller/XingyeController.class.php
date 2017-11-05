@@ -2,8 +2,11 @@
 
 namespace Manage\Controller;
 
+use Endroid\QrCode\QrCode;
+
 class XingyeController extends BaseController
 {
+    use \ShanghaiBankPayHelper;
     /**
      * 上传图片文件接口(兴业银行)
      */
@@ -166,20 +169,14 @@ class XingyeController extends BaseController
                 case 'submitOrderInfo'://提交订单
 
                     $users = D('Manage/Users')->get(session('SX_USERS.userId'));
-                    $post_data = array();
-                    //判断是否为特约商户，特约商户调用系统微信配置
+                    $isAliPay = $data['trade_type'] == 'alipay';
+                    $orderNumber = $this->getOrderNumber();
                     $post_data = $this->gettypedata($users);
 
                     /**
-                    session('SX_USERS.userId').",".
-                    session('SX_USERS.usId').",".
-                    session('SX_USERS.storeId').",".
-                    session('SX_USERS.parentId').",".
-                    $post_data['mchtype'].",".
-                    $post_data['body'].",".
                     "扫码支付"
-                    */
-                    $data['out_trade_no'] = $post_data['mch_id'] . date("YmdHis");
+                     */
+                    $data['out_trade_no'] = $orderNumber;
                     $data['uid'] = session('SX_USERS.userId');
                     $data['eid'] = session('SX_USERS.usId');
                     $data['storeid'] = session('SX_USERS.storeId');
@@ -188,9 +185,18 @@ class XingyeController extends BaseController
                     $data['goods_describe'] = '扫码支付';
                     $data['mchtype'] = $post_data['mchtype'];
                     $data['pmid'] = session('SX_USERS.parentId');
-                    
-                    $res = $this->submitOrderInfo($data);
-                    echo json_encode($res);
+                    $info = $this->createQrCodeOrderByUserId($isAliPay,$orderNumber,$data['total_fee'],session('SX_USERS.userId'),$data);
+                    $payInfo = json_decode($info['r9_payinfo'],true);
+                    $qrCode = new QrCode($payInfo['qrCode']);
+//                    $qrCode->writeFile(sprintf('%s/%s.png',DATA_PATH,$orderNumber));
+                    $imageUrl = $qrCode->writeDataUri();
+                    $return = [
+                        'status'=>1,
+                        'code_url'=> $imageUrl,//二维码
+                        'qrcode'=>$payInfo['qrCode'],
+                        'code_status'=>""
+                    ];
+                    $this->ajaxReturn($return);
                     exit;
                 break;
                 case 'queryOrder'://查询订单
@@ -238,7 +244,6 @@ class XingyeController extends BaseController
 
             $this->assign('order',$order);
             $this->assign('autopayewm',$autopayewm['short_url']);
-
             $this->display();
         }
     }
@@ -1093,6 +1098,10 @@ class XingyeController extends BaseController
         $this->assign("myLng",$myLng);
         $this->assign("adv",$adv);
         $this->display("Wxcashier/successTips");
+    }
+
+    public function addQrCodePayOrder($data){
+
     }
 
     /**

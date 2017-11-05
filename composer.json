@@ -4,6 +4,7 @@
     "require": {
         "guzzlehttp/guzzle": "^6.3",
         "bocharsky-bw/arrayzy": "^0.6.1",
-        "ramsey/uuid": "^3.7"
+        "ramsey/uuid": "^3.7",
+        "endroid/qrcode": "^2.4"
     }
 }
