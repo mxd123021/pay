@@ -159,7 +159,7 @@ class RelationMerchantsModel extends BaseModel
         return $this->where([
             'unique_id'=>$id
         ])
-            ->field(['bank_sign_key','bank_merchant_number'])
+            ->field(['bank_query_key','user_id','bank_sign_key','bank_merchant_number'])
             ->find();
     }
 

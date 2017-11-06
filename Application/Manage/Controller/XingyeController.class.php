@@ -307,7 +307,7 @@ class XingyeController extends BaseController
                 
                 //添加订单
                 $orderInfo = array(
-                    'out_trade_no'      => $out_trade_no,
+                    'out_trade_no'      => $this->getOrderNumber(),
                     'uid'               => session('SX_USERS.userId'),
                     'eid'               => session('SX_USERS.usId'),
                     'storeid'           => session('SX_USERS.storeId'),
@@ -326,9 +326,23 @@ class XingyeController extends BaseController
                     'ispay'            => 0,
                     'paytime'           => time(),
                 );
+                $res = $this->createAuthCodeOrderByUid(1,$orderInfo['out_trade_no'],$goods_price,$orderInfo['uid'],$orderInfo,$auth_code);
+                if($res === true){
+                    $this->ajaxReturn([
+                        'status'=>1,
+                        'msg'=>'付款成功',
+                        'price'=>$goods_price
+                    ]);
+                }
+                if($res instanceof \Exception){
+                    $this->ajaxReturn([
+                        'status'=>-1,
+                        'msg'=>$res->getMessage(),
+                        'price'=>$goods_price
+                    ]);
+                }
                 D('Manage/XyOrder')->addOrder($orderInfo); 
-                    
-                
+
                 $obj = D('Manage/XyMicropay');
                 $obj->setKey($post_data['xy_key']);
                 $rs = $obj->submitOrderInfo($data);

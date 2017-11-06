@@ -28,28 +28,28 @@
 					<if condition="empty($usId)">
 						<li <eq name="Think.const.CONTROLLER_NAME" value="Users"><eq name="Think.const.ACTION_NAME" value="loginLog"> class="active" </eq></eq>><a href="{:U("Manage/Users/loginLog")}">登陆日志</a></li>
 					</if>
-	                    	<if condition="empty($usId)">
-	                        	<li <eq name="Think.const.CONTROLLER_NAME" value="Users"><eq name="Think.const.ACTION_NAME" value="storefront"> class="active" </eq></eq>><a href="{:U("Manage/Users/storefront")}">子商户管理</a></li>
-	                        </if>
+	                    	<!--<if condition="empty($usId)">-->
+	                        	<!--<li <eq name="Think.const.CONTROLLER_NAME" value="Users"><eq name="Think.const.ACTION_NAME" value="storefront"> class="active" </eq></eq>><a href="{:U("Manage/Users/storefront")}">子商户管理</a></li>-->
+	                        <!--</if>-->
 	                        <!--<if condition="empty($usId)">-->
 	                        	<!--<li <eq name="Think.const.CONTROLLER_NAME" value="Users"><eq name="Think.const.ACTION_NAME" value="employers"> class="active" </eq></eq>><a href="{:U("Manage/Users/employers")}">员工管理</a></li>-->
 	                        <!--</if>-->
-	                        <if condition="empty($usId)  or in_array('wx_zfsz',session('SX_USERS.grant'))">
-	                        	<li <eq name="Think.const.CONTROLLER_NAME" value="Users"><eq name="Think.const.ACTION_NAME" value="payConfig"> class="active" </eq></eq>><a href="{:U("Manage/Users/payConfig")}">支付配置</a></li>
-	                        </if>
+	                        <!--<if condition="empty($usId)  or in_array('wx_zfsz',session('SX_USERS.grant'))">-->
+	                        	<!--<li <eq name="Think.const.CONTROLLER_NAME" value="Users"><eq name="Think.const.ACTION_NAME" value="payConfig"> class="active" </eq></eq>><a href="{:U("Manage/Users/payConfig")}">支付配置</a></li>-->
+	                        <!--</if>-->
 	                        <if condition="empty($usId)  or in_array('wx_usinfo',session('SX_USERS.grant'))">
 	                        	<li <eq name="Think.const.CONTROLLER_NAME" value="Users"><eq name="Think.const.ACTION_NAME" value="userInfo"> class="active" </eq></eq>><a href="{:U("Manage/Users/userInfo")}">个人信息</a></li>
 	                        </if>
-	                        <if condition="empty($usId)  or in_array('wx_usinfo',session('SX_USERS.grant'))">
-	                        	 <!--<li <eq name="Think.const.CONTROLLER_NAME" value="Users"><eq name="Think.const.ACTION_NAME" value="realname"> class="active" </eq></eq>><a href="{:U("Manage/Users/realname")}">实名认证</a></li>--> 
-                                <li <eq name="Think.const.CONTROLLER_NAME" value="Xingye"><eq name="Think.const.ACTION_NAME" value="realname"> class="active" </eq></eq>><a href="{:U("Manage/Xingye/realname")}">账户认证</a></li>
-	                        </if>
+	                        <!--<if condition="empty($usId)  or in_array('wx_usinfo',session('SX_USERS.grant'))">-->
+	                        	 <!--&lt;!&ndash;<li <eq name="Think.const.CONTROLLER_NAME" value="Users"><eq name="Think.const.ACTION_NAME" value="realname"> class="active" </eq></eq>><a href="{:U("Manage/Users/realname")}">实名认证</a></li>&ndash;&gt; -->
+                                <!--<li <eq name="Think.const.CONTROLLER_NAME" value="Xingye"><eq name="Think.const.ACTION_NAME" value="realname"> class="active" </eq></eq>><a href="{:U("Manage/Xingye/realname")}">账户认证</a></li>-->
+	                        <!--</if>-->
 	                        <if condition="empty($usId)">
 	                        	<li <eq name="Think.const.CONTROLLER_NAME" value="Users"><eq name="Think.const.ACTION_NAME" value="modifypwd"> class="active" </eq></eq>><a href="{:U("Manage/Users/modifypwd")}">修改密码</a></li>
 	                        </if>
-                                <if condition="empty($usId)">
-	                        	<li <eq name="Think.const.CONTROLLER_NAME" value="Users"><eq name="Think.const.ACTION_NAME" value="printerManage"> class="active" </eq></eq>><a href="{:U("Manage/Users/printerManage")}">打印机管理</a></li>
-	                        </if>
+                                <!--<if condition="empty($usId)">-->
+	                        	<!--<li <eq name="Think.const.CONTROLLER_NAME" value="Users"><eq name="Think.const.ACTION_NAME" value="printerManage"> class="active" </eq></eq>><a href="{:U("Manage/Users/printerManage")}">打印机管理</a></li>-->
+	                        <!--</if>-->
 <!--                                <if condition="empty($usId)">
 	                        	<li <eq name="Think.const.CONTROLLER_NAME" value="Users"><eq name="Think.const.ACTION_NAME" value="accoutConfig"> class="active" </eq></eq>><a href="{:U("Manage/Users/accoutConfig")}">账号配置</a></li>
 	                        </if>-->
@@ -59,7 +59,7 @@
 
                 <if condition="empty($usId) or in_array('wx_sksy',session('SX_USERS.grant')) or in_array('wx_smtk',session('SX_USERS.grant'))">
 	                <li <eq name="Think.const.CONTROLLER_NAME" value="Xingye"> class="active" </eq>>
-	                    <a href="#"><if condition="session('SX_USERS.wx_issp') eq 3"><i class="fa fa-cny"></i> <span class="nav-label">收银台</span><else /><i class="fa fa-wechat"></i> <span class="nav-label">微信收银台</span></if><span class="label label-info pull-right">NEW</span></a>
+	                    <a href="#"><if condition="session('SX_USERS.wx_issp') eq 3"><i class="fa fa-cny"></i> <span class="nav-label">&nbsp;&nbsp;收银台</span><else /><i class="fa fa-wechat"></i> <span class="nav-label">微信收银台</span></if><span class="label label-info pull-right">NEW</span></a>
 	                    <ul class="nav nav-second-level collapse <eq name="Think.const.CONTROLLER_NAME" value="Xingye"><neq name="Think.const.ACTION_NAME" value="payment"> in </neq></eq>">
 
 							<if condition="empty($usId) or in_array('wx_sksy',session('SX_USERS.grant'))">
@@ -132,9 +132,9 @@
 	                        	<li <eq name="Think.const.CONTROLLER_NAME" value="Statistics"><eq name="Think.const.ACTION_NAME" value="orderLists"><neq name="type" value="2"> class="active" </neq></eq></eq>><a href="{:U("Manage/Statistics/orderLists")}">收款订单列表</a></li>
 	                        </if>
                                 
-                                <if condition="empty($usId) or in_array('orderlists',session('SX_USERS.grant'))">
-	                        	<li <eq name="Think.const.CONTROLLER_NAME" value="Statistics"><eq name="Think.const.ACTION_NAME" value="balance"><neq name="type" value="2"> class="active" </neq></eq></eq>><a href="{:U("Manage/Statistics/balance")}">结算管理</a></li>
-	                        </if>
+                                <!--<if condition="empty($usId) or in_array('orderlists',session('SX_USERS.grant'))">-->
+	                        	<!--<li <eq name="Think.const.CONTROLLER_NAME" value="Statistics"><eq name="Think.const.ACTION_NAME" value="balance"><neq name="type" value="2"> class="active" </neq></eq></eq>><a href="{:U("Manage/Statistics/balance")}">结算管理</a></li>-->
+	                        <!--</if>-->
 
 <!--							<if condition="empty($usId) or in_array('rporderlists',session('SX_USERS.grant'))">
 	                        	<li <eq name="Think.const.CONTROLLER_NAME" value="Statistics"><eq name="Think.const.ACTION_NAME" value="rporderLists"><neq name="type" value="2"> class="active" </neq></eq></eq>><a href="{:U("Manage/Statistics/rporderLists")}">红包领取列表</a></li>

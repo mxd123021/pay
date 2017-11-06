@@ -39,7 +39,43 @@ trait ShanghaiBankPayHelper{
         }
         return false;
     }
-
+    /**
+     * 创建扫码枪支付订单
+     * @param $isAliPay
+     * @param $orderNumber
+     * @param $amount
+     * @param $ip
+     * @param $uniqueId
+     * @return mixed
+     */
+    protected function createAuthCodeOrderByUid($isAliPay,$orderNumber,$amount,$uid,$orderData,$authCode){
+        //支付类型
+        if($isAliPay){
+            $orderData['trade_type'] = 'alipay';
+            $type = 'Alipay_SCANBARCODE';
+        }else{
+            $orderData['trade_type'] = 'weixin';
+            $type = 'WX_MICROPAY';
+        }
+        //支付方式
+        $orderData['pay_type'] = 'MICROPAY';
+        $item = D('Manage/Users')->getItemBankInfoById($uid);
+        $orderData['bank_query_key'] = $item['bank_query_key'];
+        $res = D('Manage/XyOrder')->addOrder($orderData);
+        if($res){
+            $return = $this->createPayOrder($type,$orderNumber,$amount,'扫码枪支付',get_client_ip(),$authCode,$item['bank_merchant_number'],$item['bank_sign_key']);
+            //判断付款结果
+            if(isset($return['r9_payinfo'])){
+                $info = json_decode($return['r9_payinfo'],true);
+                if(isset($info['trxStatus']) && $info['trxStatus'] == 'SUCCESS'){
+                    D('Manage/XyOrder')->setOrderIsPay($return['r2_orderNumber']);
+                    return true;
+                }
+            }
+            return new Exception('订单支付失败');
+        }
+        return new Exception('生成订单失败');
+    }
     /**
      * 创建js订单
      * @param $isAliPay
@@ -50,13 +86,28 @@ trait ShanghaiBankPayHelper{
      * @return mixed
      */
     protected function createJsOrderByMerchantUniqueId($isAliPay,$orderNumber,$amount,$ip,$uniqueId){
+        $orderData = [];
         if($isAliPay){
+            $orderData['trade_type'] = 'alipay';
             $type = 'Alipay_LIFENO';
         }else{
+            $orderData['trade_type'] = 'weixin';
             $type = 'WX_SCANCODE_JSAPI';
         }
         $item = D('SX/RelationMerchants')->getItemByUniqueId($uniqueId);
         $orderName = $this->getGoodsNameByPrice($amount);
+        //添加订单表数据
+        $orderData = array_merge($orderData,[
+            'bank_query_key'=>$item['bank_query_key'],
+            'pay_type'=>'JSAPI',
+            'goods_describe'=>'自助支付',
+            'total_fee'=>$amount,
+            'tname'=>$orderName,
+            'out_trade_no'=>$orderNumber,
+            'goods_name'=>$orderName,
+            'uid'=>$item['user_id']
+        ]);
+        $res = D('Manage/XyOrder')->addOrder($orderData);
         return $this->createPayOrder($type,$orderNumber,$amount,$orderName,$ip,'',$item['bank_merchant_number'],$item['bank_sign_key']);
     }
 

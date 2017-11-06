@@ -26,18 +26,18 @@
 								<label><span class="mustInput">*</span>手机号:</label>
 								<input type="tel" id="userPhone" placeholder="请输入员工的手机号" name="userPhone" value="{$userinfo['userPhone']}" class="form-control required" aria-required="true" readonly>
 							</div>
-								<ul class="todo-list m-t small-list ui-sortable" >
-		                            <li>
-		                            	<if condition="$wxinfo eq ''">
-											<button id="bdwx" type="button" class="btn btn-primary btn-xs" style="margin: 0 20px 0 0;">点击绑定微信</button>
-										<else />
-											<img src="{$wxinfo.headimgurl}" style="width: 40px;height:40px;">
-											<span class="label" style="margin-right: 10px;">已绑定</span>
-										</if>
-		                                <i class="fa fa-info-circle"></i> 用于提现、收银和系统通知
-		                                <span class="label label-danger pull-right">重要</span>
-		                            </li>
-                        		</ul>
+								<!--<ul class="todo-list m-t small-list ui-sortable" >-->
+		                            <!--<li>-->
+		                            	<!--<if condition="$wxinfo eq ''">-->
+											<!--<button id="bdwx" type="button" class="btn btn-primary btn-xs" style="margin: 0 20px 0 0;">点击绑定微信</button>-->
+										<!--<else />-->
+											<!--<img src="{$wxinfo.headimgurl}" style="width: 40px;height:40px;">-->
+											<!--<span class="label" style="margin-right: 10px;">已绑定</span>-->
+										<!--</if>-->
+		                                <!--<i class="fa fa-info-circle"></i> 用于提现、收银和系统通知-->
+		                                <!--<span class="label label-danger pull-right">重要</span>-->
+		                            <!--</li>-->
+                        		<!--</ul>-->
                         </div>
                     </div>
                 </div>

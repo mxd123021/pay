@@ -14,7 +14,7 @@
 				      <!-- 实时交易信息展示区域 -->
 				      <div class="cashier-realtime"> 
 				       <div class="realtime-title-block clearfix"> 
-				       		<ul class="pull-left" style="height: 25px; padding: 0;">
+				       		<ul class="pull-left hide" style="height: 25px; padding: 0;">
 				       			<li style="width: 150px;">
                                                             <select name="mendian" id="mendian" class="form-control">
                                                                 <option value="0" data-cname="全部">全部门店</option>
@@ -319,7 +319,7 @@
         shrinkToFit: true,
         rowNum: 30,
         rowList: [10, 20, 30],
-        colNames: ["订单号", "付款人", "收款账户", "付款时间", "门店", "收银员", "来源", "付款金额", "付款情况", "详细"],
+        colNames: ["订单号", "付款人", "付款时间", "门店", "收银员", "来源", "付款金额", "付款情况", "详细"],
         colModel: [{
             name: "orderid",
             index: "orderid",
@@ -329,10 +329,6 @@
             name: "name",
             index: "name",
             width: 150
-        }, {
-            name: "mch_id",
-            index: "mch_id",
-            width: 60
         },{
             name: "paytime",
             index: "paytime",

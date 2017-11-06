@@ -97,8 +97,7 @@
                             <tr class="widget-list-header">
                                 <th>订单号</th>
                                 <th  data-hide="phone">付款人</th> 
-                                 <th  data-hide="phone">收款账户</th>
-                                <th  data-hide="phone">付款时间</th> 
+                                <th  data-hide="phone">付款时间</th>
                                 <th  data-hide="phone">付款金额(元)</th>
                                
                                 <th  data-hide="phone">方式</th>
@@ -122,7 +121,7 @@
             }else{
                 echo '未知客户';
             }?></td> 
-                <td><?php echo $ovv['mch_id']?></td>
+
             <td><?php $paytime=$ovv['paytime'] > 0 ? $ovv['paytime'] : $ovv['add_time']; echo date('Y-m-d H:i:s',$paytime);?></td> 
             <td><?php echo $ovv['goods_price'];?></td>
             <td><img src="__IMG__/pay_icon/{$ovv.pay_way}.png" height="20">-
@@ -151,8 +150,6 @@
             </td> 
             <td>
                 <button class="btn btn-sm btn-info" onclick="GetDetail({$ovv.id});"><strong>支付详情</strong></button>
-                <button class="btn btn-sm btn-info" onclick="refund({$ovv.id}, {$ovv.goods_price});"><strong>退款</strong></button>
-                <button class="btn btn-sm btn-info" onclick="queryRefund({$ovv.id});"><strong>查询退款</strong></button>
             </td>
            </tr>
            <?php }}else{?>
@@ -379,11 +376,11 @@
                                datahtml+='<tr class="widget-list-item">';
                                datahtml+='<td>'+vv.order_id+'</td>';
                                if(vv.truename == ""){
-                                datahtml+='<td>'+vv.openid+'</td>';
+                                datahtml+='<td>未知客户</td>';
                                }else{
                                 datahtml+='<td>'+vv.truename+'</td>';
                                }
-                               datahtml+='<td>'+vv.mch_id+'</td>';
+//                               datahtml+='<td>'+vv.mch_id+'</td>';
                                datahtml+='<td id="datas">'+getLocalTime(vv.paytime)+'</td>';
                                datahtml+='<td>'+vv.goods_price+'</td><td>';
                                 datahtml+='<img src="'+IMGSRC+'/pay_icon/'+vv.pay_way+'.png" height="20">-';

@@ -71,6 +71,9 @@ class IndexController extends BaseController{
         ]);
     }
 
+    /**
+     * 支付通知
+     */
     public function payNotice(){
         $data = I();
         $this->notice(function($orderNumber){
