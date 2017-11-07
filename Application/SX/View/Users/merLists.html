@@ -46,11 +46,11 @@
                                             <tr class="widget-list-header">
                                                 <th>ID</th>
                                                 <!--<th>选为特约商户</th>-->
-                                                <th>选为受理商</th>
+                                                <!--<th>选为受理商</th>-->
                                                 <th>商户名称</th>
                                                 <th data-hide="phone">账号</th>
-                                                <th data-hide="phone">微信配置</th>
-                                                <th data-hide="phone">来源</th>
+                                                <!--<th data-hide="phone">微信配置</th>-->
+                                                <!--<th data-hide="phone">来源</th>-->
                                                 <th data-hide="phone">审核状态</th>
                                                 <th>操作</th>
                                             </tr>
@@ -62,37 +62,17 @@
                                                     <tr class="widget-list-item">
                                                         <td class="uid">{$vo['userId']}</td>
                                                         <!--<td style="padding-top:12px;" class="ptd"><input type="checkbox" <eq name="vo['wx_issp']" value="1"> checked="checked" </eq> data-type='{$vo['userId']}' class="i-checks issp"></td>-->
-                                                        <td style="padding-top:12px;" class="ptd"><input type="checkbox"
-                                                            <eq name="vo['userType']" value="1"> checked="checked"</eq>
-                                                            data-type='{$vo['userId']}' class="i-checks setType">
-                                                        </td>
+                                                        <!--<td style="padding-top:12px;" class="ptd"><input type="checkbox"-->
+                                                            <!--<eq name="vo['userType']" value="1"> checked="checked"</eq>-->
+                                                            <!--data-type='{$vo['userId']}' class="i-checks setType">-->
+                                                        <!--</td>-->
                                                         <td class="prelative"><span
                                                                 class="wxname">{$vo['userName']}</span><input
                                                                 type="text" class="form-control" placeholder="请输入商户名称">&nbsp;&nbsp;&nbsp;<span
                                                                 class="tips"><i class="fa fa-edit"></i><span>保存修改</span></span>
                                                         </td>
                                                         <td>{$vo['loginName']}</td>
-                                                        <td>
-                                                            <?php
-                      if(!empty($vo['wx_appId']) and !empty($vo['wx_appSecret']) and!empty($vo['wx_mchId']) and !empty($vo['wx_apiSecret']) and !empty($vo['wx_apiclientCert']) and !empty($vo['wx_apiclientKey']) and !empty($vo['wx_apiclientCa'])){
-                        echo "<font color='green'>已配置</font>";
-                                                            }else{
-                                                            echo "末配置";
-                                                            }
-                                                            ?>
-                                                        </td>
-                                                        <td>
-                                                            <?php
-					switch($vo['userFlag']){
-						case 0:
-							echo "本站注册";
-						break;
-						case 1:
-							echo "受理商添加";
-						break;
-					}
-				?>
-                                                        </td>
+
                                                         <td><?php
           switch($vo['userAudit']){
             case 0:

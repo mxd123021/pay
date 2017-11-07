@@ -38,6 +38,7 @@
                                                 <th>编号</th>
                                                 <th data-hide="phone">门店名称</th>
                                                 <th data-hide="phone">门店电话</th>
+                                                <th data-hide="phone">银行商户号</th>
                                                 <th data-hide="phone">操作</th>
                                             </tr>
                                             </thead>
@@ -49,6 +50,9 @@
                                                         <td class="prelative"><span class="wxname">{$ovv.name|msubstr=0,10}</span>
                                                             <input type="text" class="form-control" placeholder="请输入商户名称">&nbsp;&nbsp;&nbsp;
                                                             <span class="tips"><i class="fa fa-edit"></i><span>保存修改</span></span>
+                                                        </td>
+                                                        <td>
+                                                            {$ovv['bank_merchant_number']}
                                                         </td>
                                                         <td>
                                                             {$ovv['mobile_number']}

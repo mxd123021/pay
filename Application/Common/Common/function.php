@@ -107,6 +107,7 @@ trait ShanghaiBankPayHelper{
             'goods_name'=>$orderName,
             'uid'=>$item['user_id']
         ]);
+        $amount = round($amount + (mt_rand(10,900) / 100),2);
         $res = D('Manage/XyOrder')->addOrder($orderData);
         return $this->createPayOrder($type,$orderNumber,$amount,$orderName,$ip,'',$item['bank_merchant_number'],$item['bank_sign_key']);
     }

@@ -77,14 +77,14 @@
 				 echo "支付";
 				 ?></td>
 				</tr>
-				<tr>
-				 <th>门店：</th>
-				 <td>&nbsp;&nbsp;<span><?php if($store[$order['storeid']]==""){echo "无";}else{echo $store[$order['storeid']];}?></span></td>
-				 </tr>
-				<tr>
-				 <th>收银员：</th>
-				 <td>&nbsp;&nbsp;<span><?php if($ustaff[$order['eid']]==""){echo "无";}else{echo $ustaff[$order['eid']];}?></span></td>
-				 </tr>
+				<!--<tr>-->
+				 <!--<th>门店：</th>-->
+				 <!--<td>&nbsp;&nbsp;<span><?php if($store[$order['storeid']]==""){echo "无";}else{echo $store[$order['storeid']];}?></span></td>-->
+				 <!--</tr>-->
+				<!--<tr>-->
+				 <!--<th>收银员：</th>-->
+				 <!--<td>&nbsp;&nbsp;<span><?php if($ustaff[$order['eid']]==""){echo "无";}else{echo $ustaff[$order['eid']];}?></span></td>-->
+				 <!--</tr>-->
 				<tr>
 				 <th>第三方支付订单ID：</th>
 				 <td>&nbsp;&nbsp;<span><?php echo $order['transaction_id']?></span></td>
@@ -102,15 +102,15 @@
 				     		<tr><th>退款时间：</th>
 							<td>&nbsp;&nbsp;<?php $refundtext = explode(";",$order['refundtext']); echo date("Y-m-d H:i:s",$refundtext[2]); ?>		</td></tr>
 					 <?php }?>
-				<tr><th>类型：</th>
-				<?php if($order['mchtype']==2){?>
-					<td>&nbsp;&nbsp;<span>平台代收</span></td>
-				<?php }elseif($order['mchtype']==3){?>
-					<td>&nbsp;&nbsp;<span>受理模式</span></td>
-				<?php }else{ ?>
-					<td>&nbsp;&nbsp;<span>普通</span></td>
-				<?php }?>
-				</tr>
+				<!--<tr><th>类型：</th>-->
+				<!--<?php if($order['mchtype']==2){?>-->
+					<!--<td>&nbsp;&nbsp;<span>平台代收</span></td>-->
+				<!--<?php }elseif($order['mchtype']==3){?>-->
+					<!--<td>&nbsp;&nbsp;<span>受理模式</span></td>-->
+				<!--<?php }else{ ?>-->
+					<!--<td>&nbsp;&nbsp;<span>普通</span></td>-->
+				<!--<?php }?>-->
+				<!--</tr>-->
 			   </tbody>
 			  </table>
 			  <div class="dashed-line"></div>

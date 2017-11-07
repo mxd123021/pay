@@ -21,15 +21,15 @@
                     <li <eq name="Think.const.CONTROLLER_NAME" value="Index"><neq name="Think.const.ACTION_NAME" value="index"> class="active" </neq></eq>>
                         <a href="#"><i class="fa fa-cog"></i> <span class="nav-label">系统配置</span></a>
                         <ul class="nav nav-second-level collapse <eq name="Think.const.CONTROLLER_NAME" value="Index"><neq name="Think.const.ACTION_NAME" value="index"> class="active" </neq></eq>">
-                            <if condition="in_array('sys_wz',session('SX_STAFF.grant'))">
-                                <li <eq name="Think.const.CONTROLLER_NAME" value="Index"><eq name="Think.const.ACTION_NAME" value="toConfig"> class="active" </eq></eq>><a href="{:U("SX/Index/toConfig")}">网站配置</a></li>
-                            </if>
-                            <if condition="in_array('sys_zf',session('SX_STAFF.grant'))">
-                                <li <eq name="Think.const.CONTROLLER_NAME" value="Index"><eq name="Think.const.ACTION_NAME" value="payConfig"> class="active" </eq></eq>><a href="{:U("SX/Index/payConfig")}">支付配置</a></li>
-                            </if>
-                            <if condition="in_array('sys_wx',session('SX_STAFF.grant'))">
-                                <li <eq name="Think.const.CONTROLLER_NAME" value="Index"><eq name="Think.const.ACTION_NAME" value="wxConfig"> class="active" </eq></eq>><a href="{:U("SX/Index/wxConfig")}">微信配置</a></li>
-                            </if>
+                            <!--<if condition="in_array('sys_wz',session('SX_STAFF.grant'))">-->
+                                <!--<li <eq name="Think.const.CONTROLLER_NAME" value="Index"><eq name="Think.const.ACTION_NAME" value="toConfig"> class="active" </eq></eq>><a href="{:U("SX/Index/toConfig")}">网站配置</a></li>-->
+                            <!--</if>-->
+                            <!--<if condition="in_array('sys_zf',session('SX_STAFF.grant'))">-->
+                                <!--<li <eq name="Think.const.CONTROLLER_NAME" value="Index"><eq name="Think.const.ACTION_NAME" value="payConfig"> class="active" </eq></eq>><a href="{:U("SX/Index/payConfig")}">支付配置</a></li>-->
+                            <!--</if>-->
+                            <!--<if condition="in_array('sys_wx',session('SX_STAFF.grant'))">-->
+                                <!--<li <eq name="Think.const.CONTROLLER_NAME" value="Index"><eq name="Think.const.ACTION_NAME" value="wxConfig"> class="active" </eq></eq>><a href="{:U("SX/Index/wxConfig")}">微信配置</a></li>-->
+                            <!--</if>-->
                             <if condition="in_array('sys_admin',session('SX_STAFF.grant'))">
                                 <li <php> if(ACTION_NAME == 'employers' or ACTION_NAME == 'roles') echo "class='active'"; </php>>
                                     <a href="index.html#">管理员配置<span class="fa arrow"></span></a>
@@ -62,19 +62,19 @@
                         </ul>
                     </li>
                 </if>
-                <if condition="in_array('market_ad',session('SX_STAFF.grant')) or in_array('market_re',session('SX_STAFF.grant'))">
-                    <li <eq name="Think.const.CONTROLLER_NAME" value="Market"> class="active" </eq>>
-                        <a href="#"><i class="fa fa-slideshare"></i> <span class="nav-label">营销功能</span><span class="label label-info pull-right">NEW</span></a>
-                        <ul class="nav nav-second-level collapse <eq name="Think.const.CONTROLLER_NAME" value="Market"> in </eq>">
-                            <if condition="in_array('market_ad',session('SX_STAFF.grant'))">
-                                <li <eq name="Think.const.CONTROLLER_NAME" value="Market"><eq name="Think.const.ACTION_NAME" value="wxmarket"> class="active" </eq></eq>><a href="{:U("SX/Market/wxmarket")}">微信广告</a></li>
-                            </if>
-<!--                            <if condition="in_array('market_re',session('SX_STAFF.grant'))">
-                                <li <eq name="Think.const.CONTROLLER_NAME" value="Market"><eq name="Think.const.ACTION_NAME" value="rlist"> class="active" </eq></eq>><a href="{:U("SX/Market/rlist")}">预约留言</a></li>
-                            </if>-->
-                        </ul>
-                    </li>
-                </if>
+                <!--<if condition="in_array('market_ad',session('SX_STAFF.grant')) or in_array('market_re',session('SX_STAFF.grant'))">-->
+                    <!--<li <eq name="Think.const.CONTROLLER_NAME" value="Market"> class="active" </eq>>-->
+                        <!--<a href="#"><i class="fa fa-slideshare"></i> <span class="nav-label">营销功能</span><span class="label label-info pull-right">NEW</span></a>-->
+                        <!--<ul class="nav nav-second-level collapse <eq name="Think.const.CONTROLLER_NAME" value="Market"> in </eq>">-->
+                            <!--<if condition="in_array('market_ad',session('SX_STAFF.grant'))">-->
+                                <!--<li <eq name="Think.const.CONTROLLER_NAME" value="Market"><eq name="Think.const.ACTION_NAME" value="wxmarket"> class="active" </eq></eq>><a href="{:U("SX/Market/wxmarket")}">微信广告</a></li>-->
+                            <!--</if>-->
+<!--&lt;!&ndash;                            <if condition="in_array('market_re',session('SX_STAFF.grant'))">-->
+                                <!--<li <eq name="Think.const.CONTROLLER_NAME" value="Market"><eq name="Think.const.ACTION_NAME" value="rlist"> class="active" </eq></eq>><a href="{:U("SX/Market/rlist")}">预约留言</a></li>-->
+                            <!--</if>&ndash;&gt;-->
+                        <!--</ul>-->
+                    <!--</li>-->
+                <!--</if>-->
                 <if condition="in_array('user_lists',session('SX_STAFF.grant'))">
                     <li <eq name="Think.const.CONTROLLER_NAME" value="Statistics"> class="active" </eq>>
                         <a href="#"><i class="fa fa-line-chart"></i> <span class="nav-label">数据统计</span></a>

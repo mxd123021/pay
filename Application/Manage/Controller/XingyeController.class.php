@@ -195,6 +195,7 @@ class XingyeController extends BaseController
                         ];
                         $this->ajaxReturn($return);
                     }
+                    Log::write('info==='.json_encode($info));
                     $payInfo = json_decode($info['r9_payinfo'],true);
                     $qrCode = new QrCode($payInfo['qrCode']);
 //                    $qrCode->writeFile(sprintf('%s/%s.png',DATA_PATH,$orderNumber));
