@@ -9,6 +9,7 @@ class RelationMerchantsModel extends BaseModel
 {
     use ShanghaiBankPayHelper;
     protected $fillable = [
+        'api_type',
         'user_id',
         'name',
         'bank_merchant_number',

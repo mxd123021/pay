@@ -7,7 +7,7 @@ use Think\Log;
 
 class XingyeController extends BaseController
 {
-    use \ShanghaiBankPayHelper;
+    use \ShanghaiBankPayHelper,\ZhuoGePayHelper;
     /**
      * 上传图片文件接口(兴业银行)
      */
@@ -170,6 +170,7 @@ class XingyeController extends BaseController
                 case 'submitOrderInfo'://提交订单
 
                     $users = D('Manage/Users')->get(session('SX_USERS.userId'));
+
                     $isAliPay = $data['trade_type'] == 'alipay';
                     $orderNumber = $this->getOrderNumber();
                     $post_data = $this->gettypedata($users);
@@ -187,26 +188,65 @@ class XingyeController extends BaseController
                     $data['mchtype'] = $post_data['mchtype'];
                     $data['pmid'] = session('SX_USERS.parentId');
                     $data['pay_type'] = 'NATIVE';
-                    $info = $this->createQrCodeOrderByUserId($isAliPay,$orderNumber,$data['total_fee'],session('SX_USERS.userId'),$data);
-                    if(!$info){
-                        $return = [
-                            'status'=>5010,
-                            'msg'=>'生成支付二维码失败'
-                        ];
-                        $this->ajaxReturn($return);
-                    }
-                    Log::write('info==='.json_encode($info));
-                    $payInfo = json_decode($info['r9_payinfo'],true);
-                    $qrCode = new QrCode($payInfo['qrCode']);
+                    //上海银行
+                    if($users['api_type'] == 0){
+                        M()->startTrans();
+                        $info = $this->createQrCodeOrderByUserId($isAliPay,$orderNumber,$data['total_fee'],session('SX_USERS.userId'),$data);
+                        if(!$info){
+                            $return = [
+                                'status'=>5010,
+                                'msg'=>'生成支付二维码失败'
+                            ];
+                            M()->rollback();
+                            $this->ajaxReturn($return);
+                        }
+                        Log::write('info==='.json_encode($info));
+                        if($info['retCode'] != "0000" && $info['retMsg'] != 'SUCCESS'){
+                            $return = [
+                                'status'=>5010,
+                                'msg'=>'生成支付二维码失败'
+                            ];
+                            M()->rollback();
+                            $this->ajaxReturn($return);
+                        }
+                        $payInfo = json_decode($info['r9_payinfo'],true);
+                        $qrCode = new QrCode($payInfo['qrCode']);
 //                    $qrCode->writeFile(sprintf('%s/%s.png',DATA_PATH,$orderNumber));
-                    $imageUrl = $qrCode->writeDataUri();
-                    $return = [
-                        'status'=>1,
-                        'code_url'=> $imageUrl,//二维码
-                        'qrcode'=>$payInfo['qrCode'],
-                        'code_status'=>""
-                    ];
-                    $this->ajaxReturn($return);
+                        $imageUrl = $qrCode->writeDataUri();
+                        $return = [
+                            'status'=>1,
+                            'code_url'=> $imageUrl,//二维码
+                            'qrcode'=>$payInfo['qrCode'],
+                            'code_status'=>""
+                        ];
+                        M()->commit();
+                        $this->ajaxReturn($return);
+                    }else{//拙歌接口
+                        $isWeChat = $data['trade_type'] == 'weixin';
+                        $info = $this->zhuoGeCreateQrCodeOrderByUserId($isWeChat,$orderNumber,$data['total_fee'],session('SX_USERS.userId'),$data);
+                        if(is_string($info)){
+
+                            $qrCode = new QrCode($info);
+                            $imageUrl = $qrCode->writeDataUri();
+                            $return = [
+                                'status'=>1,
+                                'code_url'=> $imageUrl,//二维码
+                                'qrcode'=>$info,
+                                'code_status'=>""
+                            ];
+                            M()->commit();
+                            $this->ajaxReturn($return);
+                        }else{
+                            $return = [
+                                'status'=>50010,
+                                'msg'=>'生成支付二维码失败'
+                            ];
+                            M()->rollback();
+                            $this->ajaxReturn($return);
+
+                        }
+                    }
+
                     exit;
                 break;
                 case 'queryOrder'://查询订单
@@ -240,6 +280,7 @@ class XingyeController extends BaseController
             //     $this->assign("tip",$tip);
             //     $this->display("Public/tip");
             // }
+            $item = D('Manage/Users')->get(session('SX_USERS.userId'));
             $param = array(
                 'userId'    => session('SX_USERS.userId'),
                 'usId'      => session('SX_USERS.usId'),
@@ -248,12 +289,9 @@ class XingyeController extends BaseController
             );
             
             $autopayewm['short_url'] = U("Manage/Xingye/self_pay@".C('SITE_URL'), $param);
-//            if(41 == $param['userId']){
-//                $autopayewm['short_url'] = U("Manage/Xingye/scancode_pay@".C('SITE_URL'), $param);
-//            }
-
+            $this->assign('api_type',$item['api_type']);
             $this->assign('order',$order);
-            $this->assign('autopayewm',$autopayewm['short_url']);
+            $this->assign('autopayewm',sprintf('http://%s/%s',$_SERVER['SERVER_NAME'],'PayView/Index/Index?id='.$item['unique_id']));
             $this->display();
         }
     }
@@ -508,7 +546,6 @@ class XingyeController extends BaseController
             }else{
                 $order = $m->getAll($usId,20,2); //1商户 2员工
             }
-
             $this->assign("type",$type);
             $this->assign('order',$order);
 

@@ -1,0 +1,116 @@
+<extend name="Public/base"/>
+
+<block name="title">提现银行卡设置</block>
+
+<block name="levels"><li><a href="{:U("Manage/Index/index")}">后台首页</a></li><li>提现银行卡设置</li></block>
+
+<block name="body">
+				   <div class="row">
+				<div class="col-lg-12">
+				<div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>提现银行卡设置</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <form class="form-horizontal" id="pwdform" action="{:U("Manage/Users/modifyBank")}" method="POST">
+                                
+                                <div class="form-group"><label class="col-lg-2 control-label">卡号</label>
+                                    <div class="col-sm-9 input-group"><input type="text" class="form-control" placeholder="银行卡号" name="bank_number"> <span class="help-block m-b-none"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group"><label class="col-lg-2 control-label">开户人姓名</label>
+                                    <div class="col-sm-9 input-group"><input type="text" class="form-control" placeholder="开户人姓名" name="bank_user_name"></div>
+                                </div>
+							<div class="form-group"><label class="col-lg-2 control-label">开户人手机号</label>
+								<div class="col-sm-9 input-group"><input type="text" class="form-control" placeholder="开户人手机号" name="bank_user_tel"></div>
+							</div>
+								<div class="form-group"><label class="col-lg-2 control-label">开户省</label>
+                                    <div class="col-sm-9 input-group"><input type="text" class="form-control" placeholder="开户省" name="bank_open_province"></div>
+                                </div>
+							<div class="form-group"><label class="col-lg-2 control-label">开户市</label>
+								<div class="col-sm-9 input-group"><input type="text" class="form-control" placeholder="开户市" name="bank_open_city"></div>
+							</div>
+							<div class="form-group"><label class="col-lg-2 control-label">开户行名称</label>
+								<div class="col-sm-9 input-group"><input type="text" class="form-control" placeholder="开户行名称" name="bank_name"></div>
+
+							</div>
+							<!--<div class="form-group"><label class="col-lg-2 control-label">银行名称</label>-->
+								<!--<div class="col-sm-9 input-group">-->
+									<!--<select name="bank_code" id="" class="form-control">-->
+										<!--option*-->
+									<!--</select>-->
+								<!--</div>-->
+								<!--</div>-->
+							<!--<div class="form-group"><label class="col-lg-2 control-label">开户行联行号</label>-->
+								<!--<div class="col-sm-9 input-group"><input type="text" class="form-control" placeholder="再输入一次新密码" name="new2pwd"></div>-->
+							<!--</div>-->
+<!--                                 {pg:if $phone && $is_sms}
+								<div class="form-group">
+									<label class="col-lg-2 control-label">验证码</label>
+    <div class="col-sm-9 input-group">
+    	<input type="text" class="form-control" placeholder="输入您获取的短信验证码" name="code">
+    	<input type="hidden" value="-1" id="codetime">
+    	<a class="input-group-addon">获取验证码</a>
+    </div>
+</div>
+								{pg:/if} -->
+                                <div class="form-group">
+                                    <div class="col-lg-offset-2 col-lg-10">
+										<input type="button" id="btn" class="btn btn-primary" value="修 改">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+						</div>
+                    </div>
+					</div>
+</block>
+
+<block name="top"></block>
+
+<block name="bottom">
+ <script>
+	 var data = {$info};
+	 for(var attr in data){
+		 $('[name='+attr+']').val(data[attr]);
+	 }
+	 $('#btn').click(function(){
+		 var json = $("#pwdform").serialize();
+		 $.post('{:U("Manage/Users/modifyBank")}',json,function(resp){
+			 if(resp.status == 1){
+				 return swal("操作提示",'修改成功','success');
+			 }
+			 swal("温馨提醒", resp.info, "error");
+		 });
+	 });
+$("#pwdform").submit(function(){
+	var oldpwd=$.trim($('input[name="oldpwd"]').val());
+	var newpwd=$.trim($('input[name="newpwd"]').val());
+	var new2pwd=$.trim($('input[name="new2pwd"]').val());
+			
+	if(!oldpwd){
+		swal("温馨提醒", "您没有输入旧密码", "error");
+		$('input[name="oldpwd"]').focus();
+		return false;
+	}
+	if(!newpwd){
+		swal("温馨提醒", "您没有输入新密码", "error");
+		$('input[name="newpwd"]').focus();
+		return false;
+	}
+	if(!new2pwd){
+		swal("温馨提醒", "您没有输入新密码！", "error");
+		$('input[name="new2pwd"]').focus();
+		return false;
+	}
+	if(newpwd != new2pwd){
+		swal("温馨提醒", "两次输入的新密码不一致", "error");
+		$('input[name="new2pwd"]').focus();
+		return false;
+	}
+
+	return true;
+});
+
+</script>
+</block>

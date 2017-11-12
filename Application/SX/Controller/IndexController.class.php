@@ -448,7 +448,10 @@ class IndexController extends BaseController {
         $rs = $r->rolesDel();
         $this->ajaxReturn($rs);
     }
-
+    //添加商户
+    public function showAddMerchant(){
+        $this->display('addMerchant');
+    }
     /**
      * 批量删除角色
      */
@@ -477,4 +480,6 @@ class IndexController extends BaseController {
         $this->assign('tip',$tip);
         $this->display("Public/tip");
     }
+
+
 }

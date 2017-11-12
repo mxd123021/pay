@@ -49,7 +49,8 @@
              <input type="text" name="cashier_value" class="js-cashier-value js-input" value="" placeholder="输入金额(至少0.01元)" style="margin-bottom: 20px;" /> 
              <a href="javascript:void(0)" class="btn btn-primary js-weixin-qrcode">生成微信二维码</a>
              <a href="javascript:void(0)" class="btn btn-success js-alipay-qrcode">生成支付宝二维码</a>
-            </div> 
+             <a href="javascript:void(0)" class="btn btn-success js-qq-qrcode">生成QQ二维码</a>
+            </div>
            </div> 
            <p class="gray tips fixed-tips"></p> 
           </form> 
@@ -312,6 +313,12 @@
 	<script src="__JS__/cashier/canvas2image.js"></script>
 	<script src="__JS__/cashier/commonfunc.js"></script>
     <script>
+		var apiType = {$api_type};
+		if(apiType == 1){
+			$('.js-alipay-qrcode').remove();
+		}else{
+			$('.js-qq-qrcode').remove();
+		}
 	//$('.qr-code-zone').qrcode("http://www.helloweba.com"); //任意字符串 
 	var qwidth=qheight=200;
 	if(is_mobile()){
@@ -351,6 +358,10 @@
 
 			$('.js-alipay-qrcode').click(function(){
 				getEwm('alipay');
+			});
+
+			$('.js-qq-qrcode').click(function(){
+				getEwm('qq');
 			});
 
 			$('.js-refresh-list').click(function(){

@@ -13,6 +13,8 @@
             <div class="ibox float-e-margins">
                 <div class="ibox-title clearfix">
                     <h1 class="realtime-title">商家信息列表&nbsp;&nbsp;(共：{$Page['total']} 条)</h1>
+                    <div class="row">
+                        <div class="col-lg-11">
                     <div class="input-group">
                         <input id="username" type="text" class="form-control" placeholder="输入商户名称"
                                value="{:I('username')}"> <span class="input-group-btn"> <button id="search"
@@ -20,6 +22,11 @@
                                                                                                 class="btn btn-primary">
                         搜索
                     </button> </span>
+                    </div>
+                        </div>
+                        <div class="col-lg-1">
+                            <button id="addMerchant" class="btn btn-primary pull-right">添加商户</button>
+                        </div>
                     </div>
                 </div>
 
@@ -90,19 +97,21 @@
                                                             }
                                                             ?>
                                                         </td>
-                                                        <td><a title="查看商户资料"
-                                                               href="{:U('SX/Users/auditdetail',array('id'=>$vo['userId']))}"
-                                                               target="_blank"><i style="font-size: 16px;"
-                                                                                  class="fa fa-edit text-navy"></i></a>&nbsp;&nbsp;
+                                                        <td>
+                                                            <!--<a title="查看商户资料"-->
+                                                               <!--href="{:U('SX/Users/auditdetail',array('id'=>$vo['userId']))}"-->
+                                                               <!--target="_blank"><i style="font-size: 16px;"-->
+                                                                                  <!--class="fa fa-edit text-navy"></i></a>-->
+                                                            &nbsp;&nbsp;
                                                             <a
                                                                 title="登陆商户"
                                                                 href="{:U('SX/Users/logining',array('id'=>$vo['userId']))}"
                                                                 target="_blank"><i style="font-size: 19px;"
-                                                                                   class="fa fa-sign-in text-navy"></i></a>&nbsp;&nbsp;
+                                                                                   class="fa fa-sign-in text-navy"></i><span class="label label-primary">登陆商户</span></a>&nbsp;&nbsp;
                                                             <a
                                                                     title="子商家管理"
                                                                     href="{:U('SX/RelationMerchant/getList',array('id'=>$vo['userId']))}"><i style="font-size: 19px;"
-                                                                                       class="fa fa-sign-in text-navy"></i></a>
+                                                                                       class="fa fa-edit text-navy"></i><span class="label label-primary">子商家管理</span></a>
                                                         </td>
                                                         <!--<a onclick="showtopup('{$vo['userName']}','{$vo['userId']}')" title="充值" href="javascript:;" target="_blank"><i style="font-size: 19px;" class="fa fa-money text-navy"></i></a>-->
                                                     </tr>
@@ -308,6 +317,8 @@
             });
 
         });
-
+        $('#addMerchant').click(function(){
+            window.location.href = '{:U("SX/Index/showAddMerchant")}';
+        });
     </script>
 </block>

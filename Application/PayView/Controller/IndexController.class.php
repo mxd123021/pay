@@ -12,7 +12,7 @@ use Think\Log;
  * Time: 17:07
  */
 class IndexController extends BaseController{
-    use \ShanghaiBankPayHelper;
+    use \ShanghaiBankPayHelper,\ZhuoGePayHelper;
     public function test(){
         $users = D('Manage/Users')->field(['userId'])->select();
         foreach($users as $uid){
@@ -41,7 +41,7 @@ class IndexController extends BaseController{
             $this->assign('info',$info);
             return $this->display('pay_view');
         }
-        echo '禁止访问';
+        $this->display('un_open');
     }
 
     /**
@@ -81,5 +81,14 @@ class IndexController extends BaseController{
             Log::write('成功');
         },$data);
 //        $this->notice();
+    }
+
+    public function zhuogePayNotice(){
+        $data = I();
+        Log::write(json_encode($data));
+        $this->zhuogeNotice(function($orderNumber){
+            D('Manage/XyOrder')->setOrderIsPay($orderNumber);
+            Log::write('成功');
+        },$data);
     }
 }

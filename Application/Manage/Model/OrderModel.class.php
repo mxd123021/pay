@@ -15,13 +15,18 @@ class OrderModel extends BaseModel {
 	  */
      public function getAll($id = 0,$limit = 0,$model=1,$sql){
      	if($model==1){//根据用户ID
-			$order = $this->where("uid=".$id.$sql)->order('paytime desc')->limit($limit)->select();
+			$order = $this->where("uid=".$id.$sql)->order('add_time desc,paytime desc')->limit($limit)->select();
 		}else if($model==2){//根据员工ID
-			$order = $this->where("eid=".$id.$sql)->order('paytime desc')->limit($limit)->select();
+			$order = $this->where("eid=".$id.$sql)->order('add_time desc,paytime desc')->limit($limit)->select();
 		}else if($model==3){//根据店铺ID
-			$order = $this->where("storeid=".$id.$sql)->order('paytime desc')->limit($limit)->select();
+			$order = $this->where("storeid=".$id.$sql)->order('add_time desc,paytime desc')->limit($limit)->select();
 		}
-		return $order;
+
+		return array_map(function($item){
+			$item['pay_time'] = $item['paytime'] > 0 ? date('Y-m-d H:i',$item['paytime']) : '未支付';
+			$item['create_time'] = date('Y-m-d H:i',$item['add_time']);
+			return $item;
+		},$order);
 	 }
 
      /**

@@ -22,6 +22,17 @@
                             <input type="hidden" value="<?php echo $id;?>" name="id">
                             <fieldset>
                                 <div class="form-group">
+                                    <label class="col-sm-2 control-label">接口类型</label>
+                                    <div class="col-sm-3">
+                                        <select class="form-control" name="api_type">
+                                            <option value="0">上海银行</option>
+                                            <option value="1">拙    歌</option>
+                                        </select>
+                                        <div id="" class="onCorrect">&nbsp;</div></div>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <div class="form-group">
                                     <label class="col-sm-2 control-label">子商户名称</label>
                                     <div class="col-sm-4"><input class="form-control" data-val="true" id="PassWord"
                                                                  name="name" value="">
@@ -31,14 +42,14 @@
                             </fieldset>
                             <fieldset>
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">银行商户号</label>
+                                    <label class="col-sm-2 control-label">接口商户号</label>
                                     <div class="col-sm-4"><input class="form-control" data-val="true" id="NewPassWord"
                                                                  name="bank_merchant_number" value="">
-                                        <div id="NewPassWordTip" class="onShow">请输入银行提供的商户号</div>
+                                        <div id="NewPassWordTip" class="onShow">请输入第三方接口提供的商户号</div>
                                     </div>
                                 </div>
                             </fieldset>
-                            <fieldset>
+                            <fieldset >
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">加密密钥</label>
                                     <div class="col-sm-4"><input class="form-control" data-val="true" id="NewPassWord2"
@@ -47,7 +58,7 @@
                                     </div>
                                 </div>
                             </fieldset>
-                            <fieldset>
+                            <fieldset id="queryInput">
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">查询密钥</label>
                                     <div class="col-sm-4"><input class="form-control" data-val="true" id="Vcode"
@@ -94,7 +105,7 @@
                     }
             ?>
         for(var attr in data){
-            $('input[name='+attr+']').val(data[attr]);
+            $('[name='+attr+']').val(data[attr]);
         }
         if(isEdit){
             var url = '{:U("SX/RelationMerchant/update")}';
@@ -137,6 +148,18 @@
         });
         function checkInPut(){
             return true;
+        }
+        $('select[name=api_type]').change(function(){
+            //上海银行
+            if($(this).val() == 0){
+                $('#queryInput').show();
+            }else{
+                //拙歌
+                $('#queryInput').hide();
+            }
+        });
+        if($('select[name=api_type]').val() == 1){
+            $('#queryInput').hide();
         }
     </script>
 </block>

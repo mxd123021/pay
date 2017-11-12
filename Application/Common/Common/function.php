@@ -6,6 +6,138 @@ header("Content-type: text/html; charset=utf-8");
 include 'HttpClient.class.php';//飞蛾云打印接口
 include 'print.class.php';//易联云打印接口
 
+//拙歌支付类
+trait ZhuoGePayHelper{
+    protected $zhuoGeApiUrl = 'http://newpay.shengshizhuoge.com';
+    protected $zhuoGeCallbackAction = 'PayView/Index/zhuogePayNotice';
+
+
+    protected function zhuogeWithdraw($bankData,$merchantNumber,$sign,$orderNumber,$money){
+        $url = sprintf('%s/%s',$this->zhuoGeApiUrl,'Api/Pay/withdraw');
+        $requestData = [
+            'mch_appid'=>$merchantNumber,
+            'mch_withdraw_number'=>$orderNumber,
+            'withdraw_type'=>'DF001',
+            'withdraw_money'=>(string)$money,
+            'notify_url'=>sprintf('http://%s',$_SERVER['SERVER_NAME']),
+//            'account_name'=>'周',
+//            'bank_card'=>'6212262003010353904',
+//            'open_province'=>'广东',
+//            'open_city'=>'汕头',
+//            'bank_code'=>'603',
+//            'account_tel'=>'15707545632',
+//            'bank_name'=>'不知道',
+//            'bank_linked'=>'不知道'
+        ];
+        $requestData = array_merge($bankData,$requestData);
+        $requestData['sign'] = $this->makeSignKey($requestData,$sign);
+        $request = new \GuzzleHttp\Client();
+        $body = (string)$request->request('post',$url,[
+            'form_params'=>$requestData
+        ])->getBody();
+        $response = json_decode($body,true);
+        if($response['retCode'] == 1000){
+            return true;
+        }
+        return $response['retMsg'];
+    }
+
+    /**
+     * 创建二维码订单
+     * @param $isAliPay
+     * @param $amount
+     * @param $uid
+     * @return mixed
+     */
+    protected function zhuoGeCreateQrCodeOrderByUserId($isWeChat,$orderNumber,$amount,$uid,$orderData){
+        if($isWeChat){
+            $type = 'wx';
+        }else{
+            $type = 'qq';
+        }
+        $item = D('Manage/Users')->getItemBankInfoById($uid);
+        $res = D('Manage/XyOrder')->addOrder($orderData);
+        if($res){
+            $amount = intval(round($amount * 100));
+            return $this->createZhuoGePayOrder($type,$amount,'扫码支付',$orderNumber,$item['bank_merchant_number'],$item['bank_sign_key']);
+        }
+        return false;
+    }
+    /**
+     * 通知
+     * @return string
+     */
+    public function zhuogeNotice($callback = '',$data)
+    {
+        //是否有订单号 && 商家号 && 状态值
+        if(isset($data['mch_order_number']) && isset($data['mch_appid']) && isset($data['order_status'])){
+            $merchantNumber = $data['mch_appid'];
+            //订单状态是否是成功
+            if(intval($data['order_status']) === 3){
+                if(is_callable($callback)){
+                    $callback($data['mch_order_number']);
+                }
+                echo 'success';
+                die();
+            }
+        }
+        echo 'fail';
+        die();
+    }
+    /**
+     * 获取订单字符串
+     * @return string
+     */
+    public function getZhuoGeOrderNumber(){
+        return sprintf('%s%s%s',date('YmdH'),microtime(true) * 10000,mt_rand(100000,999999));
+    }
+
+    /**
+     * 创建订单
+     * @param $type
+     * @param $money
+     * @param $orderName
+     * @param $oNumber
+     * @param $merchantNumber
+     * @param $sign
+     * @param string $pwd
+     * @return string
+     */
+    public function createZhuoGePayOrder($type,$money,$orderName,$oNumber,$merchantNumber,$sign,$pwd = ''){
+        $url = $this->getZhuoGePayApiUrl();
+        $requestData = [
+            'mch_appid'=>$merchantNumber,
+            'mch_order_number'=>$oNumber,
+            'pay_type'=>$type,
+            'pay_money'=>$money,
+            'order_desc'=>$orderName,
+            'notify_url'=>sprintf('http://%s/%s',$_SERVER['SERVER_NAME'],$this->zhuoGeCallbackAction),
+        ];
+        $requestData['sign'] = $this->makeSignKey($requestData,$sign);
+        $request = new \GuzzleHttp\Client();
+        $body = (string)$request->request('post',$url,[
+            'form_params'=>$requestData
+        ])->getBody();
+        $response = json_decode($body,true);
+        if($response['retCode'] == 1000){
+            return $response['payUrl'];
+        }
+        return false;
+    }
+
+
+    public function makeSignKey($data,$sign){
+        ksort($data);
+        return strtoupper(md5(urldecode(http_build_query($data)).$sign));
+    }
+
+    public function getZhuoGePayApiUrl(){
+        return sprintf('%s/%s',$this->zhuoGeApiUrl,'Api/Pay/getPayUrl');
+    }
+
+}
+
+
 trait ShanghaiBankPayHelper{
 
     protected $apiUrl = 'http://bosc.cardinfo.com.cn/middlepaytrx/';

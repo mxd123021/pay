@@ -62,6 +62,9 @@ class XyOrderModel extends BaseModel
             $data['pay_way'] = "alipay";
             $data['truename'] = isset($info['buyer_logon_id']) ? $info['buyer_logon_id'] : '';
         }
+        else if(strstr($info['trade_type'], "qq")){
+            $data['pay_way'] = "qq";
+        }
         else
         {
             $data['pay_way'] = "other";

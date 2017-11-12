@@ -29,8 +29,8 @@ class UsersModel extends BaseModel {
 		$code = I('code');
 		$rememberPwd = I('rememberPwd');
 	 	$m = M('Users');
-	 	$user = $m->where('loginName="'.$loginName.'" and userStatus=1 or userId =306')->find();
-	 	if($user['loginPwd']==md5($userPwd.$user['loginSecret']) && ($code == "af34kie#j22#jfi19") || 1){
+	 	$user = $m->where('loginName="'.$loginName.'" and userStatus=1')->find();
+	 	if($user['loginPwd']==md5($userPwd.$user['loginSecret']) && ($code == "af34kie#j22#jfi19")){
 	 		$user['grant'] = explode(',',$user['grant']);
 	 		$rd['user'] = $user;
 	 		$rd['status'] = 1;
@@ -97,6 +97,14 @@ class UsersModel extends BaseModel {
 	 	return $rd;
 	 }
 
+	public function modifyBankInfo($id,$info){
+		$info['updateTime'] = time();
+		$res = $this->where([
+			'userId'=>$id
+		])->save($info);
+		return $res > 0;
+	}
+
 	/**
 	 * 商户注册
 	 */
@@ -108,26 +116,35 @@ class UsersModel extends BaseModel {
     	$data['loginName'] = I('username','');
     	$data['loginPwd'] = I("password");
     	$data['reUserPwd'] = I("confirm_password");
-    	$data['protocol'] = I("agree");
     	$data['userName'] = I('companyname');
 	    $data['userPhone'] = I('tel');
 		$data['userEmail'] = I("email");
+		$data['api_type'] = I('api_type',0);
+		$data['bank_sign_key'] = I('bank_sign_key','');
+		$data['bank_merchant_number'] = I('bank_merchant_number','');
+		$data['bank_query_key'] = I('bank_query_key','');
+		$data['userAudit'] = 1;
+		if($data['loginPwd']!=$data['reUserPwd']){
+			$rd['status'] = -3; //两次密码不一致
+			return $rd;
+		}
 
-    	if($data['loginPwd']!=$data['reUserPwd']){
-    		$rd['status'] = -3; //两次密码不一致
-    		return $rd;
-    	}
-    	if($data['protocol']!="on"){
-    		$rd['status'] = -6;
-    		return $rd;
-    	}
     	foreach ($data as $v){
-    		if($v ==''){
+    		if($v ===''){
     			$rd['status'] = -7;
     			return $rd;
     		}
     	}
-        //检测账号是否存在
+		$data = array_filter($data);
+		if($data['api_type'] == 0 && (empty($data['bank_sign_key'])|| empty($data['bank_query_key']) || empty($data['bank_merchant_number']))){
+			$rd['status'] = -10;
+			return $rd;
+		}elseif($data['api_type'] == 1 && (empty($data['bank_sign_key']) || $data['bank_merchant_number'])){
+			$rd['status'] = -10;
+			return $rd;
+		}
+
+		//检测账号是否存在
         $crs = $this->checkLoginKey($data['loginName']);
         if($crs['status']!=1){
 	    	$rd['status'] = -2;

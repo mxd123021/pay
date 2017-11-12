@@ -95,13 +95,12 @@ class UsersModel extends BaseModel {
     	$data['userName'] = I('companyname');
 	    $data['userPhone'] = I('tel');
 		$data['userEmail'] = I("email");
-
+		$data['api_type'] = I('api_type',0);
+		$data['bank_sign_key'] = I('bank_sign_key','');
+		$data['bank_merchant_number'] = I('bank_merchant_number','');
+		$data['bank_query_key'] = I('bank_query_key','');
     	if($data['loginPwd']!=$data['reUserPwd']){
     		$rd['status'] = -3; //两次密码不一致
-    		return $rd;
-    	}
-    	if($data['protocol']!="on"){
-    		$rd['status'] = -6;
     		return $rd;
     	}
     	foreach ($data as $v){
@@ -143,17 +142,17 @@ class UsersModel extends BaseModel {
 		}
 	   
 	    if($rd['status']>0){
-	    	$data = array();
-	    	$data['lastTime'] = date('Y-m-d H:i:s');
-	    	$data['lastIP'] = get_client_ip();
-	    	$m->where(" userId=".$rs['userId'])->data($data)->save();
-	    	//记录登录日志
-		 	$data = array();
-			$data["userId"] = $rd['userId'];
-			$data["loginTime"] = date('Y-m-d H:i:s');
-			$data["loginIp"] = get_client_ip();
-			$m = M('log_user_logins');
-			$m->add($data);
+//	    	$data = array();
+//	    	$data['lastTime'] = date('Y-m-d H:i:s');
+//	    	$data['lastIP'] = get_client_ip();
+//	    	$m->where(" userId=".$rs['userId'])->data($data)->save();
+//	    	//记录登录日志
+//		 	$data = array();
+//			$data["userId"] = $rd['userId'];
+//			$data["loginTime"] = date('Y-m-d H:i:s');
+//			$data["loginIp"] = get_client_ip();
+//			$m = M('log_user_logins');
+//			$m->add($data);
 	    	
 	    } 
 		return $rd;

@@ -1,12 +1,70 @@
 <?php
 namespace Manage\Controller;
 class UsersController extends BaseController {
+
+    use \ZhuoGePayHelper;
+    public function showWithdraw(){
+        $this->display('withdraw');
+    }
+
+    public function withdraw(){
+        $u = D('Manage/Users');
+        $info = $u->get(session('SX_USERS.userId'));
+        $price = intval(round(I('price',0) * 100));
+        if(empty($info['bank_user_name']) || empty($info['bank_number']) || empty($info['bank_open_province']) || empty($info['bank_open_city']) || empty($info['bank_user_tel']) || empty($info['bank_name'])){
+            $this->ajaxReturn([
+                'info'=>'请先去完善提现银行卡信息'
+            ]);
+        }
+
+        $bankData = [
+            'account_name'=>$info['bank_user_name'],
+            'bank_card'=>$info['bank_number'],
+            'open_province'=>$info['bank_open_province'],
+            'open_city'=>$info['bank_open_city'],
+            'bank_code'=>'603',
+            'account_tel'=>$info['bank_user_tel'],
+            'bank_name'=>$info['bank_name'],
+            'bank_linked'=>'不知道'
+        ];
+        $res = $this->zhuogeWithdraw($bankData,$info['bank_merchant_number'],$info['bank_sign_key'],$this->getZhuoGeOrderNumber(),$price);
+        if($res === true){
+            $this->ajaxReturn([
+                'status'=>1
+            ]);
+        }
+        $this->ajaxReturn([
+            'info'=>$res
+        ]);
+    }
+
+    public function showSetBank(){
+        $u = D('Manage/Users');
+        $info = $u->get(session('SX_USERS.userId'));
+        $this->assign('info',json_encode($info));
+        $this->display('setBank');
+    }
     /**
      * 显示修改密码页面
      */
     public function modifypwd(){
         $this->isLogin();
         $this->display("modifypwd");
+    }
+
+    public function modifyBank(){
+        $u = D('Manage/Users');
+        $res = $u->modifyBankInfo(session('SX_USERS.userId'),I());
+        if($res === true){
+            $res = [
+                'status'=>1
+            ];
+        }else{
+            $res = [
+                'info'=>'修改失败'
+            ];
+        }
+        $this->ajaxReturn($res);
     }
 
     /**
@@ -145,13 +203,13 @@ class UsersController extends BaseController {
     }
 
     public function loginLog(){
-        $uid = $this->getUserId();
+        $uid = session('SX_USERS.userId');
         $m = M('log_user_logins');
         $list = $m->where(sprintf('userId=%d',$uid))->field([
             'loginTime',
             'loginIp',
-        ])->select();
-        $this->assign('items',$list);
+        ])->order('loginTime desc')->select();
+        $this->assign('list',$list);
         $this->display('loginLog');
     }
 

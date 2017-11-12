@@ -47,7 +47,8 @@
                                                             <input type="text" name="cashier_value" class="js-cashier-value js-input" value="" placeholder="输入金额(至少0.01元)" style="margin-bottom: 20px;" /> 
                                                             <a href="javascript:void(0)" class="btn btn-primary js-weixin-qrcode">生成微信二维码</a>
                                                             <a href="javascript:void(0)" class="btn btn-success js-alipay-qrcode">生成支付宝二维码</a>
-                                                        </div> 
+                                                            <a href="javascript:void(0)" class="btn btn-success js-qq-qrcode">生成QQ二维码</a>
+                                                        </div>
                                                     </div> 
                                                     <p class="gray tips fixed-tips"></p> 
                                                 </form> 
@@ -96,7 +97,8 @@
                         <thead class="js-list-header-region tableFloatingHeaderOriginal">
                             <tr class="widget-list-header">
                                 <th>订单号</th>
-                                <th  data-hide="phone">付款人</th> 
+                                <th>添加时间</th>
+                                <th  data-hide="phone">付款人</th>
                                 <th  data-hide="phone">付款时间</th>
                                 <th  data-hide="phone">付款金额(元)</th>
                                
@@ -111,7 +113,8 @@
                 foreach($order as $ovv){
             ?>
             <tr class="widget-list-item">
-                <td><?php echo $ovv['order_id'];?></td> 
+                <td><?php echo $ovv['order_id'];?></td>
+                <td><?php echo $ovv['create_time'];?></td>
                 <td><?php if(!empty($ovv['nickname'])){
                         echo $ovv['nickname'];
                         }elseif(!empty($ovv['truename'])){
@@ -122,7 +125,7 @@
                 echo '未知客户';
             }?></td> 
 
-            <td><?php $paytime=$ovv['paytime'] > 0 ? $ovv['paytime'] : $ovv['add_time']; echo date('Y-m-d H:i:s',$paytime);?></td> 
+            <td><?php echo $ovv['pay_time']; ?></td>
             <td><?php echo $ovv['goods_price'];?></td>
             <td><img src="__IMG__/pay_icon/{$ovv.pay_way}.png" height="20">-
                 <?php
@@ -316,6 +319,12 @@
     <script src="__JS__/cashier/canvas2image.js"></script>
     <script src="__JS__/cashier/commonfunc.js"></script>
     <script>
+        var apiType = {$api_type};
+        if(apiType == 1){
+            $('.js-alipay-qrcode').remove();
+        }else{
+            $('.js-qq-qrcode').remove();
+        }
     //$('.qr-code-zone').qrcode("http://www.helloweba.com"); //任意字符串 
     var qwidth=qheight=200;
     if(is_mobile()){
@@ -356,7 +365,9 @@
             $('.js-alipay-qrcode').click(function(){
                 getEwm('alipay');
             });
-
+            $('.js-qq-qrcode').click(function(){
+                getEwm('qq');
+            });
             $('.js-refresh-list').click(function(){
                 if(is_mobile()){
                   window.location.reload();
@@ -375,13 +386,14 @@
                             $.each(res.data,function(kk,vv){
                                datahtml+='<tr class="widget-list-item">';
                                datahtml+='<td>'+vv.order_id+'</td>';
+                               datahtml+='<td>'+vv.create_time+'</td>';
                                if(vv.truename == ""){
                                 datahtml+='<td>未知客户</td>';
                                }else{
                                 datahtml+='<td>'+vv.truename+'</td>';
                                }
 //                               datahtml+='<td>'+vv.mch_id+'</td>';
-                               datahtml+='<td id="datas">'+getLocalTime(vv.paytime)+'</td>';
+                               datahtml+='<td id="datas">' + vv.pay_time +'</td>';
                                datahtml+='<td>'+vv.goods_price+'</td><td>';
                                 datahtml+='<img src="'+IMGSRC+'/pay_icon/'+vv.pay_way+'.png" height="20">-';
                                if(vv.pay_type == "NATIVE"){
@@ -389,7 +401,7 @@
                                }else if(vv.pay_type=="MICROPAY"){
                                   datahtml+='刷卡';
                                }else if(vv.pay_type=="JSAPI"){
-                                  datahtml+='自助';   
+                                  datahtml+='自助';
                                }
                                datahtml+= '</td><td>';
                                if(vv.refund == 1){
@@ -438,6 +450,7 @@
          thismoney=postdata.tprice;
          topost=false;
          $.post('{:U("Manage/Xingye/ewmpay")}',postdata,function(ret){
+             $('.js-refresh-list').click();
             topost=true;
             if(ret.status == 1){
                 $("#qr-code-zone").html('').css('background-color','#FFF').qrcode({ 
@@ -580,7 +593,9 @@
     
     
     }
-    
+        setInterval(function(){
+            $('.js-refresh-list').click();
+        },5000);
     </script>
   <script src="__JS__/cashier/lhsw.js"></script>
 </block>

@@ -23,6 +23,8 @@
         $(function() {
             FastClick.attach(document.body);
         });
+        var isShangHaiBank = 1;
+
 
         function getQueryStringArgs(url) {
             // 取得查询字符串并去掉开头的问号
@@ -46,7 +48,7 @@
                 }
             }
             return args;
-        };
+        }
 
         // 判断软件来源
         function IsWeixinOrAlipay() {
@@ -55,9 +57,15 @@
             if (ua.match(/MicroMessenger/i) == 'micromessenger') {
                 return "WeiXIN";
             }
-            //判断是不是支付宝
-            if (ua.match(/AlipayClient/i) == 'alipayclient') {
-                return "Alipay";
+            if(isShangHaiBank){
+                //判断是不是支付宝
+                if (ua.match(/AlipayClient/i) == 'alipayclient') {
+                    return "Alipay";
+                }
+            }
+            //QQ
+            if(isShangHaiBank == 0 && ua.indexOf('mqqbrowser')){
+                return 'QQ';
             }
             //哪个都不是
             return 'WeiXIN';

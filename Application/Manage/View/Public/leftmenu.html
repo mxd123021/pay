@@ -26,6 +26,12 @@
 	                    <a href="#"><i class="fa fa-gears"></i> <span class="nav-label">商家设置</span></a>
 	                    <ul class="nav nav-second-level collapse <eq name="Think.const.CONTROLLER_NAME" value="Users"><neq name="Think.const.ACTION_NAME" value="index"> in </neq></eq>">
 					<if condition="empty($usId)">
+						<li <eq name="Think.const.CONTROLLER_NAME" value="Users"><eq name="Think.const.ACTION_NAME" value="showSetBank"> class="active" </eq></eq>><a href="{:U("Manage/Users/showSetBank")}">提现银行卡设置</a></li>
+					</if>
+					<if condition="empty($usId)">
+						<li <eq name="Think.const.CONTROLLER_NAME" value="Users"><eq name="Think.const.ACTION_NAME" value="showWithdraw"> class="active" </eq></eq>><a href="{:U("Manage/Users/showWithdraw")}">提现</a></li>
+					</if>
+					<if condition="empty($usId)">
 						<li <eq name="Think.const.CONTROLLER_NAME" value="Users"><eq name="Think.const.ACTION_NAME" value="loginLog"> class="active" </eq></eq>><a href="{:U("Manage/Users/loginLog")}">登陆日志</a></li>
 					</if>
 	                    	<!--<if condition="empty($usId)">-->

@@ -1,6 +1,48 @@
 <?php
 namespace SX\Controller;
 class UsersController extends BaseController {
+
+    /**
+     * 添加新用户
+     */
+    public function addUser(){
+        $m = D('Manage/Users');
+        $res = $m->regist();
+        if($res['userId']>0){//注册成功
+
+        }
+        $tip['url'] = U("Manage/Index/register/tgId/".I("tgId",0));
+        switch($res['status']){
+            case 1:
+                $tip['info'] = "添加成功";
+                $tip['status'] = 1;
+                $tip['url'] = U("Index/index");
+                break;
+            case -1:
+                $tip['info'] = "添加失败";
+                break;
+            case -2:
+                $tip['info'] = "该账号已存在";
+                break;
+            case -3:
+                $tip['info'] = "两次密码不一致";
+                break;
+            case -4:
+                $tip['info'] = "非法操作";
+                break;
+            case -7:
+                $tip['info'] = "请完善所有资料";
+                break;
+            case -8:
+                $tip['info'] = "手机号码已存在";
+                break;
+            case -10:
+                $tip['info'] = '请完善接口信息';
+                break;
+        }
+      $this->ajaxReturn($tip);
+    }
+
 	/**
 	 * 显示后台首页
 	 */
