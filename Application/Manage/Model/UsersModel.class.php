@@ -119,7 +119,7 @@ class UsersModel extends BaseModel {
     	$data['userName'] = I('companyname');
 	    $data['userPhone'] = I('tel');
 		$data['userEmail'] = I("email");
-		$data['api_type'] = I('api_type',0);
+		$data['api_type'] = I('api_type');
 		$data['bank_sign_key'] = I('bank_sign_key','');
 		$data['bank_merchant_number'] = I('bank_merchant_number','');
 		$data['bank_query_key'] = I('bank_query_key','');
@@ -128,9 +128,11 @@ class UsersModel extends BaseModel {
 			$rd['status'] = -3; //两次密码不一致
 			return $rd;
 		}
-
-    	foreach ($data as $v){
-    		if($v ===''){
+		if($data['api_type'] == 1){
+			unset($data['bank_query_key']);
+		}
+    	foreach ($data as $k=>$v){
+    		if($v ==='' && $k != 'bank_query_key'){
     			$rd['status'] = -7;
     			return $rd;
     		}
@@ -139,7 +141,7 @@ class UsersModel extends BaseModel {
 		if($data['api_type'] == 0 && (empty($data['bank_sign_key'])|| empty($data['bank_query_key']) || empty($data['bank_merchant_number']))){
 			$rd['status'] = -10;
 			return $rd;
-		}elseif($data['api_type'] == 1 && (empty($data['bank_sign_key']) || $data['bank_merchant_number'])){
+		}elseif($data['api_type'] == 1 && (empty($data['bank_sign_key']) || empty($data['bank_merchant_number']))){
 			$rd['status'] = -10;
 			return $rd;
 		}
