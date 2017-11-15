@@ -3,11 +3,42 @@ namespace Manage\Controller;
 class UsersController extends BaseController {
 
     use \ZhuoGePayHelper;
+    //显示提现页面
     public function showWithdraw(){
+        $uid = getManageUserId();
+        $info = D('Manage/WithdrawRecord')->getToDayCountInfo($uid);
+        $this->assign('info',$info);
         $this->display('withdraw');
     }
 
+    /**
+     * 获取提现记录
+     */
+    public function withdrawRecordList(){
+//        dump(D('Manage/WithdrawRecord')->addItem(session('SX_USERS.userId'),[
+//            'local_order_number'=>time(),
+//            'remote_order_number'=>time(),
+//            'withdraw_price'=>1000,
+//            'withdraw_processing_fee'=>100,
+//            'withdraw_start_time'=>time(),
+//            'withdraw_receive_time'=>time()+20,
+//            'status'=>0
+//        ]));
+//        exit();
+//        exit(session('SX_USERS.userId'));
+        $list = D('Manage/WithdrawRecord')->getAll(session('SX_USERS.userId'));
+        $this->assign('list',json_encode($list));
+        $this->display("withdrawRecordList");
+    }
+
+    //提现
     public function withdraw(){
+        $hours = date('H');
+        if($hours < 8 || $hours > 22){
+            $this->ajaxReturn([
+                'info'=>'只能在 08:00 - 22:00 的时间内提现'
+            ]);
+        }
         $u = D('Manage/Users');
         $info = $u->get(session('SX_USERS.userId'));
         $price = intval(round(I('price',0) * 100));
@@ -16,7 +47,14 @@ class UsersController extends BaseController {
                 'info'=>'请先去完善提现银行卡信息'
             ]);
         }
-
+        $uid = getManageUserId();
+        $info = D('Manage/WithdrawRecord')->getToDayCountInfo($uid);
+        $maxPrice = intval(round($info['price'] * 100));
+        if($maxPrice < $price){
+            $this->ajaxReturn([
+                'info'=>'非法金额'
+            ]);
+        }
         $bankData = [
             'account_name'=>$info['bank_user_name'],
             'bank_card'=>$info['bank_number'],
@@ -27,12 +65,27 @@ class UsersController extends BaseController {
             'bank_name'=>$info['bank_name'],
             'bank_linked'=>'不知道'
         ];
-        $res = $this->zhuogeWithdraw($bankData,$info['bank_merchant_number'],$info['bank_sign_key'],$this->getZhuoGeOrderNumber(),$price);
+        M()->startTrans();
+        $orderNumber = $this->getZhuoGeOrderNumber();
+        $logData = [
+            'bank_name'=>$info['bank_name'],
+            'bank_open_city'=>$info['bank_open_city'],
+            'bank_open_province'=>$info['bank_open_province'],
+            'bank_user_name'=>$info['bank_user_name'],
+            'bank_card_number'=>$info['bank_number'],
+            'local_order_number'=>$orderNumber,
+            'withdraw_price'=>$price,
+            'withdraw_start_time'=>time(),
+        ];
+        D('Manage/WithdrawRecord')->addItem($uid,$logData);
+        $res = $this->zhuogeWithdraw($bankData,$info['bank_merchant_number'],$info['bank_sign_key'],$orderNumber,$price);
         if($res === true){
+            M()->commit();
             $this->ajaxReturn([
                 'status'=>1
             ]);
         }
+        M()->rollback();
         $this->ajaxReturn([
             'info'=>$res
         ]);

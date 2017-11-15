@@ -3,6 +3,13 @@ namespace Manage\Controller;
 use Think\Controller;
 class BaseController extends Controller {
 
+    public function __construct(){
+        parent::__construct();
+        if(ACTION_NAME != 'toLogin' && ACTION_NAME != 'login'){
+            $this->isLogin();
+        }
+    }
+
     /**
      * 用户id
      * @return mixed|null

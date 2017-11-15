@@ -6,6 +6,19 @@ header("Content-type: text/html; charset=utf-8");
 include 'HttpClient.class.php';//飞蛾云打印接口
 include 'print.class.php';//易联云打印接口
 
+
+function getManageUserId(){
+    return session('SX_USERS.userId');
+}
+
+/**
+ * 转换整型数据为小数型数据
+ * @param $price
+ * @return float
+ */
+function transformIntPriceToFloat($price){
+    return round($price / 100,2);
+}
 //拙歌支付类
 trait ZhuoGePayHelper{
     protected $zhuoGeApiUrl = 'http://newpay.shengshizhuoge.com';
@@ -56,6 +69,7 @@ trait ZhuoGePayHelper{
             $type = 'qq';
         }
         $item = D('Manage/Users')->getItemBankInfoById($uid);
+        $orderData['order_type'] = 1;
         $res = D('Manage/XyOrder')->addOrder($orderData);
         if($res){
             $amount = intval(round($amount * 100));

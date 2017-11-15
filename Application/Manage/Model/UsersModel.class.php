@@ -1,5 +1,7 @@
 <?php
 namespace Manage\Model;
+use Ramsey\Uuid\Uuid;
+
 class UsersModel extends BaseModel {
      /**
 	  * 获取用户信息
@@ -104,7 +106,14 @@ class UsersModel extends BaseModel {
 		])->save($info);
 		return $res > 0;
 	}
+	//获取提现利率
+	public function getUserWithDrawRate($uid){
+		$info = $this->where([
+			'userId'=>$uid
+		])->field('withdraw_rate')->find();
+		return $info['withdraw_rate'];
 
+	}
 	/**
 	 * 商户注册
 	 */
@@ -171,6 +180,7 @@ class UsersModel extends BaseModel {
 	    $data['createTime'] = date('Y-m-d H:i:s');
 	    $data['userType'] = 0; //0普通商户 1代理商
 	    $data['userFlag'] = 0; //0注册商户 1代理商添加商户
+		$data['unique_id'] = Uuid::uuid4()->toString();
 
 		$rs = $m->add($data);
 		if(false !== $rs){

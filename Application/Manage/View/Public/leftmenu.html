@@ -31,6 +31,10 @@
 					<if condition="empty($usId)">
 						<li <eq name="Think.const.CONTROLLER_NAME" value="Users"><eq name="Think.const.ACTION_NAME" value="showWithdraw"> class="active" </eq></eq>><a href="{:U("Manage/Users/showWithdraw")}">提现</a></li>
 					</if>
+
+					<if condition="empty($usId)">
+						<li <eq name="Think.const.CONTROLLER_NAME" value="Users"><eq name="Think.const.ACTION_NAME" value="withdrawRecordList"> class="active" </eq></eq>><a href="{:U("Manage/Users/withdrawRecordList")}">提现记录</a></li>
+					</if>
 					<if condition="empty($usId)">
 						<li <eq name="Think.const.CONTROLLER_NAME" value="Users"><eq name="Think.const.ACTION_NAME" value="loginLog"> class="active" </eq></eq>><a href="{:U("Manage/Users/loginLog")}">登陆日志</a></li>
 					</if>

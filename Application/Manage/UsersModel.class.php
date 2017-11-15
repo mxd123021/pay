@@ -80,6 +80,12 @@ class UsersModel extends BaseModel {
 	 	return $rd;
 	 }
 
+	public function getUserWithDrawRate($uid){
+		$info = $this->where([
+			'userId'=>$uid
+		])->field('withdraw_rate')->find();
+	}
+
 	/**
 	 * 商户注册
 	 */

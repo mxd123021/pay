@@ -171,7 +171,8 @@ class RelationMerchantsModel extends BaseModel
      */
     public function getRandomMerchantInfoByUserId($id){
         $item = $this->where([
-            'user_id'=>$id
+            'user_id'=>$id,
+            'api_type'=>0
         ])->order('rand()')->field(['unique_id','name'])->find();
         return $item;
     }

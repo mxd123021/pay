@@ -46,17 +46,7 @@ class StatisticsController extends BaseController {
                     $stime = strtotime(date('Y-m-d'));
                     $etime = strtotime(date('Y-m-d',strtotime('+1days')));
                 }
-//                $stime = $stime != 0 ? strtotime($stime) : strtotime(date('Y-m-d'));
-//                $endtime = $etime != 0 ? $etime : date('Y-m-d');
-//                $etime = $etime != 0 ? strtotime("+1days", strtotime($etime)) : strtotime(date('Y-m-d',strtotime('+1days')));
-                
-                
-//                $stime += strtotime($shour);
-//                $etime += strtotime($ehour);
-//                $starttime = $stime != 0 ? $stime : date('Y-m-d',strtotime('-6days'));
-//                $stime = $stime != 0 ? strtotime($stime) : strtotime(date('Y-m-d',strtotime('-6days')));
-//                $endtime = $etime != 0 ? $etime : date('Y-m-d');
-//                $etime = $etime != 0 ? strtotime("+1days", strtotime($etime)) : strtotime(date('Y-m-d',strtotime('+1days')));
+
                 break;
         }
         $sql = " and paytime >= ".$stime." and paytime <= ".$etime;

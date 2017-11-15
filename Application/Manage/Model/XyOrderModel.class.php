@@ -47,6 +47,7 @@ class XyOrderModel extends BaseModel
         }
         
         $data = array();
+        $data['order_type'] =  isset($info['order_type']) ? $info['order_type'] : 0; //商户UID
         $data['order_id'] = $info['out_trade_no'];
         $data['uid'] = empty($info['uid']) ? 0 : $info['uid']; //商户UID
         $data['eid'] = empty($info['eid']) ? 0 : $info['eid']; //员工添加则有员工ID

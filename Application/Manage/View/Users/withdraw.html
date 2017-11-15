@@ -6,6 +6,12 @@
 
 <block name="body">
 				   <div class="row">
+					   <div class="col-lg-12">
+						   <div class="f-l pr-30 pb-20" style="height: 32px;" id="tongji">
+							   总可提现金额：<font color="red">{$info['all_money']}</font> 元，
+							   当前可提现金额：<font color="red">{$info['price']}</font>
+						   </div>
+					   </div>
 				<div class="col-lg-12">
 				<div class="ibox float-e-margins">
                         <div class="ibox-title">
@@ -34,11 +40,15 @@
 
 <block name="bottom">
  <script>
+	 var maxMoney = {$info['price']};
 	 $('#btn').click(function(){
 		 var reg = /(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/;
 		 var money = $('[name=price]').val();
 		 if (!reg.test(money)) {
 			 return swal('操作提示','金额有误','error');
+		 }
+		 if(money > maxMoney){
+			 return swal('操作提示','提现金额不能大于'+maxMoney + '元','error');
 		 }
 		 var json = $("#pwdform").serialize();
 		 $.post('{:U("Manage/Users/withdraw")}',json,function(resp){
@@ -48,34 +58,6 @@
 			 swal("温馨提醒", resp.info, "error");
 		 });
 	 });
-$("#pwdform").submit(function(){
-	var oldpwd=$.trim($('input[name="oldpwd"]').val());
-	var newpwd=$.trim($('input[name="newpwd"]').val());
-	var new2pwd=$.trim($('input[name="new2pwd"]').val());
-			
-	if(!oldpwd){
-		swal("温馨提醒", "您没有输入旧密码", "error");
-		$('input[name="oldpwd"]').focus();
-		return false;
-	}
-	if(!newpwd){
-		swal("温馨提醒", "您没有输入新密码", "error");
-		$('input[name="newpwd"]').focus();
-		return false;
-	}
-	if(!new2pwd){
-		swal("温馨提醒", "您没有输入新密码！", "error");
-		$('input[name="new2pwd"]').focus();
-		return false;
-	}
-	if(newpwd != new2pwd){
-		swal("温馨提醒", "两次输入的新密码不一致", "error");
-		$('input[name="new2pwd"]').focus();
-		return false;
-	}
-
-	return true;
-});
 
 </script>
 </block>
