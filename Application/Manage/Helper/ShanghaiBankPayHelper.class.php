@@ -8,9 +8,6 @@ namespace Manage\Helper;
  */
 trait ShanghaiBankPayHelper{
 
-
-
-
     /**
      * 创建支付订单
      * @param $orderType 支付类型

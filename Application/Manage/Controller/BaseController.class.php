@@ -3,9 +3,9 @@ namespace Manage\Controller;
 use Think\Controller;
 class BaseController extends Controller {
 
-    public function __construct(){
+    public function __construct($type = 0){
         parent::__construct();
-        if(ACTION_NAME != 'toLogin' && ACTION_NAME != 'login'){
+        if($type == 0 && ACTION_NAME != 'toLogin' && ACTION_NAME != 'login'){
             $this->isLogin();
         }
     }

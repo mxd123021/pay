@@ -3,6 +3,32 @@ namespace Manage\Model;
 use Ramsey\Uuid\Uuid;
 
 class UsersModel extends BaseModel {
+
+	/**
+	 * 根据唯一标识获取用户
+	 * @param $uid
+	 * @return mixed
+	 */
+	public function getUserByUniqueId($uid){
+		return $this->where([
+			'unique_id'=>$uid,
+		])->find();
+	}
+
+	/**
+	 * 修改提现费率
+	 * @param $uid
+	 * @param $rate
+	 * @return bool
+	 */
+	public function modifyWithDrawRate($uid,$rate){
+		return (bool)$this->where([
+			'userId'=>$uid
+		])->save([
+			'updateTime'=>time(),
+			'withdraw_rate'=>$rate
+		]);
+	}
      /**
 	  * 获取用户信息
 	  */
@@ -112,7 +138,6 @@ class UsersModel extends BaseModel {
 			'userId'=>$uid
 		])->field('withdraw_rate')->find();
 		return $info['withdraw_rate'];
-
 	}
 	/**
 	 * 商户注册

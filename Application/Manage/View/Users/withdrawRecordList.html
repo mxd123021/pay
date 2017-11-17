@@ -26,13 +26,13 @@
 				       			</li>
 				       		</ul>
                                                 <ul class="pull-left" style="height: 28px; padding: 0;">
-                                                                <li>
-                                                                    <select name="paytype" id="paytype" class="form-control" onchange="">
-                                                                        <option value="0" data-cname="全部类型" <?php if($paytype == 0){?>selected="selected"<?php }?>>全部类型</option>
-                                                                            <option value="1" data-cname="微信支付"  <?php if($paytype == 1){?>selected="selected"<?php }?>>微信支付</option>
-                                                                            <option value="2" data-cname="支付宝支付"  <?php if($paytype == 2){?>selected="selected"<?php }?>>支付宝支付</option>
-                                                                       </select>
-                                                                </li>
+                                                                <!--<li>-->
+                                                                    <!--<select name="paytype" id="paytype" class="form-control" onchange="">-->
+                                                                        <!--<option value="0" data-cname="全部类型" <?php if($paytype == 0){?>selected="selected"<?php }?>>全部类型</option>-->
+                                                                            <!--<option value="1" data-cname="微信支付"  <?php if($paytype == 1){?>selected="selected"<?php }?>>微信支付</option>-->
+                                                                            <!--<option value="2" data-cname="支付宝支付"  <?php if($paytype == 2){?>selected="selected"<?php }?>>支付宝支付</option>-->
+                                                                       <!--</select>-->
+                                                                <!--</li>-->
                                                                 </ul>
 					        <ul class="pull-right" style="height: 30px;">
 						        <li>
@@ -117,7 +117,7 @@
 					        </ul>
 				       </div> 
                                             <div>
-                                                <div class="realtime-title">收款情况</div>               
+                                                <div class="realtime-title"></div>
                                                 <div class="realtime-title " id="totalMoney" name="totalMoney">  <?php if($totalMoney != 0){ echo '：'.$totalMoney.'元('.$totalNum.'笔) | ';  }?></div>
                                                 <div class="realtime-title " id="weixinMoney" name="weixinMoney">  <?php if($weixinMoney != 0){echo ' 微信：'.$weixinMoney.'元('.$weixinNum.'笔) | '; }?></div>
                                                 <div class="realtime-title " id="alipayMoney" name="alipayMoney">  <?php if($alipayMoney != 0){echo ' 支付宝：'.$alipayMoney.'元('.$alipayNum.'笔) | '; }?></div>
@@ -259,8 +259,9 @@
         data: a,
         datatype: "local",
         height: "100%",
-        footerrow:true, 
-        autowidth: true,
+        footerrow:true,
+		loadui: "Disable",
+		autowidth: true,
         shrinkToFit: true,
         rowNum: 30,
         rowList: [10, 20, 30],
@@ -295,7 +296,8 @@
 		}],
         pager: "#pager_list_1",
         viewrecords: true,
-        caption: "提现记录",
+        caption: "总提现金额:<span style='color: red'>{$info['withdraw_price']}" +
+		"</span>元，总提现手续费:<span style='color: red'>{$info['withdraw_processing_fee']}元</span>",
         hidegrid: false,
         gridComplete:function(){
         	var rowNum=parseInt($(this).getGridParam("records"),10);
@@ -318,9 +320,9 @@
 });
 
  	function datebtn(type){
-                var mendian = $("#mendian").val();
-                var paytype = $("#paytype").val();
- 		window.location.href="{:U('Manage/Statistics/orderLists')}?datetype="+type+"&mendian="+mendian+"&paytype="+paytype;
+		var mendian = $("#mendian").val();
+		var paytype = $("#paytype").val();
+ 		window.location.href="{:U('Manage/Users/withdrawRecordList')}?datetype="+type+"&paytype="+paytype;
  	}
 
 	var timeoutHnd;

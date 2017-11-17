@@ -2,6 +2,21 @@
 namespace SX\Controller;
 class UsersController extends BaseController {
 
+    //修改提现费率
+    public function modifyWithDraw(){
+        $uid = I('userId',0);
+        $rate = I('rate',0,'floatval');
+        if($rate < 0){
+            $this->setResponseCode(412)->makeResponse('提现费率不能小于0');
+        }
+        $m = D('Manage/Users');
+        $res = $m->modifyWithDrawRate($uid,$rate);
+        if($res){
+            $this->makeResponse('ok');
+        }
+        $this->setResponseCode(412)->makeResponse('修改失败');
+    }
+
     /**
      * 添加新用户
      */
