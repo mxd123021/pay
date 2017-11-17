@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<!-- <html lang="en"> -->
+<html style="background: #f5f5f5;">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- 清除缓存 S -->
+    <META HTTP-EQUIV="pragma" CONTENT="no-cache">
+    <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate">
+    <META HTTP-EQUIV="expires" CONTENT="0">
+    <!-- 清除缓存 E -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <link rel="stylesheet" type="text/css" href="__CSS__/base.css">
+    <link rel="stylesheet" type="text/css" href="__CSS__/index.css?v=1.0.2.00">
+    <link rel="stylesheet" type="text/css" href="https://pm-debug.dzsh.net/test/js/tools/dialog/dialog.css">
+    <script src="https://cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
+    <script src="__JS__/fastclick/fastclick.js"></script>
+    <!-- 判断是微信还是支付宝 -->
+    <script>
+        // 调用FastClick.attach()
+        $(function() {
+            FastClick.attach(document.body);
+        });
+        var isShangHaiBank = 1;
+
+
+        function getQueryStringArgs(url) {
+            // 取得查询字符串并去掉开头的问号
+            var qs = location.search.length > 0 ? location.search.substring(1) : "";
+            if (url) {
+                qs = url.substring(url.indexOf('?') + '?'.length);
+            }
+            var args = {};
+            // 取得每一项
+            var items = qs.length ? qs.split("&") : [];
+            var item = null,
+                    name = null,
+                    value = null;
+            // 逐个将每一项新增到args对象中
+            for (var i = 0; i < items.length; i++) {
+                item = items[i].split("=");
+                name = decodeURIComponent(item[0]);
+                value = decodeURIComponent(item[1]);
+                if (name.length) {
+                    args[name] = value;
+                }
+            }
+            return args;
+        }
+
+        // 判断软件来源
+        function IsWeixinOrAlipay() {
+            var ua = window.navigator.userAgent.toLowerCase();
+            //判断是不是微信
+            if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+                return "WeiXIN";
+            }
+            if(isShangHaiBank){
+                //判断是不是支付宝
+                if (ua.match(/AlipayClient/i) == 'alipayclient') {
+                    return "Alipay";
+                }
+            }
+            //QQ
+            if(isShangHaiBank == 0 && ua.indexOf('mqqbrowser')){
+                return 'QQ';
+            }
+            //哪个都不是
+            return false;
+        }
+        $(
+                function() {
+                    if (IsWeixinOrAlipay() == false) {
+                        $.dialog({
+                            type: 'info',
+                            infoText: '请使用微信&支付宝进行支付',
+                            infoIcon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OEM0MDU1QkE0MDRBMTFFMkFDNjJEMTAxN0EwRjQ3ODAiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OEM0MDU1QkI0MDRBMTFFMkFDNjJEMTAxN0EwRjQ3ODAiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpDOUFEMzc1OTQwNDYxMUUyQUM2MkQxMDE3QTBGNDc4MCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpDOUFEMzc1QTQwNDYxMUUyQUM2MkQxMDE3QTBGNDc4MCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PpV29yAAAAM3SURBVHja7N3hcdNAEMVxxRWYEujAlJBKUEqgAzpIqECmEkowHVCC6UCcJsqQMZhYd/vevj12Z+4rsv+/eIguyuVunuchx2/uEiABEiAnARIgJwESICcBEiAnARIghzc70nXGss5lHYJ0Oayvd4RfafkEgNc4/55zWQfCNVvWYX2dLzMir4d+M4/zn6OMcBkfjoB8M9N8fRQRrsWHInjEV0R4Kz4MwSu+EsKt8SEInvEVELbGN0fwju+JUBvfFEEhvgdCa3wzBJX4TASr+CYIrVsRE+Bu8WdZ92V9B93hfitrb/zvPpR1ZO8FTcBbdQQCKn4TQi3ARNgnsURAx69GqAFgxLdEYMWvQqgBOJF3NVsQ2PGH9XV+QALs1zeljuAV/359vdD/A9QRQsRv/S5IFSFMfIsfSaohhIpv9TNhFYRw8a0AFBBCxrcE8ET4VNZjxPjWAF4I7DGLjwDoHcE0PgqgVwTz+EiA3hAg8dEAvSDA4jMAoiNA47MAoiLA4zMBoiFQ4rMBoiDQ4nsAqCNQ43sBqCLQ43sCqCG4xPcGUEFwi68A4I1wHJ6fYnCbncDHf/nK++p07S/eb17hEzAOz88aeeGjHoMMAeAZXwLBE0AhvjuCF4BSfFcEDwDF+G4IbADl+C4ITIAI8ekILIBI8akIDICI8WkIaIDI8SkISIAe4sMRUAA9xYciIAB6jP8aYXkW9agK4BF/ibInX/PBCmEXPP4S4f3A38Ox+01RwLFkrJleXX9f1snhNUicFeEdH3VuBQWhp/ghEXqLHw6hx/ihEHqNHwah5j7gTP6++zi0PTrCPFzk5b7kHfI+gPkQU2t805umDdsV8Dthxu/lWsRnfhKq9opatiKQCNbx0QjVG3Wte0EIBFR8FELbLqnYKYTTzDm20uq7o+ZTHpWOgmTFt0IwOWJT5TxOdvxWhB9W55sqHIrqFb8W4bTuvsqenr4FwTv+VgTT+Mi/H3ALgkr8WxHM46P/gsa/ENTiv4UAic/4GzJ/Q1CNfw0BFp8BcImgHv8SARrf4vT0LXfMH9dHOqLM57Keho7OishJgATISYAEyEmABMhJgATISYAE+O/nlwADAADMVJX9TVBJAAAAAElFTkSuQmCC',
+                            autoClose: 2000
+                        });
+                        // $('body').hide();
+                        return;
+                    } else if (IsWeixinOrAlipay() == 'Alipay') {
+                        $('.js-ok').addClass('alipay')
+                    } else if (IsWeixinOrAlipay() == 'WeiXIN') {
+                        $('.js-ok').addClass('weixin');
+                    }
+                }
+        );
+    </script>
+    <title>领胜云付</title>
+</head>
+
+<body>
+<input type="hidden" value="{$info['unique_id']}" id="merchant_id" name="merchant_id">
+<!-- 标题 -->
+<div class="wg-pay-title">
+    <div class="title-logo">
+        <img src="__IMG__/store.png" alt="">
+    </div>
+    <div class="title-name">{$info['name']}</div>
+</div>
+
+<!-- 输入框 -->
+<div class="wg-pay-money">
+    <div class="money-title">
+        付款金额
+    </div>
+    <div class="money-box">
+        <a>￥</a>
+        <div id="hint">请输入付款金额</div>
+        <div id="money"></div>
+        <img src="__IMG__/cursor.gif" id="js-cursor">
+    </div>
+</div>
+<!-- 备注 -->
+<div class="wg-remark">
+    <!-- <input class="wg-remark-input" value="" maxlength="20" type="text" placeholder="添加备注（20个字以内）"> -->
+    <!-- <div contenteditable class="wg-remark-input" maxlength="20"></div> -->
+    <textarea class="wg-remark-input" maxlength="20" onfocus="if(value=='添加备注（20个字以内）'){value=''}" onblur="if (value ==''){value='添加备注（20个字以内）'}">添加备注（20个字以内）</textarea>
+    <img src="__IMG__/remark.png" alt="" class="wg-remark-img" id="wg-remark-img">
+</div>
+<!-- 数字键盘 -->
+<div class="ui-keyboard js-keyboard ZFB on" style="display: block;">
+    <ul class="ui-keyboard-numbers js-num">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+        <li class="zero">0</li>
+        <li>.</li>
+    </ul>
+    <ul class="ui-keyboard-buttons">
+        <li class="btn-del js-del"></li>
+        <li class="js-ok">付款</li>
+    </ul>
+</div>
+
+<script src="__JS__/tools/dialog/dialog.js"></script>
+<script src="__JS__/index.js"></script>
+<script>
+</script>
+</body>
+
+</html>
