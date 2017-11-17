@@ -113,8 +113,9 @@
 		 <tbody>
 		  <tr class="test-item">
 		   <td><span><?php echo $order['goods_price'];?></span></td>
-		   <td><?php echo date('Y-m-d H:i:s',$order['paytime'])?></td>
-		   <td>
+		  <td><?php echo $order['paytime'] > 0 ? date('Y-m-d H:i:s',$order['paytime']) : '未支付';?></td>
+
+			  <td>
 				<?php if($order['refund']==1){?>
 			     <font>退款中...</font>
 			<?php }elseif($order['refund']==2){?>

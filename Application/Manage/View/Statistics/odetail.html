@@ -125,7 +125,7 @@
 		  <tr>
 		   <th>支付金额(元)</th>
 		   <th data-hide="phone">支付时间</th>
-                   <th>已退款金额(元)</th>
+                   <!--<th>已退款金额(元)</th>-->
 		   <th data-hide="phone">订单状态</th>
                    <!--<th>操作</th>-->
 		  </tr>
@@ -133,8 +133,8 @@
 		 <tbody>
 		  <tr class="test-item">
 		   <td><span><?php echo $order['goods_price'];?></span></td>
-		   <td><?php echo date('Y-m-d H:i:s',$order['paytime'])?></td>
-                    <td><?php echo $order['refund_fee']?></td>
+		   <td><?php echo $order['paytime'] > 0 ? date('Y-m-d H:i:s',$order['paytime']) : '未支付';?></td>
+                    <!--<td><?php echo $order['refund_fee']?></td>-->
 		   <td>
 				<?php if($order['refund']==1){?>
 			     <font>退款中...</font>

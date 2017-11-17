@@ -222,6 +222,7 @@ class XingyeController extends BaseController
                         M()->commit();
                         $this->ajaxReturn($return);
                     }else{//拙歌接口
+                        M()->startTrans();
                         $isWeChat = $data['trade_type'] == 'weixin';
                         $info = $this->zhuoGeCreateQrCodeOrderByUserId($isWeChat,$orderNumber,$data['total_fee'],session('SX_USERS.userId'),$data);
                         if(is_string($info)){

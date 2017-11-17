@@ -134,7 +134,7 @@ trait ZhuoGePayHelper{
             'form_params'=>$requestData
         ])->getBody();
         $response = json_decode($body,true);
-        if($response['retCode'] == 1000){
+        if($response['retCode'] == 1000 && $response['retMsg'] == '交易成功'){
             return $response['payUrl'];
         }
         return false;
