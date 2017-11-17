@@ -101,7 +101,10 @@
                                                             <!--<a title="查看商户资料"-->
                                                                <!--href="{:U('SX/Users/auditdetail',array('id'=>$vo['userId']))}"-->
                                                                <!--target="_blank"><i style="font-size: 16px;"-->
-                                                                                  <!--class="fa fa-edit text-navy"></i></a>-->
+                                                                                  <!--class="fa fa-edit text-navy"></i></a>--><a
+                                                                title="费率设置"
+                                                                data-id="{$vo['userId']}" class="setWithdrawRate" data-rate="{$vo['withdraw_rate']}"><i style="font-size: 19px;"
+                                                                                   class="fa fa-sign-in text-navy"></i><span class="label label-primary">费率设置</span></a>
                                                             &nbsp;&nbsp;
                                                             <a
                                                                 title="登陆商户"
@@ -202,6 +205,36 @@
     <script src="__JS__/footable.all2.min.js"></script>
     <script src="__JS__/plugins/icheck.min.js"></script>
     <script type="text/javascript">
+        $('.setWithdrawRate').on('click',function(e){
+            var _this = this;
+            var id = $(this).attr('data-id');
+            var rate = $(this).attr('data-rate');
+            console.log(rate);
+            layer.prompt({
+                value:rate,
+                title:'商家提现费率设置'
+            },function(val){
+                layer.msg('正在修改商家提现费率', {
+                    icon: 16,
+                    shade: 0.5,
+                    time:0
+                });
+                $.post('{:U("/SX/Users/modifyWithDraw")}',{
+                    userId:id,
+                    rate:val
+                },function(resp){
+                    setTimeout(function(){
+                        layer.closeAll();
+                        if(resp.code == 200){
+                            layer.msg('修改成功');
+                            $(_this).attr('data-rate',val);
+                        }else{
+                            layer.alert(resp.msg);
+                        }
+                    },500);
+                });
+            });
+        });
         $('#table-list-body .prelative .tips').click(function () {
             if ($(this).hasClass('fedit')) {
                 var uid = $(this).parent().siblings('.uid').text();

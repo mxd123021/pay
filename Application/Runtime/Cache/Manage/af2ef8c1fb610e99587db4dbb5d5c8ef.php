@@ -14,8 +14,10 @@
     <link href="/Static/SX/css/animate_new.css" rel="stylesheet">
     <link href="/Static/SX/css/style.css" rel="stylesheet">
 	<link href="/Static/SX/css/app.css" rel="stylesheet">
+	<link href="/Static/SX/js/layer/theme/default/layer.css" rel="stylesheet">
 	<!-- Mainly scripts -->
 	<script src="/Static/SX/js/jquery-2.1.1.js"></script>
+	<script src="/Static/SX/js/layer/layer.js"></script>
 	<script src="/Static/SX/js/bootstrap.min.js"></script>
     <script src="/Static/SX/js/jquery.metisMenu.js"></script>
     <script src="/Static/SX/js/jquery.slimscroll.min.js"></script>
@@ -90,22 +92,35 @@
                         <!--<li <?php if(in_array('Think.const.CONTROLLER_NAME', array('Users', 'Xingye'))): ?>class="active"<?php endif; ?>>-->
 	                    <a href="#"><i class="fa fa-gears"></i> <span class="nav-label">商家设置</span></a>
 	                    <ul class="nav nav-second-level collapse <?php if((CONTROLLER_NAME) == "Users"): if((ACTION_NAME) != "index"): ?>in<?php endif; endif; ?>">
-	                    	<?php if(empty($usId)): ?><li <?php if((CONTROLLER_NAME) == "Users"): if((ACTION_NAME) == "storefront"): ?>class="active"<?php endif; endif; ?>><a href="<?php echo U("Manage/Users/storefront");?>">子商户管理</a></li><?php endif; ?>
+					<?php if(empty($usId)): ?><li <?php if((CONTROLLER_NAME) == "Users"): if((ACTION_NAME) == "showSetBank"): ?>class="active"<?php endif; endif; ?>><a href="<?php echo U("Manage/Users/showSetBank");?>">提现银行卡设置</a></li><?php endif; ?>
+					<?php if(empty($usId)): ?><li <?php if((CONTROLLER_NAME) == "Users"): if((ACTION_NAME) == "showWithdraw"): ?>class="active"<?php endif; endif; ?>><a href="<?php echo U("Manage/Users/showWithdraw");?>">提现</a></li><?php endif; ?>
+
+					<?php if(empty($usId)): ?><li <?php if((CONTROLLER_NAME) == "Users"): if((ACTION_NAME) == "withdrawRecordList"): ?>class="active"<?php endif; endif; ?>><a href="<?php echo U("Manage/Users/withdrawRecordList");?>">提现记录</a></li><?php endif; ?>
+					<?php if(empty($usId)): ?><li <?php if((CONTROLLER_NAME) == "Users"): if((ACTION_NAME) == "loginLog"): ?>class="active"<?php endif; endif; ?>><a href="<?php echo U("Manage/Users/loginLog");?>">登陆日志</a></li><?php endif; ?>
+	                    	<!--<?php if(empty($usId)): ?>-->
+	                        	<!--<li <?php if((CONTROLLER_NAME) == "Users"): if((ACTION_NAME) == "storefront"): ?>class="active"<?php endif; endif; ?>><a href="<?php echo U("Manage/Users/storefront");?>">子商户管理</a></li>-->
+	                        <!--<?php endif; ?>-->
 	                        <!--<?php if(empty($usId)): ?>-->
 	                        	<!--<li <?php if((CONTROLLER_NAME) == "Users"): if((ACTION_NAME) == "employers"): ?>class="active"<?php endif; endif; ?>><a href="<?php echo U("Manage/Users/employers");?>">员工管理</a></li>-->
 	                        <!--<?php endif; ?>-->
-	                        <?php if(empty($usId) or in_array('wx_zfsz',session('SX_USERS.grant'))): ?><li <?php if((CONTROLLER_NAME) == "Users"): if((ACTION_NAME) == "payConfig"): ?>class="active"<?php endif; endif; ?>><a href="<?php echo U("Manage/Users/payConfig");?>">支付配置</a></li><?php endif; ?>
+	                        <!--<?php if(empty($usId) or in_array('wx_zfsz',session('SX_USERS.grant'))): ?>-->
+	                        	<!--<li <?php if((CONTROLLER_NAME) == "Users"): if((ACTION_NAME) == "payConfig"): ?>class="active"<?php endif; endif; ?>><a href="<?php echo U("Manage/Users/payConfig");?>">支付配置</a></li>-->
+	                        <!--<?php endif; ?>-->
 	                        <?php if(empty($usId) or in_array('wx_usinfo',session('SX_USERS.grant'))): ?><li <?php if((CONTROLLER_NAME) == "Users"): if((ACTION_NAME) == "userInfo"): ?>class="active"<?php endif; endif; ?>><a href="<?php echo U("Manage/Users/userInfo");?>">个人信息</a></li><?php endif; ?>
-	                        <?php if(empty($usId) or in_array('wx_usinfo',session('SX_USERS.grant'))): ?><!--<li <?php if((CONTROLLER_NAME) == "Users"): if((ACTION_NAME) == "realname"): ?>class="active"<?php endif; endif; ?>><a href="<?php echo U("Manage/Users/realname");?>">实名认证</a></li>--> 
-                                <li <?php if((CONTROLLER_NAME) == "Xingye"): if((ACTION_NAME) == "realname"): ?>class="active"<?php endif; endif; ?>><a href="<?php echo U("Manage/Xingye/realname");?>">账户认证</a></li><?php endif; ?>
+	                        <!--<?php if(empty($usId) or in_array('wx_usinfo',session('SX_USERS.grant'))): ?>-->
+	                        	 <!--&lt;!&ndash;<li <?php if((CONTROLLER_NAME) == "Users"): if((ACTION_NAME) == "realname"): ?>class="active"<?php endif; endif; ?>><a href="<?php echo U("Manage/Users/realname");?>">实名认证</a></li>&ndash;&gt; -->
+                                <!--<li <?php if((CONTROLLER_NAME) == "Xingye"): if((ACTION_NAME) == "realname"): ?>class="active"<?php endif; endif; ?>><a href="<?php echo U("Manage/Xingye/realname");?>">账户认证</a></li>-->
+	                        <!--<?php endif; ?>-->
 	                        <?php if(empty($usId)): ?><li <?php if((CONTROLLER_NAME) == "Users"): if((ACTION_NAME) == "modifypwd"): ?>class="active"<?php endif; endif; ?>><a href="<?php echo U("Manage/Users/modifypwd");?>">修改密码</a></li><?php endif; ?>
-                                <?php if(empty($usId)): ?><li <?php if((CONTROLLER_NAME) == "Users"): if((ACTION_NAME) == "printerManage"): ?>class="active"<?php endif; endif; ?>><a href="<?php echo U("Manage/Users/printerManage");?>">打印机管理</a></li><?php endif; ?>
+                                <!--<?php if(empty($usId)): ?>-->
+	                        	<!--<li <?php if((CONTROLLER_NAME) == "Users"): if((ACTION_NAME) == "printerManage"): ?>class="active"<?php endif; endif; ?>><a href="<?php echo U("Manage/Users/printerManage");?>">打印机管理</a></li>-->
+	                        <!--<?php endif; ?>-->
 <!--                                <?php if(empty($usId)): ?><li <?php if((CONTROLLER_NAME) == "Users"): if((ACTION_NAME) == "accoutConfig"): ?>class="active"<?php endif; endif; ?>><a href="<?php echo U("Manage/Users/accoutConfig");?>">账号配置</a></li><?php endif; ?>-->
 	                    </ul>
 	                </li><?php endif; ?>
 
                 <?php if(empty($usId) or in_array('wx_sksy',session('SX_USERS.grant')) or in_array('wx_smtk',session('SX_USERS.grant'))): ?><li <?php if((CONTROLLER_NAME) == "Xingye"): ?>class="active"<?php endif; ?>>
-	                    <a href="#"><?php if(session('SX_USERS.wx_issp') == 3): ?><i class="fa fa-cny"></i> <span class="nav-label">收银台</span><?php else: ?><i class="fa fa-wechat"></i> <span class="nav-label">微信收银台</span><?php endif; ?><span class="label label-info pull-right">NEW</span></a>
+	                    <a href="#"><?php if(session('SX_USERS.wx_issp') == 3): ?><i class="fa fa-cny"></i> <span class="nav-label">&nbsp;&nbsp;收银台</span><?php else: ?><i class="fa fa-wechat"></i> <span class="nav-label">微信收银台</span><?php endif; ?><span class="label label-info pull-right">NEW</span></a>
 	                    <ul class="nav nav-second-level collapse <?php if((CONTROLLER_NAME) == "Xingye"): if((ACTION_NAME) != "payment"): ?>in<?php endif; endif; ?>">
 
 							<?php if(empty($usId) or in_array('wx_sksy',session('SX_USERS.grant'))): ?><li <?php if((CONTROLLER_NAME) == "Xingye"): if((ACTION_NAME) == "payment"): if(($type) != "2"): ?>class="active"<?php endif; endif; endif; ?>><a href="<?php echo U("Manage/Xingye/payment/type/1");?>">刷卡收银</a></li><?php endif; ?>
@@ -148,7 +163,9 @@
 
 							<?php if(empty($usId) or in_array('orderlists',session('SX_USERS.grant'))): ?><li <?php if((CONTROLLER_NAME) == "Statistics"): if((ACTION_NAME) == "orderLists"): if(($type) != "2"): ?>class="active"<?php endif; endif; endif; ?>><a href="<?php echo U("Manage/Statistics/orderLists");?>">收款订单列表</a></li><?php endif; ?>
                                 
-                                <?php if(empty($usId) or in_array('orderlists',session('SX_USERS.grant'))): ?><li <?php if((CONTROLLER_NAME) == "Statistics"): if((ACTION_NAME) == "balance"): if(($type) != "2"): ?>class="active"<?php endif; endif; endif; ?>><a href="<?php echo U("Manage/Statistics/balance");?>">结算管理</a></li><?php endif; ?>
+                                <!--<?php if(empty($usId) or in_array('orderlists',session('SX_USERS.grant'))): ?>-->
+	                        	<!--<li <?php if((CONTROLLER_NAME) == "Statistics"): if((ACTION_NAME) == "balance"): if(($type) != "2"): ?>class="active"<?php endif; endif; endif; ?>><a href="<?php echo U("Manage/Statistics/balance");?>">结算管理</a></li>-->
+	                        <!--<?php endif; ?>-->
 
 <!--							<?php if(empty($usId) or in_array('rporderlists',session('SX_USERS.grant'))): ?><li <?php if((CONTROLLER_NAME) == "Statistics"): if((ACTION_NAME) == "rporderLists"): if(($type) != "2"): ?>class="active"<?php endif; endif; endif; ?>><a href="<?php echo U("Manage/Statistics/rporderLists");?>">红包领取列表</a></li><?php endif; ?>-->
 	                    </ul>
@@ -290,16 +307,18 @@
 								<label><span class="mustInput">*</span>手机号:</label>
 								<input type="tel" id="userPhone" placeholder="请输入员工的手机号" name="userPhone" value="<?php echo ($userinfo['userPhone']); ?>" class="form-control required" aria-required="true" readonly>
 							</div>
-								<ul class="todo-list m-t small-list ui-sortable" >
-		                            <li>
-		                            	<?php if($wxinfo == ''): ?><button id="bdwx" type="button" class="btn btn-primary btn-xs" style="margin: 0 20px 0 0;">点击绑定微信</button>
-										<?php else: ?>
-											<img src="<?php echo ($wxinfo["headimgurl"]); ?>" style="width: 40px;height:40px;">
-											<span class="label" style="margin-right: 10px;">已绑定</span><?php endif; ?>
-		                                <i class="fa fa-info-circle"></i> 用于提现、收银和系统通知
-		                                <span class="label label-danger pull-right">重要</span>
-		                            </li>
-                        		</ul>
+								<!--<ul class="todo-list m-t small-list ui-sortable" >-->
+		                            <!--<li>-->
+		                            	<!--<?php if($wxinfo == ''): ?>-->
+											<!--<button id="bdwx" type="button" class="btn btn-primary btn-xs" style="margin: 0 20px 0 0;">点击绑定微信</button>-->
+										<!--<?php else: ?>-->
+											<!--<img src="<?php echo ($wxinfo["headimgurl"]); ?>" style="width: 40px;height:40px;">-->
+											<!--<span class="label" style="margin-right: 10px;">已绑定</span>-->
+										<!--<?php endif; ?>-->
+		                                <!--<i class="fa fa-info-circle"></i> 用于提现、收银和系统通知-->
+		                                <!--<span class="label label-danger pull-right">重要</span>-->
+		                            <!--</li>-->
+                        		<!--</ul>-->
                         </div>
                     </div>
                 </div>

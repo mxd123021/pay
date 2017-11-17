@@ -14,9 +14,11 @@
     <link href="/Static/SX/css/animate_new.css" rel="stylesheet">
     <link href="/Static/SX/css/style.css" rel="stylesheet">
 	<link href="/Static/SX/css/app.css" rel="stylesheet">
-	<!-- Mainly scripts -->
+    <link href="/Static/SX/js/layer/theme/default/layer.css" rel="stylesheet">
+    <!-- Mainly scripts -->
 	<script src="/Static/SX/js/jquery-2.1.1.js"></script>
-	<script src="/Static/SX/js/bootstrap.min.js"></script>
+    <script src="/Static/SX/js/layer/layer.js"></script>
+    <script src="/Static/SX/js/bootstrap.min.js"></script>
     <script src="/Static/SX/js/jquery.metisMenu.js"></script>
     <script src="/Static/SX/js/jquery.slimscroll.min.js"></script>
 	<!-- Custom and plugin javascript -->
@@ -58,9 +60,15 @@
                 <?php if(in_array('sys_wz',session('SX_STAFF.grant')) or in_array('sys_zf',session('SX_STAFF.grant')) or in_array('sys_wx',session('SX_STAFF.grant')) or in_array('sys_admin',session('SX_STAFF.grant')) or in_array('sys_pass',session('SX_STAFF.grant'))): ?><li <?php if((CONTROLLER_NAME) == "Index"): if((ACTION_NAME) != "index"): ?>class="active"<?php endif; endif; ?>>
                         <a href="#"><i class="fa fa-cog"></i> <span class="nav-label">系统配置</span></a>
                         <ul class="nav nav-second-level collapse <?php if((CONTROLLER_NAME) == "Index"): if((ACTION_NAME) != "index"): ?>class="active"<?php endif; endif; ?>">
-                            <?php if(in_array('sys_wz',session('SX_STAFF.grant'))): ?><li <?php if((CONTROLLER_NAME) == "Index"): if((ACTION_NAME) == "toConfig"): ?>class="active"<?php endif; endif; ?>><a href="<?php echo U("SX/Index/toConfig");?>">网站配置</a></li><?php endif; ?>
-                            <?php if(in_array('sys_zf',session('SX_STAFF.grant'))): ?><li <?php if((CONTROLLER_NAME) == "Index"): if((ACTION_NAME) == "payConfig"): ?>class="active"<?php endif; endif; ?>><a href="<?php echo U("SX/Index/payConfig");?>">支付配置</a></li><?php endif; ?>
-                            <?php if(in_array('sys_wx',session('SX_STAFF.grant'))): ?><li <?php if((CONTROLLER_NAME) == "Index"): if((ACTION_NAME) == "wxConfig"): ?>class="active"<?php endif; endif; ?>><a href="<?php echo U("SX/Index/wxConfig");?>">微信配置</a></li><?php endif; ?>
+                            <!--<?php if(in_array('sys_wz',session('SX_STAFF.grant'))): ?>-->
+                                <!--<li <?php if((CONTROLLER_NAME) == "Index"): if((ACTION_NAME) == "toConfig"): ?>class="active"<?php endif; endif; ?>><a href="<?php echo U("SX/Index/toConfig");?>">网站配置</a></li>-->
+                            <!--<?php endif; ?>-->
+                            <!--<?php if(in_array('sys_zf',session('SX_STAFF.grant'))): ?>-->
+                                <!--<li <?php if((CONTROLLER_NAME) == "Index"): if((ACTION_NAME) == "payConfig"): ?>class="active"<?php endif; endif; ?>><a href="<?php echo U("SX/Index/payConfig");?>">支付配置</a></li>-->
+                            <!--<?php endif; ?>-->
+                            <!--<?php if(in_array('sys_wx',session('SX_STAFF.grant'))): ?>-->
+                                <!--<li <?php if((CONTROLLER_NAME) == "Index"): if((ACTION_NAME) == "wxConfig"): ?>class="active"<?php endif; endif; ?>><a href="<?php echo U("SX/Index/wxConfig");?>">微信配置</a></li>-->
+                            <!--<?php endif; ?>-->
                             <?php if(in_array('sys_admin',session('SX_STAFF.grant'))): ?><li <?php if(ACTION_NAME == 'employers' or ACTION_NAME == 'roles') echo "class='active'"; ?>>
                                     <a href="index.html#">管理员配置<span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level collapse">
@@ -82,13 +90,19 @@
 <!--                            <?php if(in_array('user_lists',session('SX_STAFF.grant'))): ?><li <?php if((CONTROLLER_NAME) == "Users"): if((ACTION_NAME) == "auditrealname"): ?>class="active"<?php endif; endif; ?>><a href="<?php echo U("SX/Users/auditrealname");?>">实名认证审核</a></li><?php endif; ?>-->
                         </ul>
                     </li><?php endif; ?>
-                <?php if(in_array('market_ad',session('SX_STAFF.grant')) or in_array('market_re',session('SX_STAFF.grant'))): ?><li <?php if((CONTROLLER_NAME) == "Market"): ?>class="active"<?php endif; ?>>
-                        <a href="#"><i class="fa fa-slideshare"></i> <span class="nav-label">营销功能</span><span class="label label-info pull-right">NEW</span></a>
-                        <ul class="nav nav-second-level collapse <?php if((CONTROLLER_NAME) == "Market"): ?>in<?php endif; ?>">
-                            <?php if(in_array('market_ad',session('SX_STAFF.grant'))): ?><li <?php if((CONTROLLER_NAME) == "Market"): if((ACTION_NAME) == "wxmarket"): ?>class="active"<?php endif; endif; ?>><a href="<?php echo U("SX/Market/wxmarket");?>">微信广告</a></li><?php endif; ?>
-<!--                            <?php if(in_array('market_re',session('SX_STAFF.grant'))): ?><li <?php if((CONTROLLER_NAME) == "Market"): if((ACTION_NAME) == "rlist"): ?>class="active"<?php endif; endif; ?>><a href="<?php echo U("SX/Market/rlist");?>">预约留言</a></li><?php endif; ?>-->
-                        </ul>
-                    </li><?php endif; ?>
+                <!--<?php if(in_array('market_ad',session('SX_STAFF.grant')) or in_array('market_re',session('SX_STAFF.grant'))): ?>-->
+                    <!--<li <?php if((CONTROLLER_NAME) == "Market"): ?>class="active"<?php endif; ?>>-->
+                        <!--<a href="#"><i class="fa fa-slideshare"></i> <span class="nav-label">营销功能</span><span class="label label-info pull-right">NEW</span></a>-->
+                        <!--<ul class="nav nav-second-level collapse <?php if((CONTROLLER_NAME) == "Market"): ?>in<?php endif; ?>">-->
+                            <!--<?php if(in_array('market_ad',session('SX_STAFF.grant'))): ?>-->
+                                <!--<li <?php if((CONTROLLER_NAME) == "Market"): if((ACTION_NAME) == "wxmarket"): ?>class="active"<?php endif; endif; ?>><a href="<?php echo U("SX/Market/wxmarket");?>">微信广告</a></li>-->
+                            <!--<?php endif; ?>-->
+<!--&lt;!&ndash;                            <?php if(in_array('market_re',session('SX_STAFF.grant'))): ?>-->
+                                <!--<li <?php if((CONTROLLER_NAME) == "Market"): if((ACTION_NAME) == "rlist"): ?>class="active"<?php endif; endif; ?>><a href="<?php echo U("SX/Market/rlist");?>">预约留言</a></li>-->
+                            <!--<?php endif; ?>&ndash;&gt;-->
+                        <!--</ul>-->
+                    <!--</li>-->
+                <!--<?php endif; ?>-->
                 <?php if(in_array('user_lists',session('SX_STAFF.grant'))): ?><li <?php if((CONTROLLER_NAME) == "Statistics"): ?>class="active"<?php endif; ?>>
                         <a href="#"><i class="fa fa-line-chart"></i> <span class="nav-label">数据统计</span></a>
                         <ul class="nav nav-second-level collapse <?php if((CONTROLLER_NAME) == "Statistics"): ?>in<?php endif; ?>">
@@ -138,9 +152,9 @@
                 </li>
     {pg:/if} -->
 			   <li class="dropdown" id="help-link">
-                    <a class="dropdown-toggle count-info" href="/merchants.php?m=Index&c=help&a=index" title="帮助文档" target="_blank">
-                        <i class="fa  fa-question-circle"></i> <!--<span class="label label-warning">16</span>-->
-                    </a>
+                    <!--<a class="dropdown-toggle count-info" href="/merchants.php?m=Index&c=help&a=index" title="帮助文档" target="_blank">-->
+                        <!--<i class="fa  fa-question-circle"></i> &lt;!&ndash;<span class="label label-warning">16</span>&ndash;&gt;-->
+                    <!--</a>-->
                 </li>
 
                 <li>
@@ -191,7 +205,7 @@
 <div class="wrapper wrapper-content animated fadeInRight">
     
 <div class="row">
-            <div class="col-sm-3">
+            <div class="col-sm-4">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <span class="label label-success pull-right">月</span>
@@ -205,7 +219,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-4">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <span class="label label-info pull-right">全年</span>
@@ -219,21 +233,21 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-3">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <span class="label label-success pull-right">月</span>
-                        <h5>充值金额</h5>
-                    </div>
-                    <div class="ibox-content">
-                        <h1 class="no-margins"><?php echo ($data['curmCz']); ?></h1>
-                        <div class="stat-percent font-bold text-navy"></i>
-                        </div>
-                        <small>总金额</small>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3">
+            <!--<div class="col-sm-3">-->
+                <!--<div class="ibox float-e-margins">-->
+                    <!--<div class="ibox-title">-->
+                        <!--<span class="label label-success pull-right">月</span>-->
+                        <!--<h5>充值金额</h5>-->
+                    <!--</div>-->
+                    <!--<div class="ibox-content">-->
+                        <!--<h1 class="no-margins"><?php echo ($data['curmCz']); ?></h1>-->
+                        <!--<div class="stat-percent font-bold text-navy"></i>-->
+                        <!--</div>-->
+                        <!--<small>总金额</small>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+            <div class="col-sm-4">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <span class="label label-danger pull-right">所有用户</span>
@@ -250,7 +264,7 @@
         </div>
 
 <div class="row">
-                        <div class="col-lg-8">
+                        <div class="col-lg-12">
                             <div class="ibox float-e-margins">
                                 <div class="ibox-content">
                                     <div>

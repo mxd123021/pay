@@ -1,6 +1,6 @@
 <?php
 namespace PayView\Controller;
-use Manage\Controller\BaseController;
+//use Manage\Controller\BaseController;
 use Ramsey\Uuid\Uuid;
 use Think\Controller;
 use Think\Log;
@@ -11,7 +11,7 @@ use Think\Log;
  * Date: 2017/11/2 0002
  * Time: 17:07
  */
-class IndexController extends BaseController{
+class IndexController extends Controller{
     use \ShanghaiBankPayHelper,\ZhuoGePayHelper;
     public function test(){
         $users = D('Manage/Users')->field(['userId'])->select();

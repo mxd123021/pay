@@ -15,18 +15,60 @@ class UsersController extends BaseController {
      * 获取提现记录
      */
     public function withdrawRecordList(){
-//        dump(D('Manage/WithdrawRecord')->addItem(session('SX_USERS.userId'),[
-//            'local_order_number'=>time(),
-//            'remote_order_number'=>time(),
-//            'withdraw_price'=>1000,
-//            'withdraw_processing_fee'=>100,
-//            'withdraw_start_time'=>time(),
-//            'withdraw_receive_time'=>time()+20,
-//            'status'=>0
-//        ]));
-//        exit();
-//        exit(session('SX_USERS.userId'));
-        $list = D('Manage/WithdrawRecord')->getAll(session('SX_USERS.userId'));
+        $datetype = I('datetype','');
+        $shour = $ehour = '';
+        switch($datetype){
+            case 'tdy'://今天
+                $starttime = date('Y-m-d');
+                $endtime = date('Y-m-d');
+                $stime = strtotime($starttime);
+                $etime = strtotime("+1days", strtotime($endtime));
+                $where = sprintf('add_time >%s and add_time <= %s',$stime,$etime);
+                break;
+            case 'ydy'://昨天
+                $starttime = date('Y-m-d',strtotime("-1days"));
+                $endtime = date('Y-m-d',strtotime("-1days"));
+                $stime = strtotime($starttime);
+                $etime = strtotime("+1days", strtotime($endtime));
+                $where = sprintf('add_time >%s and add_time <= %s',$stime,$etime);
+                break;
+            case 'wk'://一周
+                $starttime = date('Y-m-d',strtotime('-7days'));
+                $endtime = date('Y-m-d');
+                $stime = strtotime($starttime);
+                $etime = strtotime(date('Y-m-d')) + 86399;
+                $where = sprintf('add_time >%s and add_time <= %s',$stime,$etime);
+                break;
+            default:
+                $stime = I('stime',0);
+                $etime = I('etime',0);
+                $shour = I('shour', 0);
+                $ehour = I('ehour', 0);
+                if($stime == 0 && $etime == 0){
+                    $datetype = "tdy";
+                }
+                $starttime = $stime != 0 ? $stime : date('Y-m-d');
+                $endtime = $etime != 0 ? $etime : date('Y-m-d');
+                if($stime != 0){
+//                    if($s)
+                    $stime = strtotime($stime.' '.$shour);
+                    $etime = strtotime($etime.' '.$ehour);
+                }else{
+                    $stime = strtotime(date('Y-m-d'));
+                    $etime = strtotime(date('Y-m-d',strtotime('+1days')));
+                }
+                $where = sprintf('add_time >%s and add_time <= %s',$stime,$etime);
+                break;
+        }
+
+        $info = D('Manage/WithdrawRecord')->getAll(session('SX_USERS.userId'),0,$where);
+        $list = $info['list'];
+        $this->assign('info',$info['info']);
+        $this->assign('datetype',$datetype);
+        $this->assign('starttime',$starttime);
+        $this->assign('endtime',$endtime);
+        $this->assign('shour', $shour);
+        $this->assign('ehour', $ehour);
         $this->assign('list',json_encode($list));
         $this->display("withdrawRecordList");
     }
@@ -34,7 +76,7 @@ class UsersController extends BaseController {
     //提现
     public function withdraw(){
         $hours = date('H');
-        if($hours < 8 || $hours > 22){
+        if($hours < 8 || $hours >= 22){
             $this->ajaxReturn([
                 'info'=>'只能在 08:00 - 22:00 的时间内提现'
             ]);
@@ -48,8 +90,8 @@ class UsersController extends BaseController {
             ]);
         }
         $uid = getManageUserId();
-        $info = D('Manage/WithdrawRecord')->getToDayCountInfo($uid);
-        $maxPrice = intval(round($info['price'] * 100));
+        $countInfo = D('Manage/WithdrawRecord')->getToDayCountInfo($uid);
+        $maxPrice = intval(round($countInfo['price'] * 100));
         if($maxPrice < $price){
             $this->ajaxReturn([
                 'info'=>'非法金额'
@@ -76,6 +118,7 @@ class UsersController extends BaseController {
             'local_order_number'=>$orderNumber,
             'withdraw_price'=>$price,
             'withdraw_start_time'=>time(),
+            'status'=>1
         ];
         D('Manage/WithdrawRecord')->addItem($uid,$logData);
         $res = $this->zhuogeWithdraw($bankData,$info['bank_merchant_number'],$info['bank_sign_key'],$orderNumber,$price);

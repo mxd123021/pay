@@ -37,7 +37,7 @@
                 <div class="form-group">
                     <input type="password" name="password" class="form-control" placeholder="密码" required="">
                 </div>
-                <div class="form-group">
+                <div class="form-group hide">
                     <div class="radio radio-info radio-inline">
                         <input type="radio" value="merchant" name="type" checked="checked" id="inlineRadio1">
                         <label for="inlineRadio1"> 商户登录</label>
@@ -52,9 +52,6 @@
                     <div id="basic_slider"></div>
                 </div>
 <!--                 <button type="submit" class="btn btn-primary block full-width m-b hide">登录</button> -->
-                <div class="form-group"  >
-                    <a class="btn btn-sm btn-white btn-block" href="<?php echo U("Index/register");?>">没有账号？创建一个</a>
-                </div>
                 
             </form>
         </div>
@@ -154,7 +151,7 @@
                 var pw=$.trim($("input[name='password']").val());
                 if(un=="" || pw==""){
                     slider.noUiSlider.set(0);
-                    swal({title: "温馨提示",text:'账号或密码不能为空',type: "error"});
+                    return swal({title: "温馨提示",text:'账号或密码不能为空',type: "error"});
                 }
                 $("#basic_slider").mouseup(function(){
                     if(values[handle]< 100){

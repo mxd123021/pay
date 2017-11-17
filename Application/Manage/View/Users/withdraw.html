@@ -9,7 +9,8 @@
 					   <div class="col-lg-12">
 						   <div class="f-l pr-30 pb-20" style="height: 32px;" id="tongji">
 							   总可提现金额：<font color="red">{$info['all_money']}</font> 元，
-							   当前可提现金额：<font color="red">{$info['price']}</font>
+							   当前可提现金额：<font color="red">{$info['price']}元</font>，
+							   余下 <span style="color: red;">{$info['tomorrow_money']}元</span>明天可提现
 						   </div>
 					   </div>
 				<div class="col-lg-12">
@@ -51,9 +52,17 @@
 			 return swal('操作提示','提现金额不能大于'+maxMoney + '元','error');
 		 }
 		 var json = $("#pwdform").serialize();
+		 layer.msg('正在提交提现数据', {
+			 icon: 16,
+			 shade: 0.5,
+			 time:0
+		 });
 		 $.post('{:U("Manage/Users/withdraw")}',json,function(resp){
 			 if(resp.status == 1){
-				 return swal("操作提示",'提现成功','success');
+				 return setTimeout(function(){
+					 layer.closeAll();
+					 return swal("操作提示",'提现成功','success');
+				 },500);
 			 }
 			 swal("温馨提醒", resp.info, "error");
 		 });

@@ -14,9 +14,11 @@
     <link href="/Static/SX/css/animate_new.css" rel="stylesheet">
     <link href="/Static/SX/css/style.css" rel="stylesheet">
 	<link href="/Static/SX/css/app.css" rel="stylesheet">
-	<!-- Mainly scripts -->
+    <link href="/Static/SX/js/layer/theme/default/layer.css" rel="stylesheet">
+    <!-- Mainly scripts -->
 	<script src="/Static/SX/js/jquery-2.1.1.js"></script>
-	<script src="/Static/SX/js/bootstrap.min.js"></script>
+    <script src="/Static/SX/js/layer/layer.js"></script>
+    <script src="/Static/SX/js/bootstrap.min.js"></script>
     <script src="/Static/SX/js/jquery.metisMenu.js"></script>
     <script src="/Static/SX/js/jquery.slimscroll.min.js"></script>
 	<!-- Custom and plugin javascript -->
@@ -84,9 +86,15 @@
                 <?php if(in_array('sys_wz',session('SX_STAFF.grant')) or in_array('sys_zf',session('SX_STAFF.grant')) or in_array('sys_wx',session('SX_STAFF.grant')) or in_array('sys_admin',session('SX_STAFF.grant')) or in_array('sys_pass',session('SX_STAFF.grant'))): ?><li <?php if((CONTROLLER_NAME) == "Index"): if((ACTION_NAME) != "index"): ?>class="active"<?php endif; endif; ?>>
                         <a href="#"><i class="fa fa-cog"></i> <span class="nav-label">系统配置</span></a>
                         <ul class="nav nav-second-level collapse <?php if((CONTROLLER_NAME) == "Index"): if((ACTION_NAME) != "index"): ?>class="active"<?php endif; endif; ?>">
-                            <?php if(in_array('sys_wz',session('SX_STAFF.grant'))): ?><li <?php if((CONTROLLER_NAME) == "Index"): if((ACTION_NAME) == "toConfig"): ?>class="active"<?php endif; endif; ?>><a href="<?php echo U("SX/Index/toConfig");?>">网站配置</a></li><?php endif; ?>
-                            <?php if(in_array('sys_zf',session('SX_STAFF.grant'))): ?><li <?php if((CONTROLLER_NAME) == "Index"): if((ACTION_NAME) == "payConfig"): ?>class="active"<?php endif; endif; ?>><a href="<?php echo U("SX/Index/payConfig");?>">支付配置</a></li><?php endif; ?>
-                            <?php if(in_array('sys_wx',session('SX_STAFF.grant'))): ?><li <?php if((CONTROLLER_NAME) == "Index"): if((ACTION_NAME) == "wxConfig"): ?>class="active"<?php endif; endif; ?>><a href="<?php echo U("SX/Index/wxConfig");?>">微信配置</a></li><?php endif; ?>
+                            <!--<?php if(in_array('sys_wz',session('SX_STAFF.grant'))): ?>-->
+                                <!--<li <?php if((CONTROLLER_NAME) == "Index"): if((ACTION_NAME) == "toConfig"): ?>class="active"<?php endif; endif; ?>><a href="<?php echo U("SX/Index/toConfig");?>">网站配置</a></li>-->
+                            <!--<?php endif; ?>-->
+                            <!--<?php if(in_array('sys_zf',session('SX_STAFF.grant'))): ?>-->
+                                <!--<li <?php if((CONTROLLER_NAME) == "Index"): if((ACTION_NAME) == "payConfig"): ?>class="active"<?php endif; endif; ?>><a href="<?php echo U("SX/Index/payConfig");?>">支付配置</a></li>-->
+                            <!--<?php endif; ?>-->
+                            <!--<?php if(in_array('sys_wx',session('SX_STAFF.grant'))): ?>-->
+                                <!--<li <?php if((CONTROLLER_NAME) == "Index"): if((ACTION_NAME) == "wxConfig"): ?>class="active"<?php endif; endif; ?>><a href="<?php echo U("SX/Index/wxConfig");?>">微信配置</a></li>-->
+                            <!--<?php endif; ?>-->
                             <?php if(in_array('sys_admin',session('SX_STAFF.grant'))): ?><li <?php if(ACTION_NAME == 'employers' or ACTION_NAME == 'roles') echo "class='active'"; ?>>
                                     <a href="index.html#">管理员配置<span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level collapse">
@@ -108,13 +116,19 @@
 <!--                            <?php if(in_array('user_lists',session('SX_STAFF.grant'))): ?><li <?php if((CONTROLLER_NAME) == "Users"): if((ACTION_NAME) == "auditrealname"): ?>class="active"<?php endif; endif; ?>><a href="<?php echo U("SX/Users/auditrealname");?>">实名认证审核</a></li><?php endif; ?>-->
                         </ul>
                     </li><?php endif; ?>
-                <?php if(in_array('market_ad',session('SX_STAFF.grant')) or in_array('market_re',session('SX_STAFF.grant'))): ?><li <?php if((CONTROLLER_NAME) == "Market"): ?>class="active"<?php endif; ?>>
-                        <a href="#"><i class="fa fa-slideshare"></i> <span class="nav-label">营销功能</span><span class="label label-info pull-right">NEW</span></a>
-                        <ul class="nav nav-second-level collapse <?php if((CONTROLLER_NAME) == "Market"): ?>in<?php endif; ?>">
-                            <?php if(in_array('market_ad',session('SX_STAFF.grant'))): ?><li <?php if((CONTROLLER_NAME) == "Market"): if((ACTION_NAME) == "wxmarket"): ?>class="active"<?php endif; endif; ?>><a href="<?php echo U("SX/Market/wxmarket");?>">微信广告</a></li><?php endif; ?>
-<!--                            <?php if(in_array('market_re',session('SX_STAFF.grant'))): ?><li <?php if((CONTROLLER_NAME) == "Market"): if((ACTION_NAME) == "rlist"): ?>class="active"<?php endif; endif; ?>><a href="<?php echo U("SX/Market/rlist");?>">预约留言</a></li><?php endif; ?>-->
-                        </ul>
-                    </li><?php endif; ?>
+                <!--<?php if(in_array('market_ad',session('SX_STAFF.grant')) or in_array('market_re',session('SX_STAFF.grant'))): ?>-->
+                    <!--<li <?php if((CONTROLLER_NAME) == "Market"): ?>class="active"<?php endif; ?>>-->
+                        <!--<a href="#"><i class="fa fa-slideshare"></i> <span class="nav-label">营销功能</span><span class="label label-info pull-right">NEW</span></a>-->
+                        <!--<ul class="nav nav-second-level collapse <?php if((CONTROLLER_NAME) == "Market"): ?>in<?php endif; ?>">-->
+                            <!--<?php if(in_array('market_ad',session('SX_STAFF.grant'))): ?>-->
+                                <!--<li <?php if((CONTROLLER_NAME) == "Market"): if((ACTION_NAME) == "wxmarket"): ?>class="active"<?php endif; endif; ?>><a href="<?php echo U("SX/Market/wxmarket");?>">微信广告</a></li>-->
+                            <!--<?php endif; ?>-->
+<!--&lt;!&ndash;                            <?php if(in_array('market_re',session('SX_STAFF.grant'))): ?>-->
+                                <!--<li <?php if((CONTROLLER_NAME) == "Market"): if((ACTION_NAME) == "rlist"): ?>class="active"<?php endif; endif; ?>><a href="<?php echo U("SX/Market/rlist");?>">预约留言</a></li>-->
+                            <!--<?php endif; ?>&ndash;&gt;-->
+                        <!--</ul>-->
+                    <!--</li>-->
+                <!--<?php endif; ?>-->
                 <?php if(in_array('user_lists',session('SX_STAFF.grant'))): ?><li <?php if((CONTROLLER_NAME) == "Statistics"): ?>class="active"<?php endif; ?>>
                         <a href="#"><i class="fa fa-line-chart"></i> <span class="nav-label">数据统计</span></a>
                         <ul class="nav nav-second-level collapse <?php if((CONTROLLER_NAME) == "Statistics"): ?>in<?php endif; ?>">
@@ -164,9 +178,9 @@
                 </li>
     {pg:/if} -->
 			   <li class="dropdown" id="help-link">
-                    <a class="dropdown-toggle count-info" href="/merchants.php?m=Index&c=help&a=index" title="帮助文档" target="_blank">
-                        <i class="fa  fa-question-circle"></i> <!--<span class="label label-warning">16</span>-->
-                    </a>
+                    <!--<a class="dropdown-toggle count-info" href="/merchants.php?m=Index&c=help&a=index" title="帮助文档" target="_blank">-->
+                        <!--<i class="fa  fa-question-circle"></i> &lt;!&ndash;<span class="label label-warning">16</span>&ndash;&gt;-->
+                    <!--</a>-->
                 </li>
 
                 <li>
@@ -224,6 +238,8 @@
             <div class="ibox float-e-margins">
                 <div class="ibox-title clearfix">
                     <h1 class="realtime-title">商家信息列表&nbsp;&nbsp;(共：<?php echo ($Page['total']); ?> 条)</h1>
+                    <div class="row">
+                        <div class="col-lg-11">
                     <div class="input-group">
                         <input id="username" type="text" class="form-control" placeholder="输入商户名称"
                                value="<?php echo I('username');?>"> <span class="input-group-btn"> <button id="search"
@@ -231,6 +247,11 @@
                                                                                                 class="btn btn-primary">
                         搜索
                     </button> </span>
+                    </div>
+                        </div>
+                        <div class="col-lg-1">
+                            <button id="addMerchant" class="btn btn-primary pull-right">添加商户</button>
+                        </div>
                     </div>
                 </div>
 
@@ -257,11 +278,11 @@
                                             <tr class="widget-list-header">
                                                 <th>ID</th>
                                                 <!--<th>选为特约商户</th>-->
-                                                <th>选为受理商</th>
+                                                <!--<th>选为受理商</th>-->
                                                 <th>商户名称</th>
                                                 <th data-hide="phone">账号</th>
-                                                <th data-hide="phone">微信配置</th>
-                                                <th data-hide="phone">来源</th>
+                                                <!--<th data-hide="phone">微信配置</th>-->
+                                                <!--<th data-hide="phone">来源</th>-->
                                                 <th data-hide="phone">审核状态</th>
                                                 <th>操作</th>
                                             </tr>
@@ -271,40 +292,38 @@
                                             <?php if(!empty($Page['root'])): if(is_array($Page['root'])): $i = 0; $__LIST__ = $Page['root'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr class="widget-list-item">
                                                         <td class="uid"><?php echo ($vo['userId']); ?></td>
                                                         <!--<td style="padding-top:12px;" class="ptd"><input type="checkbox" <?php if(($vo['wx_issp']) == "1"): ?>checked="checked"<?php endif; ?> data-type='<?php echo ($vo['userId']); ?>' class="i-checks issp"></td>-->
-                                                        <td style="padding-top:12px;" class="ptd"><input type="checkbox"
-                                                            <?php if(($vo['userType']) == "1"): ?>checked="checked"<?php endif; ?>
-                                                            data-type='<?php echo ($vo['userId']); ?>' class="i-checks setType">
-                                                        </td>
+                                                        <!--<td style="padding-top:12px;" class="ptd"><input type="checkbox"-->
+                                                            <!--<?php if(($vo['userType']) == "1"): ?>checked="checked"<?php endif; ?>-->
+                                                            <!--data-type='<?php echo ($vo['userId']); ?>' class="i-checks setType">-->
+                                                        <!--</td>-->
                                                         <td class="prelative"><span
                                                                 class="wxname"><?php echo ($vo['userName']); ?></span><input
                                                                 type="text" class="form-control" placeholder="请输入商户名称">&nbsp;&nbsp;&nbsp;<span
                                                                 class="tips"><i class="fa fa-edit"></i><span>保存修改</span></span>
                                                         </td>
                                                         <td><?php echo ($vo['loginName']); ?></td>
-                                                        <td>
-                                                            <?php
- if(!empty($vo['wx_appId']) and !empty($vo['wx_appSecret']) and!empty($vo['wx_mchId']) and !empty($vo['wx_apiSecret']) and !empty($vo['wx_apiclientCert']) and !empty($vo['wx_apiclientKey']) and !empty($vo['wx_apiclientCa'])){ echo "<font color='green'>已配置</font>"; }else{ echo "末配置"; } ?>
-                                                        </td>
-                                                        <td>
-                                                            <?php
- switch($vo['userFlag']){ case 0: echo "本站注册"; break; case 1: echo "受理商添加"; break; } ?>
-                                                        </td>
+
                                                         <td><?php
  switch($vo['userAudit']){ case 0: echo "<span class='label label-default'>未审核</span>"; break; case 1: echo "<span class='label label-primary'>已通过</span>"; break; case 2: echo "<span class='label label-warning'>审核中</span>"; break; case 3: echo "<span class='label label-danger'>未通过</span>"; break; } ?>
                                                         </td>
-                                                        <td><a title="查看商户资料"
-                                                               href="<?php echo U('SX/Users/auditdetail',array('id'=>$vo['userId']));?>"
-                                                               target="_blank"><i style="font-size: 16px;"
-                                                                                  class="fa fa-edit text-navy"></i></a>&nbsp;&nbsp;
+                                                        <td>
+                                                            <!--<a title="查看商户资料"-->
+                                                               <!--href="<?php echo U('SX/Users/auditdetail',array('id'=>$vo['userId']));?>"-->
+                                                               <!--target="_blank"><i style="font-size: 16px;"-->
+                                                                                  <!--class="fa fa-edit text-navy"></i></a>--><a
+                                                                title="费率设置"
+                                                                data-id="<?php echo ($vo['userId']); ?>" class="setWithdrawRate" data-rate="<?php echo ($vo['withdraw_rate']); ?>"><i style="font-size: 19px;"
+                                                                                   class="fa fa-sign-in text-navy"></i><span class="label label-primary">费率设置</span></a>
+                                                            &nbsp;&nbsp;
                                                             <a
                                                                 title="登陆商户"
                                                                 href="<?php echo U('SX/Users/logining',array('id'=>$vo['userId']));?>"
                                                                 target="_blank"><i style="font-size: 19px;"
-                                                                                   class="fa fa-sign-in text-navy"></i></a>&nbsp;&nbsp;
+                                                                                   class="fa fa-sign-in text-navy"></i><span class="label label-primary">登陆商户</span></a>&nbsp;&nbsp;
                                                             <a
                                                                     title="子商家管理"
                                                                     href="<?php echo U('SX/RelationMerchant/getList',array('id'=>$vo['userId']));?>"><i style="font-size: 19px;"
-                                                                                       class="fa fa-sign-in text-navy"></i></a>
+                                                                                       class="fa fa-edit text-navy"></i><span class="label label-primary">子商家管理</span></a>
                                                         </td>
                                                         <!--<a onclick="showtopup('<?php echo ($vo['userName']); ?>','<?php echo ($vo['userId']); ?>')" title="充值" href="javascript:;" target="_blank"><i style="font-size: 19px;" class="fa fa-money text-navy"></i></a>-->
                                                     </tr><?php endforeach; endif; else: echo "" ;endif; ?>
@@ -378,6 +397,36 @@ $("#side-menu li").click(function () {
     <script src="/Static/SX/js/footable.all2.min.js"></script>
     <script src="/Static/SX/js/plugins/icheck.min.js"></script>
     <script type="text/javascript">
+        $('.setWithdrawRate').on('click',function(e){
+            var _this = this;
+            var id = $(this).attr('data-id');
+            var rate = $(this).attr('data-rate');
+            console.log(rate);
+            layer.prompt({
+                value:rate,
+                title:'商家提现费率设置'
+            },function(val){
+                layer.msg('正在修改商家提现费率', {
+                    icon: 16,
+                    shade: 0.5,
+                    time:0
+                });
+                $.post('<?php echo U("/SX/Users/modifyWithDraw");?>',{
+                    userId:id,
+                    rate:val
+                },function(resp){
+                    setTimeout(function(){
+                        layer.closeAll();
+                        if(resp.code == 200){
+                            layer.msg('修改成功');
+                            $(_this).attr('data-rate',val);
+                        }else{
+                            layer.alert(resp.msg);
+                        }
+                    },500);
+                });
+            });
+        });
         $('#table-list-body .prelative .tips').click(function () {
             if ($(this).hasClass('fedit')) {
                 var uid = $(this).parent().siblings('.uid').text();
@@ -493,7 +542,9 @@ $("#side-menu li").click(function () {
             });
 
         });
-
+        $('#addMerchant').click(function(){
+            window.location.href = '<?php echo U("SX/Index/showAddMerchant");?>';
+        });
     </script>
 
 </html>

@@ -480,6 +480,4 @@ class IndexController extends BaseController {
         $this->assign('tip',$tip);
         $this->display("Public/tip");
     }
-
-
 }

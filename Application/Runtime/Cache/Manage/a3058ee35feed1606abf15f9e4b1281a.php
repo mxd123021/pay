@@ -61,16 +61,16 @@
 				 <tr>
 				 <tr>
 				 <th>付款方式：</th>
-				 <td>&nbsp;&nbsp;<?php if($order['pay_way']=='weixin'){ echo "微信"; }elseif($order['pay_way']=='alipay'){ echo "支付宝"; }else{ echo "其他"; } if($order['pay_type']=='NATIVE'){ echo " - 扫码"; }elseif($order['pay_type']=='MICROPAY'){ echo " - 刷卡"; }elseif($order['pay_type']=='JSAPI'){ echo " - 自助"; } echo "支付"; ?></td>
+				 <td>&nbsp;&nbsp;<?php if($order['pay_way']=='weixin'){ echo "微信"; }elseif($order['pay_way']=='alipay'){ echo "支付宝"; }elseif($order['pay_way']=='qq'){ echo "QQ"; }else{ echo "其他"; } if($order['pay_type']=='NATIVE'){ echo " - 扫码"; }elseif($order['pay_type']=='MICROPAY'){ echo " - 刷卡"; }elseif($order['pay_type']=='JSAPI'){ echo " - 自助"; } echo "支付"; ?></td>
 				</tr>
-				<tr>
-				 <th>门店：</th>
-				 <td>&nbsp;&nbsp;<span><?php if($store[$order['storeid']]==""){echo "无";}else{echo $store[$order['storeid']];}?></span></td>
-				 </tr>
-				<tr>
-				 <th>收银员：</th>
-				 <td>&nbsp;&nbsp;<span><?php if($ustaff[$order['eid']]==""){echo "无";}else{echo $ustaff[$order['eid']];}?></span></td>
-				 </tr>
+				<!--<tr>-->
+				 <!--<th>门店：</th>-->
+				 <!--<td>&nbsp;&nbsp;<span><?php if($store[$order['storeid']]==""){echo "无";}else{echo $store[$order['storeid']];}?></span></td>-->
+				 <!--</tr>-->
+				<!--<tr>-->
+				 <!--<th>收银员：</th>-->
+				 <!--<td>&nbsp;&nbsp;<span><?php if($ustaff[$order['eid']]==""){echo "无";}else{echo $ustaff[$order['eid']];}?></span></td>-->
+				 <!--</tr>-->
 				<tr>
 				 <th>第三方支付订单ID：</th>
 				 <td>&nbsp;&nbsp;<span><?php echo $order['transaction_id']?></span></td>
@@ -83,15 +83,15 @@
 				     		<tr><th>退款时间：</th>
 							<td>&nbsp;&nbsp;<?php $refundtext = explode(";",$order['refundtext']); echo date("Y-m-d H:i:s",$refundtext[2]); ?>		</td></tr>
 					 <?php }?>
-				<tr><th>类型：</th>
-				<?php if($order['mchtype']==2){?>
-					<td>&nbsp;&nbsp;<span>平台代收</span></td>
-				<?php }elseif($order['mchtype']==3){?>
-					<td>&nbsp;&nbsp;<span>受理模式</span></td>
-				<?php }else{ ?>
-					<td>&nbsp;&nbsp;<span>普通</span></td>
-				<?php }?>
-				</tr>
+				<!--<tr><th>类型：</th>-->
+				<!--<?php if($order['mchtype']==2){?>-->
+					<!--<td>&nbsp;&nbsp;<span>平台代收</span></td>-->
+				<!--<?php }elseif($order['mchtype']==3){?>-->
+					<!--<td>&nbsp;&nbsp;<span>受理模式</span></td>-->
+				<!--<?php }else{ ?>-->
+					<!--<td>&nbsp;&nbsp;<span>普通</span></td>-->
+				<!--<?php }?>-->
+				<!--</tr>-->
 			   </tbody>
 			  </table>
 			  <div class="dashed-line"></div>
@@ -106,7 +106,7 @@
 		   <th data-hide="phone">支付时间</th>
                    <th>已退款金额(元)</th>
 		   <th data-hide="phone">订单状态</th>
-                   <th>操作</th>
+                   <!--<th>操作</th>-->
 		  </tr>
 		 </thead>
 		 <tbody>
@@ -129,10 +129,10 @@
                             <?php }?>
                         <?php }?>
 		   </td>
-                   <td>
-                       <button class="btn btn-primary btn-sm" onclick="refund(<?php echo ($order["id"]); ?>, <?php echo ($order["goods_price"]); ?>);"><strong>退款</strong></button>
-                        <button class="btn btn-sm btn-info" onclick="queryRefund(<?php echo ($order["id"]); ?>);"><strong>查询退款</strong></button>
-                   </td>
+                   <!--<td>-->
+                       <!--<button class="btn btn-primary btn-sm" onclick="refund(<?php echo ($order["id"]); ?>, <?php echo ($order["goods_price"]); ?>);"><strong>退款</strong></button>-->
+                        <!--<button class="btn btn-sm btn-info" onclick="queryRefund(<?php echo ($order["id"]); ?>);"><strong>查询退款</strong></button>-->
+                   <!--</td>-->
 		  </tr>
 		 </tbody>
 <!-- 		 <tfoot>

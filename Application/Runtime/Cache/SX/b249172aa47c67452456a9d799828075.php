@@ -153,9 +153,9 @@
                 </li>
     {pg:/if} -->
 			   <li class="dropdown" id="help-link">
-                    <a class="dropdown-toggle count-info" href="/merchants.php?m=Index&c=help&a=index" title="帮助文档" target="_blank">
-                        <i class="fa  fa-question-circle"></i> <!--<span class="label label-warning">16</span>-->
-                    </a>
+                    <!--<a class="dropdown-toggle count-info" href="/merchants.php?m=Index&c=help&a=index" title="帮助文档" target="_blank">-->
+                        <!--<i class="fa  fa-question-circle"></i> &lt;!&ndash;<span class="label label-warning">16</span>&ndash;&gt;-->
+                    <!--</a>-->
                 </li>
 
                 <li>

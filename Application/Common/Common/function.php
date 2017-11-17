@@ -50,6 +50,7 @@ trait ZhuoGePayHelper{
         ])->getBody();
         $response = json_decode($body,true);
         if($response['retCode'] == 1000){
+//            D('Manage/WithdrawRecord')->updateRemoteOrderNumber($orderNumber,);
             return true;
         }
         return $response['retMsg'];
