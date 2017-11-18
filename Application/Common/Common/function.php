@@ -63,7 +63,7 @@ trait ZhuoGePayHelper{
      * @param $uid
      * @return mixed
      */
-    protected function zhuoGeCreateQrCodeOrderByUserId($isWeChat,$orderNumber,$amount,$uid,$orderData){
+    protected function zhuoGeCreateQrCodeOrderByUserId($isWeChat,$orderNumber,$amount,$uid,$orderData,$timeOut = ''){
         if($isWeChat){
             $type = 'wx';
         }else{
@@ -74,7 +74,7 @@ trait ZhuoGePayHelper{
         $res = D('Manage/XyOrder')->addOrder($orderData);
         if($res){
             $amount = intval(round($amount * 100));
-            return $this->createZhuoGePayOrder($type,$amount,'扫码支付',$orderNumber,$item['bank_merchant_number'],$item['bank_sign_key']);
+            return $this->createZhuoGePayOrder($type,$amount,'扫码支付',$orderNumber,$item['bank_merchant_number'],$item['bank_sign_key'],$timeOut);
         }
         return false;
     }
@@ -90,7 +90,13 @@ trait ZhuoGePayHelper{
             //订单状态是否是成功
             if(intval($data['order_status']) === 3){
                 if(is_callable($callback)){
-                    $callback($data['mch_order_number']);
+                    if($callback($data['mch_order_number'])){
+                        echo 'success';
+                        die();
+                    }else{
+                        echo 'fail';
+                        die();
+                    }
                 }
                 echo 'success';
                 die();
@@ -118,7 +124,7 @@ trait ZhuoGePayHelper{
      * @param string $pwd
      * @return string
      */
-    public function createZhuoGePayOrder($type,$money,$orderName,$oNumber,$merchantNumber,$sign,$pwd = ''){
+    public function createZhuoGePayOrder($type,$money,$orderName,$oNumber,$merchantNumber,$sign,$timeOut = ''){
         $url = $this->getZhuoGePayApiUrl();
         $requestData = [
             'mch_appid'=>$merchantNumber,
@@ -128,6 +134,9 @@ trait ZhuoGePayHelper{
             'order_desc'=>$orderName,
             'notify_url'=>sprintf('http://%s/%s',$_SERVER['SERVER_NAME'],$this->zhuoGeCallbackAction),
         ];
+        if($timeOut != ''){
+            $requestData['timeOut'] = $timeOut;
+        }
         $requestData['sign'] = $this->makeSignKey($requestData,$sign);
         $request = new \GuzzleHttp\Client();
         $body = (string)$request->request('post',$url,[

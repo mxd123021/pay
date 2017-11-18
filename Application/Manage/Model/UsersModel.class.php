@@ -158,6 +158,7 @@ class UsersModel extends BaseModel {
 		$data['bank_merchant_number'] = I('bank_merchant_number','');
 		$data['bank_query_key'] = I('bank_query_key','');
 		$data['userAudit'] = 1;
+		$data['token'] = Uuid::uuid4()->toString();
 		if($data['loginPwd']!=$data['reUserPwd']){
 			$rd['status'] = -3; //两次密码不一致
 			return $rd;

@@ -1,6 +1,7 @@
 <?php
 
 namespace Manage\Model;
+use GuzzleHttp\Client;
 
 /**
  * 兴业订单处理
@@ -16,12 +17,30 @@ class XyOrderModel extends BaseModel
      */
     public function setOrderIsPay($oid)
     {
-        return $this->where([
+        $res = $this->where([
             'order_id'=>$oid
         ])->save([
             'ispay'=>1,
             'paytime'=>time()
         ]);
+        if($res){
+            $item = $this->where([
+                'order_id'=>$oid
+            ])->find();
+            if($item['callbackUrl'] != ''){
+                $client = new Client();
+                $body = $client->request('post',$item['callbackUrl'],[
+                    'form_data'=>[
+                        'orderNum'=>$item['order_id'],
+                        'price'=>intval(round($item['goods_price'] * 100)),
+                        'status'=>1
+                    ]
+                ])->getBody();
+                $body = (string)$body;
+                return $body == 'success';
+            }
+        }
+        return false;
     }
     /**
      * 获取查询key
@@ -113,6 +132,8 @@ class XyOrderModel extends BaseModel
         $data['refundtext'] = ""; //退款人员和店铺
         $data['comefrom'] = 0; //0本地 1微信营销 2微店 3O2O系统
         $data['mchtype'] = empty($info['mchtype']) ? 0 : $info['mchtype']; //0普通商户 1特约商户 2平台代收
+        //回调地址
+        $data['callbackUrl'] = empty($info['callbackUrl']) ? '' : $info['callbackUrl']; //0普通商户 1特约商户 2平台代收
         $data['pmid'] = empty($info['pmid']) ? 0 : $info['pmid']; //有上级代理则有代理者ID
         $data['p_openid'] = ""; //p_openid对应上级openid
 

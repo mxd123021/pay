@@ -29,6 +29,19 @@ class OrderModel extends BaseModel {
 		},$order);
 	 }
 
+	/**
+	 *
+	 * @param $uid
+	 * @param $oNumber
+	 * @return mixed
+	 */
+	public function getOrderNumberIsset($uid,$oNumber){
+		return $this->where([
+			'order_id'=>$oNumber,
+			'uid'=>$uid
+		])->find();
+	}
+
      /**
 	  * 获取当前用户所有订单分页信息
 	  */

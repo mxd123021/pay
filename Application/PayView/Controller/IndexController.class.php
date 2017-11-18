@@ -87,8 +87,7 @@ class IndexController extends Controller{
         $data = I();
         Log::write(json_encode($data));
         $this->zhuogeNotice(function($orderNumber){
-            D('Manage/XyOrder')->setOrderIsPay($orderNumber);
-            Log::write('成功');
+            return D('Manage/XyOrder')->setOrderIsPay($orderNumber);
         },$data);
     }
 }
