@@ -55,6 +55,8 @@
                                                 <!--<th>选为特约商户</th>-->
                                                 <!--<th>选为受理商</th>-->
                                                 <th>商户名称</th>
+                                                <th>商户接口ID</th>
+                                                <th>商户接口TOKEN</th>
                                                 <th data-hide="phone">账号</th>
                                                 <!--<th data-hide="phone">微信配置</th>-->
                                                 <!--<th data-hide="phone">来源</th>-->
@@ -78,6 +80,10 @@
                                                                 type="text" class="form-control" placeholder="请输入商户名称">&nbsp;&nbsp;&nbsp;<span
                                                                 class="tips"><i class="fa fa-edit"></i><span>保存修改</span></span>
                                                         </td>
+                                                        <td class="prelative"><span
+                                                                class="wxname">{$vo['unique_id']}</span>
+                                                        <td class="prelative"><span
+                                                                class="wxname">{$vo['token']}</span>
                                                         <td>{$vo['loginName']}</td>
 
                                                         <td><?php

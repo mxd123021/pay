@@ -4,6 +4,7 @@ namespace SX\Model;
 use Arrayzy\ArrayImitator;
 use Ramsey\Uuid\Uuid;
 use SX\Helper\ShanghaiBankPayHelper;
+use Think\Log;
 
 class RelationMerchantsModel extends BaseModel
 {
@@ -15,7 +16,8 @@ class RelationMerchantsModel extends BaseModel
         'bank_merchant_number',
         'bank_sign_key',
         'bank_query_key',
-        'mobile_number'
+        'mobile_number',
+        'rediect_url'
     ];
 
     /**
@@ -162,6 +164,40 @@ class RelationMerchantsModel extends BaseModel
         ])
             ->field(['bank_query_key','user_id','bank_sign_key','bank_merchant_number'])
             ->find();
+    }
+
+    /**
+     * 获取威富通的支付URL
+     * @param $uid
+     */
+    public function getWftCurrentWheelUrlByUid($uid){
+        $res = $this->where([
+            'user_id'=>$uid,
+            'api_type'=>2
+        ])
+            ->order('wheel_number asc')
+            ->field(['id','rediect_url'])
+            ->find();
+        if($res){
+            $this->setWftWheelIncrById($uid,$res['id']);
+            return $res['rediect_url'];
+        }
+        return false;
+    }
+
+    /**
+     * 威富通轮询次数 + 1
+     * @param $id
+     * @return bool
+     */
+    public function setWftWheelIncrById($uid,$id){
+//        Log::write('id是'.$id);
+        $res = (bool)$this->where([
+            'user_id'=>$uid,
+            'id'=>$id
+        ])
+            ->setInc('wheel_number');
+        return $res;
     }
 
     /**

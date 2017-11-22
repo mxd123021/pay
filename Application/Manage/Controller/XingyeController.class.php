@@ -293,6 +293,7 @@ class XingyeController extends BaseController
             $this->assign('api_type',$item['api_type']);
             $this->assign('order',$order);
             $this->assign('autopayewm',sprintf('http://%s/%s',$_SERVER['SERVER_NAME'],'PayView/Index/Index?id='.$item['unique_id']));
+            $this->assign('wftQrCode',sprintf('http://%s/%s',$_SERVER['SERVER_NAME'],'PayView/Index/wftIndex?id='.$item['unique_id']));
             $this->display();
         }
     }

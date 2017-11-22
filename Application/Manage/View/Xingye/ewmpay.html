@@ -85,6 +85,13 @@
                                                 <p class="tips downLoadEwm"><a href="javascript:void(0)"
                                                                                onclick="ewmdown()">下载二维码</a></p>
                                             </div>
+
+                                            <div class="pay-code" id="autopay-qrcode1">
+                                                <h5>威富通自助付款</h5>
+                                                <div class="qr-code-zone gray" id="qr-code-autopay1"></div>
+                                                <p class="gray tips">买家可自助输入付款金额</p>
+                                                <p class="tips downLoadEwm"><a href="javascript:void(0)"></a> &nbsp;</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -261,11 +268,11 @@
             padding-top: 4px;
         }
 
-        #qr-code-autopay canvas {
+        #qr-code-autopay,#qr-code-autopay1 canvas {
             vertical-align: middle;
         }
 
-        #qr-code-autopay {
+        #qr-code-autopay,#qr-code-autopay1{
             line-height: 200px;
             padding-top: 4px;
         }
@@ -452,6 +459,12 @@
                 width: qwidth, //宽度
                 height: qheight, //高度
                 text: '{$autopayewm}' //任意内容
+            });
+            $("#qr-code-autopay1").html('').css('background-color', '#FFF').qrcode({
+                //render: "table", //table方式
+                width: qwidth, //宽度
+                height: qheight, //高度
+                text: '{$wftQrCode}' //任意内容
             });
             $('.js-weixin-qrcode').click(function () {
                 getEwm('weixin');

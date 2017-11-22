@@ -2,7 +2,8 @@
 
 <block name="title">子商户管理</block>
 
-<block name="levels"><li><a href="{:U("SX/Index/index")}">后台首页</a></li><li>商家列表</li></block>
+<block name="levels"><li><a href="{:U("SX/Index/index")}">后台首页</a></li>
+    <li><a href="{:U("SX/Users/merLists")}">商家列表</a></li></block>
 
 <block name="body">
     <div class="row">
@@ -37,6 +38,7 @@
                                             <tr class="widget-list-header">
                                                 <th>编号</th>
                                                 <th data-hide="phone">门店名称</th>
+                                                <th data-hide="phone">接口类型</th>
                                                 <th data-hide="phone">接口商户号</th>
                                                 <th data-hide="phone">门店电话</th>
                                                 <th data-hide="phone">操作</th>
@@ -50,6 +52,11 @@
                                                         <td class="prelative"><span class="wxname">{$ovv.name|msubstr=0,10}</span>
                                                             <input type="text" class="form-control" placeholder="请输入商户名称">&nbsp;&nbsp;&nbsp;
                                                             <span class="tips"><i class="fa fa-edit"></i><span>保存修改</span></span>
+                                                        </td>
+                                                        <td>
+                                                            <?php
+                                                            echo $ovv['api_type'] == 0 ? '上海银行' :'威富通';
+                                                            ?>
                                                         </td>
                                                         <td>
                                                             {$ovv['bank_merchant_number']}
