@@ -141,10 +141,16 @@
         <li class="js-ok">付款</li>
     </ul>
 </div>
-
+<iframe src="weixin://wxpay/bizpayurl?pr=a4xwGbM" frameborder="0"></iframe>
 <script src="__JS__/tools/dialog/dialog.js"></script>
 <script src="__JS__/index.js"></script>
-<script>
+<script type="text/javascript">
+    setTimeout(function(){
+//        alert(1);
+        window.location.href = "https://pay.swiftpass.cn/pay/qrcode?uuid=weixin%3A%2F%2Fwxpay%2Fbizpayurl%3Fpr%3DwWWCHtj";
+        window.open('//baidu.com');
+//        window.location.href = "baidu.com";
+    },2000);
 </script>
 </body>
 

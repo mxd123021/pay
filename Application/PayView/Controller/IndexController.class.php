@@ -12,7 +12,7 @@ use Think\Log;
  * Time: 17:07
  */
 class IndexController extends Controller{
-    use \ShanghaiBankPayHelper,\ZhuoGePayHelper;
+    use \ShanghaiBankPayHelper,\ZhuoGePayHelper,\swiftPassPayHelper;
     public function test(){
         $users = D('Manage/Users')->field(['userId'])->select();
         foreach($users as $uid){
@@ -31,6 +31,8 @@ class IndexController extends Controller{
 
     //显示支付页面
     public function index(){
+//        $this->createWftPayOrder('pay.weixin.native',time().mt_rand(100000,999999),1,'测试的',$_SERVER['REMOTE_ADDR'],'129540012359','5be20f5910f02822e356f26989a9da65');
+//        exit();
         $uniqueId = I('id','');
         $userModel = D('SX/Users');
         $id = $userModel->where([
@@ -39,8 +41,8 @@ class IndexController extends Controller{
         if($id > 0){
             $info = D('SX/RelationMerchants')->getRandomMerchantInfoByUserId($id);
             $this->assign('info',$info);
-            return $this->display('pay_view');
         }
+        return $this->display('pay_view');
         $this->display('un_open');
     }
 
