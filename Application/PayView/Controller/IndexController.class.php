@@ -46,6 +46,38 @@ class IndexController extends Controller{
         $this->display('un_open');
     }
 
+    //显示支付页面
+    public function wftIndex(){
+        $uniqueId = I('id','');
+        $userModel = D('SX/Users');
+        $requestId = I('request_id','');
+        if(empty($requestId)){
+            header(sprintf('Location:%s',sprintf('http://%s/PayView/Index/wftIndex?id=%s&request_id=%s',$_SERVER['SERVER_NAME'],$uniqueId,Uuid::uuid4()->toString())));
+            Log::write('没带id');
+            exit();
+        }
+        $res = M('request_ids')->where([
+            'request_id'=>$requestId
+        ])->find();
+        if($res){
+            exit();
+        }
+        M('request_ids')->add([
+            'request_id'=>$requestId
+        ]);
+        $id = $userModel->where([
+            'unique_id'=>$uniqueId
+        ])->getField('userId');
+        if($id > 0){
+            $jumpUrl = D('SX/RelationMerchants')->getWftCurrentWheelUrlByUid($id);
+            if($jumpUrl){
+                redirect($jumpUrl);
+                exit();
+            }
+        }
+        $this->display('un_open');
+    }
+
     /**
      * 获取js支付url
      */

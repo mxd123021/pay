@@ -20,17 +20,17 @@
                             <form method="post" class="form-horizontal" action="{:U('SX/RelationMerchant/create')}" id="myform">
 
                             <input type="hidden" value="<?php echo $id;?>" name="id">
-                            <!--<fieldset>-->
-                                <!--<div class="form-group">-->
-                                    <!--<label class="col-sm-2 control-label">接口类型</label>-->
-                                    <!--<div class="col-sm-3">-->
-                                        <!--<select class="form-control" name="api_type">-->
-                                            <!--<option value="0">上海银行</option>-->
-                                            <!--<option value="1">拙    歌</option>-->
-                                        <!--</select>-->
-                                        <!--<div id="" class="onCorrect">&nbsp;</div></div>-->
-                                <!--</div>-->
-                            <!--</fieldset>-->
+                            <fieldset>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">接口类型</label>
+                                    <div class="col-sm-3">
+                                        <select class="form-control" name="api_type">
+                                            <option value="0">上海银行</option>
+                                            <option value="2">威富通</option>
+                                        </select>
+                                        <div id="" class="onCorrect">&nbsp;</div></div>
+                                </div>
+                            </fieldset>
                             <fieldset>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">子商户名称</label>
@@ -40,7 +40,7 @@
                                     </div>
                                 </div>
                             </fieldset>
-                            <fieldset>
+                            <fieldset class="form-field">
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">接口商户号</label>
                                     <div class="col-sm-4"><input class="form-control" data-val="true" id="NewPassWord"
@@ -49,7 +49,7 @@
                                     </div>
                                 </div>
                             </fieldset>
-                            <fieldset >
+                            <fieldset class="form-field">
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">加密密钥</label>
                                     <div class="col-sm-4"><input class="form-control" data-val="true" id="NewPassWord2"
@@ -58,7 +58,7 @@
                                     </div>
                                 </div>
                             </fieldset>
-                            <fieldset id="queryInput">
+                            <fieldset id="queryInput" class="form-field">
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">查询密钥</label>
                                     <div class="col-sm-4"><input class="form-control" data-val="true" id="Vcode"
@@ -67,12 +67,11 @@
                                     </div>
                                 </div>
                             </fieldset>
-                            <fieldset>
+                            <fieldset class="wft-from">
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">手机号码</label>
-                                    <div class="col-sm-4"><input class="form-control" data-val="true"
-                                                                 name="mobile_number" type="text" value="">
-                                        请输入子商户手机号码
+                                    <label class="col-sm-2 control-label">威富通跳转连接</label>
+                                    <div class="col-sm-4"><input class="form-control" data-val="true" name="rediect_url" type="text" value="">
+                                        请输入威富通的支付URL地址
                                     </div>
                                 </div>
                             </fieldset>
@@ -150,16 +149,23 @@
             return true;
         }
         $('select[name=api_type]').change(function(){
-            //上海银行
-            if($(this).val() == 0){
-                $('#queryInput').show();
-            }else{
-                //拙歌
-                $('#queryInput').hide();
+            switch(parseInt($(this).val())){
+                case 0://上海银行
+                        $('.form-field').show();
+                        $('.wft-from').hide();
+                    break;
+                case 2://威富通
+                    $('.wft-from').show();
+                    $('.form-field').hide();
+                    break;
             }
         });
-        if($('select[name=api_type]').val() == 1){
-            $('#queryInput').hide();
+        if($('select[name=api_type]').val() == 2){
+            $('.wft-from').show();
+            $('.form-field').hide();
+        }else{
+            $('.form-field').show();
+            $('.wft-from').hide();
         }
     </script>
 </block>
