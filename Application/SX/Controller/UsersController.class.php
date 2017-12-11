@@ -17,6 +17,18 @@ class UsersController extends BaseController {
         $this->setResponseCode(412)->makeResponse('修改失败');
     }
 
+    public function delUser(){
+        $uid = I('uid',0);
+        $m = D('Manage/Users');
+        $res = $m->where([
+            'userId'=>$uid
+        ])->delete();
+        if($res){
+            return $this->makeResponse('ok');
+        }
+        return $this->setResponseCode(412)->makeResponse('删除失败，请重试');
+    }
+
     /**
      * 添加新用户
      */

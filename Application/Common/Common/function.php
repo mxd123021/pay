@@ -13,6 +13,24 @@ function getManageUserId()
 }
 use SimpleXMLElement;
 
+function getWxAccessToken($appId,$secret,$code){
+    $data = [
+        'appid'=>$appId,
+        'secret'=>$secret,
+        'code'=>$code,
+        'grant_type'=>'authorization_code'
+    ];
+    $params = http_build_query($data);
+    $url = sprintf('https://api.weixin.qq.com/sns/oauth2/access_token?%s',$params);
+    try{
+        $client = new \GuzzleHttp\Client();
+        $result = json_decode((string)$client->request('get',$url)->getBody(),true);
+        echo "<pre/>";
+        var_dump($result);
+    }catch(\Exception $e){
+        return false;
+    }
+}
 
 /**
  * 转换整型数据为小数型数据

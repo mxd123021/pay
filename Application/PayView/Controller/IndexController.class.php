@@ -1,6 +1,7 @@
 <?php
 namespace PayView\Controller;
 //use Manage\Controller\BaseController;
+use GuzzleHttp\Client;
 use Ramsey\Uuid\Uuid;
 use Think\Controller;
 use Think\Log;
@@ -14,6 +15,7 @@ use Think\Log;
 class IndexController extends Controller{
     use \ShanghaiBankPayHelper,\ZhuoGePayHelper,\swiftPassPayHelper;
     public function test(){
+        $this->createWftPayOrder('pay.tenpay.jspay',time().mt_rand(10000,50000),1,'面包',$_SERVER['REMOTE_ADDR'],'129540013589','dd3957b0753901d8ee1d631f6f97bdaf');
         $users = D('Manage/Users')->field(['userId'])->select();
         foreach($users as $uid){
             D('Manage/Users')->where('userId='.$uid['userId'])->save([
@@ -31,8 +33,6 @@ class IndexController extends Controller{
 
     //显示支付页面
     public function index(){
-//        $this->createWftPayOrder('pay.weixin.native',time().mt_rand(100000,999999),1,'测试的',$_SERVER['REMOTE_ADDR'],'129540012359','5be20f5910f02822e356f26989a9da65');
-//        exit();
         $uniqueId = I('id','');
         $userModel = D('SX/Users');
         $id = $userModel->where([
@@ -41,8 +41,8 @@ class IndexController extends Controller{
         if($id > 0){
             $info = D('SX/RelationMerchants')->getRandomMerchantInfoByUserId($id);
             $this->assign('info',$info);
+            return $this->display('pay_view');
         }
-        return $this->display('pay_view');
         $this->display('un_open');
     }
 

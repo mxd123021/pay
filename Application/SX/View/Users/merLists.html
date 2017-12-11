@@ -107,11 +107,13 @@
                                                             <!--<a title="查看商户资料"-->
                                                                <!--href="{:U('SX/Users/auditdetail',array('id'=>$vo['userId']))}"-->
                                                                <!--target="_blank"><i style="font-size: 16px;"-->
-                                                                                  <!--class="fa fa-edit text-navy"></i></a>--><a
-                                                                title="费率设置"
-                                                                data-id="{$vo['userId']}" class="setWithdrawRate" data-rate="{$vo['withdraw_rate']}"><i style="font-size: 19px;"
-                                                                                   class="fa fa-sign-in text-navy"></i><span class="label label-primary">费率设置</span></a>
+                                                                                  <!--class="fa fa-edit text-navy"></i></a>-->
+                                                            <a title="删除商户" data-id="{$vo['userId']}" class="delWithdrawRate btn btn-sm btn-danger" data-rate="{$vo['withdraw_rate']}"><span class="">删除商户</span></a>
                                                             &nbsp;&nbsp;
+                                                            <a
+                                                                    title="费率设置"
+                                                                    data-id="{$vo['userId']}" class="setWithdrawRate" data-rate="{$vo['withdraw_rate']}"><i style="font-size: 19px;"
+                                                                                                                                                            class="fa fa-sign-in text-navy"></i><span class="label label-primary">费率设置</span></a>
                                                             <a
                                                                 title="登陆商户"
                                                                 href="{:U('SX/Users/logining',array('id'=>$vo['userId']))}"
@@ -358,6 +360,28 @@
         });
         $('#addMerchant').click(function(){
             window.location.href = '{:U("SX/Index/showAddMerchant")}';
+        });
+        $('.delWithdrawRate').click(function(){
+            var id = $(this).attr('data-id');
+            var _this = this;
+
+            layer.confirm('是否要删除该商户？',function(){
+                layer.msg('正在删除', {
+                    icon: 16,
+                    shade: 0.5,
+                    time:0
+                });
+                $.post('{:U("SX/Users/delUser")}',{uid:id},function(resp){
+                    layer.closeAll();
+                    if(resp.code == 200){
+                        return layer.alert('删除成功',function(){
+                            $(_this).parents('tr').remove();
+                            layer.closeAll();
+                        });
+                    }
+                    return layer.alert(resp.msg);
+                });
+            });
         });
     </script>
 </block>
