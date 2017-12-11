@@ -40,7 +40,7 @@
                                     </div>
                                 </div>
                             </fieldset>
-                            <fieldset class="form-field">
+                            <fieldset class="form-field wft-from">
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">接口商户号</label>
                                     <div class="col-sm-4"><input class="form-control" data-val="true" id="NewPassWord"
@@ -49,7 +49,7 @@
                                     </div>
                                 </div>
                             </fieldset>
-                            <fieldset class="form-field">
+                            <fieldset class="wft-from form-field">
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">加密密钥</label>
                                     <div class="col-sm-4"><input class="form-control" data-val="true" id="NewPassWord2"
@@ -151,21 +151,21 @@
         $('select[name=api_type]').change(function(){
             switch(parseInt($(this).val())){
                 case 0://上海银行
-                        $('.form-field').show();
-                        $('.wft-from').hide();
+                    $('.wft-from').hide();
+                    $('.form-field').show();
                     break;
                 case 2://威富通
-                    $('.wft-from').show();
                     $('.form-field').hide();
+                    $('.wft-from').show();
                     break;
             }
         });
         if($('select[name=api_type]').val() == 2){
-            $('.wft-from').show();
             $('.form-field').hide();
+            $('.wft-from').show();
         }else{
-            $('.form-field').show();
             $('.wft-from').hide();
+            $('.form-field').show();
         }
     </script>
 </block>

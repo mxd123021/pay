@@ -1,6 +1,7 @@
 <?php
 namespace PayView\Controller;
 //use Manage\Controller\BaseController;
+use GuzzleHttp\Client;
 use Ramsey\Uuid\Uuid;
 use Think\Controller;
 use Think\Log;
@@ -13,7 +14,40 @@ use Think\Log;
  */
 class IndexController extends Controller{
     use \ShanghaiBankPayHelper,\ZhuoGePayHelper,\swiftPassPayHelper;
+
+    /**
+     * 获取支付tokenid
+     */
+    public function getWftPayTokenId(){
+        $id = I('id','');
+        $price = I('price',0);
+        if(empty($id) || $price <= 0){
+            $this->ajaxReturn([
+                'msg'=>'提交参数有误'
+            ]);
+        }
+        $payType = I('pay_type','qq');
+        $res = $this->createWftJsOrderByMerchantUniqueId($payType,$this->getOrderNumber(),$price,get_client_ip(),$id);
+        if($res instanceof \Exception){
+            $this->ajaxReturn([
+                'msg'=>'获取支付信息失败'
+            ]);
+        }
+        //获取成功
+        $this->ajaxReturn([
+            'msg'=>'ok',
+            'data'=>[
+                'tokenId'=>$res['token_id']
+            ]
+        ]);
+    }
+
     public function test(){
+        $res = $this->createWftPayOrder('pay.tenpay.jspay',time().mt_rand(10000,50000),1,'面包',$_SERVER['REMOTE_ADDR'],'129540013589','dd3957b0753901d8ee1d631f6f97bdaf');
+        dump($res);
+        $this->assign('tokenId',$res['token_id']);
+        $this->display('index');
+        die();
         $users = D('Manage/Users')->field(['userId'])->select();
         foreach($users as $uid){
             D('Manage/Users')->where('userId='.$uid['userId'])->save([
@@ -31,8 +65,6 @@ class IndexController extends Controller{
 
     //显示支付页面
     public function index(){
-//        $this->createWftPayOrder('pay.weixin.native',time().mt_rand(100000,999999),1,'测试的',$_SERVER['REMOTE_ADDR'],'129540012359','5be20f5910f02822e356f26989a9da65');
-//        exit();
         $uniqueId = I('id','');
         $userModel = D('SX/Users');
         $id = $userModel->where([
@@ -41,10 +73,12 @@ class IndexController extends Controller{
         if($id > 0){
             $info = D('SX/RelationMerchants')->getRandomMerchantInfoByUserId($id);
             $this->assign('info',$info);
+            return $this->display('pay_view');
         }
-        return $this->display('pay_view');
         $this->display('un_open');
     }
+
+
 
     //显示支付页面
     public function wftIndex(){
@@ -69,10 +103,10 @@ class IndexController extends Controller{
             'unique_id'=>$uniqueId
         ])->getField('userId');
         if($id > 0){
-            $jumpUrl = D('SX/RelationMerchants')->getWftCurrentWheelUrlByUid($id);
-            if($jumpUrl){
-                redirect($jumpUrl);
-                exit();
+            $info = D('SX/RelationMerchants')->getWftCurrentWheelUrlByUid($id,1);
+            if($info){
+                $this->assign('info',$info);
+                return $this->display('wftPayView');
             }
         }
         $this->display('un_open');

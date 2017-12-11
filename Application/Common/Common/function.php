@@ -13,6 +13,48 @@ function getManageUserId()
 }
 use SimpleXMLElement;
 
+/**
+ * 获取生成订单的数据
+ * @param $uid
+ * @param string $payType
+ * @param int $price
+ * @param string $orderName
+ * @param $orderNumber
+ * @param $goodsDesc
+ * @param string $queryKey
+ * @return array
+ */
+function getCreateOrderInfo($uid,$payType = '',$price = 0,$orderName = '',$orderNumber,$goodsDesc,$queryKey = ''){
+    return [
+        'bank_query_key' => $queryKey,
+        'pay_type' => $payType,
+        'goods_describe' => $goodsDesc,
+        'total_fee' => $price,
+        'tname' => $orderName,
+        'out_trade_no' => $orderNumber,
+        'goods_name' => $orderName,
+        'uid' => $uid
+    ];
+}
+
+function getWxAccessToken($appId,$secret,$code){
+    $data = [
+        'appid'=>$appId,
+        'secret'=>$secret,
+        'code'=>$code,
+        'grant_type'=>'authorization_code'
+    ];
+    $params = http_build_query($data);
+    $url = sprintf('https://api.weixin.qq.com/sns/oauth2/access_token?%s',$params);
+    try{
+        $client = new \GuzzleHttp\Client();
+        $result = json_decode((string)$client->request('get',$url)->getBody(),true);
+        echo "<pre/>";
+        var_dump($result);
+    }catch(\Exception $e){
+        return false;
+    }
+}
 
 /**
  * 转换整型数据为小数型数据
@@ -190,33 +232,46 @@ trait swiftPassPayHelper
      * @param $uniqueId
      * @return mixed
      */
-    protected function createWftJsOrderByMerchantUniqueId($isAliPay, $orderNumber, $amount, $ip, $uniqueId)
-    {
-
+    protected function createWftJsOrderByMerchantUniqueId($payType, $orderNumber, $amount, $ip, $uniqueId){
         $orderData = [];
-        if ($isAliPay) {
-            $orderData['trade_type'] = 'alipay';
-            $type = 'Alipay_LIFENO';
-        } else {
-            $orderData['trade_type'] = 'weixin';
-            $type = 'WX_SCANCODE_JSAPI';
+        switch($payType){
+            case 'alipay':
+                $orderData['trade_type'] = 'alipay';
+                $type = 'pay.alipay.jspay';
+                break;
+            case 'weixin':
+                $orderData['trade_type'] = 'weixin';
+                $type = 'pay.weixin.jspay';
+                break;
+            case 'qq':
+                $orderData['trade_type'] = 'qq';
+                $type = 'pay.tenpay.jspay';
+                break;
         }
         $item = D('SX/RelationMerchants')->getItemByUniqueId($uniqueId);
-        $orderName = $this->getGoodsNameByPrice($amount);
-        //添加订单表数据
-        $orderData = array_merge($orderData, [
-            'bank_query_key' => $item['bank_query_key'],
-            'pay_type' => 'JSAPI',
-            'goods_describe' => '自助支付',
-            'total_fee' => $amount,
-            'tname' => $orderName,
-            'out_trade_no' => $orderNumber,
-            'goods_name' => $orderName,
-            'uid' => $item['user_id']
-        ]);
-        $amount = round($amount + (mt_rand(10, 900) / 100), 2);
-        $res = D('Manage/XyOrder')->addOrder($orderData);
-        return $this->createPayOrder($type, $orderNumber, $amount, $orderName, $ip, '', $item['bank_merchant_number'], $item['bank_sign_key']);
+        if($item){
+            $orderName = $this->getGoodsNameByPrice($amount);
+            //添加订单表数据
+            $orderData = array_merge($orderData, [
+                'bank_query_key' => $item['bank_query_key'],
+                'pay_type' => 'JSAPI',
+                'goods_describe' => '自助支付',
+                'total_fee' => $amount,
+                'tname' => $orderName,
+                'out_trade_no' => $orderNumber,
+                'goods_name' => $orderName,
+                'uid' => $item['user_id']
+            ]);
+            $amount = round($amount * 100);
+            $amount = round($amount + (mt_rand(10, 900) / 100), 2);
+            $payOrder = $this->createWftPayOrder($type, $orderNumber, $amount, $orderName, $ip, $item['bank_merchant_number'], $item['bank_sign_key']);
+            if($payOrder instanceof \Exception){
+                return $payOrder;
+            }
+            $res = D('Manage/XyOrder')->addOrder($orderData);
+            return $payOrder;
+        }
+        return new \Exception('获取支付数据失败',412);
     }
 
     /**
@@ -238,7 +293,7 @@ trait swiftPassPayHelper
             'mch_id' => $merchantNumber,
             'is_raw' => 0,
             'out_trade_no' => $orderNumber,
-            'total_fee' => $amount,
+            'total_fee' => intval($amount),
             'body' => $goodsName,
             'notify_url' => sprintf('http://%s/%s', $_SERVER['SERVER_NAME'], $this->swiftPassCallbackAction),
             'mch_create_ip' => $ip,
@@ -250,8 +305,8 @@ trait swiftPassPayHelper
         $response = (string)$request->request('post', $url, [
             'body' => $data
         ])->getBody();
-        dump($response);
-        return json_decode($response, true);
+        $res = xmlToArray($response);
+        return $res;
     }
 
     public function makeWftSign($data,$key){
@@ -259,7 +314,6 @@ trait swiftPassPayHelper
         return strtoupper(md5(sprintf('%s&key=%s',urldecode(http_build_query($data)),$key)));
     }
 }
-
 function getRandomStr($length)
 {
     $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_ []{}<>~`+=,.;:/?|';
