@@ -170,17 +170,20 @@ class RelationMerchantsModel extends BaseModel
      * 获取威富通的支付URL
      * @param $uid
      */
-    public function getWftCurrentWheelUrlByUid($uid){
+    public function getWftCurrentWheelUrlByUid($uid,$getType = 0){
         $res = $this->where([
             'user_id'=>$uid,
             'api_type'=>2
         ])
             ->order('wheel_number asc')
-            ->field(['id','rediect_url'])
+            ->field(['id','rediect_url','name','unique_id'])
             ->find();
         if($res){
             $this->setWftWheelIncrById($uid,$res['id']);
-            return $res['rediect_url'];
+            if($getType == 0){
+                return $res['rediect_url'];
+            }
+            return $res;
         }
         return false;
     }

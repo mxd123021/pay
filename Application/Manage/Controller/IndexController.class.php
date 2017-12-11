@@ -171,6 +171,9 @@ class IndexController extends BaseController {
      * 显示登陆页面
      */
     public function toLogin(){
+//        $data = I();
+//        echo "<pre>";
+//        var_dump(json_encode($data));
     	$this->display("login");
     }
 
